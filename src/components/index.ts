@@ -1,1 +1,6 @@
-export const a = 1
+export { Login } from './Login'
+export { Registration } from './Registration'
+export { Profile } from './Profile'
+export { NotFound } from './NotFound'
+export { PasswordRecovery } from './PasswordRecovery'
+export { NewPassword } from './NewPassword'
