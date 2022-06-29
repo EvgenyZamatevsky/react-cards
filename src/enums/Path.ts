@@ -2,7 +2,8 @@ export enum Path {
 	home = '/',
 	login = '/login',
 	newPassword = '/newPassword',
-	passwordRecovery = '/passwordRecovery',
+	forgot = '/forgot',
 	registration = '/registration',
+	checkEmail = '/checkEmail',
 	notFound = '*',
 }

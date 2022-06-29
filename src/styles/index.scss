@@ -1,0 +1,21 @@
+@import './sass/variables.scss';
+@import './sass/templates.scss';
+@import './reset.scss';
+
+body {
+	color: $textColor;
+	background: $primaryBackgroundColor;
+	font-size: $fontSize;
+	font-family: sans-serif;
+}
+
+.container {
+	@extend %container;
+}
+
+// .initialized {
+// 	position: absolute;
+// 	top: 50%;
+// 	left: 50%;
+// 	transform: translate(-50%, -50%);
+// }
