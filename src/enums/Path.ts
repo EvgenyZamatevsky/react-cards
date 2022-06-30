@@ -1,9 +1,11 @@
 export enum Path {
 	home = '/',
+	profile = '/profile',
 	login = '/login',
-	newPassword = '/newPassword',
-	forgot = '/forgot',
-	registration = '/registration',
 	checkEmail = '/checkEmail',
+	forgot = '/forgot',
+	register = '/register',
+	newPassword = '/newPassword',
+	packs = '/packs',
 	notFound = '*',
 }

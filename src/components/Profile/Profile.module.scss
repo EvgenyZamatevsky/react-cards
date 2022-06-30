@@ -1,0 +1,30 @@
+.profile {
+	height: 93.8vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.container {
+		width: 1008px;
+		height: 636px;
+		background-color: #FEFEFF;
+		display: flex;
+
+		.navbar {
+			min-width: 243px;
+			height: 100%;
+			background: #ECECF9;
+		}
+	}
+
+	.content {
+		//border: 1px solid black;
+		padding: 24px 48px 24px 48px;
+
+		.title {
+			font-weight: 600;
+			font-size: 22px;
+			line-height: 33px;
+		}
+	}
+}

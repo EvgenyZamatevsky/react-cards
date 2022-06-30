@@ -1,9 +1,12 @@
+import { setIsInitializeAC } from 'store/actions'
 import { ThunkType } from 'store/store'
+import { getUserDataTC } from '../auth'
 
-export const TC = (): ThunkType => async (dispatch) => {
-	try {
+export const initializeAppTC = (): ThunkType => async (dispatch) => {
 
-	} catch (error: any) {
+	const promise = dispatch(getUserDataTC())
 
-	}
+	Promise.all([promise]).then(() => {
+		dispatch(setIsInitializeAC(true))
+	})
 }

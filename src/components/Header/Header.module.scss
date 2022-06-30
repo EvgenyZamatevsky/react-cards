@@ -1,0 +1,42 @@
+.header {
+	height: 60px;
+	background: #EBE0E9;
+
+	.content {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.navBar {
+			display: flex;
+			height: 100%;
+
+			.link {
+				width: 173px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.cardsImage {
+					margin-right: 9.13px;
+				}
+
+				.userImage {
+					margin-right: 18.5px;
+				}
+
+				.name {
+					font-size: 14px;
+					line-height: 16px;
+					letter-spacing: 0.4px;
+				}
+			}
+		}
+	}
+}
+
+.active {
+	background: #DCCCDB;
+	border-bottom: 3px solid #21268F;
+}

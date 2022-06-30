@@ -1,0 +1,25 @@
+@import '../../../styles/sass/mixins.scss';
+
+.errorAlert {
+	position: fixed;
+	bottom: 15px;
+	left: 15px;
+	background-color: rgb(255, 63, 63);
+	padding: 20px;
+	min-width: 300px;
+	border-radius: 20px;
+	@include flex(row, space-between, center);
+
+	.alert {
+		margin-right: 20px;
+		color: #fff;
+	}
+
+	button {
+		color: #fff;
+	}
+}
+
+.closeErrorAlert {
+	display: none;
+}

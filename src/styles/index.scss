@@ -13,9 +13,10 @@ body {
 	@extend %container;
 }
 
-// .initialized {
-// 	position: absolute;
-// 	top: 50%;
-// 	left: 50%;
-// 	transform: translate(-50%, -50%);
-// }
+.tail-spin {
+	height: 100vh;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

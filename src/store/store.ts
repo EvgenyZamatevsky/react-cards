@@ -2,9 +2,11 @@ import { applyMiddleware, combineReducers, legacy_createStore as createStore } f
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { appReducer } from './reducers/app'
+import { authReducer } from './reducers/auth'
 
 const rootReducer = combineReducers({
-	app: appReducer
+	app: appReducer,
+	auth: authReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

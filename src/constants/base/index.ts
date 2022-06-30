@@ -1,1 +1,1 @@
-export const a = 1
+export const EMPTY_STRING = ''

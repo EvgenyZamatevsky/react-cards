@@ -1,16 +1,16 @@
 @import '../../styles/sass/variables.scss';
 @import '../../styles/sass/mixins.scss';
 
-.registration {
+.register {
 	height: 100vh;
 
 	@include flex(row, center, center);
 
 	.content {
-		height: 600px;
+		min-height: 600px;
 		@include flex(column, stretch, center);
 		width: 413px;
-		padding: 90px 33px 30px 33px;
+		padding: 85px 33px 30px 33px;
 		background-color: #F9F9FE;
 		border-radius: 8px;
 
@@ -18,15 +18,14 @@
 			font-weight: 600;
 			font-size: 60px;
 			line-height: 39px;
-			margin-bottom: 55px;
 		}
 
 		.form {
 			@include flex(column, stretch, stretch);
 			width: 347px;
+			margin-top: 65px;
 
 			.email {
-				margin-bottom: 30px;
 				background-color: #F9F9FE;
 				border-bottom: 1px solid #24254A;
 				padding: 4.50px 0px 4.50px 0px;
@@ -34,6 +33,7 @@
 			}
 
 			.password {
+				margin-top: 30px;
 				background-color: #F9F9FE;
 				border-bottom: 1px solid black;
 				padding: 4.50px 0px 4.50px 0px;
@@ -47,37 +47,45 @@
 				padding: 4.50px 0px 4.50px 0px;
 				line-height: 24px;
 			}
-		}
 
-		.register {
-			margin-bottom: 31px;
-			margin-top: 51px;
-			padding: 9px 113px 9px 113px;
-			line-height: 19px;
-			text-align: center;
-			letter-spacing: 0.01em;
-			color: #ECECF9;
-			text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-			border-radius: 30px;
-			box-shadow: 0px 4px 18px rgba(33, 38, 143, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-			background: #21268F;
+			.registerBtn {
+				margin-top: 51px;
+				padding: 9px 113px 9px 113px;
+				line-height: 19px;
+				text-align: center;
+				letter-spacing: 0.01em;
+				color: #ECECF9;
+				text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+				border-radius: 30px;
+				box-shadow: 0px 4px 18px rgba(33, 38, 143, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+				background: #21268F;
+				align-self: center;
 
-			&:disabled {
-				background-color: #bababa;
-				color: #dddddd;
+				&:disabled {
+					background-color: #d3d3d3;
+					color: #676767;
+					cursor: no-drop;
+					box-shadow: none;
+				}
 			}
 		}
 
-		span {
-			margin-bottom: 11px;
+		.text {
+			margin-top: 31px;
 			font-size: 14px;
 			line-height: 24px;
 		}
 
 		.signIn {
+			margin-top: 11px;
 			line-height: 24px;
 			color: #21268F;
 			text-decoration: underline;
 		}
 	}
+}
+
+.fieldError {
+	color: red;
+	margin-top: 10px;
 }
