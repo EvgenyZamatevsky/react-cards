@@ -1,8 +1,8 @@
+import { useTypedDispatch } from 'hooks'
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { setErrorAC } from 'store/actions'
-import { useTypedDispatch } from 'store/hooks'
-import { selectError } from 'store/selectors'
+import { setErrorAC } from 'store/appReducer/actions'
+import { selectError } from 'store/appReducer/selectors'
 import { ReturnComponentType } from 'types/ReturnComponentType'
 import style from './ErrorAlert.module.scss'
 

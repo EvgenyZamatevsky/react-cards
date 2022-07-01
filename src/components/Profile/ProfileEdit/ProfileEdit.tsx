@@ -2,8 +2,8 @@ import React, { ChangeEvent, FC, memo, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import avatar from 'assets/images/avatar.svg'
 import style from './ProfileEdit.module.scss'
-import { useTypedDispatch } from 'store/hooks'
-import { updateUserTC } from 'store/middlewares'
+import { useTypedDispatch } from 'hooks'
+import { updateUserTC } from 'store/authReducer/thunks'
 
 export type ProfileEditPropsType = {
 	setEditProfile: (editProfile: boolean) => void

@@ -2,11 +2,11 @@ import { Path } from 'enums'
 import React, { FC, useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { selectIsAuth, selectUserData } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import style from './Profile.module.scss'
 import { ProfileEdit } from './ProfileEdit'
 import { UserInfo } from 'components/Profile/UserInfo/UserInfo'
+import { selectIsAuth, selectUserData } from 'store/authReducer/selectors'
 
 export type ProfilePropsType = {
 

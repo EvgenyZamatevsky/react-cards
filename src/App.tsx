@@ -3,11 +3,11 @@ import { Login, NewPassword, NotFound, Forgot, Profile, Register, CheckEmail, Er
 import { Path } from 'enums'
 import { Route, Routes } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
-import { useTypedDispatch } from 'store/hooks'
 import { useSelector } from 'react-redux'
-import { selectIsInitialize, selectIsLoading } from 'store/selectors'
 import { TailSpin } from 'react-loader-spinner'
-import { initializeAppTC } from 'store/middlewares'
+import { useTypedDispatch } from 'hooks'
+import { selectIsLoading, selectIsInitialize } from 'store/appReducer/selectors'
+import { initializeAppTC } from 'store/appReducer/thunks'
 
 export const App: FC = (): ReturnComponentType => {
 

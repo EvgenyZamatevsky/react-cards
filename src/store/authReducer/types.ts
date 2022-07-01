@@ -1,6 +1,6 @@
 import { UserDataType } from 'api/auth/types'
-import { setIsAuthAC, setIsRegisterAC, setUserDataAC, updateUserAC } from 'store/actions'
 import { Nullable } from 'types'
+import { setIsRegisterAC, setIsAuthAC, setUserDataAC, updateUserAC } from './actions'
 
 export type InitialStateType = {
 	isRegister: boolean

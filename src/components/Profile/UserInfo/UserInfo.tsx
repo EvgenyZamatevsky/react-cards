@@ -2,9 +2,9 @@ import React, { FC, memo } from 'react'
 import { Nullable, ReturnComponentType } from 'types'
 import avatar from 'assets/images/avatar.svg'
 import style from './UserInfo.module.scss'
-import { useTypedDispatch } from 'store/hooks'
-import { logOutTC } from 'store/middlewares'
 import { UserDataType } from 'api/auth/types'
+import { useTypedDispatch } from 'hooks'
+import { logOutTC } from 'store/authReducer/thunks'
 
 export type UserInfoPropsType = {
 	userData: Nullable<UserDataType>

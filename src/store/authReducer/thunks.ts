@@ -1,7 +1,8 @@
 import { AUTH } from 'api'
 import { RegisterDataType, LoginDataType, NewPasswordDataType, UpdateUserType } from 'api/auth/types'
-import { setErrorAC, setIsAuthAC, setIsLoadingAC, setIsRegisterAC, setUserDataAC, updateUserAC } from 'store/actions'
+import { setIsLoadingAC, setErrorAC } from 'store/appReducer/actions'
 import { ThunkType } from 'store/store'
+import { setIsRegisterAC, setUserDataAC, setIsAuthAC, updateUserAC } from './actions'
 
 export const registerTC = (registerData: RegisterDataType): ThunkType => async (dispatch) => {
 	try {
@@ -12,9 +13,7 @@ export const registerTC = (registerData: RegisterDataType): ThunkType => async (
 		dispatch(setIsRegisterAC(true))
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}
@@ -31,9 +30,7 @@ export const getUserDataTC = (): ThunkType => async (dispatch) => {
 		dispatch(setIsAuthAC(true))
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}
@@ -41,14 +38,18 @@ export const getUserDataTC = (): ThunkType => async (dispatch) => {
 
 export const loginTC = (loginData: LoginDataType): ThunkType => async (dispatch) => {
 	try {
-		const response = await AUTH.login(loginData)
+		dispatch(setIsLoadingAC(true))
 
-		dispatch(getUserDataTC())
+		const response = await AUTH.login(loginData)
+		const userData = response.data
+
+		dispatch(setUserDataAC(userData))
+		dispatch(setIsAuthAC(true))
+		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
+		dispatch(setIsLoadingAC(false))
 	}
 }
 
@@ -62,9 +63,7 @@ export const logOutTC = (): ThunkType => async (dispatch) => {
 		dispatch(setUserDataAC(null))
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}
@@ -78,9 +77,7 @@ export const forgotTC = (email: string): ThunkType => async (dispatch) => {
 
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}
@@ -94,9 +91,7 @@ export const newPasswordTC = (newPassword: NewPasswordDataType): ThunkType => as
 
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}
@@ -119,9 +114,7 @@ export const updateUserTC = (updatedUser: UpdateUserType): ThunkType => async (d
 		dispatch(updateUserAC(updatedUser))
 		dispatch(setIsLoadingAC(false))
 	} catch (e: any) {
-		const error = e.response
-			? e.response.data.error
-			: (e.message + ', more details in the console')
+		const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 		dispatch(setErrorAC(error))
 		dispatch(setIsLoadingAC(false))
 	}

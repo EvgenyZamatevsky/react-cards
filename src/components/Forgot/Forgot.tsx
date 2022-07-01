@@ -3,9 +3,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import style from './Forgot.module.scss'
 import { Path } from 'enums/Path'
-import { useTypedDispatch } from 'store/hooks'
-import { forgotTC } from 'store/middlewares'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTypedDispatch } from 'hooks'
+import { forgotTC } from 'store/authReducer/thunks'
 
 export type ForgotPropsType = {
 

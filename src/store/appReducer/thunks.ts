@@ -1,6 +1,6 @@
-import { setIsInitializeAC } from 'store/actions'
+import { getUserDataTC } from 'store/authReducer/thunks'
 import { ThunkType } from 'store/store'
-import { getUserDataTC } from '../auth'
+import { setIsInitializeAC } from './actions'
 
 export const initializeAppTC = (): ThunkType => async (dispatch) => {
 

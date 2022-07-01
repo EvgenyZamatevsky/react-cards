@@ -1,5 +1,5 @@
-import { setErrorAC, setIsInitializeAC, setIsLoadingAC } from 'store/actions'
 import { Nullable } from 'types'
+import { setErrorAC, setIsLoadingAC, setIsInitializeAC } from './actions'
 
 export type InitialStateType = {
 	error: Nullable<string>

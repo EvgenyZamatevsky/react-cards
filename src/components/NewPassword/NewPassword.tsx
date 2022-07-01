@@ -1,9 +1,9 @@
 import { Path } from 'enums'
+import { useTypedDispatch } from 'hooks'
 import React, { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { useTypedDispatch } from 'store/hooks'
-import { newPasswordTC } from 'store/middlewares'
+import { newPasswordTC } from 'store/authReducer/thunks'
 import { ReturnComponentType } from 'types'
 import style from './NewPassword.module.scss'
 

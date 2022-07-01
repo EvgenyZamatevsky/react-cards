@@ -3,12 +3,12 @@ import React, { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate, NavLink } from 'react-router-dom'
-import { useTypedDispatch } from 'store/hooks'
-import { registerTC } from 'store/middlewares'
 import { ReturnComponentType } from 'types'
 import { RegisterPropsType, RegisterParamsType } from './types'
 import style from './Register.module.scss'
-import { selectIsRegister } from 'store/selectors'
+import { useTypedDispatch } from 'hooks'
+import { selectIsRegister } from 'store/authReducer/selectors'
+import { registerTC } from 'store/authReducer/thunks'
 
 export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
 
