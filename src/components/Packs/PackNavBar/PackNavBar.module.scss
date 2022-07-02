@@ -1,0 +1,41 @@
+.navbar {
+	padding: 33px 23px 33px 23px;
+	min-width: 243px;
+	height: 100%;
+	background: #ECECF9;
+
+	.title {
+		line-height: 19px;
+		font-weight: 600;
+	}
+
+	.showPacks {
+		margin-top: 20px;
+		width: 196px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.my {
+			padding: 10px 38px 10px 38px;
+			background: #FFFFFF;
+			border-radius: 2px;
+		}
+
+		.all {
+			padding: 10px 38px 10px 38px;
+			border-radius: 2px;
+			background: #9A91C8;
+			color: white;
+		}
+	}
+
+	.text {
+		margin-top: 45px;
+	}
+
+	.doubleRange {
+		margin-top: 20px;
+		width: 196px;
+	}
+}
