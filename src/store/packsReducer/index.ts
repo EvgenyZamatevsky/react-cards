@@ -1,13 +1,14 @@
+import { PackType } from 'api/packs/types'
 import { InitialStateType, PacksReducerActionsType } from './types'
 
 const initialState: InitialStateType = {
 	packs: [],
 	cardPacksTotalCount: 11,
 	page: 1,
-	pageCount: 4,
+	pageCount: 8,
 	maxCardsCount: 110,
 	minCardsCount: 0,
-	sortPacks: '0name',
+	sortPacks: '',
 	packName: ''
 }
 
@@ -26,6 +27,14 @@ export const packsReducer = (state: InitialStateType = initialState, action: Pac
 			return { ...state, maxCardsCount: action.maxCardsCount }
 		case 'packs/SET-MIN-CARDS-COUNT':
 			return { ...state, minCardsCount: action.minCardsCount }
+		case 'packs/SET-SORT-PACKS':
+			return { ...state, sortPacks: action.sortValue }
+		case 'packs/ADD-NEW-PACK':
+			return { ...state, packs: [action.newPack, ...state.packs] }
+		case 'packs/DELETE-PACK':
+			return { ...state, packs: state.packs.filter(pack => pack._id !== action.packId) }
+		case 'packs/UPDATE-PACK':
+			return { ...state, packs: state.packs.map(pack => pack._id === action.packId ? { ...pack, name: action.newName } : pack) as PackType[] }
 
 		default:
 			return state

@@ -12,3 +12,5 @@ export const selectPageCount = (state: RootReducerType): number => state.packs.p
 export const selectMaxCardsCount = (state: RootReducerType): number => state.packs.maxCardsCount
 
 export const selectMinCardsCount = (state: RootReducerType): number => state.packs.minCardsCount
+
+export const selectSortPacks = (state: RootReducerType): string => state.packs.sortPacks

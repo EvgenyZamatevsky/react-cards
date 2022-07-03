@@ -1,0 +1,77 @@
+.profileEdit {
+  height: 93.8vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.profileEdit .content {
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  width: 413px;
+  padding: 36px 33px 60px 33px;
+  background-color: #F9F9FE;
+  border-radius: 8px;
+}
+.profileEdit .content .title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+}
+.profileEdit .content .userImage {
+  margin-top: 15px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50px;
+}
+.profileEdit .content .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 347px;
+  margin-top: 65px;
+}
+.profileEdit .content .body .nickname {
+  background-color: #F9F9FE;
+  border-bottom: 1px solid #24254A;
+  padding: 4.5px 0px 4.5px 0px;
+  line-height: 24px;
+}
+.profileEdit .content .body .image {
+  margin-top: 30px;
+  background-color: #F9F9FE;
+  border-bottom: 1px solid black;
+  padding: 4.5px 0px 4.5px 0px;
+  line-height: 24px;
+}
+.profileEdit .content .buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 106px;
+}
+.profileEdit .content .buttons .cancel {
+  padding: 9px 36px 9px 36px;
+  line-height: 19px;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+  color: #21268F;
+  background-color: #D7D8EF;
+  border-radius: 30px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+.profileEdit .content .buttons .save {
+  padding: 9px 36px 9px 36px;
+  line-height: 19px;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+  color: #ECECF9;
+  background-color: #D7D8EF;
+  border-radius: 30px;
+  box-shadow: 0px 4px 18px rgba(33, 38, 143, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+  background: #21268F;
+}

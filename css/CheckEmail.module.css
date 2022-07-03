@@ -1,0 +1,35 @@
+.checkEmail {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.checkEmail .content {
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  width: 413px;
+  padding: 70px 33px 30px 33px;
+  background-color: #F9F9FE;
+  border-radius: 8px;
+}
+.checkEmail .content .title {
+  font-weight: 600;
+  font-size: 55px;
+  line-height: 59px;
+}
+.checkEmail .content .image {
+  margin-top: 50px;
+}
+.checkEmail .content .rememberPassword {
+  margin-top: 50px;
+  line-height: 24px;
+  text-align: center;
+  opacity: 0.7;
+}
+.checkEmail .content .rememberPassword span {
+  font-weight: 700;
+}

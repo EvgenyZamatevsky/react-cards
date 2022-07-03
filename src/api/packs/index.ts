@@ -1,5 +1,5 @@
 import { instance } from 'api/config'
-import { CreatePackType, DataPacksType, PacksResponseType, UpdatePackType } from './types'
+import { createPackResponseType, CreatePackType, DataPacksType, PacksResponseType, UpdatePackType } from './types'
 
 export const PACKS = {
 	getPacks(payload: PayloadType) {
@@ -8,7 +8,7 @@ export const PACKS = {
 			params: {
 				packName: payload.packName,
 				page: payload.page,
-				pageCount: payload.packName,
+				pageCount: payload.pageCount,
 				min: payload.min,
 				max: payload.max,
 				sortPacks: payload.sortPacks
@@ -16,7 +16,7 @@ export const PACKS = {
 		})
 	},
 	createPack(dataPack: DataPacksType<CreatePackType>) {
-		return instance.post('cards/pack', dataPack)
+		return instance.post<createPackResponseType>('cards/pack', dataPack)
 	},
 	deletePack(id: string) {
 		return instance.delete(`cards/pack?id=${id}`)

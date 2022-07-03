@@ -1,0 +1,12 @@
+.pack {
+  background: #f8f8ff;
+  padding: 16px 12px 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pack .packActions {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}

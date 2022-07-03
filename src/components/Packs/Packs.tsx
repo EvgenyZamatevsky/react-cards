@@ -13,6 +13,7 @@ import { Pack } from './Pack/Pack'
 import { PackForm } from './PackForm'
 import { PackNavBar } from './PackNavBar'
 import style from './Packs.module.scss'
+import { PacksFilter } from './PacksFilter'
 
 export type PacksPropsType = {
 
@@ -54,13 +55,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 					<h2>Packs list</h2>
 					<PackForm searchPack={searchPack} setSearchPack={setSearchPack} />
 					<div className={style.table}>
-						<div className={style.info}>
-							<div className={style.infoName}>Name</div>
-							<div className={style.infoCards}>Cards</div>
-							<div className={style.infoLastUpdated}>Last Updated</div>
-							<div className={style.infoCreatedBy}>Created by</div>
-							<div className={style.infoActions}>Actions</div>
-						</div>
+						<PacksFilter />
 						{renderPacks}
 						<div className={style.pagination}>
 							<Pagination

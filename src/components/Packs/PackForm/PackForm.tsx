@@ -1,6 +1,6 @@
 import { useTypedDispatch } from 'hooks'
 import React, { ChangeEvent, FC } from 'react'
-import { getPacksTC } from 'store/packsReducer/thunks'
+import { createPackTC, getPacksTC } from 'store/packsReducer/thunks'
 import { ReturnComponentType } from 'types'
 import style from './PackForm.module.scss'
 
@@ -21,6 +21,10 @@ export const PackForm: FC<PackFormPropsType> = ({ setSearchPack, searchPack }): 
 		dispatch(getPacksTC({ packName: searchPack }))
 	}
 
+	const onAddNewPackClick = (): void => {
+		dispatch(createPackTC({ cardsPack: { name: 'ПОЛУЧИЛОСЬ!!!', deckCover: '', private: false } }))
+	}
+
 	return (
 		<>
 			<input className={style.search}
@@ -30,7 +34,7 @@ export const PackForm: FC<PackFormPropsType> = ({ setSearchPack, searchPack }): 
 				onChange={onSearchPackChange}
 			/>
 			<button onClick={onSearchPackClick}>Search</button>
-			<button className={style.addNewPack}>Add new pack</button>
+			<button className={style.addNewPack} onClick={onAddNewPackClick}>Add new pack</button>
 		</>
 	)
 }

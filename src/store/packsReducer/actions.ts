@@ -15,8 +15,12 @@ export const setMaxCardsCountAC = (maxCardsCount: number) => {
 	return { type: 'packs/SET-MAX-CARDS-COUNT', maxCardsCount } as const
 }
 
-export const setMinCardsCountAC = (minCardsCount: number) => {
+export const setMinCardsCountAC = (minCardsCount: number) => ({ type: 'packs/SET-MIN-CARDS-COUNT', minCardsCount }) as const
 
-	return { type: 'packs/SET-MIN-CARDS-COUNT', minCardsCount } as const
-}
+export const setSortPacksAC = (sortValue: string) => ({ type: 'packs/SET-SORT-PACKS', sortValue }) as const
 
+export const addNewPackAC = (newPack: PackType) => ({ type: 'packs/ADD-NEW-PACK', newPack }) as const
+
+export const deletePackAC = (packId: string) => ({ type: 'packs/DELETE-PACK', packId }) as const
+
+export const updatePackAC = (packId: string, newName: string) => ({ type: 'packs/UPDATE-PACK', packId, newName }) as const

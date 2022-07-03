@@ -1,0 +1,59 @@
+.packs {
+  height: 93.8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.packs .container {
+  width: 1008px;
+  height: 636px;
+  background-color: #FEFEFF;
+  display: flex;
+}
+.packs .content {
+  padding: 24px 48px 24px 48px;
+}
+.packs .content h2 {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+}
+.packs .content .table {
+  margin-top: 24px;
+}
+.packs .content .table .info {
+  background: #ECECF9;
+  padding: 16px 12px 16px 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.packs .content .table .info .infoName {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+}
+.packs .content .table .info .infoCards {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+}
+.packs .content .table .info .infoLastUpdated {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+}
+.packs .content .table .info .infoCreatedBy {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+}
+.packs .content .table .info .infoActions {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  margin-right: 55px;
+}
+.packs .content .table .pagination {
+  margin-top: 24px;
+}

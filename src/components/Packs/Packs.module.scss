@@ -22,49 +22,6 @@
 
 		.table {
 			margin-top: 24px;
-
-			.info {
-				background: #ECECF9;
-				padding: 16px 12px 16px 24px;
-				display: flex;
-				justify-content: space-around;
-				align-items: center;
-
-				.infoName {
-					font-weight: 700;
-					font-size: 13px;
-					line-height: 15px;
-				}
-
-				.infoCards {
-					font-weight: 700;
-					font-size: 13px;
-					line-height: 15px;
-				}
-
-				.infoLastUpdated {
-					font-weight: 700;
-					font-size: 13px;
-					line-height: 15px;
-				}
-
-				.infoCreatedBy {
-					font-weight: 700;
-					font-size: 13px;
-					line-height: 15px;
-				}
-
-				.infoActions {
-					font-weight: 700;
-					font-size: 13px;
-					line-height: 15px;
-					margin-right: 55px;
-				}
-			}
-
-			.pagination {
-				margin-top: 24px;
-			}
 		}
 	}
 }

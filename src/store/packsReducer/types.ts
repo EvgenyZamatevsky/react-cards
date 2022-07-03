@@ -1,5 +1,5 @@
 import { PackType } from 'api/packs/types'
-import { setCardPacksTotalCountAC, setMaxCardsCountAC, setMinCardsCountAC, setPacksAC, setPageAC, setPageCountAC } from './actions'
+import { addNewPackAC, deletePackAC, setCardPacksTotalCountAC, setMaxCardsCountAC, setMinCardsCountAC, setPacksAC, setPageAC, setPageCountAC, setSortPacksAC, updatePackAC } from './actions'
 
 export type InitialStateType = {
 	packs: PackType[]
@@ -18,5 +18,8 @@ export type PacksReducerActionsType =
 	ReturnType<typeof setPageAC> |
 	ReturnType<typeof setPageCountAC> |
 	ReturnType<typeof setMaxCardsCountAC> |
-	ReturnType<typeof setMinCardsCountAC>
-
+	ReturnType<typeof setMinCardsCountAC> |
+	ReturnType<typeof setSortPacksAC> |
+	ReturnType<typeof addNewPackAC> |
+	ReturnType<typeof deletePackAC> |
+	ReturnType<typeof updatePackAC> 

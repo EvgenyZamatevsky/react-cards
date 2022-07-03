@@ -42,3 +42,9 @@ export type UpdatePackType = {
 	_id: string
 	name: string
 }
+
+export type createPackResponseType = {
+	newCardsPack: PackType
+	token: string
+	tokenDeathTime: number
+}

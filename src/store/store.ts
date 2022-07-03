@@ -3,12 +3,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { appReducer } from './appReducer'
 import { authReducer } from './authReducer'
+import { cardsReducer } from './cardsReducer'
 import { packsReducer } from './packsReducer'
 
 const rootReducer = combineReducers({
 	app: appReducer,
 	auth: authReducer,
-	packs: packsReducer
+	packs: packsReducer,
+	cards: cardsReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

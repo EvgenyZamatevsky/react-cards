@@ -8,6 +8,7 @@ import { TailSpin } from 'react-loader-spinner'
 import { useTypedDispatch } from 'hooks'
 import { selectIsLoading, selectIsInitialize } from 'store/appReducer/selectors'
 import { initializeAppTC } from 'store/appReducer/thunks'
+import { Cards } from 'components/Packs'
 
 export const App: FC = (): ReturnComponentType => {
 
@@ -37,7 +38,8 @@ export const App: FC = (): ReturnComponentType => {
 
         <Route path={Path.home} element={<Layout />}>
           <Route index element={<Profile />} />
-          <Route path={Path.packs} element={<Packs />} />
+          <Route path={`${Path.packs}`} element={<Packs />} />
+          <Route path={`${Path.packs}/:cardId`} element={<Cards />} />
         </Route>
 
       </Routes>
