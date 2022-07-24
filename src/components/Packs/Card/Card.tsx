@@ -1,10 +1,10 @@
-import { CardsType } from 'api/cards'
+import { CardType } from 'api/cards'
 import React, { FC, memo } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './Card.module.scss'
 
 export type CardPropsType = {
-	card: CardsType
+	card: CardType
 }
 
 export const Card: FC<CardPropsType> = memo(({ card }): ReturnComponentType => {

@@ -1,11 +1,17 @@
 import { instance, instanceHeroku } from 'api/config'
 import { Path } from 'enums'
 import {
-	LoginDataType, UserDataType, RegisterDataType, ForgotResponseType, NewPasswordDataType, UpdateUserType,
-	LogOutResponseType, NewPasswordResponseType
+	LoginDataType,
+	UserDataType,
+	RegisterDataType,
+	ForgotResponseType,
+	NewPasswordDataType,
+	UpdateUserType,
+	LogOutResponseType,
+	NewPasswordResponseType
 } from './types'
 
-const messageByMail = `<div style="background-color: lime; padding: 15px">password recovery link: 
+const message = `<div style="background-color: lime; padding: 15px">password recovery link: 
 <a href='http://localhost:3000/#${Path.newPassword}/$token$'>link</a></div>`
 
 export const AUTH = {
@@ -22,7 +28,7 @@ export const AUTH = {
 		return instance.delete<LogOutResponseType>('auth/me')
 	},
 	forgot(email: string) {
-		return instanceHeroku.post<ForgotResponseType>('auth/forgot', { email, message: messageByMail })
+		return instanceHeroku.post<ForgotResponseType>('auth/forgot', { email, message })
 	},
 	newPassword(newPassword: NewPasswordDataType) {
 		return instanceHeroku.post<NewPasswordResponseType>('auth/set-new-password', newPassword)

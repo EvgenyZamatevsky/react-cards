@@ -7,7 +7,7 @@ export const CARDS = {
 }
 
 export type CardsResponseType = {
-	cards: CardsType[]
+	cards: CardType[]
 	cardsTotalCount: number
 	maxGrade: number
 	minGrade: number
@@ -18,7 +18,7 @@ export type CardsResponseType = {
 	tokenDeathTime: number
 }
 
-export type CardsType = {
+export type CardType = {
 	answer: string
 	answerImg: string
 	answerVideo: string

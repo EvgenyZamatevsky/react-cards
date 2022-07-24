@@ -1,3 +1,3 @@
-import { CardsType } from 'api/cards'
+import { CardType } from 'api/cards'
 
-export const setCardsAC = (cards: CardsType[]) => ({ type: 'cards/SET-CARDS', cards } as const)
+export const setCardsAC = (cards: CardType[]) => ({ type: 'cards/SET-CARDS', cards } as const)

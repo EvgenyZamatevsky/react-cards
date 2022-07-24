@@ -1,8 +1,8 @@
-import { CardsType } from 'api/cards'
+import { CardType } from 'api/cards'
 import { setCardsAC } from './actions'
 
 export type InitialStateType = {
-	cards: CardsType[]
+	cards: CardType[]
 }
 
 export type CardsReducerActionsType =
