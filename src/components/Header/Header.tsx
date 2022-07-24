@@ -22,7 +22,7 @@ export const Header: FC<HeaderPropsType> = (): ReturnComponentType => {
 						<div className={style.name}>Packs list</div>
 					</NavLink>
 					<NavLink
-						to={Path.HOME}
+						to={Path.PROFILE}
 						className={({ isActive }) => (isActive ? ` ${style.link} ${style.active}` : `${style.link}`)}>
 						<img className={style.userImage} src={user} />
 						<div className={style.name}>Profile</div>

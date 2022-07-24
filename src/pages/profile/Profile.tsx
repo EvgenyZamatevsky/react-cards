@@ -20,7 +20,7 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 					<input type='file' />
 				</div>
 				<form className={style.form}>
-					<input className={style.nickname} type='type' placeholder='Nickname' value={'ZaM'} />
+					<input className={style.nickname} type='type' placeholder='Nickname' value={'ZaM'} onChange={() => { }} />
 					<input disabled className={style.email} type='email' value={'example@gmail.com'} />
 					<button className={style.saveBtn}>Save</button>
 				</form>

@@ -2,7 +2,7 @@
 @import 'styles/sass/templates.scss';
 
 .checkEmail {
-	height: 93.8%;
+	height: 100%;
 	@include flex(row, center, center);
 
 	.body {

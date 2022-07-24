@@ -9,3 +9,14 @@ body {
 	font-size: $fontSize;
 	font-weight: $fontWeight;
 }
+
+.app {
+	height: 100vh;
+}
+
+.preloader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

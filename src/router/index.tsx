@@ -1,6 +1,7 @@
 import { Path } from 'enums'
 import { Profile } from 'pages'
 import { lazy } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const NotFound = lazy(() => import(/* webpackChunkName: 'NotFound' */'pages/notFound')
 	.then(module => ({ default: module.NotFound })))
@@ -24,7 +25,8 @@ const Packs = lazy(() => import(/* webpackChunkName: 'Packs' */'pages/packs')
 	.then(module => ({ default: module.Packs })))
 
 export const ROUTES = [
-	{ path: Path.HOME, element: <Profile /> },
+	{ path: Path.HOME, element: <Navigate to={Path.PROFILE} /> },
+	{ path: Path.PROFILE, element: <Profile /> },
 	{ path: Path.PACKS, element: <Packs /> },
 	{ path: Path.LOGIN, element: <Login /> },
 	{ path: Path.REGISTER, element: <Register /> },
