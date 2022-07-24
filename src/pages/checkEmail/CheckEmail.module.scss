@@ -1,0 +1,44 @@
+@import 'styles/sass/mixins.scss';
+@import 'styles/sass/templates.scss';
+
+.checkEmail {
+	height: 93.8%;
+	@include flex(row, center, center);
+
+	.body {
+		width: 413px;
+		height: 450px;
+		@include flex(column, stretch, center);
+		padding: 25px 33px 30px 33px;
+		background-color: #F9F9FE;
+
+		.title {
+			font-weight: 600;
+			font-size: 26px;
+			line-height: 39px;
+		}
+
+		.writingIcon {
+			margin-top: 35px;
+		}
+
+		.instructions {
+			margin-top: 40px;
+			line-height: 24px;
+			opacity: 0.7;
+		}
+
+		.email {
+			font-weight: 700;
+			line-height: 24px;
+			opacity: 0.7;
+		}
+
+		.text {
+			margin-top: 40px;
+			text-align: center;
+			line-height: 24px;
+			opacity: 0.7;
+		}
+	}
+}

@@ -1,21 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { HashRouter } from 'react-router-dom'
-import { store } from 'store/store'
-import { App } from './App'
 import reportWebVitals from './reportWebVitals'
+import { App } from './App'
+import { Provider } from 'react-redux'
 import './styles/index.scss'
+import { BrowserRouter } from 'react-router-dom'
+import { store } from 'store'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-)
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
-  <HashRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </HashRouter>
+    </BrowserRouter>
+  </Provider>
 )
 
 reportWebVitals()

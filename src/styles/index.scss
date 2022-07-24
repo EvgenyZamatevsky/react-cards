@@ -1,22 +1,11 @@
+@import './reset.scss';
 @import './sass/variables.scss';
 @import './sass/templates.scss';
-@import './reset.scss';
 
 body {
 	color: $textColor;
-	background: $primaryBackgroundColor;
+	background: $backgroundGradient;
+	font-family: $fontFamily;
 	font-size: $fontSize;
-	font-family: sans-serif;
-}
-
-.container {
-	@extend %container;
-}
-
-.tail-spin {
-	height: 100vh;
-	border: 1px solid black;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	font-weight: $fontWeight;
 }

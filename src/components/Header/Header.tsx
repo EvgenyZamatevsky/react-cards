@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './Header.module.scss'
-import user from '../../assets/icons/user.svg'
-import cards from '../../assets/icons/cards.svg'
+import user from 'assets/icons/user.png'
+import packs from 'assets/icons/packs.png'
 import { NavLink } from 'react-router-dom'
 import { Path } from 'enums/Path'
 
@@ -16,13 +16,13 @@ export const Header: FC<HeaderPropsType> = (): ReturnComponentType => {
 			<div className={style.content}>
 				<div className={style.navBar}>
 					<NavLink
-						to={Path.packs}
+						to={Path.PACKS}
 						className={({ isActive }) => (isActive ? ` ${style.link} ${style.active}` : `${style.link}`)}>
-						<img className={style.cardsImage} src={cards} />
+						<img className={style.cardsImage} src={packs} />
 						<div className={style.name}>Packs list</div>
 					</NavLink>
 					<NavLink
-						to={Path.home}
+						to={Path.HOME}
 						className={({ isActive }) => (isActive ? ` ${style.link} ${style.active}` : `${style.link}`)}>
 						<img className={style.userImage} src={user} />
 						<div className={style.name}>Profile</div>

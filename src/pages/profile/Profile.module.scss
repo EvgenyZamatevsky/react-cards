@@ -1,0 +1,79 @@
+@import 'styles/sass/mixins.scss';
+@import 'styles/sass/templates.scss';
+
+.profile {
+	height: 93.8%;
+	@include flex(row, center, center);
+
+	.body {
+		width: 413px;
+		height: 600px;
+		@include flex(column, stretch, center);
+		padding: 25px 33px 30px 33px;
+		background-color: #F9F9FE;
+
+		.title {
+			font-weight: 600;
+			font-size: 26px;
+			line-height: 39px;
+		}
+
+		.logOut {
+			margin-top: 15px;
+			font-weight: 600;
+			line-height: 24px;
+			opacity: 0.5;
+			transition: color 0.2s ease-in 0s;
+
+			&:hover {
+				color: #b5b5b5;
+			}
+		}
+
+		.avatar {
+			height: 150px;
+			width: 150px;
+			margin-top: 20px;
+		}
+
+		.file {
+			margin-top: 20px;
+		}
+
+		.form {
+			margin-top: 50px;
+			@include flex(column, stretch, stretch);
+			width: 347px;
+
+			.nickname {
+				background-color: #F9F9FE;
+				border-bottom: 1px solid #b5b5b5;
+				padding: 4.50px 0px 4.50px 0px;
+				line-height: 24px;
+
+				&:focus {
+					border-bottom: 1px solid #000;
+				}
+			}
+
+			.email {
+				margin-top: 30px;
+				background-color: #F9F9FE;
+				border-bottom: 1px solid #b5b5b5;
+				padding: 4.50px 0px 4.50px 0px;
+				line-height: 24px;
+				opacity: 0.7;
+
+				&:focus {
+					border-bottom: 1px solid #000;
+				}
+			}
+
+			.saveBtn {
+				margin-top: 50px;
+				@extend %btn;
+			}
+		}
+
+	}
+}

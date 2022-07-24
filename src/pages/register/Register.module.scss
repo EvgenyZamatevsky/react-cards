@@ -1,0 +1,88 @@
+@import 'styles/sass/mixins.scss';
+@import 'styles/sass/templates.scss';
+
+.register {
+	height: 93.8%;
+	@include flex(row, center, center);
+
+	.body {
+		width: 413px;
+		height: 600px;
+		@include flex(column, stretch, center);
+		padding: 25px 33px 30px 33px;
+		background-color: #F9F9FE;
+
+		.title {
+			font-weight: 600;
+			font-size: 26px;
+			line-height: 39px;
+		}
+
+		.subtitle {
+			margin-top: 32px;
+			font-weight: 600;
+			line-height: 33px;
+			font-size: 22px;
+		}
+
+		.form {
+			margin-top: 50px;
+			@include flex(column, stretch, stretch);
+			width: 347px;
+
+			.email {
+				background-color: #F9F9FE;
+				border-bottom: 1px solid #b5b5b5;
+				padding: 4.50px 0px 4.50px 0px;
+				line-height: 24px;
+
+				&:focus {
+					border-bottom: 1px solid #000;
+				}
+			}
+
+			.password {
+				margin-top: 30px;
+				background-color: #F9F9FE;
+				border-bottom: 1px solid #b5b5b5;
+				padding: 4.50px 0px 4.50px 0px;
+				line-height: 24px;
+
+				&:focus {
+					border-bottom: 1px solid #000;
+				}
+			}
+
+			.confirmPassword {
+				margin-top: 30px;
+				background-color: #F9F9FE;
+				border-bottom: 1px solid #b5b5b5;
+				padding: 4.50px 0px 4.50px 0px;
+				line-height: 24px;
+
+				&:focus {
+					border-bottom: 1px solid #000;
+				}
+			}
+
+			.registerBtn {
+				margin-top: 94px;
+				@extend %btn;
+			}
+		}
+
+		.text {
+			margin-top: 31px;
+			font-weight: 600;
+			line-height: 24px;
+			opacity: 0.5;
+		}
+
+		.signUp {
+			margin-top: 11px;
+			font-weight: 600;
+			line-height: 24px;
+			color: #21268F;
+		}
+	}
+}

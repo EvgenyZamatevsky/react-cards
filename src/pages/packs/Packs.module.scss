@@ -1,0 +1,18 @@
+@import 'styles/sass/mixins.scss';
+@import 'styles/sass/templates.scss';
+
+.packs {
+	height: 93.8%;
+	@include flex(row, center, center);
+
+	.body {
+		width: 1008px;
+		height: 636px;
+		background-color: #FEFEFF;
+		display: flex;
+
+		.packsList {
+			padding: 24px 48px 72px 48px;
+		}
+	}
+}
