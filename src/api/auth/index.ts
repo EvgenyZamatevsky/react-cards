@@ -1,7 +1,7 @@
 import { instance } from 'api/config'
 
 export const AUTH = {
-	login() {
-		return instance.post('')
+	register(email: string, password: string) {
+		return instance.post('auth/register', { email, password })
 	}
 }
