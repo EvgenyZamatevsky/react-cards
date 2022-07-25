@@ -1,3 +1,4 @@
+import { registration } from 'store/asyncActions'
 import authSlice from 'store/slices/auth'
 import { AuthSliceInitialStateType } from 'store/slices/auth/types'
 
@@ -5,15 +6,18 @@ let startState: AuthSliceInitialStateType
 
 beforeEach(() => {
 	startState = {
+		isRegister: false,
 		isAuth: false
 	}
 })
 
-test('', () => {
+test('property isRegister should change', () => {
 
-	//const action = setIsLoading(true)
+	const registrationParams = { email: '', password: '' }
 
-	//const endState = exampleSlice(startState, action)
+	const action = registration.fulfilled(undefined, 'requestId', registrationParams)
 
-	//expect(endState.isLoading).toBe(true)
+	const endState = authSlice(startState, action)
+
+	expect(endState.isRegister).toBe(true)
 })

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { register } from 'store/asyncActions'
+import { registration } from 'store/asyncActions'
 import { AuthSliceInitialStateType } from './types'
 
 const initialState: AuthSliceInitialStateType = {
+	isRegister: false,
 	isAuth: false
 }
 
@@ -16,8 +17,9 @@ const authSlice = createSlice({
 	},
 	extraReducers(builder) {
 		builder
-			.addCase(register.fulfilled, (state, action) => {
-
+			.addCase(registration.fulfilled, (state, action) => {
+				state.isRegister = true
+				console.log(action)
 			})
 	},
 })
