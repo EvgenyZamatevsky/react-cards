@@ -7,7 +7,7 @@
 
 	.body {
 		width: 413px;
-		height: 600px;
+		min-height: 600px;
 		@include flex(column, stretch, center);
 		padding: 25px 33px 30px 33px;
 		background-color: #F9F9FE;
@@ -49,10 +49,14 @@
 				text-align: center;
 			}
 
-			.instructions {
+			.sendInstructionsBtn {
 				margin-top: 90px;
 				@extend %btn;
 				padding: 9px 68px;
+
+				&:disabled {
+					background-color: #b5b5b5;
+				}
 			}
 		}
 
@@ -67,4 +71,9 @@
 			color: #21268F;
 		}
 	}
+}
+
+.errorMessage {
+	color: red;
+	margin-top: 5px;
 }

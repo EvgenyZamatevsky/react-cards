@@ -75,6 +75,10 @@
 			.loginBtn {
 				margin-top: 92px;
 				@extend %btn;
+
+				&:disabled {
+					background-color: #b5b5b5;
+				}
 			}
 		}
 

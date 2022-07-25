@@ -1,6 +1,6 @@
 import { Path } from 'enums'
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import style from './NewPassword.module.scss'
 
@@ -9,6 +9,9 @@ type NewPasswordPropsType = {
 }
 
 export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => {
+
+	const params = useParams()
+
 	return (
 		<div className={style.newPassword}>
 			<div className={style.body}>

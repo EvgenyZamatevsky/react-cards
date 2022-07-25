@@ -20,7 +20,6 @@ export const login = createAsyncThunk
 	('auth/login', async (loginParams, { rejectWithValue, dispatch }) => {
 		try {
 			const response = await AUTH.login(loginParams)
-
 			dispatch(getAuthorizedUserData())
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -47,6 +46,17 @@ export const logOut = createAsyncThunk
 	('auth/logOut', async (_, { rejectWithValue }) => {
 		try {
 			const response = await AUTH.logOut()
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
+
+export const forgotPassword = createAsyncThunk
+	<void, string, { rejectValue: { error: string } }>
+	('auth/forgotPassword', async (email, { rejectWithValue }) => {
+		try {
+			const response = await AUTH.forgot(email)
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

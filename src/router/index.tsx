@@ -33,5 +33,5 @@ export const ROUTES = [
 	{ path: Path.FORGOT, element: <Forgot /> },
 	{ path: Path.CHECK_EMAIL, element: <CheckEmail /> },
 	{ path: Path.NEW_PASSWORD, element: <NewPassword /> },
-	{ path: Path.NOT_FOUND, element: <NotFound /> },
+	// { path: Path.NOT_FOUND, element: <NotFound /> },
 ]
