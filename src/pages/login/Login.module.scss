@@ -7,7 +7,7 @@
 
 	.body {
 		width: 413px;
-		height: 600px;
+		min-height: 600px;
 		@include flex(column, stretch, center);
 		padding: 25px 33px 30px 33px;
 		background-color: #F9F9FE;
@@ -92,4 +92,9 @@
 			color: #21268F;
 		}
 	}
+}
+
+.errorMessage {
+	color: red;
+	margin-top: 5px;
 }

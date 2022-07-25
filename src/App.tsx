@@ -1,14 +1,22 @@
-import React, { FC, Suspense } from 'react'
+import React, { FC, Suspense, useEffect } from 'react'
 import { ReturnComponentType } from 'types'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ROUTES } from 'router'
 import { Header } from 'components'
 import { Path } from 'enums'
 import { TailSpin } from 'react-loader-spinner'
+import { useAppDispatch } from 'store/hooks'
+import { getAuthorizedUserData } from 'store/asyncActions'
 
 export const App: FC = (): ReturnComponentType => {
 
+  const dispatch = useAppDispatch()
+
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    dispatch(getAuthorizedUserData())
+  }, [])
 
   return (
     <div className='app'>

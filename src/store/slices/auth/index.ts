@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { registration } from 'store/asyncActions'
+import { logOut, getAuthorizedUserData, registration } from 'store/asyncActions'
 import { AuthSliceInitialStateType } from './types'
 
 const initialState: AuthSliceInitialStateType = {
 	isRegister: false,
-	isAuth: false
+	isAuth: false,
+	authorizedUserData: null
 }
 
 const authSlice = createSlice({
@@ -17,9 +18,16 @@ const authSlice = createSlice({
 	},
 	extraReducers(builder) {
 		builder
-			.addCase(registration.fulfilled, (state, action) => {
+			.addCase(registration.fulfilled, (state) => {
 				state.isRegister = true
-				console.log(action)
+			})
+			.addCase(getAuthorizedUserData.fulfilled, (state, action) => {
+				state.authorizedUserData = action.payload
+				state.isAuth = true
+			})
+			.addCase(logOut.fulfilled, (state, action) => {
+				state.authorizedUserData = null
+				state.isAuth = false
 			})
 	},
 })

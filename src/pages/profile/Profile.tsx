@@ -1,20 +1,37 @@
 import { Path } from 'enums'
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import style from './Profile.module.scss'
 import avatar from 'assets/images/avatar.png'
+import { useAppDispatch } from 'store/hooks'
+import { logOut } from 'store/asyncActions'
+import { useSelector } from 'react-redux'
+import { selectIsAuth } from 'store/selectors'
 
 type ProfilePropsType = {
 
 }
 
 export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
+
+	const dispatch = useAppDispatch()
+
+	const isAuth = useSelector(selectIsAuth)
+
+	const onLogOutClick = (): void => {
+		dispatch(logOut())
+	}
+
+	if (!isAuth) {
+		return <Navigate to={Path.LOGIN} />
+	}
+
 	return (
 		<div className={style.profile}>
 			<div className={style.body}>
 				<h2 className={style.title}>Personal Information</h2>
-				<button className={style.logOut}>Log Out</button >
+				<button className={style.logOut} onClick={onLogOutClick}>Log Out</button >
 				<img className={style.avatar} src={avatar} alt='avatar' />
 				<div className={style.file}>
 					<input type='file' />

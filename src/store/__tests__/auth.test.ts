@@ -7,7 +7,8 @@ let startState: AuthSliceInitialStateType
 beforeEach(() => {
 	startState = {
 		isRegister: false,
-		isAuth: false
+		isAuth: false,
+		authorizedUserData: null
 	}
 })
 
