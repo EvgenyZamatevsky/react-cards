@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { logOut, getAuthorizedUserData, registration } from 'store/asyncActions'
+import { logOut, getAuthorizedUserData, registration, updateAuthorizedUser } from 'store/asyncActions'
 import { AuthSliceInitialStateType } from './types'
 
 const initialState: AuthSliceInitialStateType = {
@@ -11,11 +11,7 @@ const initialState: AuthSliceInitialStateType = {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {
-		setIsAuth(state, action: PayloadAction<any>) {
-
-		},
-	},
+	reducers: {},
 	extraReducers(builder) {
 		builder
 			.addCase(registration.fulfilled, (state) => {
@@ -25,13 +21,14 @@ const authSlice = createSlice({
 				state.authorizedUserData = action.payload
 				state.isAuth = true
 			})
-			.addCase(logOut.fulfilled, (state, action) => {
+			.addCase(updateAuthorizedUser.fulfilled, (state, action) => {
+				state.authorizedUserData = action.payload
+			})
+			.addCase(logOut.fulfilled, (state) => {
 				state.authorizedUserData = null
 				state.isAuth = false
 			})
 	},
 })
-
-export const { setIsAuth } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AUTH } from 'api'
 import { AuthorizedUserDataType } from 'api/auth/types'
+import { RootStateType } from 'store'
 
 export const registration = createAsyncThunk
 	<void, { email: string, password: string }, { rejectValue: { error: string } }>
@@ -68,6 +69,31 @@ export const setNewPassword = createAsyncThunk
 	('auth/setNewPassword', async (params, { rejectWithValue }) => {
 		try {
 			const response = await AUTH.setNewPassword(params.password, params.resetPasswordToken)
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
+
+export const updateAuthorizedUser = createAsyncThunk
+	<AuthorizedUserDataType,
+		{ name?: string, avatar?: string },
+		{ rejectValue: { error: string }, state: RootStateType }>
+	('auth/updateAuthorizedUser', async (domainPayload, { rejectWithValue, getState }) => {
+		try {
+
+			const authorizedUserData = getState().auth.authorizedUserData
+
+			const payload = {
+				name: authorizedUserData?.name as string,
+				avatar: authorizedUserData?.avatar as string,
+				...domainPayload
+			}
+
+			const response = await AUTH.updateAuthorizedUser(payload)
+			const updatedAuthorizedUser = response.data.updatedUser
+			return updatedAuthorizedUser
+
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

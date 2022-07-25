@@ -1,6 +1,6 @@
 import { instance, additionalInstance } from 'api/config'
 import { LoginParamsType } from 'types'
-import { AddedUserType, AuthorizedUserDataType, ForgotResponseType } from './types'
+import { AddedUserType, AuthorizedUserDataType, ForgotResponseType, UpdateAuthorizedUserResponseType } from './types'
 
 const message = `<div style="background-color: lime; padding: 15px">
 password recovery link: 
@@ -26,5 +26,8 @@ export const AUTH = {
 	},
 	setNewPassword(password: string, resetPasswordToken: string) {
 		return instance.post<{ info: string }>('auth/set-new-password', { password, resetPasswordToken })
+	},
+	updateAuthorizedUser(payload: { name: string, avatar: string }) {
+		return instance.put<UpdateAuthorizedUserResponseType>('auth/me', payload)
 	},
 }

@@ -38,3 +38,9 @@ export type ForgotResponseType = {
 	info: string
 	success: boolean
 }
+
+export type UpdateAuthorizedUserResponseType = {
+	token: string
+	tokenDeathTime: number
+	updatedUser: AuthorizedUserDataType
+}
