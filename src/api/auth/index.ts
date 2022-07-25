@@ -24,6 +24,9 @@ export const AUTH = {
 	forgot(email: string) {
 		return additionalInstance.post<ForgotResponseType>('auth/forgot', { email, message })
 	},
+	setNewPassword(password: string, resetPasswordToken: string) {
+		return instance.post<{ info: string }>('auth/set-new-password', { password, resetPasswordToken })
+	},
 }
 
 export type ForgotParamsType = {

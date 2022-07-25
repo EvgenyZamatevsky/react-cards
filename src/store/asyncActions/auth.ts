@@ -62,3 +62,14 @@ export const forgotPassword = createAsyncThunk
 			return rejectWithValue({ error })
 		}
 	})
+
+export const setNewPassword = createAsyncThunk
+	<void, { password: string, resetPasswordToken: string }, { rejectValue: { error: string } }>
+	('auth/setNewPassword', async (params, { rejectWithValue }) => {
+		try {
+			const response = await AUTH.setNewPassword(params.password, params.resetPasswordToken)
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
