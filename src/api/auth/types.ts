@@ -26,3 +26,15 @@ export type AuthorizedUserDataType = {
 	tokenDeathTime: number
 	avatar: string
 }
+
+export type ForgotParamsType = {
+	email: string
+	message: string
+}
+
+export type ForgotResponseType = {
+	answer: boolean
+	html: boolean
+	info: string
+	success: boolean
+}

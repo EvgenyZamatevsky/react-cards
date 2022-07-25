@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-	baseURL: 'http://localhost:7542/2.0/',
+	baseURL: process.env.REACT_APP_BASE_URL,
 	withCredentials: true
 })
 
 export const additionalInstance = axios.create({
-	baseURL: 'https://neko-back.herokuapp.com/2.0/',
+	baseURL: process.env.REACT_APP_ADDITIONAL_BASE_URL,
 	withCredentials: true
 })

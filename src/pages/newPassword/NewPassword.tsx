@@ -1,7 +1,7 @@
 import { Path } from 'enums'
 import React, { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { setNewPassword } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'

@@ -31,7 +31,7 @@ export const Forgot: FC<ForgotPropsType> = (): ReturnComponentType => {
 
 	const onSubmit: SubmitHandler<{ email: string }> = ({ email }): void => {
 		dispatch(forgotPassword(email))
-		navigate(`/check-email/${email}`)
+		navigate(`${Path.CHECK_EMAIL}/${email}`)
 	}
 
 	return (
