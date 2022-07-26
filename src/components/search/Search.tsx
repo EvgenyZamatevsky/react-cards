@@ -4,11 +4,12 @@ import style from './Search.module.scss'
 import loon from 'assets/icons/loon.svg'
 import cross from 'assets/icons/cross.svg'
 import { useAppDispatch } from 'store/hooks'
-import { setIsInitializedPack, setSearchValue } from 'store/slices/packs'
+import { setSearchValue } from 'store/slices/packs'
 import { EMPTY_STRING } from 'constants/base'
 import debounce from 'lodash.debounce'
 import { useSelector } from 'react-redux'
-import { selectIsInitializedPack, selectSearchValue } from 'store/selectors'
+import { selectIsDisabled, selectSearchValue } from 'store/selectors'
+import { setIsDisabled } from 'store/slices'
 
 type SearchPropsType = {
 
@@ -19,22 +20,23 @@ export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
 	const dispatch = useAppDispatch()
 
 	const searchValue = useSelector(selectSearchValue)
-	const isInitializedPack = useSelector(selectIsInitializedPack)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const [value, setValue] = useState(EMPTY_STRING)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
-	const updateSearchValue = useCallback(debounce((value: string) => {
+	const updateSearchValue = useCallback(debounce((value: string): void => {
 		dispatch(setSearchValue(value))
 	}, 500), [])
 
 	const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const currentValue = event.currentTarget.value
 
-		if (currentValue && isInitializedPack) {
-			dispatch(setIsInitializedPack(false))
+		if (currentValue && !isDisabled) {
+			dispatch(setIsDisabled(true))
 		}
+
 		setValue(currentValue)
 		updateSearchValue(currentValue)
 	}
@@ -56,8 +58,13 @@ export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
 				value={value}
 				onChange={onInputChange}
 				ref={inputRef} />
-			{isInitializedPack && searchValue &&
-				<img className={style.clearIcon} onClick={onResetSearchValueClick} src={cross} alt='cross' />}
+			{searchValue &&
+				<button
+					className={style.resetSearchValueBtn}
+					onClick={onResetSearchValueClick}
+					disabled={isDisabled}>
+					<img className={style.clearIcon} src={cross} alt='cross' />
+				</button>}
 		</div>
 	)
 }

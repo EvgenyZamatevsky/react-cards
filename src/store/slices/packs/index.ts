@@ -6,7 +6,6 @@ import { PacksSliceInitialStateType } from './types'
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchValue: EMPTY_STRING,
-	isInitializedPack: false,
 	sortValue: EMPTY_STRING,
 }
 
@@ -17,9 +16,6 @@ const packsSlice = createSlice({
 		setSearchValue(state, action: PayloadAction<string>) {
 			state.searchValue = action.payload
 		},
-		setIsInitializedPack(state, action: PayloadAction<boolean>) {
-			state.isInitializedPack = action.payload
-		},
 		setSortValue(state, action: PayloadAction<string>) {
 			state.sortValue = action.payload
 		},
@@ -28,11 +24,10 @@ const packsSlice = createSlice({
 		builder
 			.addCase(getPacks.fulfilled, (state, action) => {
 				state.packs = action.payload
-				state.isInitializedPack = true
 			})
 	},
 })
 
-export const { setSearchValue, setIsInitializedPack, setSortValue } = packsSlice.actions
+export const { setSearchValue, setSortValue } = packsSlice.actions
 
 export default packsSlice.reducer
