@@ -3,10 +3,10 @@ import { PACKS } from 'api/packs'
 import { PackType } from 'api/packs/types'
 
 export const getPacks = createAsyncThunk
-	<PackType[], undefined, { rejectValue: { error: string } }>
-	('packs/getPacks', async (_, { rejectWithValue }) => {
+	<PackType[], { packName: string }, { rejectValue: { error: string } }>
+	('packs/getPacks', async (params, { rejectWithValue }) => {
 		try {
-			const response = await PACKS.getPacks()
+			const response = await PACKS.getPacks(params.packName)
 			const { cardPacks: packs } = response.data
 
 			return packs

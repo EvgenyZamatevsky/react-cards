@@ -1,0 +1,19 @@
+.pack {
+	width: 669px;
+	min-height: 48px;
+	border: 1px solid rgb(238, 238, 238);
+	padding: 15px;
+
+	.list {
+		min-height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.actions {
+			width: 150px;
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}

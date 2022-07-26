@@ -12,8 +12,18 @@ type PackPropsType = {
 
 export const Pack: FC<PackPropsType> = ({ _id, name, cardsCount, updated, user_name }): ReturnComponentType => {
 	return (
-		<div>
-			{name}
+		<div className={style.pack}>
+			<div className={style.list}>
+				<div className={style.name}>{name}</div>
+				<div className={style.cardsCount}>{cardsCount}</div>
+				<div className={style.updated}>{updated.toString()}</div>
+				<div className={style.userName}>{user_name}</div>
+				<div className={style.actions}>
+					<button>Delete</button>
+					<button>Edit</button>
+					<button>Learn</button>
+				</div>
+			</div>
 		</div>
 	)
 }

@@ -3,13 +3,18 @@ import { getPacks } from 'store/asyncActions/packs'
 import { PacksSliceInitialStateType } from './types'
 
 const initialState: PacksSliceInitialStateType = {
-	packs: []
+	packs: [],
+	searchValue: ''
 }
 
 const packsSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSearchValue(state, action: PayloadAction<string>) {
+			state.searchValue = action.payload
+		}
+	},
 	extraReducers(builder) {
 		builder
 			.addCase(getPacks.fulfilled, (state, action) => {
@@ -18,6 +23,6 @@ const packsSlice = createSlice({
 	},
 })
 
-export const { } = packsSlice.actions
+export const { setSearchValue } = packsSlice.actions
 
 export default packsSlice.reducer
