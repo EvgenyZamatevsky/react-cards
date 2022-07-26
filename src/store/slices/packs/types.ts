@@ -4,5 +4,5 @@ export type PacksSliceInitialStateType = {
 	packs: PackType[],
 	searchValue: string
 	isInitializedPack: boolean,
-	sortPacksValue: string
+	sortValue: string
 }

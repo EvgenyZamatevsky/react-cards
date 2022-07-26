@@ -7,4 +7,4 @@ export const selectSearchValue = (state: RootStateType): string => state.packs.s
 
 export const selectIsInitializedPack = (state: RootStateType): boolean => state.packs.isInitializedPack
 
-export const selectSortPacksValue = (state: RootStateType): string => state.packs.sortPacksValue
+export const selectSortValue = (state: RootStateType): string => state.packs.sortValue

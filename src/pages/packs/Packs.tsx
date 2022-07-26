@@ -1,4 +1,4 @@
-import { NavBar, Search } from 'components'
+import { NavBar, Search, Sort } from 'components'
 import { Pack } from 'components/pack'
 import { Path } from 'enums'
 import React, { FC, useEffect } from 'react'
@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
-import { selectIsAuth, selectPacks, selectSearchValue, selectSortPacksValue } from 'store/selectors'
+import { selectIsAuth, selectPacks, selectSearchValue, selectSortValue } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 
@@ -21,7 +21,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 	const packs = useSelector(selectPacks)
 	const searchValue = useSelector(selectSearchValue)
-	const sortPacksValue = useSelector(selectSortPacksValue)
+	const sortValue = useSelector(selectSortValue)
 
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
@@ -29,9 +29,9 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getPacks({ packName: searchValue, sortPacks: sortPacksValue }))
+			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue }))
 		}
-	}, [searchValue, sortPacksValue])
+	}, [searchValue, sortValue])
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
@@ -48,13 +48,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 						<button className={style.addNewPackBtn}>Add new Pack</button>
 					</div>
 					<div className={style.container}>
-						<div className={style.sort}>
-							<button className={style.nameBtn}>Name <span></span></button>
-							<button className={style.cardsBtn}>Cards<span></span></button>
-							<button className={style.lastUpdatedBtn} >Last Updated<span></span></button>
-							<button className={style.createdByBtn}>Created by<span></span></button>
-							<button className={style.actionsBtn}>Actions<span></span></button>
-						</div>
+						<Sort />
 						{packsRender}
 					</div>
 				</div>

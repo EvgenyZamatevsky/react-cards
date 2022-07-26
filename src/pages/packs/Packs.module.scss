@@ -34,32 +34,6 @@
 
 			.container {
 				box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
-				.sort {
-					width: 669px;
-					height: 48px;
-					margin-top: 24px;
-					display: flex;
-					align-items: center;
-					justify-content: space-evenly;
-					background-color: #ECECF9;
-
-					.nameBtn,
-					.cardsBtn,
-					.lastUpdatedBtn,
-					.createdByBtn,
-					.actionsBtn {
-						position: relative;
-
-						span {
-							border: 5px solid transparent;
-							border-top: 7px solid black;
-							position: absolute;
-							top: 5px;
-							right: -13px;
-						}
-					}
-				}
 			}
 		}
 	}

@@ -7,7 +7,7 @@ const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchValue: EMPTY_STRING,
 	isInitializedPack: false,
-	sortPacksValue: EMPTY_STRING,
+	sortValue: EMPTY_STRING,
 }
 
 const packsSlice = createSlice({
@@ -20,6 +20,9 @@ const packsSlice = createSlice({
 		setIsInitializedPack(state, action: PayloadAction<boolean>) {
 			state.isInitializedPack = action.payload
 		},
+		setSortValue(state, action: PayloadAction<string>) {
+			state.sortValue = action.payload
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -30,6 +33,6 @@ const packsSlice = createSlice({
 	},
 })
 
-export const { setSearchValue, setIsInitializedPack } = packsSlice.actions
+export const { setSearchValue, setIsInitializedPack, setSortValue } = packsSlice.actions
 
 export default packsSlice.reducer
