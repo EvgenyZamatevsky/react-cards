@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { EMPTY_STRING } from 'constants/base'
 import { getPacks } from 'store/asyncActions/packs'
 import { PacksSliceInitialStateType } from './types'
 
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
-	searchValue: '',
-	isInitializedPack: false
+	searchValue: EMPTY_STRING,
+	isInitializedPack: false,
+	sortPacksValue: EMPTY_STRING,
 }
 
 const packsSlice = createSlice({
