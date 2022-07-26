@@ -13,6 +13,24 @@
 
 		.packsList {
 			padding: 24px 48px 72px 48px;
+
+			.title {
+				font-weight: 600;
+				font-size: 22px;
+				line-height: 33px;
+			}
+
+			.content {
+				display: flex;
+				margin-top: 15px;
+
+				.addNewPackBtn {
+					padding: 9px 30px;
+					width: 100%;
+					margin-left: 20px;
+					@extend %btn;
+				}
+			}
 		}
 	}
 }

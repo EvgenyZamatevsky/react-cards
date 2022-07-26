@@ -23,13 +23,14 @@ export const App: FC = (): ReturnComponentType => {
     dispatch(getAuthorizedUserData())
   }, [])
 
-  if (!isInitializedApp || isLoading) {
+  if (!isInitializedApp) {
     return <Preloader />
   }
 
   return (
     <div className='app'>
       <ErrorAlert />
+      {isLoading && <Preloader />}
       {(pathname === Path.PROFILE || pathname === Path.PACKS) && <Header />}
       <Suspense fallback={<Preloader />}>
         <Routes>
