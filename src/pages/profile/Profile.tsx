@@ -1,5 +1,5 @@
 import { Path } from 'enums'
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import avatar from 'assets/images/avatar.png'
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData, selectIsAuth } from 'store/selectors'
 import { EMPTY_STRING } from 'constants/base'
 import style from './Profile.module.scss'
+import { getPacks } from 'store/asyncActions/packs'
 
 type ProfilePropsType = {
 

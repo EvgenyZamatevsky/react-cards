@@ -1,10 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './Header.module.scss'
 import user from 'assets/icons/user.png'
 import packs from 'assets/icons/packs.png'
 import { NavLink } from 'react-router-dom'
 import { Path } from 'enums/Path'
+import { getPacks } from 'store/asyncActions/packs'
+import { useAppDispatch } from 'store/hooks'
 
 export type HeaderPropsType = {
 

@@ -8,6 +8,7 @@ import { useAppDispatch } from 'store/hooks'
 import { getAuthorizedUserData } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
 import { selectIsInitializedApp, selectIsLoading } from 'store/selectors/app'
+import { getPacks } from 'store/asyncActions/packs'
 
 export const App: FC = (): ReturnComponentType => {
 
