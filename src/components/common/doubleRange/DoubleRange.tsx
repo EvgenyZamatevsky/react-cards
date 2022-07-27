@@ -1,67 +1,71 @@
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import { current } from '@reduxjs/toolkit'
+import React, { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './DoubleRange.module.scss'
-
-export type maxMinValueType = {
-	min: number
-	max: number
-}
 
 type DoubleRangePropsType = {
 	min: number
 	max: number
-	minDefault: number
-	maxDefault: number
-	disabled?: boolean
-	onSetMinAndMaxValueMouseUp: ({ min, max }: maxMinValueType) => void
-	changeSlider?: boolean
+	minDefaultValue: number
+	maxDefaultValue: number
+	onSetMinAndMaxValueMouseUp: ({ min, max }: { min: number, max: number }) => void
 }
 
-export const DoubleRange: FC<DoubleRangePropsType> = React.memo(({ min, max, minDefault, maxDefault, disabled, onSetMinAndMaxValueMouseUp, changeSlider }): ReturnComponentType => {
-	const [minVal, setMinVal] = useState(min);
-	const [maxVal, setMaxVal] = useState(max);
-	const range = useRef<HTMLDivElement>(null);
+export const DoubleRange: FC<DoubleRangePropsType> =
+	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp }): ReturnComponentType => {
 
-	useEffect(() => {
-		setMinVal(minDefault)
-		setMaxVal(maxDefault)
-	}, [minDefault, maxDefault, changeSlider])
+		const [minValue, setMinVal] = useState(min)
+		const [maxValue, setMaxVal] = useState(max)
 
-	return (
-		<div className={style.container}>
-			<input
-				type='range'
-				min={minDefault}
-				max={maxDefault}
-				value={minVal}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					const value = Math.min(Number(event.target.value), maxVal);
-					setMinVal(value);
-				}}
-				className={`${style.thumb} ${style.thumbLeft}`}
-				onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minVal, max: maxVal })}
-				disabled={disabled}
-			/>
-			<input
-				type='range'
-				min={minDefault}
-				max={maxDefault}
-				value={maxVal}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					const value = Math.max(Number(event.target.value), minVal);
-					setMaxVal(value);
-				}}
-				className={`${style.thumb} ${style.thumbRight}`}
-				onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minVal, max: maxVal })}
-				disabled={disabled}
-			/>
+		const rangeRef = useRef<HTMLDivElement>(null)
+		const isMounted = useRef(false)
 
-			<div className={style.slider}>
-				<div className={style.slider__track}></div>
-				<div ref={range} className={style.slider__range}></div>
-				<div className={style.slider__leftValue}>{minVal}</div>
-				<div className={style.slider__rightValue}>{maxVal}</div>
+		const onMinValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
+			const currentValue = Math.min(Number(event.currentTarget.value), maxValue)
+			setMinVal(currentValue)
+		}
+
+		const onMaxValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
+			const currentValue = Math.max(Number(event.target.value), minValue)
+			setMaxVal(currentValue)
+		}
+
+		useEffect(() => {
+			if (isMounted.current) {
+				setMinVal(minDefaultValue)
+				setMaxVal(maxDefaultValue)
+			}
+
+			isMounted.current = true
+		}, [minDefaultValue, maxDefaultValue])
+
+		return (
+			<div className={style.container}>
+				<input
+					type='range'
+					min={minDefaultValue}
+					max={maxDefaultValue}
+					value={minValue}
+					onChange={onMinValueChange}
+					className={`${style.thumb} ${style.thumbLeft}`}
+					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+				/>
+				<input
+					type='range'
+					min={minDefaultValue}
+					max={maxDefaultValue}
+					value={maxValue}
+					onChange={onMaxValueChange}
+					className={`${style.thumb} ${style.thumbRight}`}
+					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+				/>
+
+				<div className={style.slider}>
+					<div className={style.slider__track}></div>
+					<div ref={rangeRef} className={style.slider__range}></div>
+					<div className={style.slider__leftValue}>{minValue}</div>
+					<div className={style.slider__rightValue}>{maxValue}</div>
+				</div>
 			</div>
-		</div>
-	)
-})
+		)
+	})

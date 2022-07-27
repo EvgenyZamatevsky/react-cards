@@ -39,11 +39,9 @@ export const NavBar: FC<NavBarPropsType> = (): ReturnComponentType => {
 				<DoubleRange
 					max={maxValue}
 					min={minValue}
-					maxDefault={maxCardsCount}
-					minDefault={minCardsCount}
+					maxDefaultValue={maxCardsCount}
+					minDefaultValue={minCardsCount}
 					onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
-					changeSlider={true}
-					disabled={false}
 				/>
 			</div>
 			<button className={style.resetBtn}>Reset filters</button>

@@ -24,7 +24,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const sortValue = useSelector(selectSortValue)
 	const minValue = useSelector(selectMinValue)
 	const maxValue = useSelector(selectMaxValue)
-	console.log(minValue, maxValue)
+
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
 	})
