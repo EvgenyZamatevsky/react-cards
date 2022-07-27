@@ -4,4 +4,8 @@ export type PacksSliceInitialStateType = {
 	packs: PackType[],
 	searchValue: string
 	sortValue: string
+	minValue: number
+	maxValue: number
+	minCardsCount: number
+	maxCardsCount: number
 }

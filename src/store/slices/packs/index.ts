@@ -7,6 +7,10 @@ const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchValue: EMPTY_STRING,
 	sortValue: EMPTY_STRING,
+	minValue: 0,
+	maxValue: 0,
+	minCardsCount: 0,
+	maxCardsCount: 0,
 }
 
 const packsSlice = createSlice({
@@ -19,15 +23,21 @@ const packsSlice = createSlice({
 		setSortValue(state, action: PayloadAction<string>) {
 			state.sortValue = action.payload
 		},
+		setMaxAndMinValue(state, action: PayloadAction<{ max: number, min: number }>) {
+			state.maxValue = action.payload.max
+			state.minValue = action.payload.min
+		},
 	},
 	extraReducers(builder) {
 		builder
 			.addCase(getPacks.fulfilled, (state, action) => {
-				state.packs = action.payload
+				state.packs = action.payload.packs
+				state.maxCardsCount = action.payload.maxCardsCount
+				state.minCardsCount = action.payload.minCardsCount
 			})
 	},
 })
 
-export const { setSearchValue, setSortValue } = packsSlice.actions
+export const { setSearchValue, setSortValue, setMaxAndMinValue } = packsSlice.actions
 
 export default packsSlice.reducer

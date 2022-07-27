@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
-import { selectIsAuth, selectPacks, selectSearchValue, selectSortValue } from 'store/selectors'
+import { selectIsAuth, selectMaxValue, selectMinValue, selectPacks, selectSearchValue, selectSortValue } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 
@@ -22,16 +22,18 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const packs = useSelector(selectPacks)
 	const searchValue = useSelector(selectSearchValue)
 	const sortValue = useSelector(selectSortValue)
-
+	const minValue = useSelector(selectMinValue)
+	const maxValue = useSelector(selectMaxValue)
+	console.log(minValue, maxValue)
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
 	})
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue }))
+			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue }))
 		}
-	}, [searchValue, sortValue])
+	}, [searchValue, sortValue, minValue, maxValue])
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
