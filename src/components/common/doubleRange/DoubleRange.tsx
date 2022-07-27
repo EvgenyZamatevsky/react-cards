@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit'
 import React, { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './DoubleRange.module.scss'
@@ -61,10 +60,10 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 				/>
 
 				<div className={style.slider}>
-					<div className={style.slider__track}></div>
-					<div ref={rangeRef} className={style.slider__range}></div>
-					<div className={style.slider__leftValue}>{minValue}</div>
-					<div className={style.slider__rightValue}>{maxValue}</div>
+					<div className={style.track}></div>
+					<div ref={rangeRef} className={style.range}></div>
+					<div className={style.leftValue}>{minValue}</div>
+					<div className={style.rightValue}>{maxValue}</div>
 				</div>
 			</div>
 		)
