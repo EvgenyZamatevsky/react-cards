@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { removePack } from 'store/asyncActions/packs'
+import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
 import style from './Pack.module.scss'
@@ -20,6 +20,10 @@ export const Pack: FC<PackPropsType> = ({ _id, name, cardsCount, updated, user_n
 		dispatch(removePack(_id))
 	}
 
+	const onUpdatePackNameClick = (): void => {
+		dispatch(updatePackName({ _id, name: '223' }))
+	}
+
 	return (
 		<div className={style.pack}>
 			<div className={style.list}>
@@ -29,7 +33,7 @@ export const Pack: FC<PackPropsType> = ({ _id, name, cardsCount, updated, user_n
 				<div className={style.userName}>{user_name}</div>
 				<div className={style.actions}>
 					<button onClick={onRemovePackClick}>Delete</button>
-					<button>Edit</button>
+					<button onClick={onUpdatePackNameClick}>Edit</button>
 					<button>Learn</button>
 				</div>
 			</div>

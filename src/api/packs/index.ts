@@ -19,4 +19,7 @@ export const PACKS = {
 	removePack(id: string) {
 		return instance.delete(`cards/pack?id=${id}`)
 	},
+	updatePackName(_id: string, name: string) {
+		return instance.put(`cards/pack`, { cardsPack: { _id, name } })
+	},
 }
