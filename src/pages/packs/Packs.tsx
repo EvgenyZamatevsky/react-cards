@@ -4,7 +4,7 @@ import { Path } from 'enums'
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { getPacks } from 'store/asyncActions/packs'
+import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { selectIsAuth, selectMaxValue, selectMinValue, selectPacks, selectSearchValue, selectSortValue } from 'store/selectors'
 import { ReturnComponentType } from 'types'
@@ -29,6 +29,10 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
 	})
 
+	const onAddPackClick = (): void => {
+		dispatch(addPack({ name: '322', private: false })) // private доработать
+	}
+
 	useEffect(() => {
 		if (isAuth) {
 			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue }))
@@ -47,7 +51,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 					<h2 className={style.title}>Packs list</h2>
 					<div className={style.content}>
 						<Search />
-						<button className={style.addNewPackBtn}>Add new Pack</button>
+						<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new Pack</button>
 					</div>
 					<div className={style.container}>
 						<Sort />

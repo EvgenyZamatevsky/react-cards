@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { PACKS } from 'api/packs'
 import { PackType } from 'api/packs/types'
+import { RootStateType } from 'store'
 
 export const getPacks = createAsyncThunk
 	<{ packs: PackType[], minCardsCount: number, maxCardsCount: number },
@@ -12,6 +13,25 @@ export const getPacks = createAsyncThunk
 			const { cardPacks: packs, minCardsCount, maxCardsCount } = response.data
 
 			return { packs, minCardsCount, maxCardsCount }
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
+
+export const addPack = createAsyncThunk
+	<void,
+		{ name: string, private: boolean },
+		{ rejectValue: { error: string }, state: RootStateType }>
+	('packs/addPack', async (params, { rejectWithValue, dispatch, getState }) => {
+		try {
+			const packName = getState().packs.searchValue
+			const sortPacks = getState().packs.sortValue
+			const min = getState().packs.minValue
+			const max = getState().packs.maxValue
+
+			const response = await PACKS.addPack(params.name, params.private)
+			dispatch(getPacks({ packName, sortPacks, min, max }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
