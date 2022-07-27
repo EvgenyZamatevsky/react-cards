@@ -37,3 +37,20 @@ export const addPack = createAsyncThunk
 			return rejectWithValue({ error })
 		}
 	})
+
+export const removePack = createAsyncThunk
+	<void, string, { rejectValue: { error: string }, state: RootStateType }>
+	('packs/removePack', async (id, { rejectWithValue, dispatch, getState }) => {
+		try {
+			const packName = getState().packs.searchValue
+			const sortPacks = getState().packs.sortValue
+			const min = getState().packs.minValue
+			const max = getState().packs.maxValue
+
+			const response = await PACKS.removePack(id)
+			dispatch(getPacks({ packName, sortPacks, min, max }))
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})

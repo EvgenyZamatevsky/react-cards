@@ -1,6 +1,6 @@
 import { instance } from 'api/config'
 import { EMPTY_STRING } from 'constants/base'
-import { AddPackResponseType, PacksResponseType } from './types'
+import { PacksResponseType } from './types'
 
 export const PACKS = {
 	getPacks(packName: string, sortPacks: string, min: number, max: number) {
@@ -14,7 +14,9 @@ export const PACKS = {
 		${packName}${currentSortPacks}${currentMin}${currentMax}`)
 	},
 	addPack(name: string, isPrivate: boolean) { // private доработать
-		return instance.post<AddPackResponseType>(`cards/pack`, { cardsPack: { name: name, private: isPrivate } })
-	}
+		return instance.post(`cards/pack`, { cardsPack: { name: name, private: isPrivate } })
+	},
+	removePack(id: string) {
+		return instance.delete(`cards/pack?id=${id}`)
+	},
 }
-

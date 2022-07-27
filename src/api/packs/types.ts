@@ -17,30 +17,6 @@ export type PackType = {
 	deckCover: string
 }
 
-export type NewCardsPackType = {
-	_id: string
-	user_id: string
-	user_name: string
-	private: boolean
-	name: string
-	path: string
-	grade: number
-	shots: number
-	cardsCount: number
-	type: string
-	rating: number
-	created: Date
-	updated: Date
-	more_id: string
-	__v: number
-}
-
-export type AddPackResponseType = {
-	newCardsPack: NewCardsPackType
-	token: string
-	tokenDeathTime: number
-}
-
 export type PacksResponseType = {
 	cardPacks: PackType[]
 	page: number
