@@ -1,79 +1,85 @@
 @import 'styles/sass/mixins.scss';
 @import 'styles/sass/templates.scss';
 
-.forgot {
-	height: 100%;
-	@include flex(row, center, center);
+.container {
+	width: 413px;
+	height: 456px;
+	background-color: #FFF;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
 
-	.body {
-		width: 413px;
-		min-height: 600px;
+	.content {
 		@include flex(column, stretch, center);
-		padding: 25px 33px 30px 33px;
-		background-color: #F9F9FE;
+		height: 100%;
 
 		.title {
+			margin-top: 35px;
 			font-weight: 600;
 			font-size: 26px;
-			line-height: 39px;
-		}
-
-		.subtitle {
-			margin-top: 32px;
-			font-weight: 600;
-			line-height: 33px;
-			font-size: 22px;
+			line-height: 32px;
 		}
 
 		.form {
-			margin-top: 50px;
+			margin-top: 55px;
+			width: 330px;
 			@include flex(column, stretch, stretch);
-			width: 347px;
+			position: relative;
 
-			.email {
-				background-color: #F9F9FE;
+			.emailField {
 				border-bottom: 1px solid #b5b5b5;
 				padding: 4.50px 0px 4.50px 0px;
 				line-height: 24px;
+				box-shadow: inset 0 0 0 50px white;
 
 				&:focus {
 					border-bottom: 1px solid #000;
 				}
 			}
 
-			.text {
-				margin-top: 80px;
-				font-weight: 600;
-				line-height: 24px;
-				opacity: 0.5;
+			.errorEmailField {
+				position: absolute;
+				top: 40px;
+				left: 0;
+				color: red;
 				text-align: center;
+				width: 100%;
 			}
 
-			.sendInstructionsBtn {
-				margin-top: 90px;
-				@extend %btn;
-				padding: 9px 68px;
+			.words {
+				margin-top: 25px;
+				font-size: 14px;
+				line-height: 24px;
+				opacity: 0.5;
+			}
 
-				&:disabled {
-					background-color: #b5b5b5;
+			.bottom {
+				margin-top: 65px;
+				@include flex(column, stretch, center);
+
+				.sendInstructionsBtn {
+					@extend %btn;
+					padding: 0px 100px;
+				}
+
+				.text {
+					margin-top: 31px;
+					opacity: 0.5;
+					line-height: 24px;
+					font-size: 14px;
+					font-weight: 600;
+				}
+
+				.signInBtn {
+					margin-top: 11px;
+					color: #366EFF;
+					line-height: 24px;
+					font-weight: 600;
+
+					&:hover {
+						text-decoration: underline;
+					}
 				}
 			}
 		}
-
-		.wording {
-			margin-top: 30px;
-		}
-
-		.tryLoggingIn {
-			margin-top: 11px;
-			font-weight: 600;
-			line-height: 24px;
-			color: #21268F;
-		}
 	}
-}
-
-.errorMessage {
-	color: red;
-	margin-top: 5px;
 }

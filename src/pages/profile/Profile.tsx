@@ -8,8 +8,8 @@ import { logOut, updateAuthorizedUser } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData, selectIsAuth } from 'store/selectors'
 import { EMPTY_STRING } from 'constants/base'
+import logOutIcon from 'assets/icons/logOut.png'
 import style from './Profile.module.scss'
-import { getPacks } from 'store/asyncActions/packs'
 
 type ProfilePropsType = {
 
@@ -22,21 +22,21 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 	const authorizedUserData = useSelector(selectAuthorizedUserData)
 
-	const [authorizedUserName, setAuthorizedUserName] = useState(authorizedUserData?.name)
+	//const [authorizedUserName, setAuthorizedUserName] = useState(authorizedUserData?.name)
 
 	const avatarAuthorizedUser = authorizedUserData?.avatar ? authorizedUserData?.avatar : avatar
 
-	const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setAuthorizedUserName(event.currentTarget.value)
-	}
+	// const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+	// 	setAuthorizedUserName(event.currentTarget.value)
+	// }
 
-	const updateAuthorizedUserName = (): void => {
-		const trimmedAuthorizedUserName = authorizedUserName?.trim()
+	// const updateAuthorizedUserName = (): void => {
+	// 	const trimmedAuthorizedUserName = authorizedUserName?.trim()
 
-		if (trimmedAuthorizedUserName !== EMPTY_STRING) {
-			dispatch(updateAuthorizedUser({ name: trimmedAuthorizedUserName }))
-		}
-	}
+	// 	if (trimmedAuthorizedUserName !== EMPTY_STRING) {
+	// 		dispatch(updateAuthorizedUser({ name: trimmedAuthorizedUserName }))
+	// 	}
+	// }
 
 	const onLogOutClick = (): void => {
 		dispatch(logOut())
@@ -47,19 +47,16 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.profile}>
-			<div className={style.body}>
+		<div className={style.container}>
+			<div className={style.content}>
 				<h2 className={style.title}>Personal Information</h2>
-				<button className={style.logOut} onClick={onLogOutClick}>Log Out</button >
 				<img className={style.avatar} src={avatarAuthorizedUser} alt='avatar' />
-				<div className={style.file}>
-					<input type='file' />
-				</div>
-				<div className={style.form}>
-					<input className={style.nickname} type='type' placeholder='Nickname' value={authorizedUserName} onChange={onInputChange} />
-					<input disabled className={style.email} type='email' defaultValue={authorizedUserData?.email} />
-					<button className={style.saveBtn} onClick={updateAuthorizedUserName}>Save</button>
-				</div>
+				<div className={style.name}>{authorizedUserData?.name}</div>
+				<div className={style.email}>{authorizedUserData?.email}</div>
+				<button className={style.LogOutBtn} onClick={onLogOutClick}>
+					<img src={logOutIcon} alt='' />
+					<div>Log out</div>
+				</button>
 			</div>
 		</div>
 	)

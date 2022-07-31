@@ -1,10 +1,12 @@
 import { Path } from 'enums'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { setNewPassword } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
+import openEye from 'assets/icons/openEye.svg'
+import closedEye from 'assets/icons/closedEye.svg'
 import style from './NewPassword.module.scss'
 
 type NewPasswordPropsType = {
@@ -19,6 +21,8 @@ export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => 
 
 	const { token } = useParams()
 
+	const [typePassword, setTypePassword] = useState('password')
+
 	const { register, handleSubmit, formState: { errors, isValid } } = useForm<{ password: string }>(
 		{ mode: 'onChange' },
 	)
@@ -28,24 +32,30 @@ export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => 
 		minLength: { value: 8, message: 'Min 8 characters!' },
 	}
 
+	const showOpenEye = (): void => setTypePassword('text')
+
+	const showClosedEye = (): void => setTypePassword('password')
+
 	const onSubmit: SubmitHandler<{ password: string }> = ({ password }): void => {
-		console.log(password, token)
 		dispatch(setNewPassword({ password, resetPasswordToken: token as string }))
 		navigate(Path.LOGIN)
 	}
 
 	return (
-		<div className={style.newPassword}>
-			<div className={style.body}>
-				<h2 className={style.title}>PLAYING CARD</h2>
-				<h2 className={style.subtitle}>Create a new password</h2>
+		<div className={style.container}>
+			<div className={style.content}>
+				<h2 className={style.title}>Create new password</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-					<input className={style.password} type='password' placeholder='Password'
-						{...register('password', passwordValidation)} />
-					{errors?.password && <p className={style.errorMessage}>{errors?.password.message}</p>}
-					<div className={style.text}>Create a new password and we will send you
-						further instructions by email</div>
-					<button className={style.createNewPassword} type='submit' disabled={!isValid}>Create a new password</button>
+					<div className={style.passwordFieldContainer}>
+						<input className={style.passwordField} type={typePassword} placeholder='Password'
+							{...register('password', passwordValidation)} />
+						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
+						{typePassword === 'password'
+							? <img className={style.eye} onClick={showOpenEye} src={openEye} />
+							: <img className={style.eye} onClick={showClosedEye} src={closedEye} />}
+					</div>
+					<div className={style.text}>Create new password and we will send you further instructions to email</div>
+					<button className={style.createNewPasswordBtn} type='submit' disabled={!isValid}>Create new password</button>
 				</form>
 			</div>
 		</div>

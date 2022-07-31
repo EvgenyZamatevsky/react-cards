@@ -1,80 +1,53 @@
 @import 'styles/sass/mixins.scss';
 @import 'styles/sass/templates.scss';
 
-.profile {
-	height: 93.8%;
-	@include flex(row, center, center);
+.container {
+	width: 413px;
+	height: 360px;
+	background-color: #FFF;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
 
-	.body {
-		width: 413px;
-		height: 600px;
+	.content {
 		@include flex(column, stretch, center);
-		padding: 25px 33px 30px 33px;
-		background-color: #F9F9FE;
 
 		.title {
+			margin-top: 27px;
 			font-weight: 600;
-			font-size: 26px;
-			line-height: 39px;
+			font-size: 22px;
+			line-height: 27px;
 		}
 
-		.logOut {
-			margin-top: 15px;
-			font-weight: 600;
+		.name {
+			margin-top: 17px;
+			font-size: 20px;
 			line-height: 24px;
-			opacity: 0.5;
-			transition: color 0.2s ease-in 0s;
-
-			&:hover {
-				color: #b5b5b5;
-			}
 		}
 
 		.avatar {
-			height: 150px;
-			width: 150px;
-			margin-top: 20px;
+			margin-top: 30px;
+			width: 96px;
+			height: 96px;
 			border-radius: 50%;
 		}
 
-		.file {
-			margin-top: 20px;
+		.email {
+			margin-top: 14px;
+			opacity: 0.5;
+			font-size: 14px;
+			line-height: 24px;
 		}
 
-		.form {
-			margin-top: 50px;
-			@include flex(column, stretch, stretch);
-			width: 347px;
-
-			.nickname {
-				background-color: #F9F9FE;
-				border-bottom: 1px solid #b5b5b5;
-				padding: 4.50px 0px 4.50px 0px;
-				line-height: 24px;
-
-				&:focus {
-					border-bottom: 1px solid #000;
-				}
-			}
-
-			.email {
-				margin-top: 30px;
-				background-color: #F9F9FE;
-				border-bottom: 1px solid #b5b5b5;
-				padding: 4.50px 0px 4.50px 0px;
-				line-height: 24px;
-				opacity: 0.7;
-
-				&:focus {
-					border-bottom: 1px solid #000;
-				}
-			}
-
-			.saveBtn {
-				margin-top: 50px;
-				@extend %btn;
-			}
+		.LogOutBtn {
+			margin-top: 29px;
+			height: 36px;
+			@include flex(row, space-evenly, center);
+			padding: 0px 20px;
+			width: 127px;
+			text-align: center;
+			background: #FCFCFC;
+			box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+			border-radius: 30px;
 		}
-
 	}
 }

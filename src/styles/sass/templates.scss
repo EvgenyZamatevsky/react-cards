@@ -1,21 +1,40 @@
  @import './variables.scss';
+ @import './mixins.scss';
 
  %container {
  	max-width: 1280px;
  	margin: 0 auto;
  }
 
+ //  %btn {
+ //  	align-self: center;
+ //  	border-radius: 30px;
+ //  	background-color: #21268F;
+ //  	width: 266px;
+ //  	color: #ECECF9;
+ //  	padding: 9px 112px;
+ //  	line-height: 19px;
+ //  	letter-spacing: 0.01em;
+ //  	display: flex;
+ //  	justify-content: center;
+ //  	align-items: center;
+ //  	text-align: center;
+ //  }
+
  %btn {
- 	align-self: center;
- 	border-radius: 30px;
- 	background-color: #21268F;
- 	width: 266px;
- 	color: #ECECF9;
- 	padding: 9px 112px;
- 	line-height: 19px;
+ 	color: #FFF;
  	letter-spacing: 0.01em;
- 	display: flex;
- 	justify-content: center;
- 	align-items: center;
+ 	line-height: 20px;
+ 	background: #366EFF;
+ 	box-shadow: 0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+ 	border-radius: 30px;
+ 	height: 36px;
+ 	@include flex(row, center, center);
  	text-align: center;
+ 	padding: 0px 119px;
+
+ 	&:disabled {
+ 		opacity: 0.5;
+ 		cursor: no-drop;
+ 	}
  }

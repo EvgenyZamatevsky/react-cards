@@ -14,14 +14,13 @@ export const CheckEmail: FC<CheckEmailPropsType> = (): ReturnComponentType => {
 	const { email } = useParams()
 
 	return (
-		<div className={style.checkEmail}>
-			<div className={style.body}>
-				<h2 className={style.title}>PLAYING CARD</h2>
+		<div className={style.container}>
+			<div className={style.content}>
+				<h2 className={style.title}>Check Email</h2>
 				<img className={style.writingIcon} src={writing} alt='writing' />
-
-				<div className={style.instructions}>We've sent an email with instructions to</div>
+				<div className={style.text}>We've sent an email with instructions to</div>
 				<div className={style.email}>{email}</div>
-				<div className={style.text}>You can close this window and click on the link from our email to continue the password recovery.</div>
+				<Link to={Path.LOGIN} className={style.backToLoginBtn}>Back to login</Link>
 			</div>
 		</div>
 	)

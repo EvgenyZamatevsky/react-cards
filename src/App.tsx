@@ -27,15 +27,18 @@ export const App: FC = (): ReturnComponentType => {
   }
 
   return (
-    <div className='app'>
+    <div>
       <ErrorAlert />
       {isLoading && <Preloader />}
-      {(pathname === Path.PROFILE || pathname === Path.PACKS) && <Header />}
-      <Suspense fallback={<Preloader />}>
-        <Routes>
-          {ROUTES.map(({ path, element }) => <Route key={path} path={path} element={element} />)}
-        </Routes>
-      </Suspense>
+      {/* {(pathname === Path.PROFILE || pathname === Path.PACKS) && <Header />} */}
+      <Header />
+      <div className={'container'}>
+        <Suspense fallback={<Preloader />}>
+          <Routes>
+            {ROUTES.map(({ path, element }) => <Route key={path} path={path} element={element} />)}
+          </Routes>
+        </Suspense>
+      </div>
     </div>
   )
 }
