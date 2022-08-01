@@ -1,40 +1,102 @@
-@import 'styles/sass/mixins.scss';
-@import 'styles/sass/templates.scss';
+ @import 'styles/sass/mixins.scss';
+ @import 'styles/sass/templates.scss';
 
-.packs {
-	height: 93.8%;
-	@include flex(row, center, center);
+ .container {
 
-	.body {
-		width: 1008px;
-		min-height: 636px;
-		background-color: #FEFEFF;
-		display: flex;
+ 	.top {
+ 		margin-top: 39px;
+ 		@include flex(row, space-between, center);
 
-		.packsList {
-			padding: 24px 48px 72px 48px;
+ 		.title {
 
-			.title {
-				font-weight: 600;
-				font-size: 22px;
-				line-height: 33px;
-			}
+ 			font-weight: 600;
+ 			font-size: 22px;
+ 			line-height: 27px;
+ 		}
 
-			.content {
-				display: flex;
-				margin-top: 15px;
+ 		.addNewPackBtn {
+ 			@extend %btn;
+ 			padding: 0px 28px;
+ 		}
+ 	}
 
-				.addNewPackBtn {
-					padding: 9px 30px;
-					width: 100%;
-					margin-left: 20px;
-					@extend %btn;
-				}
-			}
+ 	.main {
+ 		display: flex;
+ 		justify-content: space-between;
+ 		margin-top: 40px;
 
-			.container {
-				box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
-			}
-		}
-	}
-}
+ 		.search {
+ 			font-size: 14px;
+ 			line-height: 17px;
+ 			margin-bottom: 8px;
+ 		}
+
+ 		.showPacksCards {
+ 			font-size: 14px;
+ 			line-height: 17px;
+ 			margin-bottom: 8px;
+ 		}
+
+ 		.showPacksButtons {
+
+ 			.myBtn {
+ 				height: 44px;
+ 				background: #FFF;
+ 				border: 1px solid #D9D9D9;
+ 				border-radius: 2px;
+ 				padding: 0px 40px;
+ 			}
+
+ 			.allBtn {
+ 				height: 44px;
+ 				background: #366EFF;
+ 				border-radius: 0px 2px 2px 0px;
+ 				color: #fff;
+ 				padding: 0px 40px;
+ 			}
+ 		}
+
+ 		.numberOfCards {
+ 			font-size: 14px;
+ 			line-height: 17px;
+ 		}
+ 	}
+ }
+
+ // .packs {
+ // 	height: 93.8%;
+ // 	@include flex(row, center, center);
+
+ // 	.body {
+ // 		width: 1008px;
+ // 		min-height: 636px;
+ // 		background-color: #FEFEFF;
+ // 		display: flex;
+
+ // 		.packsList {
+ // 			padding: 24px 48px 72px 48px;
+
+ // 			.title {
+ // 				font-weight: 600;
+ // 				font-size: 22px;
+ // 				line-height: 33px;
+ // 			}
+
+ // 			.content {
+ // 				display: flex;
+ // 				margin-top: 15px;
+
+ // 				.addNewPackBtn {
+ // 					padding: 9px 30px;
+ // 					width: 100%;
+ // 					margin-left: 20px;
+ // 					@extend %btn;
+ // 				}
+ // 			}
+
+ // 			.container {
+ // 				box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+ // 			}
+ // 		}
+ // 	}
+ // }

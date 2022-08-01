@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 30px 0 60px 0;
+	margin: 25px 0 60px 0;
 
 	.thumb {
 		pointer-events: none;
@@ -18,10 +18,10 @@
 	}
 
 	.thumb::-webkit-slider-thumb {
-		background-color: #fef2e4;
+		background-color: #fff;
 		border: none;
 		border-radius: 50%;
-		box-shadow: 0 0 1px 1px #fd974f;
+		box-shadow: 0 0 1px 1px #366EFF;
 		cursor: pointer;
 		height: 14px;
 		width: 14px;
@@ -31,10 +31,10 @@
 	}
 
 	.thumb::-moz-range-thumb {
-		background-color: #fef2e4;
+		background-color: #366EFF;
 		border: none;
 		border-radius: 50%;
-		box-shadow: 0 0 1px 1px #fd974f;
+		box-shadow: 0 0 1px 1px #366EFF;
 		cursor: pointer;
 		height: 14px;
 		width: 14px;
@@ -69,14 +69,13 @@
 		}
 
 		.track {
-			background-color: #fd974f;
+			background-color: #366EFF;
 			width: 100%;
 			z-index: 1;
 		}
 
 		.range {
-			background-color: #fd974f;
-			z-index: 2;
+			background-color: #366EFF;
 		}
 
 		.leftValue,

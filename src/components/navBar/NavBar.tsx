@@ -17,7 +17,6 @@ export const NavBar: FC<NavBarPropsType> = (): ReturnComponentType => {
 
 	const minValue = useSelector(selectMinValue)
 	const maxValue = useSelector(selectMaxValue)
-
 	const maxCardsCount = useSelector(selectMaxCardsCount)
 	const minCardsCount = useSelector(selectMinCardsCount)
 

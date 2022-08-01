@@ -12,11 +12,6 @@ body {
 }
 
 .container {
-	//height: 93.8vh;
-	//@include flex(row, center, center);
-	// position: absolute;
-	// top: 50%;
-	// left: 50%;
-	// transform: translate(-50%, -50%);
-	padding: 0px 136px;
+	max-width: 1011px;
+	margin: 0 auto;
 }

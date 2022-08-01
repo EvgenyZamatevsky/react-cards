@@ -54,7 +54,7 @@ export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
 			<img className={style.searchIcon} src={loon} />
 			<input
 				className={style.searchInput}
-				placeholder='Search'
+				placeholder='Provide your text'
 				value={value}
 				onChange={onInputChange}
 				ref={inputRef} />
