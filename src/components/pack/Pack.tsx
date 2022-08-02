@@ -7,7 +7,7 @@ import teacher from 'assets/icons/teacher.svg'
 import cart from 'assets/icons/cart.svg'
 import pencil from 'assets/icons/pencil.svg'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData } from 'store/selectors'
+import { selectAuthorizedUserData, selectCardQuestion } from 'store/selectors'
 import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
 import { getCards } from 'store/asyncActions/cards'
@@ -40,13 +40,8 @@ export const Pack: FC<PackPropsType> =
 			dispatch(updatePackName({ _id, name: '223' }))
 		}
 
-		const onGetCardsClick = (): void => {
-			dispatch(getCards({ packId: _id }))
-			navigate(Path.CARDS)
-		}
-
 		return (
-			<div className={style.container} onClick={onGetCardsClick}>
+			<div className={style.container} onClick={() => navigate(`${Path.CARDS}/${_id}`)}>
 				<div className={style.list}>
 					<div className={style.name}>{name}</div>
 					<div className={style.cardsCount}>{cardsCount}</div>

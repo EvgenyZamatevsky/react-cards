@@ -5,6 +5,7 @@ import { EMPTY_STRING } from 'constants/base'
 import { isErrorRejected } from 'store/helpers'
 import { AppSliceInitialStateType } from './types'
 import { getPacks } from 'store/asyncActions/packs'
+import { getCards } from 'store/asyncActions/cards'
 
 const initialState: AppSliceInitialStateType = {
 	errorMessage: EMPTY_STRING,
@@ -39,7 +40,16 @@ const appSlice = createSlice({
 				state.isDisabled = false
 			})
 			.addCase(getPacks.rejected, (state) => {
-				//state.isDisabled = true
+				state.isDisabled = true
+			})
+			.addCase(getCards.pending, (state) => {
+				state.isDisabled = true
+			})
+			.addCase(getCards.fulfilled, (state) => {
+				state.isDisabled = false
+			})
+			.addCase(getCards.rejected, (state) => {
+				state.isDisabled = true
 			})
 			.addMatcher(isErrorRejected, (state, action: PayloadAction<{ error: string }>) => {
 				state.errorMessage = action.payload.error
@@ -47,7 +57,7 @@ const appSlice = createSlice({
 			.addMatcher(isLoadingPending, (state) => {
 				state.isLoading = true
 			})
-			.addMatcher(isLoadingFulfilled, (state, action) => {
+			.addMatcher(isLoadingFulfilled, (state) => {
 				state.isLoading = false
 			})
 			.addMatcher(isLoadingRejected, (state) => {

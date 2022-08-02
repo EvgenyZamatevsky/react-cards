@@ -20,7 +20,7 @@ import {
 	selectSelectedPack,
 	selectSortValue
 } from 'store/selectors'
-import { setMaxAndMinValue } from 'store/slices'
+import { setMaxAndMinValue, setSearchValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 
@@ -65,6 +65,14 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		dispatch(addPack({ name: '322', private: false })) // private доработать
 	}
 
+	const handleSetSearchValueChange = (value: string): void => {
+		dispatch(setSearchValue(value))
+	}
+
+	const handleResetSearchValueClick = (resetValue: string): void => {
+		dispatch(setSearchValue(resetValue))
+	}
+
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -76,7 +84,12 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 				<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new pack</button>
 			</div>
 			<div className={style.main}>
-				<Search title={'Search'} />
+				<Search
+					title={'Search'}
+					searchValue={searchValue}
+					handleSetSearchValueChange={handleSetSearchValueChange}
+					handleResetSearchValueClick={handleResetSearchValueClick}
+				/>
 				<ShowPacks selectedPack={selectedPack} />
 				<DoubleRange
 					max={maxValue}

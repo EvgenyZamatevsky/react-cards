@@ -31,7 +31,7 @@ export const ROUTES = [
 	{ path: Path.HOME, element: <Navigate to={Path.PROFILE} /> },
 	{ path: Path.PROFILE, element: <Profile /> },
 	{ path: Path.PACKS, element: <Packs /> },
-	{ path: Path.CARDS, element: <Cards /> },
+	{ path: Path.CARDS_PARAMS, element: <Cards /> },
 	{ path: Path.LOGIN, element: <Login /> },
 	{ path: Path.REGISTER, element: <Register /> },
 	{ path: Path.FORGOT, element: <Forgot /> },

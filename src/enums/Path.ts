@@ -10,5 +10,6 @@ export enum Path {
 	PROFILE = '/profile',
 	PACKS = '/packs',
 	CARDS = '/cards',
+	CARDS_PARAMS = '/cards/:cardId',
 	NOT_FOUND = '*'
 }

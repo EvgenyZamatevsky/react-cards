@@ -1,18 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { EMPTY_STRING } from 'constants/base'
 import { getCards } from 'store/asyncActions/cards'
 import { CardsSliceInitialStateType } from './types'
 
 const initialState: CardsSliceInitialStateType = {
-	cards: []
+	cards: [],
+	cardQuestion: EMPTY_STRING
 }
 
 const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
 	reducers: {
-		setSearchValue(state, action: PayloadAction<string>) {
-			// state.searchValue = action.payload
+		setCardQuestion(state, action: PayloadAction<string>) {
+			state.cardQuestion = action.payload
 		},
+		resetCards(state) {
+			state.cards = []
+		}
 	},
 	extraReducers(builder) {
 		builder
@@ -22,6 +27,6 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { } = cardsSlice.actions
+export const { setCardQuestion, resetCards } = cardsSlice.actions
 
 export default cardsSlice.reducer
