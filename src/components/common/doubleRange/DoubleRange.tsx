@@ -39,31 +39,34 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 		}, [minDefaultValue, maxDefaultValue])
 
 		return (
-			<div className={style.container}>
-				<input
-					type='range'
-					min={minDefaultValue}
-					max={maxDefaultValue}
-					value={minValue}
-					onChange={onMinValueChange}
-					className={`${style.thumb} ${style.thumbLeft}`}
-					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
-				/>
-				<input
-					type='range'
-					min={minDefaultValue}
-					max={maxDefaultValue}
-					value={maxValue}
-					onChange={onMaxValueChange}
-					className={`${style.thumb} ${style.thumbRight}`}
-					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
-				/>
+			<div>
+				<div className={style.numberOfCards}>Number of cards</div>
+				<div className={style.container}>
+					<input
+						type='range'
+						min={minDefaultValue}
+						max={maxDefaultValue}
+						value={minValue}
+						onChange={onMinValueChange}
+						className={`${style.thumb} ${style.thumbLeft}`}
+						onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+					/>
+					<input
+						type='range'
+						min={minDefaultValue}
+						max={maxDefaultValue}
+						value={maxValue}
+						onChange={onMaxValueChange}
+						className={`${style.thumb} ${style.thumbRight}`}
+						onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+					/>
 
-				<div className={style.slider}>
-					<div className={style.track}></div>
-					<div ref={rangeRef} className={style.range}></div>
-					<div className={style.leftValue}>{minValue}</div>
-					<div className={style.rightValue}>{maxValue}</div>
+					<div className={style.slider}>
+						<div className={style.track}></div>
+						<div ref={rangeRef} className={style.range}></div>
+						<div className={style.leftValue}>{minValue}</div>
+						<div className={style.rightValue}>{maxValue}</div>
+					</div>
 				</div>
 			</div>
 		)

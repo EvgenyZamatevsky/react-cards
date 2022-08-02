@@ -1,0 +1,21 @@
+.showPacksCards {
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 8px;
+}
+
+.showPacksButtons {
+
+	.myBtn,
+	.allBtn {
+		height: 44px;
+		background: #FFF;
+		border-radius: 2px;
+		padding: 0px 40px;
+	}
+}
+
+.active {
+	background: #366EFF !important;
+	color: #fff;
+}

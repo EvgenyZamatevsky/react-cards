@@ -1,4 +1,4 @@
-import { DoubleRange, NavBar, Search, Sort } from 'components'
+import { DoubleRange, Search, ShowPacks, Sort } from 'components'
 import { Pack } from 'components/pack'
 import { Path } from 'enums'
 import React, { FC, useCallback, useEffect } from 'react'
@@ -6,7 +6,20 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
-import { selectIsAuth, selectMaxCardsCount, selectMaxValue, selectMinCardsCount, selectMinValue, selectPacks, selectPageCount, selectSearchValue, selectSortValue } from 'store/selectors'
+import {
+	selectAuthorizedUserData,
+	selectIsAuth,
+	selectMaxCardsCount,
+	selectMaxValue,
+	selectMinCardsCount,
+	selectMinValue,
+	selectPacks,
+	selectPage,
+	selectPageCount,
+	selectSearchValue,
+	selectSelectedPack,
+	selectSortValue
+} from 'store/selectors'
 import { setMaxAndMinValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
@@ -28,24 +41,29 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const minCardsCount = useSelector(selectMinCardsCount)
 	const maxCardsCount = useSelector(selectMaxCardsCount)
 	const pageCount = useSelector(selectPageCount)
+	const authorizedUserData = useSelector(selectAuthorizedUserData)
+	const selectedPack = useSelector(selectSelectedPack)
+	const page = useSelector(selectPage)
 
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
 	})
 
+	useEffect(() => {
+		if (isAuth && selectedPack === 'All') {
+			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue, page, pageCount }))
+		} else {
+			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue, pageCount, page, userId: authorizedUserData?._id }))
+		}
+	}, [searchValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
+
+	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }) => {
+		dispatch(setMaxAndMinValue({ max, min }))
+	}, [])
+
 	const onAddPackClick = (): void => {
 		dispatch(addPack({ name: '322', private: false })) // private доработать
 	}
-
-	useEffect(() => {
-		if (isAuth) {
-			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue, pageCount }))
-		}
-	}, [searchValue, sortValue, minValue, maxValue, pageCount])
-
-	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }) => {
-		dispatch(setMaxAndMinValue({ max: max, min: min }))
-	}, [])
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
@@ -58,27 +76,15 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 				<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new pack</button>
 			</div>
 			<div className={style.main}>
-				<div>
-					<div className={style.search}>Search</div>
-					<Search />
-				</div>
-				<div>
-					<div className={style.showPacksCards}>Show packs cards</div>
-					<div className={style.showPacksButtons}>
-						<button className={style.myBtn}>My</button>
-						<button className={style.allBtn}>All</button>
-					</div>
-				</div>
-				<div>
-					<div className={style.numberOfCards}>Number of cards</div>
-					<DoubleRange
-						max={maxValue}
-						min={minValue}
-						maxDefaultValue={maxCardsCount}
-						minDefaultValue={minCardsCount}
-						onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
-					/>
-				</div>
+				<Search />
+				<ShowPacks selectedPack={selectedPack} />
+				<DoubleRange
+					max={maxValue}
+					min={minValue}
+					maxDefaultValue={maxCardsCount}
+					minDefaultValue={minCardsCount}
+					onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
+				/>
 			</div>
 			<Sort />
 			{packsRender}

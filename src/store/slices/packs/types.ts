@@ -8,5 +8,9 @@ export type PacksSliceInitialStateType = {
 	maxValue: number
 	minCardsCount: number
 	maxCardsCount: number
-	pageCount: number
+	pageCount: number,
+	page: number
+	selectedPack: SelectedPackType
 }
+
+export type SelectedPackType = 'My' | 'All'

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
 import { getPacks } from 'store/asyncActions/packs'
-import { PacksSliceInitialStateType } from './types'
+import { PacksSliceInitialStateType, SelectedPackType } from './types'
 
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
@@ -11,7 +11,9 @@ const initialState: PacksSliceInitialStateType = {
 	maxValue: 0,
 	minCardsCount: 0,
 	maxCardsCount: 0,
-	pageCount: 8
+	pageCount: 8,
+	page: 1,
+	selectedPack: 'All'
 }
 
 const packsSlice = createSlice({
@@ -28,6 +30,9 @@ const packsSlice = createSlice({
 			state.maxValue = action.payload.max
 			state.minValue = action.payload.min
 		},
+		setSelectedPack(state, action: PayloadAction<SelectedPackType>) {
+			state.selectedPack = action.payload
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -39,6 +44,6 @@ const packsSlice = createSlice({
 	},
 })
 
-export const { setSearchValue, setSortValue, setMaxAndMinValue } = packsSlice.actions
+export const { setSearchValue, setSortValue, setMaxAndMinValue, setSelectedPack } = packsSlice.actions
 
 export default packsSlice.reducer

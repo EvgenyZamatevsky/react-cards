@@ -50,21 +50,24 @@ export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.search}>
-			<img className={style.searchIcon} src={loon} />
-			<input
-				className={style.searchInput}
-				placeholder='Provide your text'
-				value={value}
-				onChange={onInputChange}
-				ref={inputRef} />
-			{searchValue &&
-				<button
-					className={style.resetSearchValueBtn}
-					onClick={onResetSearchValueClick}
-					disabled={isDisabled}>
-					<img className={style.clearIcon} src={cross} alt='cross' />
-				</button>}
+		<div>
+			<div className={style.searchText}>Search</div>
+			<div className={style.search}>
+				<img className={style.searchIcon} src={loon} />
+				<input
+					className={style.searchInput}
+					placeholder='Provide your text'
+					value={value}
+					onChange={onInputChange}
+					ref={inputRef} />
+				{searchValue &&
+					<button
+						className={style.resetSearchValueBtn}
+						onClick={onResetSearchValueClick}
+						disabled={isDisabled}>
+						<img className={style.clearIcon} src={cross} alt='cross' />
+					</button>}
+			</div>
 		</div>
 	)
 }
