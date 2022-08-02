@@ -8,4 +8,5 @@ export type PacksSliceInitialStateType = {
 	maxValue: number
 	minCardsCount: number
 	maxCardsCount: number
+	pageCount: number
 }

@@ -14,3 +14,5 @@ export const selectMaxValue = (state: RootStateType): number => state.packs.maxV
 export const selectMinCardsCount = (state: RootStateType): number => state.packs.minCardsCount
 
 export const selectMaxCardsCount = (state: RootStateType): number => state.packs.maxCardsCount
+
+export const selectPageCount = (state: RootStateType): number => state.packs.pageCount

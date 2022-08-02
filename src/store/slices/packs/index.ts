@@ -11,6 +11,7 @@ const initialState: PacksSliceInitialStateType = {
 	maxValue: 0,
 	minCardsCount: 0,
 	maxCardsCount: 0,
+	pageCount: 8
 }
 
 const packsSlice = createSlice({

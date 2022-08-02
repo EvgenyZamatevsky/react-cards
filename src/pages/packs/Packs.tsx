@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
-import { selectIsAuth, selectMaxCardsCount, selectMaxValue, selectMinCardsCount, selectMinValue, selectPacks, selectSearchValue, selectSortValue } from 'store/selectors'
+import { selectIsAuth, selectMaxCardsCount, selectMaxValue, selectMinCardsCount, selectMinValue, selectPacks, selectPageCount, selectSearchValue, selectSortValue } from 'store/selectors'
 import { setMaxAndMinValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
@@ -27,6 +27,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const maxValue = useSelector(selectMaxValue)
 	const minCardsCount = useSelector(selectMinCardsCount)
 	const maxCardsCount = useSelector(selectMaxCardsCount)
+	const pageCount = useSelector(selectPageCount)
 
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
 		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
@@ -38,9 +39,9 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue }))
+			dispatch(getPacks({ packName: searchValue, sortPacks: sortValue, min: minValue, max: maxValue, pageCount }))
 		}
-	}, [searchValue, sortValue, minValue, maxValue])
+	}, [searchValue, sortValue, minValue, maxValue, pageCount])
 
 	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }) => {
 		dispatch(setMaxAndMinValue({ max: max, min: min }))
