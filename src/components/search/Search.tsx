@@ -12,10 +12,10 @@ import { selectIsDisabled, selectSearchValue } from 'store/selectors'
 import { setIsDisabled } from 'store/slices'
 
 type SearchPropsType = {
-
+	title?: string
 }
 
-export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
+export const Search: FC<SearchPropsType> = ({ title }): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -51,7 +51,7 @@ export const Search: FC<SearchPropsType> = (): ReturnComponentType => {
 
 	return (
 		<div>
-			<div className={style.searchText}>Search</div>
+			<div className={style.searchText}>{title}</div>
 			<div className={style.search}>
 				<img className={style.searchIcon} src={loon} />
 				<input

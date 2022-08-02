@@ -3,7 +3,7 @@ import { Pack } from 'components/pack'
 import { Path } from 'enums'
 import React, { FC, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import {
@@ -45,8 +45,8 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const selectedPack = useSelector(selectSelectedPack)
 	const page = useSelector(selectPage)
 
-	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name }) => {
-		return <Pack key={_id} _id={_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
+	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name, user_id }) => {
+		return <Pack key={_id} _id={_id} user_id={user_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
 	})
 
 	useEffect(() => {
@@ -76,7 +76,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 				<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new pack</button>
 			</div>
 			<div className={style.main}>
-				<Search />
+				<Search title={'Search'} />
 				<ShowPacks selectedPack={selectedPack} />
 				<DoubleRange
 					max={maxValue}

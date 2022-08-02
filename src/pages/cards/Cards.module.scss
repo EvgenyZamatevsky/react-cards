@@ -1,0 +1,49 @@
+ @import 'styles/sass/mixins.scss';
+ @import 'styles/sass/templates.scss';
+
+ .container {
+ 	margin-top: 24px;
+
+ 	.backToPacksListBtn {
+ 		display: flex;
+ 		align-items: center;
+ 		font-size: 14px;
+ 		line-height: 24px;
+ 		transition: color 0.2s ease-in-out 0s;
+
+ 		img {
+ 			margin-right: 8px;
+ 		}
+
+ 		&:hover {
+ 			color: #7a7a7a;
+ 		}
+ 	}
+
+ 	.top {
+ 		margin-top: 39px;
+ 		@include flex(row, space-between, center);
+
+ 		.title {
+ 			font-weight: 600;
+ 			font-size: 22px;
+ 			line-height: 27px;
+ 		}
+ 	}
+
+ 	.main {
+ 		display: flex;
+ 		justify-content: space-between;
+ 		align-items: center;
+ 		margin-top: 20px;
+
+ 		.addNewPackBtn {
+ 			@extend %btn;
+ 			padding: 0px 28px;
+ 		}
+ 	}
+
+ 	.bottom {
+ 		margin-top: 33px;
+ 	}
+ }

@@ -47,7 +47,7 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 	return (
 		<div className={style.container}>
 			<Link to={Path.PACKS} className={style.backToPacksListBtn}>
-				<img src={arrow} alt='' />
+				<img src={arrow} alt='arrow' />
 				<div>Back to Packs List</div>
 			</Link>
 			<div className={style.content}>

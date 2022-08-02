@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { PACKS } from 'api/packs'
+import { PACKS } from 'api'
 import { PackType } from 'api/packs/types'
 import { RootStateType } from 'store'
 

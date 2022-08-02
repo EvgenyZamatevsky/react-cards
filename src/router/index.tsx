@@ -24,10 +24,14 @@ const NewPassword = lazy(() => import(/* webpackChunkName: 'NewPassword' */'page
 const Packs = lazy(() => import(/* webpackChunkName: 'Packs' */'pages/packs')
 	.then(module => ({ default: module.Packs })))
 
+const Cards = lazy(() => import(/* webpackChunkName: 'Cards' */'pages/cards')
+	.then(module => ({ default: module.Cards })))
+
 export const ROUTES = [
 	{ path: Path.HOME, element: <Navigate to={Path.PROFILE} /> },
 	{ path: Path.PROFILE, element: <Profile /> },
 	{ path: Path.PACKS, element: <Packs /> },
+	{ path: Path.CARDS, element: <Cards /> },
 	{ path: Path.LOGIN, element: <Login /> },
 	{ path: Path.REGISTER, element: <Register /> },
 	{ path: Path.FORGOT, element: <Forgot /> },
