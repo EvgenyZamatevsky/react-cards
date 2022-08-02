@@ -54,7 +54,7 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		<div className={style.container}>
 			<div className={style.top}>
 				<h2 className={style.title}>Packs list</h2>
-				<button className={style.addNewPackBtn}>Add new pack</button>
+				<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new pack</button>
 			</div>
 			<div className={style.main}>
 				<div>
@@ -79,6 +79,8 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 					/>
 				</div>
 			</div>
+			<Sort />
+			{packsRender}
 		</div>
 	)
 }

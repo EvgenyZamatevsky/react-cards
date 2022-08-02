@@ -1,19 +1,46 @@
-.pack {
-	width: 669px;
+.container {
+	width: 100%;
 	min-height: 48px;
-	border: 1px solid rgb(238, 238, 238);
+	border: 1px solid #D9D9D9;
 	padding: 15px;
 
 	.list {
 		min-height: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+
+		.name {
+			width: 150px;
+			overflow: hidden;
+			text-align: center;
+		}
+
+		.cardsCount {
+			width: 50px;
+			overflow: hidden;
+			margin-left: 83px;
+			text-align: center;
+		}
+
+		.updated {
+			width: 210px;
+			overflow: hidden;
+			margin-left: 81px;
+			text-align: center;
+		}
+
+		.userName {
+			width: 200px;
+			overflow: hidden;
+			margin-left: 17px;
+			text-align: center;
+		}
 
 		.actions {
-			width: 150px;
+			width: 100px;
 			display: flex;
 			justify-content: space-between;
+			margin-left: 56px;
 		}
 	}
 }
