@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-cards/static/css/main.4e6aa5b2.css",
-    "main.js": "/react-cards/static/js/main.e82cb4cf.js",
+    "main.js": "/react-cards/static/js/main.c75cbba9.js",
     "NotFound.css": "/react-cards/static/css/NotFound.a45ebe97.chunk.css",
     "NotFound.js": "/react-cards/static/js/NotFound.93de53c8.chunk.js",
     "Login.css": "/react-cards/static/css/Login.9d6ea284.chunk.css",
@@ -31,7 +31,7 @@
     "index.html": "/react-cards/index.html",
     "static/media/arrow.svg": "/react-cards/static/media/arrow.519110c32786a43bcb3957820cd9c116.svg",
     "main.4e6aa5b2.css.map": "/react-cards/static/css/main.4e6aa5b2.css.map",
-    "main.e82cb4cf.js.map": "/react-cards/static/js/main.e82cb4cf.js.map",
+    "main.c75cbba9.js.map": "/react-cards/static/js/main.c75cbba9.js.map",
     "NotFound.a45ebe97.chunk.css.map": "/react-cards/static/css/NotFound.a45ebe97.chunk.css.map",
     "NotFound.93de53c8.chunk.js.map": "/react-cards/static/js/NotFound.93de53c8.chunk.js.map",
     "Login.9d6ea284.chunk.css.map": "/react-cards/static/css/Login.9d6ea284.chunk.css.map",
@@ -53,6 +53,6 @@
   },
   "entrypoints": [
     "static/css/main.4e6aa5b2.css",
-    "static/js/main.e82cb4cf.js"
+    "static/js/main.c75cbba9.js"
   ]
 }
