@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_cards=self.webpackChunkreact_cards||[]).push([[187],{4880:function(n,t,u){u.r(t),u.d(t,{NotFound:function(){return r}});u(2791);var c="NotFound_notFound__MvnCL",e=u(184),r=function(){return(0,e.jsx)("h1",{className:c,children:"404 page not found"})}}}]);
+//# sourceMappingURL=NotFound.93de53c8.chunk.js.map
