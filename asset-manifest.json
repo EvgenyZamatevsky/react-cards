@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/react-cards/static/css/main.4e6aa5b2.css",
-    "main.js": "/react-cards/static/js/main.cfd5ef31.js",
+    "main.js": "/react-cards/static/js/main.eee5e5ce.js",
     "NotFound.css": "/react-cards/static/css/NotFound.a45ebe97.chunk.css",
     "NotFound.js": "/react-cards/static/js/NotFound.93de53c8.chunk.js",
     "Login.css": "/react-cards/static/css/Login.9d6ea284.chunk.css",
-    "Login.js": "/react-cards/static/js/Login.abcf4e2c.chunk.js",
+    "Login.js": "/react-cards/static/js/Login.cf2e8e24.chunk.js",
     "Register.css": "/react-cards/static/css/Register.d9a974a0.chunk.css",
     "Register.js": "/react-cards/static/js/Register.f653c05b.chunk.js",
     "Forgot.css": "/react-cards/static/css/Forgot.56db0d59.chunk.css",
@@ -31,11 +31,11 @@
     "index.html": "/react-cards/index.html",
     "static/media/arrow.svg": "/react-cards/static/media/arrow.519110c32786a43bcb3957820cd9c116.svg",
     "main.4e6aa5b2.css.map": "/react-cards/static/css/main.4e6aa5b2.css.map",
-    "main.cfd5ef31.js.map": "/react-cards/static/js/main.cfd5ef31.js.map",
+    "main.eee5e5ce.js.map": "/react-cards/static/js/main.eee5e5ce.js.map",
     "NotFound.a45ebe97.chunk.css.map": "/react-cards/static/css/NotFound.a45ebe97.chunk.css.map",
     "NotFound.93de53c8.chunk.js.map": "/react-cards/static/js/NotFound.93de53c8.chunk.js.map",
     "Login.9d6ea284.chunk.css.map": "/react-cards/static/css/Login.9d6ea284.chunk.css.map",
-    "Login.abcf4e2c.chunk.js.map": "/react-cards/static/js/Login.abcf4e2c.chunk.js.map",
+    "Login.cf2e8e24.chunk.js.map": "/react-cards/static/js/Login.cf2e8e24.chunk.js.map",
     "Register.d9a974a0.chunk.css.map": "/react-cards/static/css/Register.d9a974a0.chunk.css.map",
     "Register.f653c05b.chunk.js.map": "/react-cards/static/js/Register.f653c05b.chunk.js.map",
     "Forgot.56db0d59.chunk.css.map": "/react-cards/static/css/Forgot.56db0d59.chunk.css.map",
@@ -53,6 +53,6 @@
   },
   "entrypoints": [
     "static/css/main.4e6aa5b2.css",
-    "static/js/main.cfd5ef31.js"
+    "static/js/main.eee5e5ce.js"
   ]
 }
