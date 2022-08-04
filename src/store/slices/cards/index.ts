@@ -16,9 +16,6 @@ const cardsSlice = createSlice({
 		setCardQuestion(state, action: PayloadAction<string>) {
 			state.cardQuestion = action.payload
 		},
-		resetCards(state) {
-			state.cards = []
-		},
 		setSortCards(state, action: PayloadAction<string>) {
 			state.sortCards = action.payload
 		}
@@ -31,6 +28,6 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { setCardQuestion, resetCards, setSortCards } = cardsSlice.actions
+export const { setCardQuestion, setSortCards } = cardsSlice.actions
 
 export default cardsSlice.reducer

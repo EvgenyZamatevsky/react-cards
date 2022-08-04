@@ -13,4 +13,9 @@ export const CARDS = {
 
 		return instance.get<CardsResponseType>(`cards/card?cardsPack_id=${packId}${currentCardQuestion}${currentSortCards}`)
 	},
+	addCard(packId: string, question: string, answer: string) {
+		return instance.post(`cards/card`, {
+			card: { cardsPack_id: packId, question, answer }
+		})
+	}
 }

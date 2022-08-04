@@ -1,11 +1,8 @@
 import { Search } from 'components/common/search'
 import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
-
-import teacher from 'assets/icons/teacher.svg'
 import cart from 'assets/icons/cart.svg'
 import pencil from 'assets/icons/pencil.svg'
-
 import style from './Card.module.scss'
 
 type CardPropsType = {
@@ -13,23 +10,21 @@ type CardPropsType = {
 	answer: string
 	updated: Date
 	grade: number
+	cardsPack_id: string
 }
 
-export const Card: FC<CardPropsType> = ({ question, answer, updated, grade }): ReturnComponentType => {
+export const Card: FC<CardPropsType> = ({ question, answer, updated, grade, cardsPack_id }): ReturnComponentType => {
 
 	const isOwner = true // временная заглушка
 
 	return (
 		<div className={style.container}>
 			<div className={style.list}>
-				<div className={style.name}>{question}</div>
-				<div className={style.cardsCount}>{answer}</div>
+				<div className={style.question}>{question}</div>
+				<div className={style.answer}>{answer}</div>
 				<div className={style.updated}>{updated.toString()}</div>
-				<div className={style.userName}>{grade}</div>
+				<div className={style.grade}>{grade}</div>
 				<div className={isOwner ? style.actions : style.secondaryActions}>
-					<button>
-						<img src={teacher} alt='teacher' />
-					</button>
 					{isOwner &&
 						<>
 							<button onClick={() => { }}>
