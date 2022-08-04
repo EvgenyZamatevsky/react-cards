@@ -20,7 +20,7 @@ import {
 	selectSelectedPack,
 	selectSortValue
 } from 'store/selectors'
-import { setMaxAndMinValue, setSearchValue } from 'store/slices'
+import { setMaxAndMinValue, setSearchValue, setSortValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 
@@ -44,6 +44,10 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const authorizedUserData = useSelector(selectAuthorizedUserData)
 	const selectedPack = useSelector(selectSelectedPack)
 	const page = useSelector(selectPage)
+
+	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
+	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name'] // По убыванию
+	const sortPacksByAscending: string[] = ['1name', '1cardsCount', '1updated', '1user_name'] // По возрастанию
 
 	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name, user_id }) => {
 		return <Pack key={_id} _id={_id} user_id={user_id} name={name} cardsCount={cardsCount} updated={updated} user_name={user_name} />
@@ -73,6 +77,14 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		dispatch(setSearchValue(resetValue))
 	}
 
+	const handleSortPacksByAscendingClick = (value: any): void => {
+		dispatch(setSortValue(value))
+	}
+
+	const handleSortPacksByDescendingClick = (value: any): void => {
+		dispatch(setSortValue(value))
+	}
+
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -99,7 +111,17 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 					onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
 				/>
 			</div>
-			<Sort />
+			<div className={style.sort}>
+				<Sort
+					sortValues={sortPacksValues}
+					sortByDescending={sortPacksByDescending}
+					sortByAscending={sortPacksByAscending}
+					sortValue={sortValue}
+					handleSortByAscendingClick={handleSortPacksByAscendingClick}
+					handleSortByDescendingClick={handleSortPacksByDescendingClick}
+				/>
+				<div className={style.actions}>Actions</div>
+			</div>
 			{packsRender}
 		</div>
 	)

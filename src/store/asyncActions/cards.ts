@@ -4,11 +4,11 @@ import { CardType } from 'api/cards/types'
 
 export const getCards = createAsyncThunk
 	<{ cards: CardType[] },
-		{ packId: string, cardQuestion: string },
+		{ packId: string, cardQuestion: string, sortCards: string },
 		{ rejectValue: { error: string } }>
 	('cards/getCards', async (params, { rejectWithValue }) => {
 		try {
-			const response = await CARDS.getCards(params.packId, params.cardQuestion)
+			const response = await CARDS.getCards(params.packId, params.cardQuestion, params.sortCards)
 			const { cards } = response.data
 
 			return { cards }

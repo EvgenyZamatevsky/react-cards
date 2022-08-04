@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { getCards } from 'store/asyncActions/cards'
 import { useAppDispatch } from 'store/hooks'
-import { selectCardQuestion, selectCards, selectIsAuth } from 'store/selectors'
+import { selectCardQuestion, selectCards, selectIsAuth, selectSortCards } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import arrow from 'assets/icons/arrow.svg'
 import style from './Cards.module.scss'
-import { resetCards, setCardQuestion } from 'store/slices'
+import { resetCards, setCardQuestion, setSortCards } from 'store/slices'
 
 type CardsPropsType = {
 
@@ -24,6 +24,11 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 	const cards = useSelector(selectCards)
 	const cardQuestion = useSelector(selectCardQuestion)
+	const sortCards = useSelector(selectSortCards)
+
+	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
+	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade '] // По убыванию
+	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade '] // По возрастанию
 
 	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
 		return <Card key={_id} question={question} answer={answer} updated={updated} grade={grade} />
@@ -31,9 +36,9 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getCards({ packId: cardId as string, cardQuestion }))
+			dispatch(getCards({ packId: cardId as string, cardQuestion, sortCards }))
 		}
-	}, [cardQuestion])
+	}, [cardQuestion, sortCards])
 
 	const handleSetCardQuestionChange = (value: string): void => {
 		dispatch(setCardQuestion(value))
@@ -45,6 +50,14 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 
 	const onResetCardsClick = (): void => {
 		dispatch(resetCards())
+	}
+
+	const handleSortCardsByDescendingClick = (value: any): void => {
+		dispatch(setSortCards(value))
+	}
+
+	const handleSortCardsByAscendingClick = (value: any): void => {
+		dispatch(setSortCards(value))
 	}
 
 	if (!isAuth) {
@@ -70,7 +83,16 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 				<button className={style.addNewPackBtn} onClick={() => { }}>Add new card</button>
 			</div>
 			<div className={style.bottom}>
-				<Sort />
+				<div className={style.sort}>
+					<Sort
+						sortValues={sortCardsValues}
+						sortByDescending={sortCardsByDescending}
+						sortByAscending={sortCardsByAscending}
+						sortValue={sortCards}
+						handleSortByDescendingClick={handleSortCardsByDescendingClick}
+						handleSortByAscendingClick={handleSortCardsByAscendingClick}
+					/>
+				</div>
 			</div>
 			{cardsRender}
 		</div>
