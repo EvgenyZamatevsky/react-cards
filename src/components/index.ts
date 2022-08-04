@@ -1,5 +1,5 @@
 export { Header } from './header'
-export { Search } from './search'
+export { Search } from './common/search'
 export { NavBar } from './navBar'
 export { Sort } from './sort'
 export { SortValues } from './sort/sortValues'

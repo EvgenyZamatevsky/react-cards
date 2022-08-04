@@ -15,6 +15,13 @@
 			overflow: hidden;
 			text-align: center;
 			word-wrap: break-word;
+			cursor: pointer;
+			transition: color 0.2s ease-in-out 0s;
+
+			&:hover {
+				color: #7a7a7a;
+				text-decoration: underline;
+			}
 		}
 
 		.cardsCount {

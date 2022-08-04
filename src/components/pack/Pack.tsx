@@ -41,9 +41,9 @@ export const Pack: FC<PackPropsType> =
 		}
 
 		return (
-			<div className={style.container} onClick={() => navigate(`${Path.CARDS}/${_id}`)}>
+			<div className={style.container}>
 				<div className={style.list}>
-					<div className={style.name}>{name}</div>
+					<div className={style.name} onClick={() => navigate(`${Path.CARDS}/${_id}`)}>{name}</div>
 					<div className={style.cardsCount}>{cardsCount}</div>
 					<div className={style.updated}>{updated.toString()}</div>
 					<div className={style.userName}>{user_name}</div>

@@ -1,4 +1,4 @@
-import { Search } from 'components/search'
+import { Search } from 'components/common/search'
 import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './Card.module.scss'
