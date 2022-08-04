@@ -30,8 +30,8 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade '] // По убыванию
 	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade '] // По возрастанию
 
-	const cardsRender = cards.map(({ _id, question, answer, updated, grade, cardsPack_id }) => {
-		return <Card key={_id} cardsPack_id={cardsPack_id} question={question} answer={answer} updated={updated} grade={grade} />
+	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
+		return <Card key={_id} cardId={_id} question={question} answer={answer} updated={updated} grade={grade} packId={packId!} />
 	})
 
 	useEffect(() => {

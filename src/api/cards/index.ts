@@ -17,5 +17,11 @@ export const CARDS = {
 		return instance.post(`cards/card`, {
 			card: { cardsPack_id: packId, question, answer }
 		})
-	}
+	},
+	removeCard(id: string) {
+		return instance.delete(`cards/card?id=${id}`)
+	},
+	updateCardQuestion(id: string, question: string) {
+		return instance.put(`cards/card`, { card: { _id: id, question } })
+	},
 }

@@ -35,3 +35,37 @@ export const addCard = createAsyncThunk
 			return rejectWithValue({ error })
 		}
 	})
+
+export const removeCard = createAsyncThunk
+	<void,
+		{ cardId: string, packId: string },
+		{ rejectValue: { error: string }, state: RootStateType }>
+	('cards/removeCard', async (params, { rejectWithValue, dispatch, getState }) => {
+		try {
+			const sortCards = getState().cards.sortCards
+			const cardQuestion = getState().cards.cardQuestion
+
+			const response = await CARDS.removeCard(params.cardId)
+			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
+
+export const updateCardQuestion = createAsyncThunk
+	<void,
+		{ packId: string, cardId: string, question: string },
+		{ rejectValue: { error: string }, state: RootStateType }>
+	('cards/updateCardQuestion', async (params, { rejectWithValue, dispatch, getState }) => {
+		try {
+			const sortCards = getState().cards.sortCards
+			const cardQuestion = getState().cards.cardQuestion
+
+			const response = await CARDS.updateCardQuestion(params.cardId, params.question)
+			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
