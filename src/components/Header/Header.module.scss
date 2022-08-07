@@ -15,6 +15,7 @@
 	.authorizedUser {
 		display: flex;
 		align-items: center;
+		position: relative;
 
 		.name {
 			line-height: 24px;
@@ -26,6 +27,38 @@
 			width: 36px;
 			border-radius: 50%;
 			margin-left: 12px;
+		}
+
+		.popup {
+			position: absolute;
+			top: 50px;
+			right: 10px;
+			width: 122px;
+			height: 104px;
+			background: #FFFFFF;
+			border: 1px solid #CFCFCF;
+			box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+
+			.profileBtn,
+			.logOutBtn {
+				display: flex;
+				align-items: center;
+				height: 100%;
+				transition: background-color 0.2s ease-in-out 0s;
+
+				.personIcon,
+				.logOutIcon {
+					margin-left: 18px;
+					margin-right: 7px;
+				}
+
+				&:hover {
+					background-color: rgb(237, 245, 255)
+				}
+			}
 		}
 	}
 

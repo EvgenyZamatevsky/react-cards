@@ -30,7 +30,7 @@ export const login = createAsyncThunk
 
 export const getAuthorizedUserData = createAsyncThunk
 	<AuthorizedUserDataType, undefined, { rejectValue: { error: string } }>
-	('auth/getAuthorizedUserData', async (_, { rejectWithValue }) => {
+	('auth/getAuthorizedUserData', async (_, { rejectWithValue, dispatch }) => {
 		try {
 			const response = await AUTH.me()
 			const authorizedUserData = response.data
@@ -79,7 +79,7 @@ export const updateAuthorizedUser = createAsyncThunk
 	<AuthorizedUserDataType,
 		{ name?: string, avatar?: string },
 		{ rejectValue: { error: string }, state: RootStateType }>
-	('auth/updateAuthorizedUser', async (domainPayload, { rejectWithValue, getState }) => {
+	('auth/updateAuthorizedUser', async (domainPayload, { rejectWithValue, getState, dispatch }) => {
 		try {
 
 			const authorizedUserData = getState().auth.authorizedUserData
@@ -92,6 +92,7 @@ export const updateAuthorizedUser = createAsyncThunk
 
 			const response = await AUTH.updateAuthorizedUser(payload)
 			const updatedAuthorizedUser = response.data.updatedUser
+
 			return updatedAuthorizedUser
 
 		} catch (e: any) {

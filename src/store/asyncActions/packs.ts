@@ -25,7 +25,7 @@ export const addPack = createAsyncThunk
 		{ rejectValue: { error: string }, state: RootStateType }>
 	('packs/addPack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
-			const packName = getState().packs.searchValue
+			const packName = getState().packs.searchPackValue
 			const sortPacks = getState().packs.sortValue
 			const min = getState().packs.minValue
 			const max = getState().packs.maxValue
@@ -44,7 +44,7 @@ export const removePack = createAsyncThunk
 	<void, string, { rejectValue: { error: string }, state: RootStateType }>
 	('packs/removePack', async (id, { rejectWithValue, dispatch, getState }) => {
 		try {
-			const packName = getState().packs.searchValue
+			const packName = getState().packs.searchPackValue
 			const sortPacks = getState().packs.sortValue
 			const min = getState().packs.minValue
 			const max = getState().packs.maxValue
@@ -63,7 +63,7 @@ export const updatePackName = createAsyncThunk
 	<void, { _id: string, name: string }, { rejectValue: { error: string }, state: RootStateType }>
 	('packs/updatePackName', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
-			const packName = getState().packs.searchValue
+			const packName = getState().packs.searchPackValue
 			const sortPacks = getState().packs.sortValue
 			const min = getState().packs.minValue
 			const max = getState().packs.maxValue

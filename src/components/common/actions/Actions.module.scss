@@ -1,0 +1,7 @@
+.cartIcon,
+.pencilIcon {
+
+	&:disabled {
+		opacity: 0.5;
+	}
+}

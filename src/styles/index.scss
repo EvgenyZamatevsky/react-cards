@@ -11,7 +11,11 @@ body {
 	font-weight: $fontWeight;
 }
 
-.container {
-	max-width: 1008px;
-	margin: 0 auto;
+.app {
+	height: 100vh;
+
+	.container {
+		max-width: 1008px;
+		margin: 0 auto;
+	}
 }

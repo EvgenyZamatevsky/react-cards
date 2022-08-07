@@ -8,12 +8,21 @@ type SortPropsType = {
 	sortByDescending: string[]
 	sortByAscending: string[]
 	sortValue: string
+	isDisabled: boolean
 	handleSortByDescendingClick: (value: any) => void
 	handleSortByAscendingClick: (value: any) => void
 }
 
 export const Sort: FC<SortPropsType> =
-	({ sortValues, sortByDescending, sortByAscending, sortValue, handleSortByDescendingClick, handleSortByAscendingClick }): ReturnComponentType => {
+	({
+		sortValues,
+		sortByDescending,
+		sortByAscending,
+		sortValue,
+		isDisabled,
+		handleSortByDescendingClick,
+		handleSortByAscendingClick
+	}): ReturnComponentType => {
 
 		const sortValuesRender = sortValues.map((value, index) => {
 			return (
@@ -24,6 +33,7 @@ export const Sort: FC<SortPropsType> =
 					sortByDescending={sortByDescending}
 					sortByAscending={sortByAscending}
 					sortValue={sortValue}
+					isDisabled={isDisabled}
 					handleSortByDescendingClick={handleSortByDescendingClick}
 					handleSortByAscendingClick={handleSortByAscendingClick}
 				/>

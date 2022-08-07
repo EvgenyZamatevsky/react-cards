@@ -1,16 +1,14 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
-import style from './Pack.module.scss'
 import teacher from 'assets/icons/teacher.svg'
-import cart from 'assets/icons/cart.svg'
-import pencil from 'assets/icons/pencil.svg'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData, selectCardQuestion } from 'store/selectors'
+import { selectAuthorizedUserData } from 'store/selectors'
 import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
-import { getCards } from 'store/asyncActions/cards'
+import { Actions } from 'components/common/actions'
+import style from './Pack.module.scss'
 
 type PackPropsType = {
 	_id: string
@@ -19,10 +17,11 @@ type PackPropsType = {
 	cardsCount: number
 	updated: Date
 	user_name: string
+	isDisabled: boolean
 }
 
 export const Pack: FC<PackPropsType> =
-	({ _id, user_id, name, cardsCount, updated, user_name }): ReturnComponentType => {
+	({ _id, user_id, name, cardsCount, updated, user_name, isDisabled }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
 
@@ -32,7 +31,7 @@ export const Pack: FC<PackPropsType> =
 
 		const isOwner = authorizedUserData?._id === user_id
 
-		const onRemovePackClick = (): void => {
+		const handleRemovePackClick = (): void => {
 			dispatch(removePack(_id))
 		}
 
@@ -43,23 +42,27 @@ export const Pack: FC<PackPropsType> =
 		return (
 			<div className={style.container}>
 				<div className={style.list}>
-					<div className={style.name} onClick={() => navigate(`${Path.CARDS}/${_id}`)}>{name}</div>
+					<button
+						className={style.name}
+						onClick={() => navigate(`${Path.CARDS}/${_id}`)}
+						disabled={isDisabled}
+					>
+						{name}
+					</button>
 					<div className={style.cardsCount}>{cardsCount}</div>
 					<div className={style.updated}>{updated.toString()}</div>
 					<div className={style.userName}>{user_name}</div>
 					<div className={isOwner ? style.actions : style.secondaryActions}>
-						<button>
+						<button className={style.teacher} disabled>
 							<img src={teacher} alt='teacher' />
 						</button>
 						{isOwner &&
-							<>
-								<button onClick={onRemovePackClick}>
-									<img src={cart} alt='cart' />
-								</button>
-								<button onClick={onUpdatePackNameClick}>
-									<img src={pencil} alt='pencil' />
-								</button>
-							</>}
+							<Actions
+								isDisabled={isDisabled}
+								onRemoveItemClick={handleRemovePackClick}
+								onUpdateItemClick={onUpdatePackNameClick}
+							/>
+						}
 					</div>
 				</div>
 			</div>

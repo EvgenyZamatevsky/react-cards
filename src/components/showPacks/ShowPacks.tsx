@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
+import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'store/hooks'
+import { selectIsDisabled } from 'store/selectors'
 import { setSelectedPack } from 'store/slices'
 import { SelectedPackType } from 'store/slices/packs/types'
 import { ReturnComponentType } from 'types'
@@ -12,6 +14,8 @@ type ShowPacksPropsType = {
 export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
+
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const onSelectMyPacksClick = (): void => {
 		if (selectedPack !== 'My') {
@@ -31,12 +35,16 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 			<div className={style.showPacksButtons}>
 				<button
 					className={`${style.myBtn} ${selectedPack === 'My' && style.active}`}
-					onClick={onSelectMyPacksClick}>
+					onClick={onSelectMyPacksClick}
+					disabled={isDisabled}
+				>
 					My
 				</button>
 				<button
 					className={`${style.allBtn} ${selectedPack === 'All' && style.active}`}
-					onClick={onSelectAllPacksClick}>
+					onClick={onSelectAllPacksClick}
+					disabled={isDisabled}
+				>
 					All
 				</button>
 			</div>

@@ -5,7 +5,7 @@ import { CardsSliceInitialStateType } from './types'
 
 const initialState: CardsSliceInitialStateType = {
 	cards: [],
-	cardQuestion: EMPTY_STRING,
+	searchCardValue: EMPTY_STRING,
 	sortCards: EMPTY_STRING,
 }
 
@@ -13,8 +13,8 @@ const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
 	reducers: {
-		setCardQuestion(state, action: PayloadAction<string>) {
-			state.cardQuestion = action.payload
+		setSearchCardValue(state, action: PayloadAction<string>) {
+			state.searchCardValue = action.payload
 		},
 		setSortCards(state, action: PayloadAction<string>) {
 			state.sortCards = action.payload
@@ -28,6 +28,6 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { setCardQuestion, setSortCards } = cardsSlice.actions
+export const { setSearchCardValue, setSortCards } = cardsSlice.actions
 
 export default cardsSlice.reducer

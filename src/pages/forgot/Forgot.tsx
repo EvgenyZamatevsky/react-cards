@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import { Path } from 'enums'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
-import style from './Forgot.module.scss'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { forgotPassword } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
+import style from './Forgot.module.scss'
 
 type ForgotPropsType = {
 

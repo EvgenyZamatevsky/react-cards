@@ -6,4 +6,10 @@ export const isLoadingRejected = (action: AnyAction) => action.type.endsWith('re
 
 export const isLoadingPending = (action: AnyAction) => action.type.endsWith('pending')
 
+export const isDisabledFulfilled = (action: AnyAction) => action.type.endsWith('fulfilled')
+
+export const isDisabledRejected = (action: AnyAction) => action.type.endsWith('rejected')
+
+export const isDisabledPending = (action: AnyAction) => action.type.endsWith('pending')
+
 export const isErrorRejected = (action: AnyAction) => action.type.endsWith('rejected')

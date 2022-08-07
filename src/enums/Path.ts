@@ -11,5 +11,6 @@ export enum Path {
 	PACKS = '/packs',
 	CARDS = '/cards',
 	CARDS_PARAMS = '/cards/:packId',
-	NOT_FOUND = '*'
+	NOT_FOUND = '*',
+	NOT_FOUND_404 = '/404'
 }

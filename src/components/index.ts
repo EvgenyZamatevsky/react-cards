@@ -1,6 +1,5 @@
 export { Header } from './header'
 export { Search } from './common/search'
-export { NavBar } from './navBar'
 export { ShowPacks } from './showPacks'
 export { Card } from './card'
 export { ErrorAlert } from './common/errorAlert'

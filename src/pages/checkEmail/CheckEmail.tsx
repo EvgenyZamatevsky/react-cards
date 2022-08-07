@@ -2,8 +2,8 @@ import { Path } from 'enums'
 import React, { FC } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
-import style from './CheckEmail.module.scss'
 import writing from 'assets/icons/writing.png'
+import style from './CheckEmail.module.scss'
 
 type CheckEmailPropsType = {
 

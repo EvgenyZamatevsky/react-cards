@@ -1,17 +1,16 @@
+import React, { FC } from 'react'
 import { Path } from 'enums'
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import avatar from 'assets/images/avatar.png'
 import { useAppDispatch } from 'store/hooks'
 import { logOut, updateAuthorizedUser } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData, selectIsAuth } from 'store/selectors'
-import { EMPTY_STRING } from 'constants/base'
+import { selectAuthorizedUserData, selectIsAuth, selectIsDisabled } from 'store/selectors'
 import logOutIcon from 'assets/icons/logOut.png'
-import arrow from 'assets/icons/arrow.svg'
-import style from './Profile.module.scss'
 import { EditableItem } from 'components'
+import { BackPage } from 'components/common/backPage'
+import style from './Profile.module.scss'
 
 type ProfilePropsType = {
 
@@ -21,16 +20,13 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
+	const navigate = useNavigate()
+
 	const isAuth = useSelector(selectIsAuth)
 	const authorizedUserData = useSelector(selectAuthorizedUserData)
-
-	//const [authorizedUserName, setAuthorizedUserName] = useState(authorizedUserData?.name)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const avatarAuthorizedUser = authorizedUserData?.avatar ? authorizedUserData?.avatar : avatar
-
-	// const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-	// 	setAuthorizedUserName(event.currentTarget.value)
-	// }
 
 	const handleUpdateNameBlurAndKeyDown = (newName: string): void => {
 		dispatch(updateAuthorizedUser({ name: newName }))
@@ -40,23 +36,36 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 		dispatch(logOut())
 	}
 
+	const handleBackPacksListClick = (): void => {
+		navigate(Path.PACKS)
+	}
+
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
 
 	return (
 		<div className={style.container}>
-			<Link to={Path.PACKS} className={style.backToPacksListBtn}>
-				<img src={arrow} alt='arrow' />
-				<div>Back to Packs List</div>
-			</Link>
+			<BackPage
+				title={'Back to Packs List'}
+				isDisabled={isDisabled}
+				onBackPageClick={handleBackPacksListClick}
+			/>
 			<div className={style.content}>
 				<h2 className={style.title}>Personal Information</h2>
 				<img className={style.avatar} src={avatarAuthorizedUser} alt='avatar' />
-				<EditableItem currentValue={authorizedUserData!?.name} changeCurrentValue={handleUpdateNameBlurAndKeyDown} />
+				<EditableItem
+					currentValue={authorizedUserData!?.name}
+					isDisabled={isDisabled}
+					changeCurrentValue={handleUpdateNameBlurAndKeyDown}
+				/>
 				<div className={style.email}>{authorizedUserData?.email}</div>
-				<button className={style.LogOutBtn} onClick={onLogOutClick}>
-					<img src={logOutIcon} alt='' />
+				<button
+					className={style.LogOutBtn}
+					onClick={onLogOutClick}
+					disabled={isDisabled}
+				>
+					<img src={logOutIcon} alt='log Out' />
 					<div>Log out</div>
 				</button>
 			</div>

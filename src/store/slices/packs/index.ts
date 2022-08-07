@@ -5,7 +5,7 @@ import { PacksSliceInitialStateType, SelectedPackType } from './types'
 
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
-	searchValue: EMPTY_STRING,
+	searchPackValue: EMPTY_STRING,
 	sortValue: EMPTY_STRING,
 	minValue: 0,
 	maxValue: 0,
@@ -20,8 +20,8 @@ const packsSlice = createSlice({
 	name: 'packs',
 	initialState,
 	reducers: {
-		setSearchValue(state, action: PayloadAction<string>) {
-			state.searchValue = action.payload
+		setSearchPackValue(state, action: PayloadAction<string>) {
+			state.searchPackValue = action.payload
 		},
 		setSortValue(state, action: PayloadAction<string>) {
 			state.sortValue = action.payload
@@ -44,6 +44,6 @@ const packsSlice = createSlice({
 	},
 })
 
-export const { setSearchValue, setSortValue, setMaxAndMinValue, setSelectedPack } = packsSlice.actions
+export const { setSearchPackValue, setSortValue, setMaxAndMinValue, setSelectedPack } = packsSlice.actions
 
 export default packsSlice.reducer

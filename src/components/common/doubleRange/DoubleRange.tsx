@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectIsDisabled } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import style from './DoubleRange.module.scss'
 
@@ -12,6 +14,8 @@ type DoubleRangePropsType = {
 
 export const DoubleRange: FC<DoubleRangePropsType> =
 	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp }): ReturnComponentType => {
+
+		const isDisabled = useSelector(selectIsDisabled)
 
 		const [minValue, setMinVal] = useState(min)
 		const [maxValue, setMaxVal] = useState(max)
@@ -50,6 +54,7 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 						onChange={onMinValueChange}
 						className={`${style.thumb} ${style.thumbLeft}`}
 						onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+						disabled={isDisabled}
 					/>
 					<input
 						type='range'
@@ -59,6 +64,7 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 						onChange={onMaxValueChange}
 						className={`${style.thumb} ${style.thumbRight}`}
 						onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+						disabled={isDisabled}
 					/>
 
 					<div className={style.slider}>

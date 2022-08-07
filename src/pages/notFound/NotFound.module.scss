@@ -1,6 +1,32 @@
-.notFound {
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+ @import 'styles/sass/mixins.scss';
+ @import 'styles/sass/templates.scss';
+
+ .container {
+ 	height: 100vh;
+ 	@include flex(row, center, center);
+
+ 	.content {
+ 		@include flex(row, space-between, center);
+ 		width: 730px;
+
+ 		.body {
+
+ 			.title {
+ 				font-weight: 600;
+ 				font-size: 50px;
+ 				line-height: 61px;
+ 			}
+
+ 			.text {
+ 				line-height: 36px;
+ 				margin-top: 11px
+ 			}
+
+ 			.backHomePageBtn {
+ 				@extend %btn;
+ 				padding: 0px 28px;
+ 				margin-top: 36px;
+ 			}
+ 		}
+ 	}
+ }

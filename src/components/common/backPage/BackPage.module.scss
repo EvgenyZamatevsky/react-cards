@@ -1,0 +1,15 @@
+.backPageBtn {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	line-height: 24px;
+	transition: color 0.2s ease-in-out 0s;
+
+	.arrowIcon {
+		margin-right: 8px;
+	}
+
+	&:hover {
+		color: #7a7a7a;
+	}
+}

@@ -26,7 +26,7 @@ export const addCard = createAsyncThunk
 	('cards/addCard', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const sortCards = getState().cards.sortCards
-			const cardQuestion = getState().cards.cardQuestion
+			const cardQuestion = getState().cards.searchCardValue
 
 			const response = await CARDS.addCard(params.packId, params.question, params.answer)
 			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
@@ -43,7 +43,7 @@ export const removeCard = createAsyncThunk
 	('cards/removeCard', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const sortCards = getState().cards.sortCards
-			const cardQuestion = getState().cards.cardQuestion
+			const cardQuestion = getState().cards.searchCardValue
 
 			const response = await CARDS.removeCard(params.cardId)
 			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
@@ -60,7 +60,7 @@ export const updateCardQuestion = createAsyncThunk
 	('cards/updateCardQuestion', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const sortCards = getState().cards.sortCards
-			const cardQuestion = getState().cards.cardQuestion
+			const cardQuestion = getState().cards.searchCardValue
 
 			const response = await CARDS.updateCardQuestion(params.cardId, params.question)
 			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))

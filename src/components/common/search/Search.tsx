@@ -1,15 +1,14 @@
 import React, { ChangeEvent, FC, useCallback, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import style from './Search.module.scss'
 import loon from 'assets/icons/loon.svg'
 import cross from 'assets/icons/cross.svg'
 import { useAppDispatch } from 'store/hooks'
-import { setSearchValue } from 'store/slices/packs'
 import { EMPTY_STRING } from 'constants/base'
 import debounce from 'lodash.debounce'
 import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
 import { setIsDisabled } from 'store/slices'
+import style from './Search.module.scss'
 
 type SearchPropsType = {
 	title?: string

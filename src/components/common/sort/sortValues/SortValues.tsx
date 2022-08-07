@@ -1,5 +1,5 @@
-import { EMPTY_STRING } from 'constants/base'
 import React, { FC } from 'react'
+import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types'
 import style from './SortValues.module.scss'
 
@@ -9,27 +9,35 @@ type SortValuesPropsType = {
 	sortByDescending: string[]
 	sortByAscending: string[]
 	sortValue: string
+	isDisabled: boolean
 	handleSortByDescendingClick: (value: any) => void
 	handleSortByAscendingClick: (value: any) => void
 }
 
 export const SortValues: FC<SortValuesPropsType> =
-	({ value, index, sortByDescending, sortByAscending, sortValue, handleSortByDescendingClick, handleSortByAscendingClick }): ReturnComponentType => {
+	({
+		value,
+		index,
+		sortByDescending,
+		sortByAscending,
+		sortValue,
+		isDisabled,
+		handleSortByDescendingClick,
+		handleSortByAscendingClick
+	}): ReturnComponentType => {
 
-		const onSortByDescendingClick = (): void => { // По убыванию
-			handleSortByDescendingClick(sortByDescending[index])
-		}
+		const onSortByDescendingClick = (): void => handleSortByDescendingClick(sortByDescending[index])
 
-		const onSortByAscendingClick = (): void => {// По возрастанию
-			handleSortByAscendingClick(sortByAscending[index])
-		}
+		const onSortByAscendingClick = (): void => handleSortByAscendingClick(sortByAscending[index])
 
 		return (
 			<>
 				{sortValue === sortByDescending[index]
 					? <button
 						className={style.sortValueBtn}
-						onClick={onSortByAscendingClick}>
+						onClick={onSortByAscendingClick}
+						disabled={isDisabled}
+					>
 						{value}
 						<span className={sortValue === sortByDescending[index]
 							? `${style.triangleDescending}`
@@ -38,7 +46,9 @@ export const SortValues: FC<SortValuesPropsType> =
 					</button>
 					: <button
 						className={style.sortValueBtn}
-						onClick={onSortByDescendingClick}>
+						onClick={onSortByDescendingClick}
+						disabled={isDisabled}
+					>
 						{value}
 						<span className={sortValue === sortByAscending[index]
 							? `${style.triangleAscending}`

@@ -1,4 +1,4 @@
-import { isLoadingFulfilled, isLoadingPending, isLoadingRejected } from './../../helpers/app'
+import { isDisabledFulfilled, isDisabledPending, isDisabledRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from './../../helpers/app'
 import { getAuthorizedUserData } from 'store/asyncActions'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
@@ -33,24 +33,24 @@ const appSlice = createSlice({
 			.addCase(getAuthorizedUserData.rejected, (state) => {
 				state.isInitializedApp = true
 			})
-			.addCase(getPacks.pending, (state) => {
-				state.isDisabled = true
-			})
-			.addCase(getPacks.fulfilled, (state) => {
-				state.isDisabled = false
-			})
-			.addCase(getPacks.rejected, (state) => {
-				state.isDisabled = true
-			})
-			.addCase(getCards.pending, (state) => {
-				state.isDisabled = true
-			})
-			.addCase(getCards.fulfilled, (state) => {
-				state.isDisabled = false
-			})
-			.addCase(getCards.rejected, (state) => {
-				state.isDisabled = true
-			})
+			// .addCase(getPacks.pending, (state) => {
+			// 	state.isDisabled = true
+			// })
+			// .addCase(getPacks.fulfilled, (state) => {
+			// 	state.isDisabled = false
+			// })
+			// .addCase(getPacks.rejected, (state) => {
+			// 	state.isDisabled = true
+			// })
+			// .addCase(getCards.pending, (state) => {
+			// 	state.isDisabled = true
+			// })
+			// .addCase(getCards.fulfilled, (state) => {
+			// 	state.isDisabled = false
+			// })
+			// .addCase(getCards.rejected, (state) => {
+			// 	state.isDisabled = true
+			// })
 			.addMatcher(isErrorRejected, (state, action: PayloadAction<{ error: string }>) => {
 				state.errorMessage = action.payload.error
 			})
@@ -62,6 +62,15 @@ const appSlice = createSlice({
 			})
 			.addMatcher(isLoadingRejected, (state) => {
 				state.isLoading = false
+			})
+			.addMatcher(isDisabledPending, (state) => {
+				state.isDisabled = true
+			})
+			.addMatcher(isDisabledFulfilled, (state) => {
+				state.isDisabled = false
+			})
+			.addMatcher(isDisabledRejected, (state) => {
+				state.isDisabled = false
 			})
 	},
 })

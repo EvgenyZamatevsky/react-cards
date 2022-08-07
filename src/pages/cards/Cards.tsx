@@ -1,15 +1,15 @@
+import React, { FC, useEffect } from 'react'
 import { Card, Search, Sort } from 'components'
 import { Path } from 'enums'
-import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { useAppDispatch } from 'store/hooks'
-import { selectCardQuestion, selectCards, selectIsAuth, selectSortCards } from 'store/selectors'
+import { selectCards, selectIsAuth, selectIsDisabled, selectSearchCardValue, selectSortCards } from 'store/selectors'
 import { ReturnComponentType } from 'types'
-import arrow from 'assets/icons/arrow.svg'
+import { setSearchCardValue, setSortCards } from 'store/slices'
+import { BackPage } from 'components/common/backPage'
 import style from './Cards.module.scss'
-import { setCardQuestion, setSortCards } from 'store/slices'
 
 type CardsPropsType = {
 
@@ -20,32 +20,34 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 	const dispatch = useAppDispatch()
 
 	const { packId } = useParams()
+	const navigate = useNavigate()
 
 	const isAuth = useSelector(selectIsAuth)
 	const cards = useSelector(selectCards)
-	const cardQuestion = useSelector(selectCardQuestion)
+	const searchCardValue = useSelector(selectSearchCardValue)
 	const sortCards = useSelector(selectSortCards)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
-	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade '] // По убыванию
-	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade '] // По возрастанию
+	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
+	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade ']
 
-	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
-		return <Card key={_id} cardId={_id} question={question} answer={answer} updated={updated} grade={grade} packId={packId!} />
+	const cardsRender = cards.map(({ _id, question, answer, updated, grade, user_id }) => {
+		return <Card key={_id} cardId={_id} question={question} answer={answer} updated={updated} grade={grade} packId={packId!} isDisabled={isDisabled} user_id={user_id} />
 	})
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getCards({ packId: packId as string, cardQuestion, sortCards }))
+			dispatch(getCards({ packId: packId as string, cardQuestion: searchCardValue, sortCards }))
 		}
-	}, [cardQuestion, sortCards])
+	}, [searchCardValue, sortCards])
 
-	const handleSetCardQuestionChange = (value: string): void => {
-		dispatch(setCardQuestion(value))
+	const handleSetSearchCardValueChange = (value: string): void => {
+		dispatch(setSearchCardValue(value))
 	}
 
-	const handleResetCardQuestionClick = (resetValue: string): void => {
-		dispatch(setCardQuestion(resetValue))
+	const handleResetSearchCardValueClick = (resetValue: string): void => {
+		dispatch(setSearchCardValue(resetValue))
 	}
 
 	const handleSortCardsByDescendingClick = (value: any): void => {
@@ -56,8 +58,12 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 		dispatch(setSortCards(value))
 	}
 
-	const onAddPackClick = () => {
+	const onAddPackClick = (): void => {
 		dispatch(addCard({ packId: packId as string, answer: 'ttt', question: 'aaa' }))
+	}
+
+	const handleBackPacksListClick = (): void => {
+		navigate(Path.PACKS)
 	}
 
 	if (!isAuth) {
@@ -66,21 +72,28 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 
 	return (
 		<div className={style.container}>
-			<Link to={Path.PACKS} className={style.backToPacksListBtn} >
-				<img src={arrow} alt='arrow' />
-				<div>Back to Packs List</div>
-			</Link>
+			<BackPage
+				title={'Back to Packs List'}
+				isDisabled={isDisabled}
+				onBackPageClick={handleBackPacksListClick}
+			/>
 
 			<div className={style.top}>
 				<h2 className={style.title}>Packs list</h2>
 			</div>
 			<div className={style.main}>
 				<Search
-					searchValue={cardQuestion}
-					handleSetSearchValueChange={handleSetCardQuestionChange}
-					handleResetSearchValueClick={handleResetCardQuestionClick}
+					searchValue={searchCardValue}
+					handleSetSearchValueChange={handleSetSearchCardValueChange}
+					handleResetSearchValueClick={handleResetSearchCardValueClick}
 				/>
-				<button className={style.addNewPackBtn} onClick={onAddPackClick}>Add new card</button>
+				<button
+					className={style.addNewPackBtn}
+					onClick={onAddPackClick}
+					disabled={isDisabled}
+				>
+					Add new card
+				</button>
 			</div>
 			<div className={style.bottom}>
 				<div className={style.sort}>
@@ -89,6 +102,7 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 						sortByDescending={sortCardsByDescending}
 						sortByAscending={sortCardsByAscending}
 						sortValue={sortCards}
+						isDisabled={isDisabled}
 						handleSortByDescendingClick={handleSortCardsByDescendingClick}
 						handleSortByAscendingClick={handleSortCardsByAscendingClick}
 					/>
