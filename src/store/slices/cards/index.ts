@@ -8,7 +8,7 @@ const initialState: CardsSliceInitialStateType = {
 	searchCardValue: EMPTY_STRING,
 	sortCards: EMPTY_STRING,
 	page: 1,
-	pageCount: 10,
+	pageCount: 5,
 	cardsTotalCount: 0,
 }
 

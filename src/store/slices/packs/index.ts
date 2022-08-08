@@ -11,7 +11,7 @@ const initialState: PacksSliceInitialStateType = {
 	maxValue: 0,
 	minCardsCount: 0,
 	maxCardsCount: 0,
-	pageCount: 10,
+	pageCount: 5,
 	page: 1,
 	packsTotalCount: 0,
 	selectedPack: 'All'
