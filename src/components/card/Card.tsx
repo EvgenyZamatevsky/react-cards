@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData } from 'store/selectors'
 import { Actions } from 'components/common/actions'
 import style from './Card.module.scss'
+import { convertDate } from 'utils'
 
 type CardPropsType = {
 	question: string
@@ -40,7 +41,7 @@ export const Card: FC<CardPropsType> =
 				<div className={style.list}>
 					<div className={style.question}>{question}</div>
 					<div className={style.answer}>{answer}</div>
-					<div className={style.updated}>{updated.toString()}</div>
+					<div className={style.updated}>{convertDate(updated)}</div>
 					<div className={style.grade}>{grade}</div>
 					<div className={isOwner ? style.actions : style.secondaryActions}>
 						{isOwner &&

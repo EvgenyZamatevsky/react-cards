@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { Card, Search, Sort } from 'components'
+import { BackPage, Card, Pagination, Search, Sort } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -17,9 +17,7 @@ import {
 } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
-import { BackPage } from 'components/common/backPage'
 import style from './Cards.module.scss'
-import { Pagination } from 'components/common/pagination'
 
 type CardsPropsType = {
 
@@ -82,11 +80,11 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 		dispatch(setSearchCardValue(resetValue))
 	}
 
-	const handleSortCardsByDescendingClick = (value: any): void => {
+	const handleSortCardsByDescendingClick = (value: string): void => {
 		dispatch(setSortCards(value))
 	}
 
-	const handleSortCardsByAscendingClick = (value: any): void => {
+	const handleSortCardsByAscendingClick = (value: string): void => {
 		dispatch(setSortCards(value))
 	}
 

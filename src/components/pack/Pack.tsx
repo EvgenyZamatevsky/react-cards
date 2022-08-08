@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import style from './Pack.module.scss'
+import { convertDate } from 'utils'
 
 type PackPropsType = {
 	_id: string
@@ -50,7 +51,7 @@ export const Pack: FC<PackPropsType> =
 						{name}
 					</button>
 					<div className={style.cardsCount}>{cardsCount}</div>
-					<div className={style.updated}>{updated.toString()}</div>
+					<div className={style.updated}>{convertDate(updated)}</div>
 					<div className={style.userName}>{user_name}</div>
 					<div className={isOwner ? style.actions : style.secondaryActions}>
 						<button className={style.teacher} disabled>
