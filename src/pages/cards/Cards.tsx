@@ -5,11 +5,21 @@ import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { useAppDispatch } from 'store/hooks'
-import { selectCards, selectIsAuth, selectIsDisabled, selectSearchCardValue, selectSortCards } from 'store/selectors'
+import {
+	selectCardPage,
+	selectCardPageCount,
+	selectCards,
+	selectCardsTotalCount,
+	selectIsAuth,
+	selectIsDisabled,
+	selectSearchCardValue,
+	selectSortCards
+} from 'store/selectors'
 import { ReturnComponentType } from 'types'
-import { setSearchCardValue, setSortCards } from 'store/slices'
+import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
 import { BackPage } from 'components/common/backPage'
 import style from './Cards.module.scss'
+import { Pagination } from 'components/common/pagination'
 
 type CardsPropsType = {
 
@@ -27,20 +37,42 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 	const searchCardValue = useSelector(selectSearchCardValue)
 	const sortCards = useSelector(selectSortCards)
 	const isDisabled = useSelector(selectIsDisabled)
+	const cardPage = useSelector(selectCardPage)
+	const cardPageCount = useSelector(selectCardPageCount)
+	const cardsTotalCount = useSelector(selectCardsTotalCount)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
 	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade ']
 
 	const cardsRender = cards.map(({ _id, question, answer, updated, grade, user_id }) => {
-		return <Card key={_id} cardId={_id} question={question} answer={answer} updated={updated} grade={grade} packId={packId!} isDisabled={isDisabled} user_id={user_id} />
+		return (
+			<Card
+				key={_id}
+				cardId={_id}
+				question={question}
+				answer={answer}
+				updated={updated}
+				grade={grade}
+				packId={packId!}
+				isDisabled={isDisabled}
+				user_id={user_id}
+			/>
+		)
 	})
 
 	useEffect(() => {
 		if (isAuth) {
-			dispatch(getCards({ packId: packId as string, cardQuestion: searchCardValue, sortCards }))
+			dispatch(getCards(
+				{
+					packId: packId as string,
+					cardQuestion: searchCardValue,
+					sortCards,
+					page: cardPage,
+					pageCount: cardPageCount
+				}))
 		}
-	}, [searchCardValue, sortCards])
+	}, [searchCardValue, sortCards, cardPage, cardPageCount])
 
 	const handleSetSearchCardValueChange = (value: string): void => {
 		dispatch(setSearchCardValue(value))
@@ -64,6 +96,14 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
+	}
+
+	const handleSetCurrentPageClick = (page: number): void => {
+		dispatch(setCardPage(page))
+	}
+
+	const handleSetPageCountChange = (pageCount: number): void => {
+		dispatch(setCardPageCount(pageCount))
 	}
 
 	if (!isAuth) {
@@ -109,6 +149,13 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 				</div>
 			</div>
 			{cardsRender}
+			<Pagination
+				count={cardPageCount}
+				currentPage={cardPage}
+				totalItemsCount={cardsTotalCount}
+				handleSetCurrentPageClick={handleSetCurrentPageClick}
+				handleSetPageCountChange={handleSetPageCountChange}
+			/>
 		</div>
 	)
 }

@@ -4,4 +4,7 @@ export type CardsSliceInitialStateType = {
 	cards: CardType[],
 	searchCardValue: string
 	sortCards: string
+	page: number
+	pageCount: number
+	cardsTotalCount: number
 }

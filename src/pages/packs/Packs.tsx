@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
-import { setMaxAndMinValue, setSearchPackValue, setSortValue } from 'store/slices'
+import { setMaxAndMinValue, setPackPage, setPackPageCount, setSearchPackValue, setSortValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import {
 	selectAuthorizedUserData,
@@ -17,6 +17,7 @@ import {
 	selectMinCardsCount,
 	selectMinValue,
 	selectPacks,
+	selectPacksTotalCount,
 	selectPage,
 	selectPageCount,
 	selectSearchPackValue,
@@ -24,6 +25,7 @@ import {
 	selectSortValue
 } from 'store/selectors'
 import style from './Packs.module.scss'
+import { Pagination } from 'components/common/pagination'
 
 type PacksPropsType = {
 
@@ -42,10 +44,11 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const maxValue = useSelector(selectMaxValue)
 	const minCardsCount = useSelector(selectMinCardsCount)
 	const maxCardsCount = useSelector(selectMaxCardsCount)
-	const pageCount = useSelector(selectPageCount)
 	const authorizedUserData = useSelector(selectAuthorizedUserData)
 	const selectedPack = useSelector(selectSelectedPack)
+	const pageCount = useSelector(selectPageCount)
 	const page = useSelector(selectPage)
+	const packsTotalCount = useSelector(selectPacksTotalCount)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
@@ -107,12 +110,20 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		dispatch(setSearchPackValue(resetValue))
 	}
 
-	const handleSortPacksByAscendingClick = (value: any): void => {
+	const handleSortPacksByAscendingClick = (value: string): void => {
 		dispatch(setSortValue(value))
 	}
 
-	const handleSortPacksByDescendingClick = (value: any): void => {
+	const handleSortPacksByDescendingClick = (value: string): void => {
 		dispatch(setSortValue(value))
+	}
+
+	const handleSetPackPageClick = (page: number): void => {
+		dispatch(setPackPage(page))
+	}
+
+	const handleSetPackPageCountChange = (pageCount: number) => {
+		dispatch(setPackPageCount(pageCount))
 	}
 
 	if (!isAuth) {
@@ -159,6 +170,13 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 				<div className={style.actions}>Actions</div>
 			</div>
 			{packsRender}
+			<Pagination
+				count={pageCount}
+				currentPage={page}
+				handleSetCurrentPageClick={handleSetPackPageClick}
+				handleSetPageCountChange={handleSetPackPageCountChange}
+				totalItemsCount={packsTotalCount}
+			/>
 		</div>
 	)
 }

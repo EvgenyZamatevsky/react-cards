@@ -4,15 +4,15 @@ import { PackType } from 'api/packs/types'
 import { RootStateType } from 'store'
 
 export const getPacks = createAsyncThunk
-	<{ packs: PackType[], minCardsCount: number, maxCardsCount: number },
+	<{ packs: PackType[], minCardsCount: number, maxCardsCount: number, packsTotalCount: number },
 		{ packName: string, sortPacks: string, min: number, max: number, pageCount: number, page: number, userId?: string },
 		{ rejectValue: { error: string } }>
 	('packs/getPacks', async (params, { rejectWithValue }) => {
 		try {
 			const response = await PACKS.getPacks(params.packName, params.sortPacks, params.min, params.max, params.pageCount, params.page, params.userId)
-			const { cardPacks: packs, minCardsCount, maxCardsCount } = response.data
+			const { cardPacks: packs, minCardsCount, maxCardsCount, cardPacksTotalCount: packsTotalCount } = response.data
 
-			return { packs, minCardsCount, maxCardsCount }
+			return { packs, minCardsCount, maxCardsCount, packsTotalCount }
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

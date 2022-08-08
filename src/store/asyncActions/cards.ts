@@ -4,15 +4,16 @@ import { CardType } from 'api/cards/types'
 import { RootStateType } from 'store'
 
 export const getCards = createAsyncThunk
-	<{ cards: CardType[] },
-		{ packId: string, cardQuestion: string, sortCards: string },
+	<{ cards: CardType[], cardsTotalCount: number },
+		{ packId: string, cardQuestion: string, sortCards: string, page: number, pageCount: number },
 		{ rejectValue: { error: string } }>
 	('cards/getCards', async (params, { rejectWithValue }) => {
 		try {
-			const response = await CARDS.getCards(params.packId, params.cardQuestion, params.sortCards)
-			const { cards } = response.data
+			const response = await CARDS.getCards(
+				params.packId, params.cardQuestion, params.sortCards, params.page, params.pageCount)
+			const { cards, cardsTotalCount } = response.data
 
-			return { cards }
+			return { cards, cardsTotalCount }
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
@@ -27,9 +28,11 @@ export const addCard = createAsyncThunk
 		try {
 			const sortCards = getState().cards.sortCards
 			const cardQuestion = getState().cards.searchCardValue
+			const page = getState().cards.page
+			const pageCount = getState().cards.pageCount
 
 			const response = await CARDS.addCard(params.packId, params.question, params.answer)
-			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
+			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards, page, pageCount }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
@@ -44,9 +47,11 @@ export const removeCard = createAsyncThunk
 		try {
 			const sortCards = getState().cards.sortCards
 			const cardQuestion = getState().cards.searchCardValue
+			const page = getState().cards.page
+			const pageCount = getState().cards.pageCount
 
 			const response = await CARDS.removeCard(params.cardId)
-			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
+			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards, page, pageCount }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
@@ -61,9 +66,11 @@ export const updateCardQuestion = createAsyncThunk
 		try {
 			const sortCards = getState().cards.sortCards
 			const cardQuestion = getState().cards.searchCardValue
+			const page = getState().cards.page
+			const pageCount = getState().cards.pageCount
 
 			const response = await CARDS.updateCardQuestion(params.cardId, params.question)
-			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards }))
+			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards, page, pageCount }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

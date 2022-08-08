@@ -1,4 +1,4 @@
-import { SelectedPackType } from './../slices/packs/types';
+import { SelectedPackType } from './../slices/packs/types'
 import { PackType } from 'api/packs/types'
 import { RootStateType } from 'store'
 
@@ -21,3 +21,5 @@ export const selectPageCount = (state: RootStateType): number => state.packs.pag
 export const selectPage = (state: RootStateType): number => state.packs.page
 
 export const selectSelectedPack = (state: RootStateType): SelectedPackType => state.packs.selectedPack
+
+export const selectPacksTotalCount = (state: RootStateType): number => state.packs.packsTotalCount
