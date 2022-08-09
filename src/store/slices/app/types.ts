@@ -3,4 +3,5 @@ export type AppSliceInitialStateType = {
 	isInitializedApp: boolean,
 	isLoading: boolean,
 	isDisabled: boolean
+	isModalActive: boolean
 }

@@ -4,14 +4,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
 import { isErrorRejected } from 'store/helpers'
 import { AppSliceInitialStateType } from './types'
-import { getPacks } from 'store/asyncActions/packs'
-import { getCards } from 'store/asyncActions/cards'
 
 const initialState: AppSliceInitialStateType = {
 	errorMessage: EMPTY_STRING,
 	isInitializedApp: false,
 	isLoading: false,
-	isDisabled: false
+	isDisabled: false,
+	isModalActive: false
 }
 
 const appSlice = createSlice({
@@ -23,6 +22,9 @@ const appSlice = createSlice({
 		},
 		setIsDisabled(state, action: PayloadAction<boolean>) {
 			state.isDisabled = action.payload
+		},
+		setIsModalActive(state, action: PayloadAction<boolean>) {
+			state.isModalActive = action.payload
 		},
 	},
 	extraReducers(builder) {
@@ -75,6 +77,6 @@ const appSlice = createSlice({
 	},
 })
 
-export const { setErrorMessage, setIsDisabled } = appSlice.actions
+export const { setErrorMessage, setIsDisabled, setIsModalActive } = appSlice.actions
 
 export default appSlice.reducer
