@@ -1,1 +1,0 @@
-export { ModalUpdate } from './ModalUpdate'

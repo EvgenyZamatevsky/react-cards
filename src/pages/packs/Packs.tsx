@@ -1,5 +1,6 @@
-import React, { FC, useCallback, useEffect } from 'react'
-import { DoubleRange, Search, ShowPacks, Sort } from 'components'
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
+import { DoubleRange, Pagination, Search, ShowPacks, Sort } from 'components'
+import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
@@ -24,8 +25,8 @@ import {
 	selectSelectedPack,
 	selectSortValue
 } from 'store/selectors'
+import { EMPTY_STRING } from 'constants/base'
 import style from './Packs.module.scss'
-import { Pagination } from 'components/common/pagination'
 
 type PacksPropsType = {
 
@@ -49,6 +50,10 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	const pageCount = useSelector(selectPageCount)
 	const page = useSelector(selectPage)
 	const packsTotalCount = useSelector(selectPacksTotalCount)
+
+	const [isActiveModal, setIsActiveModal] = useState(false)
+	const [packName, setPackName] = useState(EMPTY_STRING)
+	const [isPackPrivate, setIsPackPrivate] = useState(false)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
@@ -98,10 +103,6 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		dispatch(setMaxAndMinValue({ max, min }))
 	}, [])
 
-	const onAddPackClick = (): void => {
-		dispatch(addPack({ name: '322', private: false }))
-	}
-
 	const handleSetSearchPackValueChange = (value: string): void => {
 		dispatch(setSearchPackValue(value))
 	}
@@ -122,8 +123,35 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 		dispatch(setPackPage(page))
 	}
 
-	const handleSetPackPageCountChange = (pageCount: number) => {
+	const handleSetPackPageCountChange = (pageCount: number): void => {
 		dispatch(setPackPageCount(pageCount))
+	}
+
+	const resetModalValues = (): void => {
+		setIsActiveModal(false)
+		setPackName(EMPTY_STRING)
+		setIsPackPrivate(false)
+	}
+
+	const handleDeactivateModalClick = (): void => {
+		resetModalValues()
+	}
+
+	const handleActivateModalClick = (): void => {
+		setIsActiveModal(true)
+	}
+
+	const onAddPackClick = (): void => {
+		dispatch(addPack({ name: packName, private: isPackPrivate }))
+		resetModalValues()
+	}
+
+	const onPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+		setPackName(event.currentTarget.value)
+	}
+
+	const onIsPackPrivateChange = (event: ChangeEvent<HTMLInputElement>): void => {
+		setIsPackPrivate(event.currentTarget.checked)
 	}
 
 	if (!isAuth) {
@@ -131,52 +159,66 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.top}>
-				<h2 className={style.title}>Packs list</h2>
-				<button
-					className={style.addNewPackBtn}
-					onClick={onAddPackClick}
-					disabled={isDisabled}>
-					Add new pack
-				</button>
-			</div>
-			<div className={style.main}>
-				<Search
-					title={'Search'}
-					searchValue={searchPackValue}
-					handleSetSearchValueChange={handleSetSearchPackValueChange}
-					handleResetSearchValueClick={handleResetSearchPackValueClick}
+		<>
+			<Modal isModalActive={isActiveModal} onDeactivateModalClick={handleDeactivateModalClick}>
+				<ModalPack
+					onDeactivateModalClick={handleDeactivateModalClick}
+					onInputChange={onPackNameChange}
+					onCheckboxChange={onIsPackPrivateChange}
+					onSaveClick={onAddPackClick}
+					value={packName}
+					isPackPrivate={isPackPrivate}
+					isLabelItem={true}
+					title={'Add new pack'}
 				/>
-				<ShowPacks selectedPack={selectedPack} />
-				<DoubleRange
-					max={maxValue}
-					min={minValue}
-					maxDefaultValue={maxCardsCount}
-					minDefaultValue={minCardsCount}
-					onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
+			</Modal>
+			<div className={style.container}>
+				<div className={style.top}>
+					<h2 className={style.title}>Packs list</h2>
+					<button
+						className={style.addNewPackBtn}
+						onClick={handleActivateModalClick}
+						disabled={isDisabled}>
+						Add new pack
+					</button>
+				</div>
+				<div className={style.main}>
+					<Search
+						title={'Search'}
+						searchValue={searchPackValue}
+						handleSetSearchValueChange={handleSetSearchPackValueChange}
+						handleResetSearchValueClick={handleResetSearchPackValueClick}
+					/>
+					<ShowPacks selectedPack={selectedPack} />
+					<DoubleRange
+						max={maxValue}
+						min={minValue}
+						maxDefaultValue={maxCardsCount}
+						minDefaultValue={minCardsCount}
+						onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
+					/>
+				</div>
+				<div className={style.sort}>
+					<Sort
+						sortValues={sortPacksValues}
+						sortByDescending={sortPacksByDescending}
+						sortByAscending={sortPacksByAscending}
+						sortValue={sortValue}
+						handleSortByAscendingClick={handleSortPacksByAscendingClick}
+						handleSortByDescendingClick={handleSortPacksByDescendingClick}
+						isDisabled={isDisabled}
+					/>
+					<div className={style.actions}>Actions</div>
+				</div>
+				{packsRender}
+				<Pagination
+					count={pageCount}
+					currentPage={page}
+					handleSetCurrentPageClick={handleSetPackPageClick}
+					handleSetPageCountChange={handleSetPackPageCountChange}
+					totalItemsCount={packsTotalCount}
 				/>
 			</div>
-			<div className={style.sort}>
-				<Sort
-					sortValues={sortPacksValues}
-					sortByDescending={sortPacksByDescending}
-					sortByAscending={sortPacksByAscending}
-					sortValue={sortValue}
-					handleSortByAscendingClick={handleSortPacksByAscendingClick}
-					handleSortByDescendingClick={handleSortPacksByDescendingClick}
-					isDisabled={isDisabled}
-				/>
-				<div className={style.actions}>Actions</div>
-			</div>
-			{packsRender}
-			<Pagination
-				count={pageCount}
-				currentPage={page}
-				handleSetCurrentPageClick={handleSetPackPageClick}
-				handleSetPageCountChange={handleSetPackPageCountChange}
-				totalItemsCount={packsTotalCount}
-			/>
-		</div>
+		</>
 	)
 }

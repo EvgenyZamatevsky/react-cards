@@ -10,7 +10,7 @@ import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import style from './Pack.module.scss'
 import { convertDate } from 'utils'
-import { Modal, ModalUpdate } from 'components/common/modals'
+import { Modal, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING } from 'constants/base'
 
 type PackPropsType = {
@@ -37,6 +37,11 @@ export const Pack: FC<PackPropsType> =
 
 		const isOwner = authorizedUserData?._id === user_id
 
+		const resetModalValues = (): void => {
+			setIsModalActive(false)
+			setUpdatedPackName(EMPTY_STRING)
+		}
+
 		const onUpdatedPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
 			setUpdatedPackName(event.currentTarget.value)
 		}
@@ -47,21 +52,22 @@ export const Pack: FC<PackPropsType> =
 
 		const onUpdatePackNameClick = (): void => {
 			dispatch(updatePackName({ _id, name: updatedPackName }))
-			setIsModalActive(false)
+			resetModalValues()
 		}
 
-		const handleDeactivateModalClick = (): void => setIsModalActive(false)
+		const handleDeactivateModalClick = (): void => resetModalValues()
 
 		const handleActivateModalClick = (): void => setIsModalActive(true)
 
 		return (
 			<>
 				<Modal isModalActive={isModalActive} onDeactivateModalClick={handleDeactivateModalClick}>
-					<ModalUpdate
+					<ModalPack
 						value={updatedPackName}
 						onInputChange={onUpdatedPackNameChange}
 						onDeactivateModalClick={handleDeactivateModalClick}
 						onSaveClick={onUpdatePackNameClick}
+						title={'Edit pack'}
 					/>
 				</Modal>
 				<div className={style.container}>

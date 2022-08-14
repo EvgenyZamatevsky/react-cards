@@ -1,2 +1,2 @@
 export { Modal } from './Modal'
-export { ModalUpdate } from './modalUpdate'
+export { ModalPack } from './modalPack'
