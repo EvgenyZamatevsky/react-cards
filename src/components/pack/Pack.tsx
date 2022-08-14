@@ -10,7 +10,7 @@ import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import style from './Pack.module.scss'
 import { convertDate } from 'utils'
-import { Modal } from 'components/common/modal'
+import { Modal, ModalUpdate } from 'components/common/modals'
 import { EMPTY_STRING } from 'constants/base'
 
 type PackPropsType = {
@@ -47,18 +47,22 @@ export const Pack: FC<PackPropsType> =
 
 		const onUpdatePackNameClick = (): void => {
 			dispatch(updatePackName({ _id, name: updatedPackName }))
+			setIsModalActive(false)
 		}
 
-		const onDeactivateModalClick = (): void => setIsModalActive(false)
+		const handleDeactivateModalClick = (): void => setIsModalActive(false)
 
-		const onActivateModalClick = (): void => setIsModalActive(true)
+		const handleActivateModalClick = (): void => setIsModalActive(true)
 
 		return (
 			<>
-				<Modal isModalActive={isModalActive} onDeactivateModalClick={onDeactivateModalClick}>
-					<input type='text' placeholder='text...' value={updatedPackName} onChange={onUpdatedPackNameChange} />
-					<button onClick={onDeactivateModalClick}>Cancel</button>
-					<button onClick={onUpdatePackNameClick}>Save</button>
+				<Modal isModalActive={isModalActive} onDeactivateModalClick={handleDeactivateModalClick}>
+					<ModalUpdate
+						value={updatedPackName}
+						onInputChange={onUpdatedPackNameChange}
+						onDeactivateModalClick={handleDeactivateModalClick}
+						onSaveClick={onUpdatePackNameClick}
+					/>
 				</Modal>
 				<div className={style.container}>
 					<div className={style.list}>
@@ -80,7 +84,7 @@ export const Pack: FC<PackPropsType> =
 								<Actions
 									isDisabled={isDisabled}
 									onRemoveItemClick={handleRemovePackClick}
-									onUpdateItemClick={onActivateModalClick}
+									onUpdateItemClick={handleActivateModalClick}
 								/>
 							}
 						</div>
