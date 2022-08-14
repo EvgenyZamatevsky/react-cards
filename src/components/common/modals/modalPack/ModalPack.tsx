@@ -15,7 +15,17 @@ type ModalPackPropsType = {
 }
 
 export const ModalPack: FC<ModalPackPropsType> =
-	({ onDeactivateModalClick, value, onInputChange, onCheckboxChange, onSaveClick, isPackPrivate, title, isLabelItem = false }): ReturnComponentType => {
+	({
+		onDeactivateModalClick,
+		value,
+		onInputChange,
+		onCheckboxChange,
+		onSaveClick,
+		isPackPrivate,
+		title,
+		isLabelItem = false
+	}): ReturnComponentType => {
+
 		return (
 			<div className={style.container}>
 				<div className={style.top}>

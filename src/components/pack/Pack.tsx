@@ -8,10 +8,10 @@ import { selectAuthorizedUserData } from 'store/selectors'
 import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
-import style from './Pack.module.scss'
 import { convertDate } from 'utils'
-import { Modal, ModalPack } from 'components/common/modals'
+import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING } from 'constants/base'
+import style from './Pack.module.scss'
 
 type PackPropsType = {
 	_id: string
@@ -32,13 +32,14 @@ export const Pack: FC<PackPropsType> =
 
 		const authorizedUserData = useSelector(selectAuthorizedUserData)
 
-		const [isModalActive, setIsModalActive] = useState(false)
+		const [isPackModalActive, setIsPackModalActive] = useState(false)
+		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [updatedPackName, setUpdatedPackName] = useState(EMPTY_STRING)
 
 		const isOwner = authorizedUserData?._id === user_id
 
-		const resetModalValues = (): void => {
-			setIsModalActive(false)
+		const resetPackModalValues = (): void => {
+			setIsPackModalActive(false)
 			setUpdatedPackName(EMPTY_STRING)
 		}
 
@@ -48,26 +49,39 @@ export const Pack: FC<PackPropsType> =
 
 		const handleRemovePackClick = (): void => {
 			dispatch(removePack(_id))
+			setIsDeleteModalActive(false)
 		}
 
 		const onUpdatePackNameClick = (): void => {
 			dispatch(updatePackName({ _id, name: updatedPackName }))
-			resetModalValues()
+			resetPackModalValues()
 		}
 
-		const handleDeactivateModalClick = (): void => resetModalValues()
+		const handleDeactivatePackModalClick = (): void => resetPackModalValues()
 
-		const handleActivateModalClick = (): void => setIsModalActive(true)
+		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
+
+		const handleActivatePackModalClick = (): void => setIsPackModalActive(true)
+
+		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
 		return (
 			<>
-				<Modal isModalActive={isModalActive} onDeactivateModalClick={handleDeactivateModalClick}>
+				<Modal isModalActive={isPackModalActive} onDeactivateModalClick={handleDeactivatePackModalClick}>
 					<ModalPack
 						value={updatedPackName}
 						onInputChange={onUpdatedPackNameChange}
-						onDeactivateModalClick={handleDeactivateModalClick}
+						onDeactivateModalClick={handleDeactivatePackModalClick}
 						onSaveClick={onUpdatePackNameClick}
 						title={'Edit pack'}
+					/>
+				</Modal>
+				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>
+					<ModalDelete
+						title={'Delete Pack'}
+						name={name}
+						onDeactivateModalClick={handleDeactivateDeleteModalClick}
+						onDeleteClick={handleRemovePackClick}
 					/>
 				</Modal>
 				<div className={style.container}>
@@ -89,8 +103,8 @@ export const Pack: FC<PackPropsType> =
 							{isOwner &&
 								<Actions
 									isDisabled={isDisabled}
-									onRemoveItemClick={handleRemovePackClick}
-									onUpdateItemClick={handleActivateModalClick}
+									onActivateDeleteModalClick={handleActivateDeleteModalClick}
+									onActivateEditModalClick={handleActivatePackModalClick}
 								/>
 							}
 						</div>
