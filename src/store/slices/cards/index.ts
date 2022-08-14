@@ -6,7 +6,7 @@ import { CardsSliceInitialStateType } from './types'
 const initialState: CardsSliceInitialStateType = {
 	cards: [],
 	searchCardValue: EMPTY_STRING,
-	sortCards: EMPTY_STRING,
+	sortCards: '0updated',
 	page: 1,
 	pageCount: 5,
 	cardsTotalCount: 0,

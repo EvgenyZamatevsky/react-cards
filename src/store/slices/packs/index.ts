@@ -6,7 +6,7 @@ import { PacksSliceInitialStateType, SelectedPackType } from './types'
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchPackValue: EMPTY_STRING,
-	sortValue: EMPTY_STRING,
+	sortValue: '0updated',
 	minValue: 0,
 	maxValue: 0,
 	minCardsCount: 0,

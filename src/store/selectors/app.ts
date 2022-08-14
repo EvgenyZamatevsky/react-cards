@@ -7,5 +7,3 @@ export const selectIsInitializedApp = (state: RootStateType): boolean => state.a
 export const selectIsLoading = (state: RootStateType): boolean => state.app.isLoading
 
 export const selectIsDisabled = (state: RootStateType): boolean => state.app.isDisabled
-
-export const selectIsModalActive = (state: RootStateType): boolean => state.app.isModalActive
