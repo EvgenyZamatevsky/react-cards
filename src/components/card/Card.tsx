@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
 import { removeCard, updateCardQuestion } from 'store/asyncActions/cards'
@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData } from 'store/selectors'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
-import { Modal, ModalDelete } from 'components/common'
+import { Modal, ModalCard, ModalDelete } from 'components/common'
 import style from './Card.module.scss'
+import { EMPTY_STRING } from 'constants/base'
 
 type CardPropsType = {
 	question: string
@@ -27,9 +28,18 @@ export const Card: FC<CardPropsType> =
 
 		const authorizedUserData = useSelector(selectAuthorizedUserData)
 
+		const [isCardModalActive, setIsCardModalActive] = useState(false)
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
+		const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
+		const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
 
 		const isOwner = authorizedUserData?._id === user_id
+
+		const resetModalValues = (): void => {
+			setIsCardModalActive(false)
+			setQuestionValue(EMPTY_STRING)
+			setAnswerValue(EMPTY_STRING)
+		}
 
 		const handleRemoveCardClick = (): void => {
 			dispatch(removeCard({ packId, cardId }))
@@ -37,15 +47,40 @@ export const Card: FC<CardPropsType> =
 		}
 
 		const handleUpdateCardQuestionClick = (): void => {
-			dispatch(updateCardQuestion({ packId, cardId, question: 'test' }))
+			dispatch(updateCardQuestion({ packId, cardId, question: questionValue })) // Добавить answerValue
+			resetModalValues()
 		}
 
+		const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
+			setQuestionValue(event.currentTarget.value)
+		}
+
+		const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
+			setAnswerValue(event.currentTarget.value)
+		}
+
+		const handleDeactivateCardModalClick = (): void => resetModalValues()
+
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
+
+		const handleActivateCardModalClick = (): void => setIsCardModalActive(true)
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
 		return (
 			<>
+				<Modal isModalActive={isCardModalActive} onDeactivateModalClick={handleDeactivateCardModalClick}>
+					<ModalCard
+						answer={answerValue}
+						question={questionValue}
+						onAnswerChange={handleAnswerChange}
+						onQuestionChange={handleQuestionChange}
+						onDeactivateModalClick={handleDeactivateCardModalClick}
+						onSaveClick={handleUpdateCardQuestionClick}
+						title={'Edit card'}
+					/>
+				</Modal>
+
 				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>
 					<ModalDelete
 						title={'Delete Card'}
@@ -65,7 +100,7 @@ export const Card: FC<CardPropsType> =
 								<Actions
 									isDisabled={isDisabled}
 									onActivateDeleteModalClick={handleActivateDeleteModalClick}
-									onActivateEditModalClick={() => { }}
+									onActivateEditModalClick={handleActivateCardModalClick}
 								/>}
 						</div>
 					</div>
