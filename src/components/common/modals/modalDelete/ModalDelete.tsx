@@ -8,10 +8,11 @@ type ModalDeletePropsType = {
 	onDeleteClick: () => void
 	title: string
 	name: string
+	isPackDelete?: boolean
 }
 
 export const ModalDelete: FC<ModalDeletePropsType> =
-	({ onDeactivateModalClick, onDeleteClick, title, name }): ReturnComponentType => {
+	({ onDeactivateModalClick, onDeleteClick, title, name, isPackDelete = true }): ReturnComponentType => {
 		return (
 			<div className={style.container}>
 				<div className={style.top}>
@@ -20,8 +21,9 @@ export const ModalDelete: FC<ModalDeletePropsType> =
 				</div>
 
 				<div className={style.body}>
-					Do you really want to remove <span className={style.name}>{name}</span>?
-					<div>All cards will be deleted.</div>
+					Do you really want to remove <span className={style.name}>{name}</span> {!isPackDelete && 'card'}?
+
+					{isPackDelete && <div>All cards will be deleted.</div>}
 				</div>
 
 				<div className={style.buttons}>

@@ -100,6 +100,7 @@ export const Card: FC<CardPropsType> =
 						name={question}
 						onDeactivateModalClick={handleDeactivateDeleteModalClick}
 						onDeleteClick={handleRemoveCardClick}
+						isPackDelete={false}
 					/>
 				</Modal>
 				<div className={style.container}>
