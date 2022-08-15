@@ -36,9 +36,9 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 	const cards = useSelector(selectCards)
 	const searchCardValue = useSelector(selectSearchCardValue)
 	const sortCards = useSelector(selectSortCards)
-	const isDisabled = useSelector(selectIsDisabled)
 	const cardPage = useSelector(selectCardPage)
 	const cardPageCount = useSelector(selectCardPageCount)
+	const isDisabled = useSelector(selectIsDisabled)
 	const cardsTotalCount = useSelector(selectCardsTotalCount)
 
 	const [isActiveModal, setIsActiveModal] = useState(false)

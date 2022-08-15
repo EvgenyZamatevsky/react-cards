@@ -7,8 +7,8 @@ import { selectAuthorizedUserData } from 'store/selectors'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
-import style from './Card.module.scss'
 import { EMPTY_STRING } from 'constants/base'
+import style from './Card.module.scss'
 
 type CardPropsType = {
 	question: string
@@ -108,7 +108,7 @@ export const Card: FC<CardPropsType> =
 						<div className={style.question}>{question}</div>
 						<div className={style.answer}>{answer}</div>
 						<div className={style.updated}>{convertDate(updated)}</div>
-						<div className={style.grade}>{grade}</div>
+						<div className={style.grade}>{Number(grade.toFixed(1))}</div>
 						<div className={isOwner ? style.actions : style.secondaryActions}>
 							{isOwner &&
 								<Actions

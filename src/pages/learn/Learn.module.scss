@@ -32,7 +32,8 @@
 				}
 			}
 
-			.question {
+			.question,
+			.answer {
 				margin-top: 13px;
 				line-height: 24px;
 
@@ -47,6 +48,17 @@
 				@extend %btn;
 				padding: 0px 132px;
 			}
+
+			.text {
+				margin-top: 29px;
+				line-height: 24px;
+			}
 		}
 	}
+}
+
+.nextQuestionBtn {
+	@extend %btn;
+	width: 100%;
+	margin-top: 42px;
 }

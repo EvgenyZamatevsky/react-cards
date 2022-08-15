@@ -84,3 +84,23 @@ export const updateCard = createAsyncThunk
 			return rejectWithValue({ error })
 		}
 	})
+
+export const updateCardGrade = createAsyncThunk
+	<void,
+		{ grade: number, cardId: string },
+		{ rejectValue: { error: string }, state: RootStateType }>
+	('cards/updateCardGrade', async (params, { rejectWithValue, dispatch, getState }) => {
+		try {
+			// const sortCards = getState().cards.sortCards
+			// const cardQuestion = getState().cards.searchCardValue
+			// const page = getState().cards.page
+			// const pageCount = getState().cards.pageCount
+
+			const response = await CARDS.updateCardGrade(params.grade, params.cardId)
+			const { shots } = response.data.updatedGrade
+			//dispatch(getCards({ packId: params.packId, cardQuestion, sortCards, page, pageCount }))
+		} catch (e: any) {
+			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+			return rejectWithValue({ error })
+		}
+	})
