@@ -36,9 +36,7 @@ export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
 		dispatch(logOut())
 	}
 
-	const handleBackPacksListClick = (): void => {
-		navigate(Path.PACKS)
-	}
+	const handleBackPacksListClick = (): void => navigate(Path.PACKS)
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
