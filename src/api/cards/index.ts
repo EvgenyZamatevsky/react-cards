@@ -27,7 +27,7 @@ export const CARDS = {
 	removeCard(id: string) {
 		return instance.delete(`cards/card?id=${id}`)
 	},
-	updateCardQuestion(id: string, question: string) {
-		return instance.put(`cards/card`, { card: { _id: id, question } })
+	updateCard(id: string, question: string, answer: string) {
+		return instance.put(`cards/card`, { card: { _id: id, question, answer } })
 	},
 }

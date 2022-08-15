@@ -58,18 +58,18 @@ export const removeCard = createAsyncThunk
 		}
 	})
 
-export const updateCardQuestion = createAsyncThunk
+export const updateCard = createAsyncThunk
 	<void,
-		{ packId: string, cardId: string, question: string },
+		{ packId: string, cardId: string, question: string, answer: string },
 		{ rejectValue: { error: string }, state: RootStateType }>
-	('cards/updateCardQuestion', async (params, { rejectWithValue, dispatch, getState }) => {
+	('cards/updateCard', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const sortCards = getState().cards.sortCards
 			const cardQuestion = getState().cards.searchCardValue
 			const page = getState().cards.page
 			const pageCount = getState().cards.pageCount
 
-			const response = await CARDS.updateCardQuestion(params.cardId, params.question)
+			const response = await CARDS.updateCard(params.cardId, params.question, params.answer)
 			dispatch(getCards({ packId: params.packId, cardQuestion, sortCards, page, pageCount }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')

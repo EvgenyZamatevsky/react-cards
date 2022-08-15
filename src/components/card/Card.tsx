@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
-import { removeCard, updateCardQuestion } from 'store/asyncActions/cards'
+import { removeCard, updateCard } from 'store/asyncActions/cards'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData } from 'store/selectors'
 import { Actions } from 'components/common/actions'
@@ -47,7 +47,7 @@ export const Card: FC<CardPropsType> =
 		}
 
 		const handleUpdateCardQuestionClick = (): void => {
-			dispatch(updateCardQuestion({ packId, cardId, question: questionValue })) // Добавить answerValue
+			dispatch(updateCard({ packId, cardId, question: questionValue, answer: answerValue }))
 			resetModalValues()
 		}
 
