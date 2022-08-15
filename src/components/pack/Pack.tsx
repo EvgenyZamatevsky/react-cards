@@ -40,7 +40,10 @@ export const Pack: FC<PackPropsType> =
 
 		const resetPackModalValues = (): void => {
 			setIsPackModalActive(false)
-			setUpdatedPackName(EMPTY_STRING)
+
+			if (updatedPackName !== name) {
+				setUpdatedPackName(name)
+			}
 		}
 
 		const onUpdatedPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -53,15 +56,21 @@ export const Pack: FC<PackPropsType> =
 		}
 
 		const onUpdatePackNameClick = (): void => {
-			dispatch(updatePackName({ _id, name: updatedPackName }))
-			resetPackModalValues()
+			if (updatedPackName !== name) {
+				dispatch(updatePackName({ _id, name: updatedPackName }))
+			}
+
+			setIsPackModalActive(false)
 		}
 
 		const handleDeactivatePackModalClick = (): void => resetPackModalValues()
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const handleActivatePackModalClick = (): void => setIsPackModalActive(true)
+		const handleActivatePackModalClick = (): void => {
+			setIsPackModalActive(true)
+			setUpdatedPackName(name)
+		}
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 

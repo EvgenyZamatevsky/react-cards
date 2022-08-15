@@ -37,8 +37,14 @@ export const Card: FC<CardPropsType> =
 
 		const resetModalValues = (): void => {
 			setIsCardModalActive(false)
-			setQuestionValue(EMPTY_STRING)
-			setAnswerValue(EMPTY_STRING)
+
+			if (answerValue !== answer) {
+				setAnswerValue(answer)
+			}
+
+			if (questionValue !== question) {
+				setQuestionValue(question)
+			}
 		}
 
 		const handleRemoveCardClick = (): void => {
@@ -47,8 +53,11 @@ export const Card: FC<CardPropsType> =
 		}
 
 		const handleUpdateCardQuestionClick = (): void => {
-			dispatch(updateCard({ packId, cardId, question: questionValue, answer: answerValue }))
-			resetModalValues()
+			if (answerValue !== answer || questionValue !== question) {
+				dispatch(updateCard({ packId, cardId, domainPayload: { answer: answerValue, question: questionValue } }))
+			}
+
+			setIsCardModalActive(false)
 		}
 
 		const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -63,7 +72,11 @@ export const Card: FC<CardPropsType> =
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const handleActivateCardModalClick = (): void => setIsCardModalActive(true)
+		const handleActivateCardModalClick = (): void => {
+			setIsCardModalActive(true)
+			setQuestionValue(question)
+			setAnswerValue(answer)
+		}
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
