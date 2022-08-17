@@ -31,21 +31,26 @@ export const EditableItem: FC<EditableItemPropsType> =
 			setNewValue(currentValue)
 		}
 
-		const onSetNewValueKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
-			if (event.key === Key.ENTER) {
-				setIsEditMode(false)
-				changeCurrentValue(newValue)
-			}
-		}
-
-		const onSetNewValueBlur = (): void => {
+		const handleSetNewValueBlurAndKeyDown = (): void => {
 			const newValueTrimmed = newValue.trim()
 
 			if (newValueTrimmed !== EMPTY_STRING) {
 				setIsEditMode(false)
-				changeCurrentValue(newValueTrimmed)
+
+				if (currentValue !== newValueTrimmed) {
+					changeCurrentValue(newValueTrimmed)
+				}
+
 			} else {
 				setErrorMessage('Title is required!')
+			}
+		}
+
+		const onSetNewValueBlur = (): void => handleSetNewValueBlurAndKeyDown()
+
+		const onSetNewValueKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+			if (event.key === Key.ENTER) {
+				handleSetNewValueBlurAndKeyDown()
 			}
 		}
 
@@ -54,7 +59,7 @@ export const EditableItem: FC<EditableItemPropsType> =
 				{isEditMode
 					? <>
 						<input
-							className={`${style.newNameField} ${errorMessage ? style.errorBorder : EMPTY_STRING}`}
+							className={`${style.newNameField} ${errorMessage && style.errorBorder}`}
 							type='text'
 							placeholder='Enter a new name'
 							autoFocus

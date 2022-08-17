@@ -5,7 +5,7 @@ import { ReturnComponentType } from 'types'
 import teacher from 'assets/icons/teacher.svg'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData } from 'store/selectors'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
@@ -106,9 +106,13 @@ export const Pack: FC<PackPropsType> =
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.userName}>{user_name}</div>
 						<div className={isOwner ? style.actions : style.secondaryActions}>
-							<NavLink to={`/learn/${_id}`} className={style.teacher}>
+							<button
+								className={style.teacher}
+								onClick={() => navigate(`/learn/${_id}`)}
+								disabled={cardsCount === 0}
+							>
 								<img src={teacher} alt='teacher' />
-							</NavLink>
+							</button>
 							{isOwner &&
 								<Actions
 									isDisabled={isDisabled}
