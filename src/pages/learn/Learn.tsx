@@ -9,13 +9,9 @@ import { selectCardPage, selectCardPageCount, selectCards, selectIsAuth, selectS
 import { ReturnComponentType } from 'types'
 import style from './Learn.module.scss'
 
-type LearnPropsType = {
-
-}
-
 const grades: string[] = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал']
 
-export const Learn: FC<LearnPropsType> = (): ReturnComponentType => {
+export const Learn: FC = (): ReturnComponentType => {
 
 	const dispatch = useDispatch()
 

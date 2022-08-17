@@ -12,16 +12,7 @@ import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING } from 'constants/base'
 import style from './Pack.module.scss'
-
-type PackPropsType = {
-	_id: string
-	user_id: string
-	name: string
-	cardsCount: number
-	updated: Date
-	user_name: string
-	isDisabled: boolean
-}
+import { PackPropsType } from './types'
 
 export const Pack: FC<PackPropsType> =
 	({ _id, user_id, name, cardsCount, updated, user_name, isDisabled }): ReturnComponentType => {

@@ -3,14 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import style from './DoubleRange.module.scss'
-
-type DoubleRangePropsType = {
-	min: number
-	max: number
-	minDefaultValue: number
-	maxDefaultValue: number
-	onSetMinAndMaxValueMouseUp: ({ min, max }: { min: number, max: number }) => void
-}
+import { DoubleRangePropsType } from './types'
 
 export const DoubleRange: FC<DoubleRangePropsType> =
 	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp }): ReturnComponentType => {

@@ -2,16 +2,7 @@ import React, { ChangeEvent, FC } from 'react'
 import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalCard.module.scss'
-
-type ModalCardPropsType = {
-	question: string // вопрос
-	answer: string // ответ
-	onQuestionChange: (event: ChangeEvent<HTMLInputElement>) => void
-	onAnswerChange: (event: ChangeEvent<HTMLInputElement>) => void
-	onDeactivateModalClick: () => void
-	onSaveClick: () => void
-	title: string
-}
+import { ModalCardPropsType } from './types'
 
 export const ModalCard: FC<ModalCardPropsType> =
 	({ question, answer, onQuestionChange, onAnswerChange, onDeactivateModalClick, onSaveClick, title, }): ReturnComponentType => {

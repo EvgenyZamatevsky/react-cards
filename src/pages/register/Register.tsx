@@ -10,18 +10,9 @@ import { useSelector } from 'react-redux'
 import { selectIsRegister } from 'store/selectors'
 import openEye from 'assets/icons/openEye.svg'
 import closedEye from 'assets/icons/closedEye.svg'
+import { RegisterParamsType } from './types'
 
-type RegisterParamsType = {
-	email: string
-	password: string
-	confirmPassword: string
-}
-
-type RegisterPropsType = {
-
-}
-
-export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
+export const Register: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -34,7 +25,7 @@ export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
 		{ mode: 'onChange' },
 	)
 
-	const emailValidation = {
+	const emailSettings = {
 		required: 'Field is required!',
 		pattern: {
 			value: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
@@ -42,12 +33,12 @@ export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
 		}
 	}
 
-	const passwordValidation = {
+	const passwordSettings = {
 		required: 'Field is required!',
 		minLength: { value: 8, message: 'Min 8 characters!' },
 	}
 
-	const confirmPasswordValidation = {
+	const confirmPasswordSettings = {
 		required: 'Field is required!',
 		minLength: { value: 8, message: 'Min 8 characters!' },
 		validate: (value: string) => {
@@ -80,12 +71,12 @@ export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.emailFieldContainer}>
 						<input className={style.emailField} type='email' placeholder='Email'
-							{...register('email', emailValidation)} />
+							{...register('email', emailSettings)} />
 						{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
 					</div>
 					<div className={style.passwordFieldContainer}>
 						<input className={style.passwordField} type={typePassword} placeholder='Password'
-							{...register('password', passwordValidation)} />
+							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
 							? <img className={style.eye} onClick={showOpenEyeForPasswordField} src={openEye} />
@@ -93,7 +84,7 @@ export const Register: FC<RegisterPropsType> = (): ReturnComponentType => {
 					</div>
 					<div className={style.confirmPasswordFieldContainer}>
 						<input className={style.confirmPasswordField} type={typeConfirmPassword} placeholder='Confirm password'
-							{...register('confirmPassword', confirmPasswordValidation)} />
+							{...register('confirmPassword', confirmPasswordSettings)} />
 						{errors?.confirmPassword && <p className={style.errorConfirmPasswordField}>{errors?.confirmPassword.message}</p>}
 						{typeConfirmPassword === 'password'
 							? <img className={style.eye} onClick={showOpenEyeForConfirmPasswordField} src={openEye} />

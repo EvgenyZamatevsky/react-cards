@@ -9,13 +9,7 @@ import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
 import { setIsDisabled } from 'store/slices'
 import style from './Search.module.scss'
-
-type SearchPropsType = {
-	title?: string
-	searchValue: string
-	handleSetSearchValueChange: (value: string) => void
-	handleResetSearchValueClick: (resetValue: string) => void
-}
+import { SearchPropsType } from './types'
 
 export const Search: FC<SearchPropsType> =
 	({ title, searchValue, handleSetSearchValueChange, handleResetSearchValueClick }): ReturnComponentType => {

@@ -9,17 +9,7 @@ import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
 import { EMPTY_STRING } from 'constants/base'
 import style from './Card.module.scss'
-
-type CardPropsType = {
-	question: string
-	answer: string
-	updated: Date
-	grade: number
-	cardId: string
-	packId: string
-	isDisabled: boolean
-	user_id: string
-}
+import { CardPropsType } from './types'
 
 export const Card: FC<CardPropsType> =
 	({ cardId, question, answer, updated, grade, packId, isDisabled, user_id }): ReturnComponentType => {

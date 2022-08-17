@@ -4,12 +4,7 @@ import pencil from 'assets/icons/pencil.svg'
 import { EMPTY_STRING } from 'constants/base'
 import { Key } from 'enums'
 import style from './EditableItem.module.scss'
-
-type EditableItemPropsType = {
-	currentValue: string
-	isDisabled: boolean
-	changeCurrentValue: (newValue: string) => void
-}
+import { EditableItemPropsType } from './types'
 
 export const EditableItem: FC<EditableItemPropsType> =
 	({ currentValue, isDisabled, changeCurrentValue }): ReturnComponentType => {

@@ -9,11 +9,7 @@ import openEye from 'assets/icons/openEye.svg'
 import closedEye from 'assets/icons/closedEye.svg'
 import style from './NewPassword.module.scss'
 
-type NewPasswordPropsType = {
-
-}
-
-export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => {
+export const NewPassword: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -27,7 +23,7 @@ export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => 
 		{ mode: 'onChange' },
 	)
 
-	const passwordValidation = {
+	const passwordSettings = {
 		required: 'Field is required!',
 		minLength: { value: 8, message: 'Min 8 characters!' },
 	}
@@ -48,7 +44,7 @@ export const NewPassword: FC<NewPasswordPropsType> = (): ReturnComponentType => 
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.passwordFieldContainer}>
 						<input className={style.passwordField} type={typePassword} placeholder='Password'
-							{...register('password', passwordValidation)} />
+							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
 							? <img className={style.eye} onClick={showOpenEye} src={openEye} />

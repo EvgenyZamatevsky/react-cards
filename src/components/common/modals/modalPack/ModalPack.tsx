@@ -2,17 +2,7 @@ import React, { ChangeEvent, FC } from 'react'
 import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalPack.module.scss'
-
-type ModalPackPropsType = {
-	value: string
-	onInputChange: (event: ChangeEvent<HTMLInputElement>) => void
-	onDeactivateModalClick: () => void
-	onSaveClick: () => void
-	title: string
-	onCheckboxChange?: (event: ChangeEvent<HTMLInputElement>) => void
-	isPackPrivate?: boolean
-	isLabelItem?: boolean
-}
+import { ModalPackPropsType } from './types'
 
 export const ModalPack: FC<ModalPackPropsType> =
 	({

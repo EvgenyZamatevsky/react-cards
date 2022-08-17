@@ -11,11 +11,7 @@ import { useAppDispatch } from 'store/hooks'
 import { logOut } from 'store/asyncActions'
 import style from './Header.module.scss'
 
-export type HeaderPropsType = {
-
-}
-
-export const Header: FC<HeaderPropsType> = (): ReturnComponentType => {
+export const Header: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 

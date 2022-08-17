@@ -28,11 +28,7 @@ import {
 import { EMPTY_STRING } from 'constants/base'
 import style from './Packs.module.scss'
 
-type PacksPropsType = {
-
-}
-
-export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
+export const Packs: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -212,9 +208,9 @@ export const Packs: FC<PacksPropsType> = (): ReturnComponentType => {
 				</div>
 				{packsRender}
 				<Pagination
-					count={pageCount}
-					currentPage={page}
-					handleSetCurrentPageClick={handleSetPackPageClick}
+					pageCount={pageCount}
+					page={page}
+					handleSetPageClick={handleSetPackPageClick}
 					handleSetPageCountChange={handleSetPackPageCountChange}
 					totalItemsCount={packsTotalCount}
 				/>

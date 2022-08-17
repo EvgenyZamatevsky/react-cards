@@ -3,13 +3,9 @@ import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'store/hooks'
 import { selectIsDisabled } from 'store/selectors'
 import { setSelectedPack } from 'store/slices'
-import { SelectedPackType } from 'store/slices/packs/types'
 import { ReturnComponentType } from 'types'
 import style from './ShowPacks.module.scss'
-
-type ShowPacksPropsType = {
-	selectedPack: SelectedPackType
-}
+import { ShowPacksPropsType } from './types'
 
 export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnComponentType => {
 

@@ -1,12 +1,7 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import style from './Modal.module.scss'
-
-type ModalPropsType = {
-	children: ReactNode
-	isModalActive: boolean
-	onDeactivateModalClick: () => void
-}
+import { ModalPropsType } from './types'
 
 export const Modal: FC<ModalPropsType> = ({ children, isModalActive, onDeactivateModalClick }): ReturnComponentType => {
 	return (

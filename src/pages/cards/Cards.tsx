@@ -21,11 +21,7 @@ import style from './Cards.module.scss'
 import { Modal, ModalCard } from 'components/common'
 import { EMPTY_STRING } from 'constants/base'
 
-type CardsPropsType = {
-
-}
-
-export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
+export const Cards: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -109,7 +105,7 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 		navigate(Path.PACKS)
 	}
 
-	const handleSetCurrentPageClick = (page: number): void => {
+	const handleSetPageClick = (page: number): void => {
 		dispatch(setCardPage(page))
 	}
 
@@ -185,10 +181,10 @@ export const Cards: FC<CardsPropsType> = (): ReturnComponentType => {
 				</div>
 				{cardsRender}
 				<Pagination
-					count={cardPageCount}
-					currentPage={cardPage}
+					pageCount={cardPageCount}
+					page={cardPage}
 					totalItemsCount={cardsTotalCount}
-					handleSetCurrentPageClick={handleSetCurrentPageClick}
+					handleSetPageClick={handleSetPageClick}
 					handleSetPageCountChange={handleSetPageCountChange}
 				/>
 			</div>

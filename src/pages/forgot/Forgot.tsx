@@ -7,11 +7,7 @@ import { forgotPassword } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import style from './Forgot.module.scss'
 
-type ForgotPropsType = {
-
-}
-
-export const Forgot: FC<ForgotPropsType> = (): ReturnComponentType => {
+export const Forgot: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -21,7 +17,7 @@ export const Forgot: FC<ForgotPropsType> = (): ReturnComponentType => {
 		{ mode: 'onChange' },
 	)
 
-	const emailValidation = {
+	const emailSettings = {
 		required: 'Field is required!',
 		pattern: {
 			value: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
@@ -40,7 +36,7 @@ export const Forgot: FC<ForgotPropsType> = (): ReturnComponentType => {
 				<h2 className={style.title}>Forgot your password?</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<input className={style.emailField} type='email' placeholder='Email'
-						{...register('email', emailValidation)} />
+						{...register('email', emailSettings)} />
 					{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
 					<div className={style.words}>Enter your email address and we will send you further instructions</div>
 					<div className={style.bottom}>

@@ -12,11 +12,7 @@ import { EditableItem } from 'components'
 import { BackPage } from 'components/common/backPage'
 import style from './Profile.module.scss'
 
-type ProfilePropsType = {
-
-}
-
-export const Profile: FC<ProfilePropsType> = (): ReturnComponentType => {
+export const Profile: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 

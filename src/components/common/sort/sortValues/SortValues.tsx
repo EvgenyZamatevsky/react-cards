@@ -2,17 +2,7 @@ import React, { FC } from 'react'
 import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types'
 import style from './SortValues.module.scss'
-
-type SortValuesPropsType = {
-	value: string
-	index: number
-	sortByDescending: string[]
-	sortByAscending: string[]
-	sortValue: string
-	isDisabled: boolean
-	handleSortByDescendingClick: (value: string) => void
-	handleSortByAscendingClick: (value: string) => void
-}
+import { SortValuesPropsType } from './types'
 
 export const SortValues: FC<SortValuesPropsType> =
 	({

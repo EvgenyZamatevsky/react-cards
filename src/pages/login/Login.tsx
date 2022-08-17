@@ -11,11 +11,7 @@ import openEye from 'assets/icons/openEye.svg'
 import closedEye from 'assets/icons/closedEye.svg'
 import style from './Login.module.scss'
 
-type LoginPropsType = {
-
-}
-
-export const Login: FC<LoginPropsType> = (): ReturnComponentType => {
+export const Login: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
@@ -27,7 +23,7 @@ export const Login: FC<LoginPropsType> = (): ReturnComponentType => {
 		{ mode: 'onChange' },
 	)
 
-	const emailValidation = {
+	const emailSettings = {
 		required: 'Field is required!',
 		pattern: {
 			value: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
@@ -35,7 +31,7 @@ export const Login: FC<LoginPropsType> = (): ReturnComponentType => {
 		}
 	}
 
-	const passwordValidation = {
+	const passwordSettings = {
 		required: 'Field is required!',
 		minLength: { value: 8, message: 'Min 8 characters!' },
 	}
@@ -59,12 +55,12 @@ export const Login: FC<LoginPropsType> = (): ReturnComponentType => {
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.emailFieldContainer}>
 						<input className={style.emailField} type='email' placeholder='Email'
-							{...register('email', emailValidation)} />
+							{...register('email', emailSettings)} />
 						{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
 					</div>
 					<div className={style.passwordFieldContainer}>
 						<input className={style.passwordField} type={typePassword} placeholder='Password'
-							{...register('password', passwordValidation)} />
+							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
 							? <img className={style.eye} onClick={showOpenEye} src={openEye} />

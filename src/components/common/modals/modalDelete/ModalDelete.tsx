@@ -1,15 +1,8 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalDelete.module.scss'
-
-type ModalDeletePropsType = {
-	onDeactivateModalClick: () => void
-	onDeleteClick: () => void
-	title: string
-	name: string
-	isPackDelete?: boolean
-}
+import { ModalDeletePropsType } from './types'
 
 export const ModalDelete: FC<ModalDeletePropsType> =
 	({ onDeactivateModalClick, onDeleteClick, title, name, isPackDelete = true }): ReturnComponentType => {

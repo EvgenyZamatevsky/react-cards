@@ -2,12 +2,7 @@ import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import arrow from 'assets/icons/arrow.svg'
 import style from './BackPage.module.scss'
-
-type BackPagePropsType = {
-	isDisabled: boolean
-	title: string
-	onBackPageClick: () => void
-}
+import { BackPagePropsType } from './types'
 
 export const BackPage: FC<BackPagePropsType> = ({ isDisabled, title, onBackPageClick }): ReturnComponentType => {
 	return (

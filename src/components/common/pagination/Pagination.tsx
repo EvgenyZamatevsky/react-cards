@@ -2,29 +2,28 @@ import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react'
 import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types/ReturnComponentType'
 import style from './Pagination.module.scss'
+import { PageCountValueType, PaginationPropsType } from './types'
 
-type PaginationPropsType = {
-	totalItemsCount: number,
-	count: number
-	currentPage: number
-	handleSetCurrentPageClick: (currentPage: number) => void
-	handleSetPageCountChange: (pageCount: number) => void
-	portionSize?: number
-}
+const pageCountValues: PageCountValueType[] = [
+	{ value: '5', count: 5 },
+	{ value: '25', count: 25 },
+	{ value: '50', count: 50 },
+	{ value: '100', count: 100 },
+]
 
 export const Pagination: FC<PaginationPropsType> =
 	memo(({
 		totalItemsCount,
-		count,
-		currentPage,
-		handleSetCurrentPageClick,
+		pageCount,
+		page,
+		handleSetPageClick,
 		handleSetPageCountChange,
-		portionSize = 10
+		portionSize = 10,
 	}): ReturnComponentType => {
 
-		const [portionNumber, setPortionNumber] = useState<number>(1)
+		const [portionNumber, setPortionNumber] = useState(1)
 
-		const pagesCount = Math.ceil(totalItemsCount / count)
+		const pagesCount = Math.ceil(totalItemsCount / pageCount)
 		const pages = []
 		const portionCount = Math.ceil(pagesCount / portionSize)
 		const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
@@ -35,8 +34,8 @@ export const Pagination: FC<PaginationPropsType> =
 		}
 
 		useEffect(() => {
-			setPortionNumber(Math.ceil(currentPage / portionSize))
-		}, [currentPage])
+			setPortionNumber(Math.ceil(page / portionSize))
+		}, [page])
 
 		const onDecreasePortionNumberClick = (): void => setPortionNumber(portionNumber - 1)
 
@@ -50,35 +49,36 @@ export const Pagination: FC<PaginationPropsType> =
 			<div className={style.pagination}>
 
 				<div className={style.container}>
-					{portionNumber > 1 && <button onClick={onDecreasePortionNumberClick}>&laquo;</button>}
+					{totalItemsCount >= 11 &&
+						<>
+							{portionNumber > 1 && <button onClick={onDecreasePortionNumberClick}>&laquo;</button>}
 
-					{pages
-						.filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
-						.map(page => {
+							{pages
+								.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+								.map(p => {
 
-							const onSetCurrentPageClick = (): void => handleSetCurrentPageClick(page)
+									const onSetPageClick = (): void => handleSetPageClick(p)
 
-							return (
-								<button
-									key={page}
-									className={currentPage === page ? style.active : EMPTY_STRING}
-									onClick={onSetCurrentPageClick}>
-									{page}
-								</button>
-							)
-						})}
+									return (
+										<button
+											key={p}
+											className={page === p ? style.active : EMPTY_STRING}
+											onClick={onSetPageClick}>
+											{p}
+										</button>
+									)
+								})}
 
-					{portionCount > portionNumber && <button onClick={onIncreasePortionNumberClick}>&raquo;</button>}
-					{totalItemsCount >= 26 && <div className={style.showContainer}>
-						Show
-						<select className={style.select} onChange={onSelectChange}>
-							<option value={'5'}>5</option>
-							<option value={'25'}>25</option>
-							<option value={'50'}>50</option>
-							<option value={'100'}>100</option>
-						</select>
-						Cards per Page
-					</div>}
+							{portionCount > portionNumber && <button onClick={onIncreasePortionNumberClick}>&raquo;</button>}
+						</>}
+					{totalItemsCount >= 26 &&
+						<div className={style.showContainer}>
+							Show
+							<select defaultValue={pageCount} className={style.select} onChange={onSelectChange}>
+								{pageCountValues.map(({ value, count }) => <option key={value} value={value}>{count}</option>)}
+							</select>
+							Cards per Page
+						</div>}
 				</div>
 			</div>
 		)

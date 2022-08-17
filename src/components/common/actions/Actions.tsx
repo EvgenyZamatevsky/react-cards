@@ -3,12 +3,7 @@ import { ReturnComponentType } from 'types'
 import cart from 'assets/icons/cart.svg'
 import pencil from 'assets/icons/pencil.svg'
 import style from './Actions.module.scss'
-
-type ActionsPropsType = {
-	onActivateDeleteModalClick: () => void
-	onActivateEditModalClick: () => void
-	isDisabled: boolean
-}
+import { ActionsPropsType } from './types'
 
 export const Actions: FC<ActionsPropsType> =
 	({ onActivateDeleteModalClick, onActivateEditModalClick, isDisabled }): ReturnComponentType => {

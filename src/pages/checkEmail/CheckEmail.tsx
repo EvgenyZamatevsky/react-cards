@@ -5,11 +5,7 @@ import { ReturnComponentType } from 'types'
 import writing from 'assets/icons/writing.png'
 import style from './CheckEmail.module.scss'
 
-type CheckEmailPropsType = {
-
-}
-
-export const CheckEmail: FC<CheckEmailPropsType> = (): ReturnComponentType => {
+export const CheckEmail: FC = (): ReturnComponentType => {
 
 	const { email } = useParams()
 
