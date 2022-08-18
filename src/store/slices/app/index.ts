@@ -1,3 +1,4 @@
+import { updateAuthorizedUser } from './../../asyncActions/auth';
 import { isDisabledFulfilled, isDisabledPending, isDisabledRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from './../../helpers/app'
 import { getAuthorizedUserData } from 'store/asyncActions'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -10,6 +11,7 @@ const initialState: AppSliceInitialStateType = {
 	isInitializedApp: false,
 	isLoading: false,
 	isDisabled: false,
+	isAvatarBroken: false,
 }
 
 const appSlice = createSlice({
@@ -22,6 +24,9 @@ const appSlice = createSlice({
 		setIsDisabled(state, action: PayloadAction<boolean>) {
 			state.isDisabled = action.payload
 		},
+		setIsAvatarBroken(state, action: PayloadAction<boolean>) {
+			state.isAvatarBroken = action.payload
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -30,6 +35,9 @@ const appSlice = createSlice({
 			})
 			.addCase(getAuthorizedUserData.rejected, (state) => {
 				state.isInitializedApp = true
+			})
+			.addCase(updateAuthorizedUser.fulfilled, (state) => {
+				state.isAvatarBroken = false
 			})
 			// .addCase(getPacks.pending, (state) => {
 			// 	state.isDisabled = true
@@ -73,6 +81,6 @@ const appSlice = createSlice({
 	},
 })
 
-export const { setErrorMessage, setIsDisabled } = appSlice.actions
+export const { setErrorMessage, setIsDisabled, setIsAvatarBroken } = appSlice.actions
 
 export default appSlice.reducer

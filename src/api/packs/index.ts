@@ -15,7 +15,7 @@ export const PACKS = {
 		return instance.get<PacksResponseType>(`cards/pack
 		?pageCount=${pageCount}&page=${page}${currentPackName}${currentSortPacks}${currentMin}${currentMax}${currentUserId}`)
 	},
-	addPack(name: string, isPrivate: boolean) { // private доработать
+	addPack(name: string, isPrivate: boolean) {
 		return instance.post(`cards/pack`, { cardsPack: { name: name, private: isPrivate } })
 	},
 	removePack(id: string) {

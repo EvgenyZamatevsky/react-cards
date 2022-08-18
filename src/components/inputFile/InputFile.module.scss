@@ -1,0 +1,27 @@
+@import 'styles/sass/mixins.scss';
+
+.container {
+	@include flex(column, stretch, center);
+
+	.avatar {
+		margin-top: 30px;
+		width: 96px;
+		height: 96px;
+		border-radius: 50%;
+		position: relative;
+	}
+
+	.label {
+		position: relative;
+
+		.file {
+			display: none;
+		}
+
+		.selectFileImg {
+			position: absolute;
+			bottom: 15px;
+			left: 15px;
+		}
+	}
+}

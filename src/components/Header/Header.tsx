@@ -3,8 +3,8 @@ import { ReturnComponentType } from 'types'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Path } from 'enums/Path'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData, selectIsAuth, selectIsDisabled } from 'store/selectors'
-import avatar from 'assets/images/avatar.png'
+import { selectAuthorizedUserData, selectIsAuth, selectIsAvatarBroken, selectIsDisabled } from 'store/selectors'
+import defaultAvatar from 'assets/images/avatar.png'
 import logOutIcon from 'assets/icons/logOut.png'
 import person from 'assets/icons/person.svg'
 import { useAppDispatch } from 'store/hooks'
@@ -20,12 +20,13 @@ export const Header: FC = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 	const authorizedUser = useSelector(selectAuthorizedUserData)
 	const isDisabled = useSelector(selectIsDisabled)
+	const isAvatarBroken = useSelector(selectIsAvatarBroken)
 
 	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
 	const itemRef = useRef<HTMLDivElement>(null)
 
-	const avatarAuthorizedUser = authorizedUser?.avatar ? authorizedUser?.avatar : avatar
+	const avatarAuthorizedUser = isAvatarBroken ? defaultAvatar : authorizedUser?.avatar
 
 	useEffect(() => {
 		const onOutsideClick = (event: any) => {
