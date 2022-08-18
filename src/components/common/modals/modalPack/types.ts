@@ -6,6 +6,7 @@ export type ModalPackPropsType = {
 	onDeactivateModalClick: () => void
 	onSaveClick: () => void
 	title: string
+	errorMessage: string
 	onCheckboxChange?: (event: ChangeEvent<HTMLInputElement>) => void
 	isPackPrivate?: boolean
 	isLabelItem?: boolean

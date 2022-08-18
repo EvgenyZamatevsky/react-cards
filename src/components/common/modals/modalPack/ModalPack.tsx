@@ -13,6 +13,7 @@ export const ModalPack: FC<ModalPackPropsType> =
 		onSaveClick,
 		isPackPrivate,
 		title,
+		errorMessage,
 		isLabelItem = false
 	}): ReturnComponentType => {
 
@@ -30,6 +31,8 @@ export const ModalPack: FC<ModalPackPropsType> =
 					value={value}
 					onChange={onInputChange}
 				/>
+
+				{errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
 
 				{isLabelItem &&
 					<label className={style.label}>

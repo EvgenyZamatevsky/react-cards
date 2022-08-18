@@ -10,7 +10,7 @@ import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
-import { EMPTY_STRING } from 'constants/base'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import style from './Pack.module.scss'
 import { PackPropsType } from './types'
 
@@ -26,11 +26,13 @@ export const Pack: FC<PackPropsType> =
 		const [isPackModalActive, setIsPackModalActive] = useState(false)
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [updatedPackName, setUpdatedPackName] = useState(EMPTY_STRING)
+		const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
 
 		const isOwner = authorizedUserData?._id === user_id
 
 		const resetPackModalValues = (): void => {
 			setIsPackModalActive(false)
+			setErrorMessage(EMPTY_STRING)
 
 			if (updatedPackName !== name) {
 				setUpdatedPackName(name)
@@ -39,6 +41,7 @@ export const Pack: FC<PackPropsType> =
 
 		const onUpdatedPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
 			setUpdatedPackName(event.currentTarget.value)
+			setErrorMessage(EMPTY_STRING)
 		}
 
 		const handleRemovePackClick = (): void => {
@@ -46,12 +49,22 @@ export const Pack: FC<PackPropsType> =
 			setIsDeleteModalActive(false)
 		}
 
-		const onUpdatePackNameClick = (): void => {
+		const handleUpdatePackNameClick = (): void => {
 			if (updatedPackName !== name) {
 				dispatch(updatePackName({ _id, name: updatedPackName }))
 			}
 
 			setIsPackModalActive(false)
+		}
+
+		const onUpdatePackNameClick = (): void => {
+			const updatedPackNameTrimmed = updatedPackName.trim()
+
+			if (updatedPackNameTrimmed !== EMPTY_STRING) {
+				handleUpdatePackNameClick()
+			} else {
+				setErrorMessage(ERROR_MESSAGE)
+			}
 		}
 
 		const handleDeactivatePackModalClick = (): void => resetPackModalValues()
@@ -74,6 +87,7 @@ export const Pack: FC<PackPropsType> =
 						onDeactivateModalClick={handleDeactivatePackModalClick}
 						onSaveClick={onUpdatePackNameClick}
 						title={'Edit pack'}
+						errorMessage={errorMessage}
 					/>
 				</Modal>
 				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>

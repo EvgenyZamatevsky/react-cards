@@ -9,6 +9,8 @@ import { addPack, getPacks } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { setMaxAndMinValue, setPackPage, setPackPageCount, setSearchPackValue, setSortValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
+import style from './Packs.module.scss'
 import {
 	selectAuthorizedUserData,
 	selectIsAuth,
@@ -25,8 +27,6 @@ import {
 	selectSelectedPack,
 	selectSortValue
 } from 'store/selectors'
-import { EMPTY_STRING } from 'constants/base'
-import style from './Packs.module.scss'
 
 export const Packs: FC = (): ReturnComponentType => {
 
@@ -50,6 +50,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	const [isActiveModal, setIsActiveModal] = useState(false)
 	const [packName, setPackName] = useState(EMPTY_STRING)
 	const [isPackPrivate, setIsPackPrivate] = useState(false)
+	const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
@@ -127,23 +128,30 @@ export const Packs: FC = (): ReturnComponentType => {
 		setIsActiveModal(false)
 		setPackName(EMPTY_STRING)
 		setIsPackPrivate(false)
+		setErrorMessage(EMPTY_STRING)
 	}
 
-	const handleDeactivateModalClick = (): void => {
-		resetModalValues()
-	}
+	const handleDeactivateModalClick = (): void => resetModalValues()
 
-	const handleActivateModalClick = (): void => {
-		setIsActiveModal(true)
-	}
+	const handleActivateModalClick = (): void => setIsActiveModal(true)
 
 	const onAddPackClick = (): void => {
-		dispatch(addPack({ name: packName, private: isPackPrivate }))
-		resetModalValues()
+		const packNameTrimmed = packName.trim()
+
+		if (packNameTrimmed !== EMPTY_STRING) {
+			dispatch(addPack({ name: packNameTrimmed, private: isPackPrivate }))
+			resetModalValues()
+		} else {
+			setErrorMessage(ERROR_MESSAGE)
+		}
 	}
 
 	const onPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		setPackName(event.currentTarget.value)
+
+		if (errorMessage) {
+			setErrorMessage(EMPTY_STRING)
+		}
 	}
 
 	const onIsPackPrivateChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -165,6 +173,7 @@ export const Packs: FC = (): ReturnComponentType => {
 					value={packName}
 					isPackPrivate={isPackPrivate}
 					isLabelItem={true}
+					errorMessage={errorMessage}
 					title={'Add new pack'}
 				/>
 			</Modal>

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import pencil from 'assets/icons/pencil.svg'
-import { EMPTY_STRING } from 'constants/base'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { Key } from 'enums'
 import style from './EditableItem.module.scss'
 import { EditableItemPropsType } from './types'
@@ -37,7 +37,7 @@ export const EditableItem: FC<EditableItemPropsType> =
 				}
 
 			} else {
-				setErrorMessage('Title is required!')
+				setErrorMessage(ERROR_MESSAGE)
 			}
 		}
 
@@ -54,7 +54,7 @@ export const EditableItem: FC<EditableItemPropsType> =
 				{isEditMode
 					? <>
 						<input
-							className={`${style.newNameField} ${errorMessage && style.errorBorder}`}
+							className={style.newNameField}
 							type='text'
 							placeholder='Enter a new name'
 							autoFocus
