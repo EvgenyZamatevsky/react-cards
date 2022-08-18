@@ -2,7 +2,6 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
-import teacher from 'assets/icons/teacher.svg'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserData } from 'store/selectors'
 import { useNavigate } from 'react-router-dom'
@@ -110,22 +109,14 @@ export const Pack: FC<PackPropsType> =
 						<div className={style.cardsCount}>{cardsCount}</div>
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.userName}>{user_name}</div>
-						<div className={isOwner ? style.actions : style.secondaryActions}>
-							<button
-								className={style.teacher}
-								onClick={() => navigate(`/learn/${_id}`)}
-								disabled={cardsCount === 0}
-							>
-								<img src={teacher} alt='teacher' />
-							</button>
-							{isOwner &&
-								<Actions
-									isDisabled={isDisabled}
-									onActivateDeleteModalClick={handleActivateDeleteModalClick}
-									onActivateEditModalClick={handleActivatePackModalClick}
-								/>
-							}
-						</div>
+						<Actions
+							isDisabled={isDisabled}
+							onActivateDeleteModalClick={handleActivateDeleteModalClick}
+							onActivateEditModalClick={handleActivatePackModalClick}
+							cardsCount={cardsCount}
+							packId={_id}
+							isOwner={isOwner}
+						/>
 					</div>
 				</div>
 			</>

@@ -1,7 +1,13 @@
-.cartIcon,
-.pencilIcon {
+@import 'styles/sass/mixins.scss';
 
-	&:disabled {
-		opacity: 0.5;
-	}
+.container {
+	width: 100px;
+	@include flex(row, space-between, center);
+	margin-left: 56px;
+}
+
+.secondaryContainer {
+	width: 100px;
+	@include flex(row, center, center);
+	margin-left: 56px;
 }

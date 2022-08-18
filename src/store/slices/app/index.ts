@@ -39,24 +39,6 @@ const appSlice = createSlice({
 			.addCase(updateAuthorizedUser.fulfilled, (state) => {
 				state.isAvatarBroken = false
 			})
-			// .addCase(getPacks.pending, (state) => {
-			// 	state.isDisabled = true
-			// })
-			// .addCase(getPacks.fulfilled, (state) => {
-			// 	state.isDisabled = false
-			// })
-			// .addCase(getPacks.rejected, (state) => {
-			// 	state.isDisabled = true
-			// })
-			// .addCase(getCards.pending, (state) => {
-			// 	state.isDisabled = true
-			// })
-			// .addCase(getCards.fulfilled, (state) => {
-			// 	state.isDisabled = false
-			// })
-			// .addCase(getCards.rejected, (state) => {
-			// 	state.isDisabled = true
-			// })
 			.addMatcher(isErrorRejected, (state, action: PayloadAction<{ error: string }>) => {
 				state.errorMessage = action.payload.error
 			})
