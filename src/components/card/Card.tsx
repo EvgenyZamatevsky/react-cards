@@ -100,12 +100,12 @@ export const Card: FC<CardPropsType> =
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.grade}>{Number(grade.toFixed(1))}</div>
 						<div className={isOwner ? style.actions : style.secondaryActions}>
-							{isOwner &&
-								<Actions
-									isDisabled={isDisabled}
-									onActivateDeleteModalClick={handleActivateDeleteModalClick}
-									onActivateEditModalClick={handleActivateCardModalClick}
-								/>}
+							<Actions
+								isDisabled={isDisabled}
+								onActivateDeleteModalClick={handleActivateDeleteModalClick}
+								onActivateEditModalClick={handleActivateCardModalClick}
+								isTeacherVisible={false}
+							/>
 						</div>
 					</div>
 				</div>

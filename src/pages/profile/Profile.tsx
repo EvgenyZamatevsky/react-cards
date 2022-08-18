@@ -36,7 +36,7 @@ export const Profile: FC = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
+		<div className={style.profile}>
 
 			<BackPage
 				title={'Back to Packs List'}
@@ -44,7 +44,7 @@ export const Profile: FC = (): ReturnComponentType => {
 				onBackPageClick={handleBackPacksListClick}
 			/>
 
-			<div className={style.content}>
+			<div className={style.container}>
 				<h2 className={style.title}>Personal Information</h2>
 				<InputFile avatarAuthorizedUser={authorizedUserData!.avatar} />
 
@@ -62,7 +62,7 @@ export const Profile: FC = (): ReturnComponentType => {
 					disabled={isDisabled}
 				>
 					<img src={logOutIcon} alt='log Out' />
-					<div>Log out</div>
+					Log out
 				</button>
 			</div>
 		</div>

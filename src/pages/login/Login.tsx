@@ -49,30 +49,30 @@ export const Login: FC = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.content}>
+		<div className={style.login}>
+			<div className={style.container}>
 				<h2 className={style.title}>Sign in</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.emailFieldContainer}>
 						<input className={style.emailField} type='email' placeholder='Email'
 							{...register('email', emailSettings)} />
-						{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
+						{errors?.email && <p className={style.errorMessageEmailField}>{errors?.email.message}</p>}
 					</div>
 					<div className={style.passwordFieldContainer}>
 						<input className={style.passwordField} type={typePassword} placeholder='Password'
 							{...register('password', passwordSettings)} />
-						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
+						{errors?.password && <p className={style.errorMessagePasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
 							? <img className={style.eye} onClick={showOpenEye} src={openEye} />
 							: <img className={style.eye} onClick={showClosedEye} src={closedEye} />}
 					</div>
 					<div className={style.body}>
-						<label>
+						<label className={style.label}>
 							<input className={style.rememberMe} type='checkbox'
 								{...register('rememberMe')} />
 							Remember me
 						</label>
-						<Link to={Path.FORGOT} className={style.forgot}>Forgot Password?</Link>
+						<Link to={Path.FORGOT} className={style.forgotLink}>Forgot Password?</Link>
 					</div>
 					<div className={style.bottom}>
 						<button className={style.signInBtn} type='submit' disabled={!isValid}>Sign in</button>

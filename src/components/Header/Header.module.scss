@@ -60,7 +60,7 @@
 	}
 
 	.signInBtn {
-		@extend %button;
+		@extend %primaryButton;
 		width: 113px;
 	}
 }

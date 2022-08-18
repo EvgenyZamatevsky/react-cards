@@ -44,7 +44,7 @@
 
 			.showAnswerBtn {
 				margin-top: 29px;
-				@extend %button;
+				@extend %primaryButton;
 				width: 373px;
 			}
 
@@ -57,7 +57,7 @@
 }
 
 .nextQuestionBtn {
-	@extend %button;
+	@extend %primaryButton;
 	width: 373px;
 	margin-top: 42px;
 }

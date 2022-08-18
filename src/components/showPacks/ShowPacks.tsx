@@ -28,22 +28,20 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 	return (
 		<div>
 			<div className={style.showPacksCards}>Show packs cards</div>
-			<div className={style.showPacksButtons}>
-				<button
-					className={`${style.myBtn} ${selectedPack === 'My' && style.active}`}
-					onClick={onSelectMyPacksClick}
-					disabled={isDisabled}
-				>
-					My
-				</button>
-				<button
-					className={`${style.allBtn} ${selectedPack === 'All' && style.active}`}
-					onClick={onSelectAllPacksClick}
-					disabled={isDisabled}
-				>
-					All
-				</button>
-			</div>
+			<button
+				className={`${style.myBtn} ${selectedPack === 'My' && style.active}`}
+				onClick={onSelectMyPacksClick}
+				disabled={isDisabled}
+			>
+				My
+			</button>
+			<button
+				className={`${style.allBtn} ${selectedPack === 'All' && style.active}`}
+				onClick={onSelectAllPacksClick}
+				disabled={isDisabled}
+			>
+				All
+			</button>
 		</div>
 	)
 }

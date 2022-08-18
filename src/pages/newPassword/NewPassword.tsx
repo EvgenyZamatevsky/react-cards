@@ -38,8 +38,8 @@ export const NewPassword: FC = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.content}>
+		<div className={style.newPassword}>
+			<div className={style.container}>
 				<h2 className={style.title}>Create new password</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.passwordFieldContainer}>

@@ -31,18 +31,18 @@ export const Forgot: FC = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.content}>
+		<div className={style.forgot}>
+			<div className={style.container}>
 				<h2 className={style.title}>Forgot your password?</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<input className={style.emailField} type='email' placeholder='Email'
 						{...register('email', emailSettings)} />
-					{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
+					{errors?.email && <p className={style.errorMessage}>{errors?.email.message}</p>}
 					<div className={style.words}>Enter your email address and we will send you further instructions</div>
 					<div className={style.bottom}>
 						<button className={style.sendInstructionsBtn} type='submit' disabled={!isValid}>Send Instructions</button>
 						<div className={style.text}>Did you remember your password?</div>
-						<Link to={Path.LOGIN} className={style.signInBtn}>Try logging in</Link>
+						<Link to={Path.LOGIN} className={style.tryLoggingInBtn}>Try logging in</Link>
 					</div>
 				</form>
 			</div>

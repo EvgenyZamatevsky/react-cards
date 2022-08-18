@@ -15,7 +15,8 @@ export const Actions: FC<ActionsPropsType> =
 		isDisabled,
 		cardsCount,
 		packId,
-		isOwner
+		isOwner,
+		isTeacherVisible = true
 	}): ReturnComponentType => {
 
 		const navigate = useNavigate()
@@ -24,13 +25,14 @@ export const Actions: FC<ActionsPropsType> =
 
 		return (
 			<div className={isOwner ? style.container : style.secondaryContainer}>
-				<button
-					className={style.teacher}
-					onClick={onNavigateToLearnPageClick}
-					disabled={cardsCount === 0}
-				>
-					<img src={teacher} alt='teacher' />
-				</button>
+				{isTeacherVisible &&
+					<button
+						className={style.teacher}
+						onClick={onNavigateToLearnPageClick}
+						disabled={cardsCount === 0}
+					>
+						<img src={teacher} alt='teacher' />
+					</button>}
 				{isOwner &&
 					<>
 						<button onClick={onActivateDeleteModalClick} disabled={isDisabled}>

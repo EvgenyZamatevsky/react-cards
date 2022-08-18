@@ -16,7 +16,7 @@
  		margin-top: 20px;
 
  		.addNewCardBtn {
- 			@extend %button;
+ 			@extend %primaryButton;
  			width: 184px;
  		}
  	}

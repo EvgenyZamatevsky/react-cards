@@ -65,8 +65,8 @@ export const Register: FC = (): ReturnComponentType => {
 	}
 
 	return (
-		<div className={style.container}>
-			<div className={style.content}>
+		<div className={style.register}>
+			<div className={style.container}>
 				<h2 className={style.title}>Sign Up</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.emailFieldContainer}>
