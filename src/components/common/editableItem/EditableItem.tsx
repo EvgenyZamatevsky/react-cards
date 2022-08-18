@@ -71,7 +71,7 @@ export const EditableItem: FC<EditableItemPropsType> =
 						onClick={onSetCurrentValueClick}
 					>
 						{currentValue}
-						<img src={pencil} alt='pencil' />
+						<img className={style.pencilIcon} src={pencil} alt='pencil' />
 					</button>}
 			</>
 		)

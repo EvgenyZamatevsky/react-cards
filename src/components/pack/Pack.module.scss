@@ -1,3 +1,5 @@
+@import 'styles/sass/mixins.scss';
+
 .container {
 	width: 100%;
 	min-height: 48px;
@@ -6,8 +8,7 @@
 
 	.list {
 		min-height: 100%;
-		display: flex;
-		align-items: center;
+		@include flex(row, stretch, center);
 
 		.name {
 			max-height: 110px;

@@ -1,19 +1,24 @@
  @import './variables.scss';
  @import './mixins.scss';
 
- %btn {
+ %button {
  	color: #FFF;
- 	letter-spacing: 0.01em;
- 	line-height: 20px;
- 	background: #366EFF;
+ 	height: 36px;
+ 	width: 347px;
+ 	background-color: #366EFF;
  	box-shadow: 0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
  	border-radius: 30px;
- 	height: 36px;
  	@include flex(row, center, center);
  	text-align: center;
- 	padding: 0px 119px;
+ }
 
- 	&:disabled {
- 		opacity: 0.7;
+ %input {
+ 	width: 330px;
+ 	border-bottom: 1px solid #b5b5b5;
+ 	padding: 4.50px 0px 4.50px 0px;
+ 	line-height: 24px;
+
+ 	&:focus {
+ 		border-bottom: 1px solid #000;
  	}
  }

@@ -1,3 +1,5 @@
+@import 'styles/sass/mixins.scss';
+
 .container {
 	width: 100%;
 	min-height: 48px;
@@ -6,8 +8,7 @@
 
 	.list {
 		min-height: 100%;
-		display: flex;
-		align-items: center;
+		@include flex(row, stretch, center);
 
 		.question {
 			max-height: 110px;
@@ -41,17 +42,13 @@
 
 		.actions {
 			width: 50px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			@include flex(row, space-between, center);
 			margin-left: 10px;
 		}
 
 		.secondaryActions {
 			width: 50px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			@include flex(row, center, center);
 		}
 	}
 }

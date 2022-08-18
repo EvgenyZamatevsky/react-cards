@@ -13,8 +13,7 @@
 	}
 
 	.authorizedUser {
-		display: flex;
-		align-items: center;
+		@include flex(row, stretch, center);
 		position: relative;
 
 		.name {
@@ -38,15 +37,12 @@
 			background: #FFFFFF;
 			border: 1px solid #CFCFCF;
 			box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
-			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
+			@include flex(column, space-evenly, stretch);
 			z-index: 2;
 
 			.profileBtn,
 			.logOutBtn {
-				display: flex;
-				align-items: center;
+				@include flex(row, stretch, center);
 				height: 100%;
 				transition: background-color 0.2s ease-in-out 0s;
 
@@ -64,7 +60,7 @@
 	}
 
 	.signInBtn {
-		@extend %btn;
-		padding: 0px 28px;
+		@extend %button;
+		width: 113px;
 	}
 }

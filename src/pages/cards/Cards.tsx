@@ -131,7 +131,10 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	return (
 		<>
-			<Modal isModalActive={isActiveModal} onDeactivateModalClick={handleDeactivateModalClick}>
+			<Modal
+				isModalActive={isActiveModal}
+				onDeactivateModalClick={handleDeactivateModalClick}
+			>
 				<ModalCard
 					onDeactivateModalClick={handleDeactivateModalClick}
 					onSaveClick={onAddPackClick}
@@ -149,35 +152,31 @@ export const Cards: FC = (): ReturnComponentType => {
 					onBackPageClick={handleBackPacksListClick}
 				/>
 
-				<div className={style.top}>
-					<h2 className={style.title}>Packs list</h2>
-				</div>
-				<div className={style.main}>
+				<h2 className={style.title}>Packs list</h2>
+				<div className={style.content}>
 					<Search
 						searchValue={searchCardValue}
 						handleSetSearchValueChange={handleSetSearchCardValueChange}
 						handleResetSearchValueClick={handleResetSearchCardValueClick}
 					/>
 					<button
-						className={style.addNewPackBtn}
+						className={style.addNewCardBtn}
 						onClick={handleActivateModalClick}
 						disabled={isDisabled}
 					>
 						Add new card
 					</button>
 				</div>
-				<div className={style.bottom}>
-					<div className={style.sort}>
-						<Sort
-							sortValues={sortCardsValues}
-							sortByDescending={sortCardsByDescending}
-							sortByAscending={sortCardsByAscending}
-							sortValue={sortCards}
-							isDisabled={isDisabled}
-							handleSortByDescendingClick={handleSortCardsByDescendingClick}
-							handleSortByAscendingClick={handleSortCardsByAscendingClick}
-						/>
-					</div>
+				<div className={style.sort}>
+					<Sort
+						sortValues={sortCardsValues}
+						sortByDescending={sortCardsByDescending}
+						sortByAscending={sortCardsByAscending}
+						sortValue={sortCards}
+						isDisabled={isDisabled}
+						handleSortByDescendingClick={handleSortCardsByDescendingClick}
+						handleSortByAscendingClick={handleSortCardsByAscendingClick}
+					/>
 				</div>
 				{cardsRender}
 				<Pagination

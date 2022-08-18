@@ -1,6 +1,7 @@
+@import 'styles/sass/mixins.scss';
+
 .backPageBtn {
-	display: flex;
-	align-items: center;
+	@include flex(row, stretch, center);
 	font-size: 14px;
 	line-height: 24px;
 	transition: color 0.2s ease-in-out 0s;

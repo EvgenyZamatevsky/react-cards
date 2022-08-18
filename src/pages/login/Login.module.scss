@@ -28,14 +28,7 @@
 				position: relative;
 
 				.emailField {
-					width: 330px;
-					border-bottom: 1px solid #b5b5b5;
-					padding: 4.50px 0px 4.50px 0px;
-					line-height: 24px;
-
-					&:focus {
-						border-bottom: 1px solid #000;
-					}
+					@extend %input;
 				}
 
 				.errorEmailField {
@@ -51,19 +44,10 @@
 
 			.passwordFieldContainer {
 				position: relative;
-				top: 0;
-				left: 0;
 
 				.passwordField {
 					margin-top: 40px;
-					width: 330px;
-					border-bottom: 1px solid #b5b5b5;
-					padding: 4.50px 0px 4.50px 0px;
-					line-height: 24px;
-
-					&:focus {
-						border-bottom: 1px solid #000;
-					}
+					@extend %input;
 				}
 
 				.errorPasswordField {
@@ -123,8 +107,7 @@
 				@include flex(column, stretch, center);
 
 				.signInBtn {
-					@extend %btn;
-					padding: 0px 145px;
+					@extend %button;
 
 				}
 

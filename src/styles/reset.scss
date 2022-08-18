@@ -101,11 +101,6 @@ select {
 
 button {
 	background-color: transparent;
-
-	&:disabled {
-		cursor: no-drop;
-		opacity: 0.5;
-	}
 }
 
 textarea {
@@ -127,6 +122,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox'],
+input[type='range'],
 label,
 button {
 	cursor: pointer;
@@ -138,4 +134,13 @@ ul {
 
 a {
 	text-decoration: none;
+}
+
+input[type='range'],
+button {
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: no-drop;
+	}
 }

@@ -6,6 +6,7 @@ import cart from 'assets/icons/cart.svg'
 import pencil from 'assets/icons/pencil.svg'
 import teacher from 'assets/icons/teacher.svg'
 import style from './Actions.module.scss'
+import { Path } from 'enums'
 
 export const Actions: FC<ActionsPropsType> =
 	({
@@ -19,9 +20,7 @@ export const Actions: FC<ActionsPropsType> =
 
 		const navigate = useNavigate()
 
-		const onNavigateToLearnPageClick = (): void => {
-			navigate(`/learn/${packId}`)
-		}
+		const onNavigateToLearnPageClick = (): void => navigate(`${Path.LEARN}/${packId}`)
 
 		return (
 			<div className={isOwner ? style.container : style.secondaryContainer}>

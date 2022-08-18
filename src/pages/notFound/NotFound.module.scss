@@ -23,9 +23,9 @@
  			}
 
  			.backHomePageBtn {
- 				@extend %btn;
- 				padding: 0px 28px;
+ 				@extend %button;
  				margin-top: 36px;
+ 				width: 218px;
  			}
  		}
  	}

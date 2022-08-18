@@ -1,23 +1,18 @@
+@import 'styles/sass/templates.scss';
+
 .editableItem {
 	margin-top: 17px;
 	font-size: 20px;
 	line-height: 24px;
 
-	img {
+	.pencilIcon {
 		margin-left: 5px;
 	}
 }
 
 .newNameField {
 	margin-top: 7px;
-	width: 330px;
-	border-bottom: 1px solid #b5b5b5;
-	padding: 4.50px 0px 4.50px 0px;
-	line-height: 24px;
-
-	&:focus {
-		border-bottom: 1px solid #000;
-	}
+	@extend %input;
 }
 
 .errorMessage {

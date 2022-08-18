@@ -40,7 +40,7 @@ export const ROUTES = [
 	{ path: Path.FORGOT, element: <Forgot /> },
 	{ path: Path.CHECK_EMAIL_PARAMS, element: <CheckEmail /> },
 	{ path: Path.NEW_PASSWORD_PARAMS, element: <NewPassword /> },
-	{ path: '/learn/:packId', element: <Learn /> },
+	{ path: Path.LEARN_PARAMS, element: <Learn /> },
 	{ path: Path.NOT_FOUND_404, element: <NotFound /> },
 	{ path: Path.NOT_FOUND, element: <Navigate to={Path.NOT_FOUND_404} /> },
 ]

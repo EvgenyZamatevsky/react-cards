@@ -1,12 +1,12 @@
+@import 'styles/sass/mixins.scss';
+
 .numberOfCards {
 	font-size: 14px;
 	line-height: 17px;
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	@include flex(row, center, center);
 	margin: 25px 0 60px 0;
 
 	.thumb {
@@ -15,10 +15,6 @@
 		height: 0;
 		width: 200px;
 		outline: none;
-
-		&:disabled {
-			opacity: 0.7;
-		}
 	}
 
 	.thumb,
@@ -31,7 +27,6 @@
 		border: none;
 		border-radius: 50%;
 		box-shadow: 0 0 1px 1px #366EFF;
-		cursor: pointer;
 		height: 14px;
 		width: 14px;
 		margin-top: 4px;
