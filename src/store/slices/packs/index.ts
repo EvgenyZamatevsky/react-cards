@@ -53,16 +53,16 @@ const packsSlice = createSlice({
 			})
 			.addCase(logOut.fulfilled, (state) => {
 				state.packs = []
+				state.searchPackValue = EMPTY_STRING
+				state.sortValue = '0updated'
 				state.minValue = 0
 				state.maxValue = 0
-				state.sortValue = '0updated'
+				state.minCardsCount = 0
+				state.maxCardsCount = 0
+				state.pageCount = 5
+				state.page = 1
 				state.packsTotalCount = 0
 				state.selectedPack = 'All'
-				state.page = 1
-				state.pageCount = 5
-				state.searchPackValue = EMPTY_STRING
-				state.maxCardsCount = 0
-				state.minCardsCount = 0
 			})
 	},
 })

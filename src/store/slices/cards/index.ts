@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
 import { logOut } from 'store/asyncActions'
-import { getCards } from 'store/asyncActions/cards'
+import { getCards, updateCardGrade } from 'store/asyncActions/cards'
 import { CardsSliceInitialStateType } from './types'
 
 const initialState: CardsSliceInitialStateType = {
@@ -36,6 +36,13 @@ const cardsSlice = createSlice({
 				state.cards = action.payload.cards
 				state.cardsTotalCount = action.payload.cardsTotalCount
 			})
+			.addCase(updateCardGrade.fulfilled, (state, action) => {
+				const card = state.cards.find(card => card._id === action.payload.card_id)
+				if (card) {
+					card.shots = action.payload.shots
+					card.grade = action.payload.grade
+				}
+			})
 			.addCase(logOut.fulfilled, (state) => {
 				state.cards = []
 				state.searchCardValue = EMPTY_STRING
@@ -47,6 +54,11 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { setSearchCardValue, setSortCards, setCardPage, setCardPageCount } = cardsSlice.actions
+export const {
+	setSearchCardValue,
+	setSortCards,
+	setCardPage,
+	setCardPageCount
+} = cardsSlice.actions
 
 export default cardsSlice.reducer

@@ -4,16 +4,28 @@ import { PacksResponseType } from './types'
 
 export const PACKS = {
 	getPacks(
-		packName: string, sortPacks: string, min: number, max: number, pageCount: number, page: number, userId?: string) {
-
+		packName: string,
+		sortPacks: string,
+		min: number,
+		max: number,
+		pageCount: number,
+		page: number,
+		userId?: string
+	) {
 		const currentPackName = packName === EMPTY_STRING ? EMPTY_STRING : `&packName=${packName}`
-		const currentSortPacks = sortPacks === EMPTY_STRING ? EMPTY_STRING : `&sortPacks=${sortPacks}`
 		const currentUserId = userId === EMPTY_STRING || userId === undefined ? EMPTY_STRING : `&user_id=${userId}`
 		const currentMin = min <= 0 ? EMPTY_STRING : `&min=${min}`
 		const currentMax = max <= 0 ? EMPTY_STRING : `&max=${max}`
 
 		return instance.get<PacksResponseType>(`cards/pack
-		?pageCount=${pageCount}&page=${page}${currentPackName}${currentSortPacks}${currentMin}${currentMax}${currentUserId}`)
+		?pageCount=${pageCount}
+		&page=${page}
+		&sortPacks=${sortPacks}
+		${currentPackName}
+		${currentMin}
+		${currentMax}
+		${currentUserId}
+		`)
 	},
 	addPack(name: string, isPrivate: boolean) {
 		return instance.post(`cards/pack`, { cardsPack: { name: name, private: isPrivate } })
