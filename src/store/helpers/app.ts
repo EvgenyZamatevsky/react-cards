@@ -12,4 +12,6 @@ export const isDisabledRejected = (action: AnyAction) => action.type.endsWith('r
 
 export const isDisabledPending = (action: AnyAction) => action.type.endsWith('pending')
 
-export const isErrorRejected = (action: AnyAction) => action.type.endsWith('rejected')
+export const isErrorRejected = (action: AnyAction) => {
+	return action.type.endsWith('rejected') && action.type !== 'auth/getAuthorizedUserData/rejected'
+}
