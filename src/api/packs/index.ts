@@ -14,16 +14,14 @@ export const PACKS = {
 	) {
 		const currentPackName = packName === EMPTY_STRING ? EMPTY_STRING : `&packName=${packName}`
 		const currentUserId = userId === EMPTY_STRING || userId === undefined ? EMPTY_STRING : `&user_id=${userId}`
-		const currentMin = min <= 0 ? EMPTY_STRING : `&min=${min}`
-		const currentMax = max <= 0 ? EMPTY_STRING : `&max=${max}`
 
 		return instance.get<PacksResponseType>(`cards/pack
 		?pageCount=${pageCount}
 		&page=${page}
 		&sortPacks=${sortPacks}
+		&min=${min}
+		&max=${max}
 		${currentPackName}
-		${currentMin}
-		${currentMax}
 		${currentUserId}
 		`)
 	},

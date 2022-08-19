@@ -8,10 +8,10 @@ const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchPackValue: EMPTY_STRING,
 	sortValue: '0updated',
-	minValue: 0,
-	maxValue: 0,
 	minCardsCount: 0,
 	maxCardsCount: 110,
+	minValue: 0,
+	maxValue: 110,
 	pageCount: 5,
 	page: 1,
 	packsTotalCount: 0,
@@ -56,7 +56,7 @@ const packsSlice = createSlice({
 				state.searchPackValue = EMPTY_STRING
 				state.sortValue = '0updated'
 				state.minValue = 0
-				state.maxValue = 0
+				state.maxValue = 110
 				state.minCardsCount = 0
 				state.maxCardsCount = 110
 				state.pageCount = 5
