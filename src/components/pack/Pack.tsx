@@ -3,7 +3,7 @@ import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData } from 'store/selectors'
+import { selectAuthorizedUserId } from 'store/selectors'
 import { useNavigate } from 'react-router-dom'
 import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
@@ -20,14 +20,14 @@ export const Pack: FC<PackPropsType> =
 
 		const navigate = useNavigate()
 
-		const authorizedUserData = useSelector(selectAuthorizedUserData)
+		const authorizedUserId = useSelector(selectAuthorizedUserId)
 
 		const [isPackModalActive, setIsPackModalActive] = useState(false)
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [updatedPackName, setUpdatedPackName] = useState(EMPTY_STRING)
 		const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
 
-		const isOwner = authorizedUserData?._id === user_id
+		const isOwner = authorizedUserId === user_id
 
 		const resetPackModalValues = (): void => {
 			setIsPackModalActive(false)

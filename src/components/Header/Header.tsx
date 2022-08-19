@@ -3,13 +3,19 @@ import { ReturnComponentType } from 'types'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Path } from 'enums/Path'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData, selectIsAuth, selectIsAvatarBroken, selectIsDisabled } from 'store/selectors'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
 import logOutIcon from 'assets/icons/logOut.png'
 import person from 'assets/icons/person.svg'
 import { useAppDispatch } from 'store/hooks'
 import { logOut } from 'store/asyncActions'
 import style from './Header.module.scss'
+import {
+	selectAuthorizedUserAvatar,
+	selectAuthorizedUserName,
+	selectIsAuth,
+	selectIsAvatarBroken,
+	selectIsDisabled
+} from 'store/selectors'
 
 export const Header: FC = (): ReturnComponentType => {
 
@@ -18,15 +24,14 @@ export const Header: FC = (): ReturnComponentType => {
 	const navigate = useNavigate()
 
 	const isAuth = useSelector(selectIsAuth)
-	const authorizedUser = useSelector(selectAuthorizedUserData)
+	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
+	const authorizedUserName = useSelector(selectAuthorizedUserName)
 	const isDisabled = useSelector(selectIsDisabled)
 	const isAvatarBroken = useSelector(selectIsAvatarBroken)
 
 	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
 	const itemRef = useRef<HTMLDivElement>(null)
-
-	const avatarAuthorizedUser = isAvatarBroken ? defaultAvatar : authorizedUser?.avatar
 
 	useEffect(() => {
 		const onOutsideClick = (event: any) => {
@@ -61,8 +66,12 @@ export const Header: FC = (): ReturnComponentType => {
 						className={style.name}
 						onClick={onShowPopupClick}
 						disabled={isDisabled}
-					>{authorizedUser?.name}</button>
-					<img className={style.image} src={avatarAuthorizedUser} alt='avatar' />
+					>{authorizedUserName}</button>
+					<img
+						className={style.image}
+						src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
+						alt='avatar'
+					/>
 					{isVisiblePopup &&
 						<div className={style.popup}>
 							<button className={style.profileBtn} onClick={onGoProfileClick}>

@@ -5,11 +5,16 @@ import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
 import { logOut, updateAuthorizedUser } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserData, selectIsAuth, selectIsDisabled } from 'store/selectors'
 import logOutIcon from 'assets/icons/logOut.png'
 import { EditableItem, InputFile } from 'components'
 import { BackPage } from 'components/common/backPage'
 import style from './Profile.module.scss'
+import {
+	selectAuthorizedUserEmail,
+	selectAuthorizedUserName,
+	selectIsAuth,
+	selectIsDisabled
+} from 'store/selectors'
 
 export const Profile: FC = (): ReturnComponentType => {
 
@@ -18,7 +23,8 @@ export const Profile: FC = (): ReturnComponentType => {
 	const navigate = useNavigate()
 
 	const isAuth = useSelector(selectIsAuth)
-	const authorizedUserData = useSelector(selectAuthorizedUserData)
+	const authorizedUserName = useSelector(selectAuthorizedUserName)
+	const authorizedUserEmail = useSelector(selectAuthorizedUserEmail)
 	const isDisabled = useSelector(selectIsDisabled)
 
 	const handleUpdateNameBlurAndKeyDown = (newName: string): void => {
@@ -46,15 +52,15 @@ export const Profile: FC = (): ReturnComponentType => {
 
 			<div className={style.container}>
 				<h2 className={style.title}>Personal Information</h2>
-				<InputFile avatarAuthorizedUser={authorizedUserData!.avatar} />
+				<InputFile />
 
 				<EditableItem
-					currentValue={authorizedUserData!?.name}
+					currentValue={authorizedUserName}
 					isDisabled={isDisabled}
 					changeCurrentValue={handleUpdateNameBlurAndKeyDown}
 				/>
 
-				<div className={style.email}>{authorizedUserData?.email}</div>
+				<div className={style.email}>{authorizedUserEmail}</div>
 
 				<button
 					className={style.LogOutBtn}

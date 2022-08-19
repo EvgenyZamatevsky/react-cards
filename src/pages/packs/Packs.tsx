@@ -12,7 +12,7 @@ import { ReturnComponentType } from 'types'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import style from './Packs.module.scss'
 import {
-	selectAuthorizedUserData,
+	selectAuthorizedUserId,
 	selectIsAuth,
 	selectIsDisabled,
 	selectMaxCardsCount,
@@ -41,7 +41,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	const maxValue = useSelector(selectMaxValue)
 	const minCardsCount = useSelector(selectMinCardsCount)
 	const maxCardsCount = useSelector(selectMaxCardsCount)
-	const authorizedUserData = useSelector(selectAuthorizedUserData)
+	const authorizedUserId = useSelector(selectAuthorizedUserId)
 	const selectedPack = useSelector(selectSelectedPack)
 	const pageCount = useSelector(selectPageCount)
 	const page = useSelector(selectPage)
@@ -91,7 +91,7 @@ export const Packs: FC = (): ReturnComponentType => {
 					max: maxValue,
 					pageCount,
 					page,
-					userId: authorizedUserData?._id
+					userId: authorizedUserId
 				}))
 		}
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])

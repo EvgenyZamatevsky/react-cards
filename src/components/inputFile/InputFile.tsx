@@ -7,14 +7,15 @@ import defaultAvatar from 'assets/images/defaultAvatar.png'
 import selectFile from 'assets/icons/selectFile.svg'
 import { InputFilePropsType } from './types'
 import { useSelector } from 'react-redux'
-import { selectIsAvatarBroken } from 'store/selectors'
+import { selectAuthorizedUserAvatar, selectIsAvatarBroken } from 'store/selectors'
 import style from './InputFile.module.scss'
 
-export const InputFile: FC<InputFilePropsType> = ({ avatarAuthorizedUser }): ReturnComponentType => {
+export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
 	const isAvatarBroken = useSelector(selectIsAvatarBroken)
+	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -52,7 +53,7 @@ export const InputFile: FC<InputFilePropsType> = ({ avatarAuthorizedUser }): Ret
 		<div className={style.container}>
 			<img
 				className={style.avatar}
-				src={isAvatarBroken ? defaultAvatar : avatarAuthorizedUser}
+				src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
 				alt='avatar'
 				onError={onImgError}
 			/>
