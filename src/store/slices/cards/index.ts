@@ -11,6 +11,7 @@ const initialState: CardsSliceInitialStateType = {
 	page: 1,
 	pageCount: 5,
 	cardsTotalCount: 0,
+	packUserId: EMPTY_STRING
 }
 
 const cardsSlice = createSlice({
@@ -35,6 +36,7 @@ const cardsSlice = createSlice({
 			.addCase(getCards.fulfilled, (state, action) => {
 				state.cards = action.payload.cards
 				state.cardsTotalCount = action.payload.cardsTotalCount
+				state.packUserId = action.payload.packUserId
 			})
 			.addCase(updateCardGrade.fulfilled, (state, action) => {
 				const card = state.cards.find(card => card._id === action.payload.card_id)

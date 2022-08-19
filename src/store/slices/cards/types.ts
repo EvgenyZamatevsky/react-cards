@@ -7,4 +7,5 @@ export type CardsSliceInitialStateType = {
 	page: number
 	pageCount: number
 	cardsTotalCount: number
+	packUserId: string
 }

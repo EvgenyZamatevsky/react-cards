@@ -5,7 +5,7 @@ import { RootStateType } from 'store'
 
 export const getCards = createAsyncThunk
 	<
-		{ cards: CardType[], cardsTotalCount: number },
+		{ cards: CardType[], cardsTotalCount: number, packUserId: string },
 		{ packId: string, cardQuestion: string, sortCards: string, page: number, pageCount: number },
 		{ rejectValue: { error: string } }
 	>
@@ -18,9 +18,9 @@ export const getCards = createAsyncThunk
 				params.page,
 				params.pageCount
 			)
-			const { cards, cardsTotalCount } = response.data
+			const { cards, cardsTotalCount, packUserId } = response.data
 
-			return { cards, cardsTotalCount }
+			return { cards, cardsTotalCount, packUserId }
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

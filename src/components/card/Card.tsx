@@ -2,8 +2,6 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
 import { removeCard, updateCard } from 'store/asyncActions/cards'
-import { useSelector } from 'react-redux'
-import { selectAuthorizedUserId } from 'store/selectors'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
@@ -12,18 +10,14 @@ import { CardPropsType } from './types'
 import style from './Card.module.scss'
 
 export const Card: FC<CardPropsType> =
-	({ cardId, question, answer, updated, grade, packId, isDisabled, user_id }): ReturnComponentType => {
+	({ cardId, question, answer, updated, grade, packId, isDisabled, isOwner }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
-
-		const authorizedUserId = useSelector(selectAuthorizedUserId)
 
 		const [isCardModalActive, setIsCardModalActive] = useState(false)
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
 		const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
-
-		const isOwner = authorizedUserId === user_id
 
 		const resetModalValues = (): void => {
 			setIsCardModalActive(false)

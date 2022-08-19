@@ -6,12 +6,14 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { useAppDispatch } from 'store/hooks'
 import {
+	selectAuthorizedUserId,
 	selectCardPage,
 	selectCardPageCount,
 	selectCards,
 	selectCardsTotalCount,
 	selectIsAuth,
 	selectIsDisabled,
+	selectPackUserId,
 	selectSearchCardValue,
 	selectSortCards
 } from 'store/selectors'
@@ -36,6 +38,8 @@ export const Cards: FC = (): ReturnComponentType => {
 	const cardPageCount = useSelector(selectCardPageCount)
 	const isDisabled = useSelector(selectIsDisabled)
 	const cardsTotalCount = useSelector(selectCardsTotalCount)
+	const authorizedUserId = useSelector(selectAuthorizedUserId)
+	const packUserId = useSelector(selectPackUserId)
 
 	const [isActiveModal, setIsActiveModal] = useState(false)
 	const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
@@ -44,8 +48,9 @@ export const Cards: FC = (): ReturnComponentType => {
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
 	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade ']
+	const isOwner = authorizedUserId === packUserId
 
-	const cardsRender = cards.map(({ _id, question, answer, updated, grade, user_id }) => {
+	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
 		return (
 			<Card
 				key={_id}
@@ -56,7 +61,7 @@ export const Cards: FC = (): ReturnComponentType => {
 				grade={grade}
 				packId={packId!}
 				isDisabled={isDisabled}
-				user_id={user_id}
+				isOwner={isOwner}
 			/>
 		)
 	})
@@ -159,13 +164,14 @@ export const Cards: FC = (): ReturnComponentType => {
 						handleSetSearchValueChange={handleSetSearchCardValueChange}
 						handleResetSearchValueClick={handleResetSearchCardValueClick}
 					/>
-					<button
-						className={style.addNewCardBtn}
-						onClick={handleActivateModalClick}
-						disabled={isDisabled}
-					>
-						Add new card
-					</button>
+					{isOwner &&
+						<button
+							className={style.addNewCardBtn}
+							onClick={handleActivateModalClick}
+							disabled={isDisabled}
+						>
+							Add new card
+						</button>}
 				</div>
 				<div className={style.sort}>
 					<Sort

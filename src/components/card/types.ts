@@ -6,5 +6,5 @@ export type CardPropsType = {
 	cardId: string
 	packId: string
 	isDisabled: boolean
-	user_id: string
+	isOwner: boolean
 }
