@@ -72,28 +72,15 @@ export const Packs: FC = (): ReturnComponentType => {
 	})
 
 	useEffect(() => {
-		if (isAuth && selectedPack === 'All') {
-			dispatch(getPacks(
-				{
-					packName: searchPackValue,
-					sortPacks: sortValue,
-					min: minValue,
-					max: maxValue,
-					page,
-					pageCount
-				}))
-		} else {
-			dispatch(getPacks(
-				{
-					packName: searchPackValue,
-					sortPacks: sortValue,
-					min: minValue,
-					max: maxValue,
-					pageCount,
-					page,
-					userId: authorizedUserId
-				}))
-		}
+		dispatch(getPacks({
+			packName: searchPackValue,
+			sortPacks: sortValue,
+			min: minValue,
+			max: maxValue,
+			pageCount,
+			page,
+			userId: authorizedUserId
+		}))
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
 
 	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }): void => {
