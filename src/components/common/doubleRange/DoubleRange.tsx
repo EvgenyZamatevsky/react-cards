@@ -7,14 +7,12 @@ import { DoubleRangePropsType } from './types'
 
 export const DoubleRange: FC<DoubleRangePropsType> =
 	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp }): ReturnComponentType => {
-
 		const isDisabled = useSelector(selectIsDisabled)
 
 		const [minValue, setMinVal] = useState(min)
 		const [maxValue, setMaxVal] = useState(max)
 
 		const rangeRef = useRef<HTMLDivElement>(null)
-		const isMounted = useRef(false)
 
 		const onMinValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
 			const currentValue = Math.min(Number(event.currentTarget.value), maxValue)
@@ -22,17 +20,13 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 		}
 
 		const onMaxValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
-			const currentValue = Math.max(Number(event.target.value), minValue)
+			const currentValue = Math.max(Number(event.currentTarget.value), minValue)
 			setMaxVal(currentValue)
 		}
 
 		useEffect(() => {
-			if (isMounted.current) {
-				setMinVal(minDefaultValue)
-				setMaxVal(maxDefaultValue)
-			}
-
-			isMounted.current = true
+			setMinVal(minDefaultValue)
+			setMaxVal(maxDefaultValue)
 		}, [minDefaultValue, maxDefaultValue])
 
 		return (

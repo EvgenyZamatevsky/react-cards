@@ -97,7 +97,9 @@ export const Packs: FC = (): ReturnComponentType => {
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
 
 	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }): void => {
-		dispatch(setMaxAndMinValue({ max, min }))
+		if (min !== minCardsCount || max !== maxCardsCount) {
+			dispatch(setMaxAndMinValue({ max, min }))
+		}
 	}, [])
 
 	const handleSetSearchPackValueChange = (value: string): void => {
@@ -139,7 +141,7 @@ export const Packs: FC = (): ReturnComponentType => {
 		const packNameTrimmed = packName.trim()
 
 		if (packNameTrimmed !== EMPTY_STRING) {
-			dispatch(addPack({ name: packNameTrimmed, private: isPackPrivate }))
+			dispatch(addPack({ userId: authorizedUserId, name: packNameTrimmed, private: isPackPrivate }))
 			resetModalValues()
 		} else {
 			setErrorMessage(ERROR_MESSAGE)

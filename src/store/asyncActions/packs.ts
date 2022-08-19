@@ -32,7 +32,7 @@ export const getPacks = createAsyncThunk
 export const addPack = createAsyncThunk
 	<
 		void,
-		{ name: string, private: boolean },
+		{ userId: string, name: string, private: boolean },
 		{ rejectValue: { error: string }, state: RootStateType }
 	>
 	('packs/addPack', async (params, { rejectWithValue, dispatch, getState }) => {
@@ -43,10 +43,30 @@ export const addPack = createAsyncThunk
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount
 			const page = getState().packs.page
+			const selectedPack = getState().packs.selectedPack
 
 			const response = await PACKS.addPack(params.name, params.private)
 
-			dispatch(getPacks({ packName: searchPackValue, sortPacks, min: minValue, max: maxValue, pageCount, page }))
+			if (selectedPack === 'All') {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page
+				}))
+			} else {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page,
+					userId: params.userId
+				}))
+			}
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
@@ -54,8 +74,8 @@ export const addPack = createAsyncThunk
 	})
 
 export const removePack = createAsyncThunk
-	<void, string, { rejectValue: { error: string }, state: RootStateType }>
-	('packs/removePack', async (id, { rejectWithValue, dispatch, getState }) => {
+	<void, { packId: string, userId: string }, { rejectValue: { error: string }, state: RootStateType }>
+	('packs/removePack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
 			const sortPacks = getState().packs.sortValue
@@ -63,9 +83,30 @@ export const removePack = createAsyncThunk
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount
 			const page = getState().packs.page
+			const selectedPack = getState().packs.selectedPack
 
-			const response = await PACKS.removePack(id)
-			dispatch(getPacks({ packName: searchPackValue, sortPacks, min: minValue, max: maxValue, pageCount, page }))
+			const response = await PACKS.removePack(params.packId)
+
+			if (selectedPack === 'All') {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page
+				}))
+			} else {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page,
+					userId: params.userId
+				}))
+			}
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
@@ -73,7 +114,7 @@ export const removePack = createAsyncThunk
 	})
 
 export const updatePackName = createAsyncThunk
-	<void, { _id: string, name: string }, { rejectValue: { error: string }, state: RootStateType }>
+	<void, { userId: string, packId: string, packName: string }, { rejectValue: { error: string }, state: RootStateType }>
 	('packs/updatePackName', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
@@ -82,9 +123,30 @@ export const updatePackName = createAsyncThunk
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount
 			const page = getState().packs.page
+			const selectedPack = getState().packs.selectedPack
 
-			const response = await PACKS.updatePackName(params._id, params.name)
-			dispatch(getPacks({ packName: searchPackValue, sortPacks, min: minValue, max: maxValue, pageCount, page }))
+			const response = await PACKS.updatePackName(params.packId, params.packName)
+
+			if (selectedPack === 'All') {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page
+				}))
+			} else {
+				dispatch(getPacks({
+					packName: searchPackValue,
+					sortPacks,
+					min: minValue,
+					max: maxValue,
+					pageCount,
+					page,
+					userId: params.userId
+				}))
+			}
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })
