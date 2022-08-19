@@ -8,7 +8,6 @@ import logOutIcon from 'assets/icons/logOut.png'
 import person from 'assets/icons/person.svg'
 import { useAppDispatch } from 'store/hooks'
 import { logOut } from 'store/asyncActions'
-import { resetCardsState, resetPacksState } from 'store/slices'
 import style from './Header.module.scss'
 import {
 	selectAuthorizedUserAvatar,
@@ -60,14 +59,6 @@ export const Header: FC = (): ReturnComponentType => {
 	const onGoToProfileClick = (): void => {
 		navigate(Path.PROFILE)
 		setIsVisiblePopup(false)
-
-		if (packsLength > 0) {
-			dispatch(resetPacksState())
-		}
-
-		if (cardsLength > 0) {
-			dispatch(resetCardsState())
-		}
 	}
 
 	return (

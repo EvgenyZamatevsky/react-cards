@@ -7,8 +7,6 @@ import pencil from 'assets/icons/pencil.svg'
 import teacher from 'assets/icons/teacher.svg'
 import style from './Actions.module.scss'
 import { Path } from 'enums'
-import { useAppDispatch } from 'store/hooks'
-import { resetPacksState } from 'store/slices'
 
 export const Actions: FC<ActionsPropsType> =
 	({
@@ -21,13 +19,10 @@ export const Actions: FC<ActionsPropsType> =
 		isTeacherVisible = true
 	}): ReturnComponentType => {
 
-		const dispatch = useAppDispatch()
-
 		const navigate = useNavigate()
 
 		const onNavigateToLearnPageClick = (): void => {
 			navigate(`${Path.LEARN}/${packId}`)
-			dispatch(resetPacksState())
 		}
 
 		return (

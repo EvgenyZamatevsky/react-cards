@@ -12,7 +12,6 @@ import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import style from './Pack.module.scss'
 import { PackPropsType } from './types'
-import { resetPacksState } from 'store/slices'
 
 export const Pack: FC<PackPropsType> =
 	({ _id, user_id, name, cardsCount, updated, user_name, isDisabled }): ReturnComponentType => {
@@ -80,7 +79,6 @@ export const Pack: FC<PackPropsType> =
 
 		const onGoToCardsPageClick = (): void => {
 			navigate(`${Path.CARDS}/${_id}`)
-			dispatch(resetPacksState())
 		}
 
 		return (

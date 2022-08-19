@@ -16,7 +16,7 @@ import {
 	selectSortCards
 } from 'store/selectors'
 import { ReturnComponentType } from 'types'
-import { resetCardsState, setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
+import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
 import style from './Cards.module.scss'
 import { Modal, ModalCard } from 'components/common'
 import { EMPTY_STRING } from 'constants/base'
@@ -103,7 +103,6 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		dispatch(resetCardsState())
 	}
 
 	const handleSetPageClick = (page: number): void => {

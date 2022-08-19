@@ -18,7 +18,7 @@ export const Search: FC<SearchPropsType> =
 
 		const isDisabled = useSelector(selectIsDisabled)
 
-		const [value, setValue] = useState(EMPTY_STRING)
+		const [value, setValue] = useState(searchValue)
 
 		const inputRef = useRef<HTMLInputElement>(null)
 

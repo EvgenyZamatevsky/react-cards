@@ -7,8 +7,8 @@ import { DoubleRangePropsType } from './types'
 
 export const DoubleRange: FC<DoubleRangePropsType> =
 	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp }): ReturnComponentType => {
-		const isDisabled = useSelector(selectIsDisabled)
 
+		const isDisabled = useSelector(selectIsDisabled)
 		const [minValue, setMinVal] = useState(min)
 		const [maxValue, setMaxVal] = useState(max)
 

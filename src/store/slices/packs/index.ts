@@ -22,19 +22,6 @@ const packsSlice = createSlice({
 	name: 'packs',
 	initialState,
 	reducers: {
-		resetPacksState(state) {
-			state.packs = []
-			state.searchPackValue = EMPTY_STRING
-			state.sortValue = '0updated'
-			state.minValue = 0
-			state.maxValue = 0
-			state.minCardsCount = 0
-			state.maxCardsCount = 110
-			state.pageCount = 5
-			state.page = 1
-			state.packsTotalCount = 0
-			state.selectedPack = 'All'
-		},
 		setSearchPackValue(state, action: PayloadAction<string>) {
 			state.searchPackValue = action.payload
 		},
@@ -87,7 +74,6 @@ export const {
 	setSelectedPack,
 	setPackPage,
 	setPackPageCount,
-	resetPacksState
 } = packsSlice.actions
 
 export default packsSlice.reducer
