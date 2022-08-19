@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
+import { logOut } from 'store/asyncActions'
 import { getCards } from 'store/asyncActions/cards'
 import { CardsSliceInitialStateType } from './types'
 
@@ -34,6 +35,14 @@ const cardsSlice = createSlice({
 			.addCase(getCards.fulfilled, (state, action) => {
 				state.cards = action.payload.cards
 				state.cardsTotalCount = action.payload.cardsTotalCount
+			})
+			.addCase(logOut.fulfilled, (state) => {
+				state.cards = []
+				state.searchCardValue = EMPTY_STRING
+				state.sortCards = '0updated'
+				state.page = 1
+				state.pageCount = 5
+				state.cardsTotalCount = 0
 			})
 	},
 })

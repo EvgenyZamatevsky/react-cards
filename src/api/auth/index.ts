@@ -1,6 +1,6 @@
 import { instance, additionalInstance } from 'api/config'
 import { LoginParamsType } from 'types'
-import { AddedUserType, AuthorizedUserDataType, ForgotResponseType, UpdateAuthorizedUserResponseType } from './types'
+import { AuthorizedUserDataType, UpdatedAuthorizedUserResponseType } from './types'
 
 const message = `<div style="background-color: lime; padding: 15px">
 password recovery link: 
@@ -10,7 +10,7 @@ link</a>
 
 export const AUTH = {
 	register(email: string, password: string) {
-		return instance.post<AddedUserType>('auth/register', { email, password })
+		return instance.post('auth/register', { email, password })
 	},
 	login(loginParams: LoginParamsType) {
 		return instance.post<AuthorizedUserDataType>('auth/login', loginParams)
@@ -19,15 +19,15 @@ export const AUTH = {
 		return instance.post<AuthorizedUserDataType>('auth/me')
 	},
 	logOut() {
-		return instance.delete<{ info: string }>('auth/me')
+		return instance.delete('auth/me')
 	},
 	forgot(email: string) {
-		return additionalInstance.post<ForgotResponseType>('auth/forgot', { email, message })
+		return additionalInstance.post('auth/forgot', { email, message })
 	},
-	setNewPassword(password: string, resetPasswordToken: string) {
-		return instance.post<{ info: string }>('auth/set-new-password', { password, resetPasswordToken })
+	newPassword(password: string, resetPasswordToken: string) {
+		return instance.post('auth/set-new-password', { password, resetPasswordToken })
 	},
 	updateAuthorizedUser(payload: { name: string, avatar: string }) {
-		return instance.put<UpdateAuthorizedUserResponseType>('auth/me', payload)
+		return instance.put<UpdatedAuthorizedUserResponseType>('auth/me', payload)
 	},
 }

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
+import { logOut } from 'store/asyncActions'
 import { getPacks } from 'store/asyncActions/packs'
 import { PacksSliceInitialStateType, SelectedPackType } from './types'
 
@@ -40,6 +41,7 @@ const packsSlice = createSlice({
 		setPackPageCount(state, action: PayloadAction<number>) {
 			state.pageCount = action.payload
 		},
+
 	},
 	extraReducers(builder) {
 		builder
@@ -48,6 +50,19 @@ const packsSlice = createSlice({
 				state.maxCardsCount = action.payload.maxCardsCount
 				state.minCardsCount = action.payload.minCardsCount
 				state.packsTotalCount = action.payload.packsTotalCount
+			})
+			.addCase(logOut.fulfilled, (state) => {
+				state.packs = []
+				state.minValue = 0
+				state.maxValue = 0
+				state.sortValue = '0updated'
+				state.packsTotalCount = 0
+				state.selectedPack = 'All'
+				state.page = 1
+				state.pageCount = 5
+				state.searchPackValue = EMPTY_STRING
+				state.maxCardsCount = 0
+				state.minCardsCount = 0
 			})
 	},
 })

@@ -2,7 +2,7 @@ import { Path } from 'enums'
 import React, { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { setNewPassword } from 'store/asyncActions'
+import { newPassword } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import { ReturnComponentType } from 'types'
 import openEye from 'assets/icons/openEye.svg'
@@ -33,7 +33,7 @@ export const NewPassword: FC = (): ReturnComponentType => {
 	const showClosedEye = (): void => setTypePassword('password')
 
 	const onSubmit: SubmitHandler<{ password: string }> = ({ password }): void => {
-		dispatch(setNewPassword({ password, resetPasswordToken: token as string }))
+		dispatch(newPassword({ password, resetPasswordToken: token as string }))
 		navigate(Path.LOGIN)
 	}
 

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { logOut, getAuthorizedUserData, registration, updateAuthorizedUser } from 'store/asyncActions'
+import { createSlice } from '@reduxjs/toolkit'
+import { logOut, getAuthorizedUserData, registration, updateAuthorizedUser, login } from 'store/asyncActions'
 import { AuthSliceInitialStateType } from './types'
 
 const initialState: AuthSliceInitialStateType = {
@@ -17,16 +17,23 @@ const authSlice = createSlice({
 			.addCase(registration.fulfilled, (state) => {
 				state.isRegister = true
 			})
+			.addCase(login.fulfilled, (state, action) => {
+				state.authorizedUserData = action.payload
+				state.isAuth = true
+			})
 			.addCase(getAuthorizedUserData.fulfilled, (state, action) => {
 				state.authorizedUserData = action.payload
 				state.isAuth = true
 			})
-			.addCase(updateAuthorizedUser.fulfilled, (state, action) => {
-				state.authorizedUserData = action.payload
-			})
 			.addCase(logOut.fulfilled, (state) => {
 				state.authorizedUserData = null
 				state.isAuth = false
+			})
+			.addCase(updateAuthorizedUser.fulfilled, (state, action) => {
+				if (state.authorizedUserData) {
+					state.authorizedUserData.avatar = action.payload.avatar
+					state.authorizedUserData.name = action.payload.name
+				}
 			})
 	},
 })
