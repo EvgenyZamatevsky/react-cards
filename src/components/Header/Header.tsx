@@ -8,13 +8,16 @@ import logOutIcon from 'assets/icons/logOut.png'
 import person from 'assets/icons/person.svg'
 import { useAppDispatch } from 'store/hooks'
 import { logOut } from 'store/asyncActions'
+import { resetCardsState, resetPacksState } from 'store/slices'
 import style from './Header.module.scss'
 import {
 	selectAuthorizedUserAvatar,
 	selectAuthorizedUserName,
+	selectCardsLength,
 	selectIsAuth,
 	selectIsAvatarBroken,
-	selectIsDisabled
+	selectIsDisabled,
+	selectPacksLength
 } from 'store/selectors'
 
 export const Header: FC = (): ReturnComponentType => {
@@ -28,6 +31,8 @@ export const Header: FC = (): ReturnComponentType => {
 	const authorizedUserName = useSelector(selectAuthorizedUserName)
 	const isDisabled = useSelector(selectIsDisabled)
 	const isAvatarBroken = useSelector(selectIsAvatarBroken)
+	const cardsLength = useSelector(selectCardsLength)
+	const packsLength = useSelector(selectPacksLength)
 
 	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
@@ -52,9 +57,17 @@ export const Header: FC = (): ReturnComponentType => {
 		setIsVisiblePopup(false)
 	}
 
-	const onGoProfileClick = (): void => {
+	const onGoToProfileClick = (): void => {
 		navigate(Path.PROFILE)
 		setIsVisiblePopup(false)
+
+		if (packsLength > 0) {
+			dispatch(resetPacksState())
+		}
+
+		if (cardsLength > 0) {
+			dispatch(resetCardsState())
+		}
 	}
 
 	return (
@@ -66,7 +79,8 @@ export const Header: FC = (): ReturnComponentType => {
 						className={style.name}
 						onClick={onShowPopupClick}
 						disabled={isDisabled}
-					>{authorizedUserName}</button>
+					>
+						{authorizedUserName}</button>
 					<img
 						className={style.image}
 						src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
@@ -74,7 +88,7 @@ export const Header: FC = (): ReturnComponentType => {
 					/>
 					{isVisiblePopup &&
 						<div className={style.popup}>
-							<button className={style.profileBtn} onClick={onGoProfileClick}>
+							<button className={style.profileBtn} onClick={onGoToProfileClick}>
 								<img className={style.personIcon} src={person} alt='user' />
 								Profile
 							</button>

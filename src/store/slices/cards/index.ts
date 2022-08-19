@@ -17,6 +17,14 @@ const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
 	reducers: {
+		resetCardsState(state) {
+			state.cards = []
+			state.searchCardValue = EMPTY_STRING
+			state.sortCards = '0updated'
+			state.page = 1
+			state.pageCount = 5
+			state.cardsTotalCount = 0
+		},
 		setSearchCardValue(state, action: PayloadAction<string>) {
 			state.searchCardValue = action.payload
 		},
@@ -58,7 +66,8 @@ export const {
 	setSearchCardValue,
 	setSortCards,
 	setCardPage,
-	setCardPageCount
+	setCardPageCount,
+	resetCardsState
 } = cardsSlice.actions
 
 export default cardsSlice.reducer
