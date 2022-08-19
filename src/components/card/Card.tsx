@@ -8,8 +8,8 @@ import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
 import { EMPTY_STRING } from 'constants/base'
-import style from './Card.module.scss'
 import { CardPropsType } from './types'
+import style from './Card.module.scss'
 
 export const Card: FC<CardPropsType> =
 	({ cardId, question, answer, updated, grade, packId, isDisabled, user_id }): ReturnComponentType => {
@@ -99,12 +99,13 @@ export const Card: FC<CardPropsType> =
 						<div className={style.answer}>{answer}</div>
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.grade}>{Number(grade.toFixed(1))}</div>
-						<div className={isOwner ? style.actions : style.secondaryActions}>
+						<div className={style.actionsContainer}>
 							<Actions
 								isDisabled={isDisabled}
 								onActivateDeleteModalClick={handleActivateDeleteModalClick}
 								onActivateEditModalClick={handleActivateCardModalClick}
 								isTeacherVisible={false}
+								isOwner={isOwner}
 							/>
 						</div>
 					</div>

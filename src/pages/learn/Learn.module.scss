@@ -32,13 +32,18 @@
 				}
 			}
 
-			.question,
-			.answer {
+			.questionContainer,
+			.answerContainer {
 				margin-top: 13px;
 				line-height: 24px;
 
 				span {
 					font-weight: 600;
+				}
+
+				.question,
+				.answer {
+					overflow-wrap: break-word;
 				}
 			}
 
@@ -50,6 +55,7 @@
 
 			.text {
 				margin-top: 29px;
+				margin-bottom: 12px;
 				line-height: 24px;
 			}
 		}

@@ -1,0 +1,12 @@
+@import 'styles/sass/mixins.scss';
+
+.container {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+
+	.grade {
+		margin-left: 12px;
+		line-height: 24px;
+	}
+}

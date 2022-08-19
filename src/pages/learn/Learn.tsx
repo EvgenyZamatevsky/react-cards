@@ -5,11 +5,22 @@ import { Path } from 'enums'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getCards, updateCardGrade } from 'store/asyncActions/cards'
-import { selectCardPage, selectCardPageCount, selectCards, selectIsAuth, selectSearchCardValue, selectSortCards } from 'store/selectors'
-import { ReturnComponentType } from 'types'
+import { Nullable, ReturnComponentType } from 'types'
+import { CurrentCardType } from './types'
 import style from './Learn.module.scss'
+import {
+	selectCardPage,
+	selectCardPageCount,
+	selectCards,
+	selectIsAuth,
+	selectSearchCardValue,
+	selectSortCards
+} from 'store/selectors'
+import { Grade } from 'components/grade'
 
-const grades: string[] = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал']
+const FIRST_INDEX_ELEMENTS = 0
+
+const grades: string[] = ['Did not know', 'Forgot', 'A lot of thought', 'Сonfused', 'Knew the answer']
 
 export const Learn: FC = (): ReturnComponentType => {
 
@@ -26,40 +37,30 @@ export const Learn: FC = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 
 	const [isShowAnswer, setIsShowAnswer] = useState(false)
-	const [first, setFirst] = useState(true)
-	const [gradeValue, setGradeValue] = useState(0)
-	const [card, setCard] = useState<any>({
-		_id: 'fake',
-		cardsPack_id: '',
+	const [isMounted, setIsMounted] = useState(true)
+	const [gradeIndex, setGradeIndex] = useState(FIRST_INDEX_ELEMENTS)
+	const [currentCard, setCurrentCard] = useState<Nullable<CurrentCardType>>(null)
 
-		answer: 'answer fake',
-		question: 'question fake',
-		grade: 0,
-		shots: 0,
-
-		type: '',
-		rating: 0,
-		more_id: '',
-
-		created: '',
-		updated: '',
+	const gradesRender = grades.map((grade, index) => {
+		return <Grade key={index} grade={grade} index={index} setGradeIndex={setGradeIndex} />
 	})
 
 	useEffect(() => {
-		if (first) {
-			//@ts-ignore
-			dispatch(getCards({ packId: packId, cardQuestion: searchCardValue, sortCards, page: cardPage, pageCount: cardPageCount }))
-			setFirst(false)
+		if (isMounted) {
+			dispatch(getCards({
+				packId: packId as string,
+				cardQuestion: searchCardValue,
+				sortCards,
+				page: cardPage,
+				pageCount: cardPageCount
+			}) as any)
+			setIsMounted(false)
 		}
 
 		if (cards.length > 0) {
-			setCard(getCard(cards))
+			setCurrentCard(getCard(cards))
 		}
-
-		return () => {
-			//	console.log('LearnContainer useEffect off')
-		}
-	}, [packId, cards, first])
+	}, [packId, cards, isMounted])
 
 	const getCard = (cards: CardType[]) => {
 		const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
@@ -67,22 +68,18 @@ export const Learn: FC = (): ReturnComponentType => {
 		const res = cards.reduce((acc: { sum: number, id: number }, card, i) => {
 			const newSum = acc.sum + (6 - card.grade) * (6 - card.grade)
 			return { sum: newSum, id: newSum < rand ? i : acc.id }
-		}
-			, { sum: 0, id: -1 })
+		}, { sum: 0, id: -1 })
 
 		return cards[res.id + 1]
 	}
 
-	const onNext = () => {
-		setGradeValue(0)
+	const onNextQuestionClick = (): void => {
+		setGradeIndex(0)
 		setIsShowAnswer(false)
 
 		if (cards.length > 0) {
-			//@ts-ignore
-			dispatch(updateCardGrade({ grade: gradeValue, cardId: card._id }))
-			setCard(getCard(cards))
-		} else {
-
+			dispatch(updateCardGrade({ grade: gradeIndex, cardId: currentCard!?._id }) as any)
+			setCurrentCard(getCard(cards))
 		}
 	}
 
@@ -103,33 +100,40 @@ export const Learn: FC = (): ReturnComponentType => {
 			/>
 
 			<div className={style.content}>
-				<h2 className={style.title}>Learn “Pack Name”</h2>
+				<h2 className={style.title}>Learn</h2>
 
 				<div className={style.body}>
-					<div className={style.shots}>Количество попыток ответов на вопрос: <span>{card.shots}</span></div>
-					<div className={style.question}><span>Question:</span> {card.question}</div>
-					{!isShowAnswer && <button className={style.showAnswerBtn} onClick={onShowAnswerActiveClick}>Show answer</button>}
+					<div className={style.shots}>
+						Number of attempts to answer a question:
+						<span> {currentCard?.shots}</span>
+					</div>
+					<div className={style.questionContainer}>
+						<span>Question:</span>
+						<div className={style.question}>{currentCard?.question}</div>
+					</div>
+					{!isShowAnswer &&
+						<button
+							className={style.showAnswerBtn}
+							onClick={onShowAnswerActiveClick}
+						>
+							Show answer
+						</button>}
 
 					{isShowAnswer &&
 						<>
-							<div className={style.answer}><span>Answer:</span> {card.answer}</div>
+							<div className={style.answerContainer}>
+								<span>Answer:</span>
+								<div className={style.answer}>{currentCard?.answer}</div>
+							</div>
 
 							<div className={style.text}>Rate yourself:</div>
 
-							{grades.map((grade, index) => {
-								return (
-									<div key={'grade-' + index}>
-										<button onClick={() => setGradeValue(index + 1)}>
-											{grade}
-										</button>
-									</div>
-								)
-							})}
+							{gradesRender}
 
 							<button
-								disabled={gradeValue === 0}
+								disabled={gradeIndex === 0}
 								className={style.nextQuestionBtn}
-								onClick={onNext}
+								onClick={onNextQuestionClick}
 							>
 								Next question
 							</button>

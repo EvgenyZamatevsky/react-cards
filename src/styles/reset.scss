@@ -112,17 +112,14 @@ input {
 	outline: none;
 }
 
-input {
+input[type='text'],
+input[type='email'] {
 	box-shadow: inset 0 0 0 50px #FFF;
-}
-
-input[type='password'],
-input[type='checkbox'] {
-	box-shadow: none;
 }
 
 input[type='checkbox'],
 input[type='range'],
+input[type='radio'],
 label,
 button {
 	cursor: pointer;
