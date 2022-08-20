@@ -183,7 +183,9 @@ export const Cards: FC = (): ReturnComponentType => {
 						handleSortByAscendingClick={handleSortCardsByAscendingClick}
 					/>
 				</div>
-				{cardsRender}
+				{cards.length
+					? cardsRender
+					: <h2 className={style.emptyItems}>There are no cards in this pack</h2>}
 				<Pagination
 					pageCount={cardPageCount}
 					page={cardPage}

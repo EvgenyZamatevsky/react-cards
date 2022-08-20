@@ -202,7 +202,9 @@ export const Packs: FC = (): ReturnComponentType => {
 					/>
 					<div className={style.actions}>Actions</div>
 				</div>
-				{packsRender}
+				{packs.length
+					? packsRender
+					: <h2 className={style.emptyItems}>This pack is empty</h2>}
 				<Pagination
 					pageCount={pageCount}
 					page={page}
