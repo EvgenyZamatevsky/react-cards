@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from 'react'
 import { DoubleRange, Pagination, Search, ShowPacks, Sort } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
@@ -51,6 +51,8 @@ export const Packs: FC = (): ReturnComponentType => {
 	const [packName, setPackName] = useState(EMPTY_STRING)
 	const [isPackPrivate, setIsPackPrivate] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
+
+	const namePackInputRef = useRef<HTMLInputElement>(null)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
@@ -120,7 +122,10 @@ export const Packs: FC = (): ReturnComponentType => {
 
 	const handleDeactivateModalClick = (): void => resetModalValues()
 
-	const handleActivateModalClick = (): void => setIsActiveModal(true)
+	const handleActivateModalClick = (): void => {
+		setIsActiveModal(true)
+		namePackInputRef.current?.focus()
+	}
 
 	const onAddPackClick = (): void => {
 		const packNameTrimmed = packName.trim()
@@ -161,6 +166,7 @@ export const Packs: FC = (): ReturnComponentType => {
 					isPackPrivate={isPackPrivate}
 					isLabelItem={true}
 					errorMessage={errorMessage}
+					ref={namePackInputRef}
 					title={'Add new pack'}
 				/>
 			</Modal>

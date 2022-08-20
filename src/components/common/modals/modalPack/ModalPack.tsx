@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { ChangeEvent, FC, forwardRef } from 'react'
 import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalPack.module.scss'
 import { ModalPackPropsType } from './types'
 
 export const ModalPack: FC<ModalPackPropsType> =
-	({
+	forwardRef(({
 		onDeactivateModalClick,
 		value,
 		onInputChange,
@@ -15,7 +15,8 @@ export const ModalPack: FC<ModalPackPropsType> =
 		title,
 		errorMessage,
 		isLabelItem = false
-	}): ReturnComponentType => {
+	},
+		ref): ReturnComponentType => {
 
 		return (
 			<div className={style.container}>
@@ -30,6 +31,7 @@ export const ModalPack: FC<ModalPackPropsType> =
 					placeholder='Name pack'
 					value={value}
 					onChange={onInputChange}
+					ref={ref}
 				/>
 
 				{errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
@@ -51,4 +53,4 @@ export const ModalPack: FC<ModalPackPropsType> =
 				</div>
 			</div>
 		)
-	}
+	})

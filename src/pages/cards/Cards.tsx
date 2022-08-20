@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { BackPage, Card, Pagination, Search, Sort } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
@@ -44,6 +44,8 @@ export const Cards: FC = (): ReturnComponentType => {
 	const [isActiveModal, setIsActiveModal] = useState(false)
 	const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
 	const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
+
+	const questionInputRef = useRef<HTMLInputElement>(null)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
@@ -120,7 +122,10 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	const handleDeactivateModalClick = (): void => resetModalValues()
 
-	const handleActivateModalClick = (): void => setIsActiveModal(true)
+	const handleActivateModalClick = (): void => {
+		setIsActiveModal(true)
+		questionInputRef.current?.focus()
+	}
 
 	const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		setAnswerValue(event.currentTarget.value)
@@ -148,6 +153,7 @@ export const Cards: FC = (): ReturnComponentType => {
 					onQuestionChange={handleQuestionChange}
 					answer={answerValue}
 					question={questionValue}
+					ref={questionInputRef}
 				/>
 			</Modal>
 			<div className={style.container}>

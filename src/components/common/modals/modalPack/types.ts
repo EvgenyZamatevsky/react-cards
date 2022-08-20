@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, Ref } from 'react'
 
 export type ModalPackPropsType = {
 	value: string
@@ -10,4 +10,5 @@ export type ModalPackPropsType = {
 	onCheckboxChange?: (event: ChangeEvent<HTMLInputElement>) => void
 	isPackPrivate?: boolean
 	isLabelItem?: boolean
+	ref: Ref<HTMLInputElement>
 }

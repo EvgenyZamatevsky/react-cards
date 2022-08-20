@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, Ref } from 'react'
 
 export type ModalCardPropsType = {
 	question: string
@@ -8,4 +8,5 @@ export type ModalCardPropsType = {
 	onDeactivateModalClick: () => void
 	onSaveClick: () => void
 	title: string
+	ref: Ref<HTMLInputElement>
 }

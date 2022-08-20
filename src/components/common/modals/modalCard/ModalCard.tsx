@@ -1,11 +1,20 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { FC, forwardRef } from 'react'
 import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalCard.module.scss'
 import { ModalCardPropsType } from './types'
 
 export const ModalCard: FC<ModalCardPropsType> =
-	({ question, answer, onQuestionChange, onAnswerChange, onDeactivateModalClick, onSaveClick, title, }): ReturnComponentType => {
+	forwardRef(({
+		question,
+		answer,
+		onQuestionChange,
+		onAnswerChange,
+		onDeactivateModalClick,
+		onSaveClick,
+		title,
+	},
+		ref): ReturnComponentType => {
 
 		return (
 			<div className={style.container}>
@@ -20,6 +29,7 @@ export const ModalCard: FC<ModalCardPropsType> =
 					placeholder='Question'
 					value={question}
 					onChange={onQuestionChange}
+					ref={ref}
 				/>
 				<input
 					className={style.answer}
@@ -35,4 +45,4 @@ export const ModalCard: FC<ModalCardPropsType> =
 				</div>
 			</div>
 		)
-	}
+	})

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
@@ -18,6 +18,8 @@ export const Card: FC<CardPropsType> =
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
 		const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
+
+		const editableQuestionInputRef = useRef<HTMLInputElement>(null)
 
 		const resetModalValues = (): void => {
 			setIsCardModalActive(false)
@@ -60,6 +62,7 @@ export const Card: FC<CardPropsType> =
 			setIsCardModalActive(true)
 			setQuestionValue(question)
 			setAnswerValue(answer)
+			editableQuestionInputRef.current?.focus()
 		}
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
@@ -74,6 +77,7 @@ export const Card: FC<CardPropsType> =
 						onQuestionChange={handleQuestionChange}
 						onDeactivateModalClick={handleDeactivateCardModalClick}
 						onSaveClick={handleUpdateCardQuestionClick}
+						ref={editableQuestionInputRef}
 						title={'Edit card'}
 					/>
 				</Modal>

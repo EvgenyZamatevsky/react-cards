@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useRef, useState } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'hooks'
 import { ReturnComponentType } from 'types'
@@ -26,6 +26,8 @@ export const Pack: FC<PackPropsType> =
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
 		const [updatedPackName, setUpdatedPackName] = useState(EMPTY_STRING)
 		const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
+
+		const updatedPackNameInputRef = useRef<HTMLInputElement>(null)
 
 		const isOwner = authorizedUserId === user_id
 
@@ -73,6 +75,7 @@ export const Pack: FC<PackPropsType> =
 		const handleActivatePackModalClick = (): void => {
 			setIsPackModalActive(true)
 			setUpdatedPackName(name)
+			updatedPackNameInputRef.current?.focus()
 		}
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
@@ -91,6 +94,7 @@ export const Pack: FC<PackPropsType> =
 						onSaveClick={onUpdatePackNameClick}
 						title={'Edit pack'}
 						errorMessage={errorMessage}
+						ref={updatedPackNameInputRef}
 					/>
 				</Modal>
 				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>
