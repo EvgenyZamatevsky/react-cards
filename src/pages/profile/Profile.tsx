@@ -3,7 +3,7 @@ import { Path } from 'enums'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
-import { logOut, updateAuthorizedUser } from 'store/asyncActions'
+import { logOut, updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
 import logOutIcon from 'assets/icons/logOut.png'
 import { EditableItem, InputFile } from 'components'
@@ -29,7 +29,7 @@ export const Profile: FC = (): ReturnComponentType => {
 	const isDisabled = useSelector(selectIsDisabled)
 
 	const handleUpdateNameBlurAndKeyDown = (newName: string): void => {
-		dispatch(updateAuthorizedUser({ name: newName }))
+		dispatch(updateAuthorizedUserNameOrAvatar({ name: newName }))
 	}
 
 	const onLogOutClick = (): void => {

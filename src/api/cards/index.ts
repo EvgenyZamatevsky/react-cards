@@ -1,6 +1,6 @@
 import { instance } from 'api/config'
 import { EMPTY_STRING } from 'constants/base'
-import { CardsResponseType, UpdatedGradeResponseType } from './types'
+import { CardsResponseType, PayloadType, UpdatedGradeResponseType } from './types'
 
 export const CARDS = {
 	getCards(packId: string, cardQuestion: string, sortCards: string, page: number, pageCount: number) {
@@ -18,13 +18,13 @@ export const CARDS = {
 	addCard(packId: string, question: string, answer: string) {
 		return instance.post(`cards/card`, { card: { cardsPack_id: packId, question, answer } })
 	},
-	removeCard(id: string) {
-		return instance.delete(`cards/card?id=${id}`)
+	removeCard(cardId: string) {
+		return instance.delete(`cards/card?id=${cardId}`)
 	},
-	updateCard(id: string, payload: { question: string, answer: string }) {
-		return instance.put(`cards/card`, { card: { _id: id, question: payload.question, answer: payload.answer } })
+	updateCardQuestionOrAnswer(cardId: string, payload: PayloadType) {
+		return instance.put(`cards/card`, { card: { _id: cardId, question: payload.question, answer: payload.answer } })
 	},
-	updateCardGrade(grade: number, card_id: string) {
-		return instance.put<UpdatedGradeResponseType>(`cards/grade`, { grade, card_id })
+	updateCardGrade(cardId: string, updatedGrade: number) {
+		return instance.put<UpdatedGradeResponseType>(`cards/grade`, { grade: updatedGrade, card_id: cardId })
 	}
 }

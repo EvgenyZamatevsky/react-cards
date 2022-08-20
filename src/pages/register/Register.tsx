@@ -80,16 +80,16 @@ export const Register: FC = (): ReturnComponentType => {
 							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
-							? <button onClick={showOpenEyeForPasswordField} disabled={isDisabled}><img className={style.eye} src={openEye} /></button>
-							: <button onClick={showClosedEyeForPasswordField} disabled={isDisabled}><img className={style.eye} src={closedEye} /></button>}
+							? <img onClick={showOpenEyeForPasswordField} className={style.eye} src={openEye} />
+							: <img onClick={showClosedEyeForPasswordField} className={style.eye} src={closedEye} />}
 					</div>
 					<div className={style.confirmPasswordFieldContainer}>
 						<input className={style.confirmPasswordField} type={typeConfirmPassword} placeholder='Confirm password' disabled={isDisabled}
 							{...register('confirmPassword', confirmPasswordSettings)} />
 						{errors?.confirmPassword && <p className={style.errorConfirmPasswordField}>{errors?.confirmPassword.message}</p>}
 						{typeConfirmPassword === 'password'
-							? <button onClick={showOpenEyeForConfirmPasswordField} disabled={isDisabled}><img className={style.eye} src={openEye} /></button>
-							: <button onClick={showClosedEyeForConfirmPasswordField} disabled={isDisabled}><img className={style.eye} src={closedEye} /></button>}
+							? <img onClick={showOpenEyeForConfirmPasswordField} className={style.eye} src={openEye} />
+							: <img onClick={showClosedEyeForConfirmPasswordField} className={style.eye} src={closedEye} />}
 					</div>
 					<div className={style.bottom}>
 						<button className={style.signUpBtn} type='submit' disabled={!isValid}>Sign Up</button>

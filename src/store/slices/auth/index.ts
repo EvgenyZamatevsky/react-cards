@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { logOut, getAuthorizedUserData, registration, updateAuthorizedUser, login } from 'store/asyncActions'
+import { logOut, getAuthorizedUserData, registration, updateAuthorizedUserNameOrAvatar, login } from 'store/asyncActions'
 import { AuthSliceInitialStateType } from './types'
 
 const initialState: AuthSliceInitialStateType = {
@@ -33,7 +33,7 @@ const authSlice = createSlice({
 				state.authorizedUserData = null
 				state.isAuth = false
 			})
-			.addCase(updateAuthorizedUser.fulfilled, (state, action) => {
+			.addCase(updateAuthorizedUserNameOrAvatar.fulfilled, (state, action) => {
 				if (state.authorizedUserData) {
 					state.authorizedUserData.avatar = action.payload.avatar
 					state.authorizedUserData.name = action.payload.name

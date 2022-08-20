@@ -11,6 +11,9 @@ export const isDisabledFulfilled = (action: AnyAction) => {
 		&& action.type !== 'packs/addPack/fulfilled'
 		&& action.type !== 'packs/removePack/fulfilled'
 		&& action.type !== 'packs/updatePackName/fulfilled'
+		&& action.type !== 'cards/addCard/fulfilled'
+		&& action.type !== 'cards/updateCard/fulfilled'
+		&& action.type !== 'cards/removeCard/fulfilled'
 }
 
 export const isDisabledRejected = (action: AnyAction) => action.type.endsWith('rejected')

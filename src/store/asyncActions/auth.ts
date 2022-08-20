@@ -87,7 +87,7 @@ export const forgot = createAsyncThunk
 		}
 	})
 
-export const newPassword = createAsyncThunk
+export const setNewPassword = createAsyncThunk
 	<
 		void,
 		{ password: string, resetPasswordToken: string },
@@ -95,7 +95,7 @@ export const newPassword = createAsyncThunk
 	>
 	('auth/newPassword', async (params, { rejectWithValue }) => {
 		try {
-			const response = await AUTH.newPassword(params.password, params.resetPasswordToken)
+			const response = await AUTH.setNewPassword(params.password, params.resetPasswordToken)
 
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -103,7 +103,7 @@ export const newPassword = createAsyncThunk
 		}
 	})
 
-export const updateAuthorizedUser = createAsyncThunk
+export const updateAuthorizedUserNameOrAvatar = createAsyncThunk
 	<
 		{ avatar: string, name: string },
 		{ name?: string, avatar?: string },
@@ -119,7 +119,7 @@ export const updateAuthorizedUser = createAsyncThunk
 				...domainPayload
 			}
 
-			const response = await AUTH.updateAuthorizedUser(payload)
+			const response = await AUTH.updateAuthorizedUserNameOrAvatar(payload)
 			const { avatar, name } = response.data.updatedUser
 
 			return { avatar, name }

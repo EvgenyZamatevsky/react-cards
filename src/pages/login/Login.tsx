@@ -72,8 +72,8 @@ export const Login: FC = (): ReturnComponentType => {
 							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorMessagePasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
-							? <button onClick={showOpenEye} disabled={isDisabled}><img className={style.eye} src={openEye} /></button>
-							: <button onClick={showClosedEye} disabled={isDisabled}><img className={style.eye} src={closedEye} /></button>}
+							? <img onClick={showOpenEye} className={style.eye} src={openEye} />
+							: <img onClick={showClosedEye} className={style.eye} src={closedEye} />}
 					</div>
 					<div className={style.body}>
 						<label className={style.label}>

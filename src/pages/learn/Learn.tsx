@@ -81,7 +81,7 @@ export const Learn: FC = (): ReturnComponentType => {
 		setIsShowAnswer(false)
 
 		if (cards.length > 0) {
-			dispatch(updateCardGrade({ grade: gradeIndex, cardId: currentCard!?._id }) as any)
+			dispatch(updateCardGrade({ updatedGrade: gradeIndex, cardId: currentCard!?._id }) as any)
 			setCurrentCard(getCard(cards))
 		}
 	}

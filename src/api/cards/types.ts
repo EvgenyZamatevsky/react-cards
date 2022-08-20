@@ -49,3 +49,8 @@ export type UpdatedGradeResponseType = {
 	token: string
 	tokenDeathTime: number
 }
+
+export type PayloadType = {
+	question: string
+	answer: string
+}

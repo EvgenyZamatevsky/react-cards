@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'store/hooks'
-import { removeCard, updateCard } from 'store/asyncActions/cards'
+import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
@@ -38,7 +38,7 @@ export const Card: FC<CardPropsType> =
 
 		const handleUpdateCardQuestionClick = (): void => {
 			if (answerValue !== answer || questionValue !== question) {
-				dispatch(updateCard({ packId, cardId, domainPayload: { answer: answerValue, question: questionValue } }))
+				dispatch(updateCardQuestionOrAnswer({ packId, cardId, domainPayload: { answer: answerValue, question: questionValue } }))
 			}
 
 			setIsCardModalActive(false)

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useRef } from 'react'
-import { updateAuthorizedUser } from 'store/asyncActions'
+import { updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import { setErrorMessage, setIsAvatarBroken } from 'store/slices'
 import { ReturnComponentType } from 'types'
@@ -28,7 +28,7 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 
 			if (file.size < 100000) {
 				convertFileToBase64(file, (file64: string) => {
-					dispatch(updateAuthorizedUser({ avatar: file64 }))
+					dispatch(updateAuthorizedUserNameOrAvatar({ avatar: file64 }))
 				})
 			} else {
 				dispatch(setErrorMessage('The file is too large!'))

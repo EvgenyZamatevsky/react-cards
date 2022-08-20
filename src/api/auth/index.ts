@@ -23,10 +23,10 @@ export const AUTH = {
 	forgot(email: string) {
 		return instanceAdditional.post('auth/forgot', { email, message })
 	},
-	newPassword(password: string, resetPasswordToken: string) {
+	setNewPassword(password: string, resetPasswordToken: string) {
 		return instance.post('auth/set-new-password', { password, resetPasswordToken })
 	},
-	updateAuthorizedUser(payload: PayloadType) {
+	updateAuthorizedUserNameOrAvatar(payload: PayloadType) {
 		return instance.put<UpdatedAuthorizedUserResponseType>('auth/me', payload)
 	},
 }

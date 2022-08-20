@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { CARDS } from 'api'
-import { CardType } from 'api/cards/types'
+import { CardType, PayloadType } from 'api/cards/types'
 import { RootStateType } from 'store'
 
 export const getCards = createAsyncThunk
@@ -69,7 +69,7 @@ export const removeCard = createAsyncThunk
 		}
 	})
 
-export const updateCard = createAsyncThunk
+export const updateCardQuestionOrAnswer = createAsyncThunk
 	<
 		void,
 		{ packId: string, cardId: string, domainPayload: { question?: string, answer?: string } },
@@ -84,13 +84,13 @@ export const updateCard = createAsyncThunk
 
 			const card = getState().cards.cards.find(card => card._id === params.cardId)
 
-			const payload = {
-				question: card?.question,
-				answer: card?.answer,
+			const payload: PayloadType = {
+				question: card?.question as string,
+				answer: card?.answer as string,
 				...params.domainPayload
 			}
 
-			const response = await CARDS.updateCard(params.cardId, payload as { question: string, answer: string })
+			const response = await CARDS.updateCardQuestionOrAnswer(params.cardId, payload)
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -100,16 +100,16 @@ export const updateCard = createAsyncThunk
 
 export const updateCardGrade = createAsyncThunk
 	<
-		{ card_id: string, shots: number, grade: number },
-		{ grade: number, cardId: string },
+		{ cardId: string, shots: number, grade: number },
+		{ updatedGrade: number, cardId: string },
 		{ rejectValue: { error: string }, state: RootStateType }
 	>
 	('cards/updateCardGrade', async (params, { rejectWithValue }) => {
 		try {
-			const response = await CARDS.updateCardGrade(params.grade, params.cardId)
-			const { card_id, shots, grade } = response.data.updatedGrade
+			const response = await CARDS.updateCardGrade(params.cardId, params.updatedGrade)
+			const { card_id: cardId, shots, grade } = response.data.updatedGrade
 
-			return { card_id, shots, grade }
+			return { cardId, shots, grade }
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
 			return rejectWithValue({ error })

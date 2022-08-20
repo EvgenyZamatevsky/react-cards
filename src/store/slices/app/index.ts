@@ -1,5 +1,5 @@
 import { isDisabledFulfilled, isDisabledPending, isDisabledRejected } from 'store/helpers/app'
-import { getAuthorizedUserData, updateAuthorizedUser } from 'store/asyncActions'
+import { getAuthorizedUserData, updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
 import { isErrorRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from 'store/helpers'
@@ -35,7 +35,7 @@ const appSlice = createSlice({
 			.addCase(getAuthorizedUserData.rejected, (state) => {
 				state.isInitializedApp = true
 			})
-			.addCase(updateAuthorizedUser.fulfilled, (state) => {
+			.addCase(updateAuthorizedUserNameOrAvatar.fulfilled, (state) => {
 				state.isAvatarBroken = false
 			})
 			.addMatcher(isErrorRejected, (state, action: PayloadAction<{ error: string }>) => {

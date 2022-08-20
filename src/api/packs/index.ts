@@ -10,10 +10,10 @@ export const PACKS = {
 		max: number,
 		pageCount: number,
 		page: number,
-		userId?: string
+		userId: string
 	) {
 		const currentPackName = packName === EMPTY_STRING ? EMPTY_STRING : `&packName=${packName}`
-		const currentUserId = userId === EMPTY_STRING || userId === undefined ? EMPTY_STRING : `&user_id=${userId}`
+		const currentUserId = userId === EMPTY_STRING ? EMPTY_STRING : `&user_id=${userId}`
 
 		return instance.get<PacksResponseType>(`cards/pack
 		?pageCount=${pageCount}
@@ -25,13 +25,13 @@ export const PACKS = {
 		${currentUserId}
 		`)
 	},
-	addPack(name: string, isPrivate: boolean) {
-		return instance.post(`cards/pack`, { cardsPack: { name: name, private: isPrivate } })
+	addPack(packName: string, isPackPrivate: boolean) {
+		return instance.post(`cards/pack`, { cardsPack: { name: packName, private: isPackPrivate } })
 	},
-	removePack(id: string) {
-		return instance.delete(`cards/pack?id=${id}`)
+	removePack(packId: string) {
+		return instance.delete(`cards/pack?id=${packId}`)
 	},
-	updatePackName(_id: string, name: string) {
-		return instance.put(`cards/pack`, { cardsPack: { _id, name } })
+	updatePackName(packId: string, updatedPackName: string) {
+		return instance.put(`cards/pack`, { cardsPack: { _id: packId, name: updatedPackName } })
 	},
 }

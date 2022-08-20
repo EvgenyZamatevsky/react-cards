@@ -7,7 +7,7 @@ import { RootStateType } from 'store'
 export const getPacks = createAsyncThunk
 	<
 		{ packs: PackType[], minCardsCount: number, maxCardsCount: number, packsTotalCount: number },
-		{ packName: string, sortPacks: string, min: number, max: number, pageCount: number, page: number, userId?: string },
+		{ packName: string, sortPacks: string, min: number, max: number, pageCount: number, page: number, userId: string },
 		{ rejectValue: { error: string }, state: RootStateType }
 	>
 	('packs/getPacks', async (params, { rejectWithValue, getState }) => {
@@ -35,7 +35,7 @@ export const getPacks = createAsyncThunk
 export const addPack = createAsyncThunk
 	<
 		void,
-		{ userId: string, name: string, private: boolean },
+		{ authorizedUserId: string, packName: string, isPackPrivate: boolean },
 		{ rejectValue: { error: string }, state: RootStateType }
 	>
 	('packs/addPack', async (params, { rejectWithValue, dispatch, getState }) => {
@@ -47,7 +47,7 @@ export const addPack = createAsyncThunk
 			const pageCount = getState().packs.pageCount
 			const page = getState().packs.page
 
-			const response = await PACKS.addPack(params.name, params.private)
+			const response = await PACKS.addPack(params.packName, params.isPackPrivate)
 
 			dispatch(getPacks({
 				packName: searchPackValue,
@@ -56,7 +56,7 @@ export const addPack = createAsyncThunk
 				max: maxValue,
 				pageCount,
 				page,
-				userId: params.userId
+				userId: params.authorizedUserId
 			}))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -65,7 +65,7 @@ export const addPack = createAsyncThunk
 	})
 
 export const removePack = createAsyncThunk
-	<void, { packId: string, userId: string }, { rejectValue: { error: string }, state: RootStateType }>
+	<void, { packId: string, authorizedUserId: string }, { rejectValue: { error: string }, state: RootStateType }>
 	('packs/removePack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
@@ -84,7 +84,7 @@ export const removePack = createAsyncThunk
 				max: maxValue,
 				pageCount,
 				page,
-				userId: params.userId
+				userId: params.authorizedUserId
 			}))
 
 		} catch (e: any) {
@@ -94,7 +94,11 @@ export const removePack = createAsyncThunk
 	})
 
 export const updatePackName = createAsyncThunk
-	<void, { userId: string, packId: string, packName: string }, { rejectValue: { error: string }, state: RootStateType }>
+	<
+		void,
+		{ authorizedUserId: string, packId: string, updatedPackName: string },
+		{ rejectValue: { error: string }, state: RootStateType }
+	>
 	('packs/updatePackName', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
@@ -104,7 +108,7 @@ export const updatePackName = createAsyncThunk
 			const pageCount = getState().packs.pageCount
 			const page = getState().packs.page
 
-			const response = await PACKS.updatePackName(params.packId, params.packName)
+			const response = await PACKS.updatePackName(params.packId, params.updatedPackName)
 
 			dispatch(getPacks({
 				packName: searchPackValue,
@@ -113,7 +117,7 @@ export const updatePackName = createAsyncThunk
 				max: maxValue,
 				pageCount,
 				page,
-				userId: params.userId
+				userId: params.authorizedUserId
 			}))
 		} catch (e: any) {
 			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')

@@ -44,13 +44,13 @@ export const Pack: FC<PackPropsType> =
 		}
 
 		const handleRemovePackClick = (): void => {
-			dispatch(removePack({ packId: _id, userId: user_id }))
+			dispatch(removePack({ packId: _id, authorizedUserId: user_id }))
 			setIsDeleteModalActive(false)
 		}
 
 		const handleUpdatePackNameClick = (): void => {
 			if (updatedPackName !== name) {
-				dispatch(updatePackName({ userId: user_id, packId: _id, packName: updatedPackName }))
+				dispatch(updatePackName({ authorizedUserId: user_id, packId: _id, updatedPackName }))
 			}
 
 			setIsPackModalActive(false)

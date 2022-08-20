@@ -126,7 +126,7 @@ export const Packs: FC = (): ReturnComponentType => {
 		const packNameTrimmed = packName.trim()
 
 		if (packNameTrimmed !== EMPTY_STRING) {
-			dispatch(addPack({ userId: authorizedUserId, name: packNameTrimmed, private: isPackPrivate }))
+			dispatch(addPack({ authorizedUserId, packName: packNameTrimmed, isPackPrivate }))
 			resetModalValues()
 		} else {
 			setErrorMessage(ERROR_MESSAGE)
