@@ -1,16 +1,17 @@
 import React, { FC, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
-import { LoginParamsType, ReturnComponentType } from 'types'
+import { ReturnComponentType } from 'types'
 import { Path } from 'enums/Path'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { login } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
 import { selectIsAuth, selectIsDisabled, selectIsRegister } from 'store/selectors'
 import openEye from 'assets/icons/openEye.svg'
 import closedEye from 'assets/icons/closedEye.svg'
-import style from './Login.module.scss'
 import { setIsRegister } from 'store/slices'
+import { LoginParamsType } from './types'
+import style from './Login.module.scss'
 
 export const Login: FC = (): ReturnComponentType => {
 

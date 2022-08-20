@@ -12,8 +12,8 @@ export enum Path {
 	NOT_FOUND = '*',
 	NOT_FOUND_404 = '/404',
 
-	CHECK_EMAIL_PARAMS = '/check-email/:email',
-	NEW_PASSWORD_PARAMS = '/new-password/:token',
-	CARDS_PARAMS = '/cards/:packId',
-	LEARN_PARAMS = '/learn/:packId',
+	CHECK_EMAIL_PARAM = '/check-email/:email',
+	NEW_PASSWORD_PARAM = '/new-password/:token',
+	CARDS_PARAM = '/cards/:packId',
+	LEARN_PARAM = '/learn/:packId',
 }

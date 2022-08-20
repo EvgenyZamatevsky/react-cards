@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'

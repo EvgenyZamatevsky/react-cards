@@ -65,7 +65,11 @@ export const addPack = createAsyncThunk
 	})
 
 export const removePack = createAsyncThunk
-	<void, { packId: string, authorizedUserId: string }, { rejectValue: { error: string }, state: RootStateType }>
+	<
+		void,
+		{ packId: string, authorizedUserId: string },
+		{ rejectValue: { error: string }, state: RootStateType }
+	>
 	('packs/removePack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue

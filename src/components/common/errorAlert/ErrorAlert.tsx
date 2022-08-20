@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { EMPTY_STRING } from 'constants/base'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { selectErrorMessage } from 'store/selectors/app'
 import { setErrorMessage } from 'store/slices/app'
 import { ReturnComponentType } from 'types/ReturnComponentType'

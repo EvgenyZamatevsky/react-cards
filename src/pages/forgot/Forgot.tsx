@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { forgot } from 'store/asyncActions'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import style from './Forgot.module.scss'
 
 export const Forgot: FC = (): ReturnComponentType => {

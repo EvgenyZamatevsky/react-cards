@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useRef } from 'react'
 import { updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { setErrorMessage, setIsAvatarBroken } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import defaultAvatar from 'assets/images/defaultAvatar.png'

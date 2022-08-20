@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { ReturnComponentType } from 'types'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserId } from 'store/selectors'

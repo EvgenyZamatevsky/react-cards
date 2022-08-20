@@ -3,11 +3,11 @@ import { ReturnComponentType } from 'types'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ROUTES } from 'router'
 import { ErrorAlert, Header, Preloader } from 'components'
-import { useAppDispatch } from 'store/hooks'
 import { getAuthorizedUserData } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
 import { selectIsInitializedApp, selectIsLoading } from 'store/selectors/app'
 import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
 
 export const App: FC = (): ReturnComponentType => {
 

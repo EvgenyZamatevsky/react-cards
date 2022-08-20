@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch } from 'hooks'
 import { selectIsDisabled } from 'store/selectors'
 import { resetMinValueAndMaxValue, setSelectedPack } from 'store/slices'
 import { ReturnComponentType } from 'types'
