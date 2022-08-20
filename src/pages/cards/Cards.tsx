@@ -60,7 +60,6 @@ export const Cards: FC = (): ReturnComponentType => {
 				updated={updated}
 				grade={grade}
 				packId={packId!}
-				isDisabled={isDisabled}
 				isOwner={isOwner}
 			/>
 		)
@@ -153,7 +152,6 @@ export const Cards: FC = (): ReturnComponentType => {
 			<div className={style.container}>
 				<BackPage
 					title={'Back to Packs List'}
-					isDisabled={isDisabled}
 					onBackPageClick={handleBackPacksListClick}
 				/>
 

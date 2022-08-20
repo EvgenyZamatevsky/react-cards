@@ -3,8 +3,13 @@ import { ReturnComponentType } from 'types'
 import arrow from 'assets/icons/arrow.svg'
 import style from './BackPage.module.scss'
 import { BackPagePropsType } from './types'
+import { useSelector } from 'react-redux'
+import { selectIsDisabled } from 'store/selectors'
 
-export const BackPage: FC<BackPagePropsType> = ({ isDisabled, title, onBackPageClick }): ReturnComponentType => {
+export const BackPage: FC<BackPagePropsType> = ({ title, onBackPageClick }): ReturnComponentType => {
+
+	const isDisabled = useSelector(selectIsDisabled)
+
 	return (
 		<button
 			className={style.backPageBtn}

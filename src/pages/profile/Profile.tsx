@@ -46,7 +46,6 @@ export const Profile: FC = (): ReturnComponentType => {
 
 			<BackPage
 				title={'Back to Packs List'}
-				isDisabled={isDisabled}
 				onBackPageClick={handleBackPacksListClick}
 			/>
 

@@ -114,7 +114,6 @@ export const Pack: FC<PackPropsType> =
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.userName}>{user_name}</div>
 						<Actions
-							isDisabled={isDisabled}
 							onActivateDeleteModalClick={handleActivateDeleteModalClick}
 							onActivateEditModalClick={handleActivatePackModalClick}
 							cardsCount={cardsCount}

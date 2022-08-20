@@ -13,6 +13,7 @@ import {
 	selectCardPageCount,
 	selectCards,
 	selectIsAuth,
+	selectIsDisabled,
 	selectSearchCardValue,
 	selectSortCards
 } from 'store/selectors'
@@ -35,6 +36,7 @@ export const Learn: FC = (): ReturnComponentType => {
 	const cardPage = useSelector(selectCardPage)
 	const cardPageCount = useSelector(selectCardPageCount)
 	const isAuth = useSelector(selectIsAuth)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const [isShowAnswer, setIsShowAnswer] = useState(false)
 	const [isMounted, setIsMounted] = useState(true)
@@ -95,7 +97,6 @@ export const Learn: FC = (): ReturnComponentType => {
 		<div className={style.container}>
 			<BackPage
 				title={'Back to Packs List'}
-				isDisabled={false}
 				onBackPageClick={handleBackPacksListClick}
 			/>
 
@@ -115,6 +116,7 @@ export const Learn: FC = (): ReturnComponentType => {
 						<button
 							className={style.showAnswerBtn}
 							onClick={onShowAnswerActiveClick}
+							disabled={isDisabled}
 						>
 							Show answer
 						</button>}

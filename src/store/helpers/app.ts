@@ -6,7 +6,12 @@ export const isLoadingRejected = (action: AnyAction) => action.type.endsWith('re
 
 export const isLoadingPending = (action: AnyAction) => action.type.endsWith('pending')
 
-export const isDisabledFulfilled = (action: AnyAction) => action.type.endsWith('fulfilled')
+export const isDisabledFulfilled = (action: AnyAction) => {
+	return action.type.endsWith('fulfilled')
+		&& action.type !== 'packs/addPack/fulfilled'
+		&& action.type !== 'packs/removePack/fulfilled'
+		&& action.type !== 'packs/updatePackName/fulfilled'
+}
 
 export const isDisabledRejected = (action: AnyAction) => action.type.endsWith('rejected')
 

@@ -5,6 +5,5 @@ export type CardPropsType = {
 	grade: number
 	cardId: string
 	packId: string
-	isDisabled: boolean
 	isOwner: boolean
 }

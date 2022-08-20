@@ -10,7 +10,7 @@ import { CardPropsType } from './types'
 import style from './Card.module.scss'
 
 export const Card: FC<CardPropsType> =
-	({ cardId, question, answer, updated, grade, packId, isDisabled, isOwner }): ReturnComponentType => {
+	({ cardId, question, answer, updated, grade, packId, isOwner }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
 
@@ -95,7 +95,6 @@ export const Card: FC<CardPropsType> =
 						<div className={style.grade}>{Number(grade.toFixed(1))}</div>
 						<div className={style.actionsContainer}>
 							<Actions
-								isDisabled={isDisabled}
 								onActivateDeleteModalClick={handleActivateDeleteModalClick}
 								onActivateEditModalClick={handleActivateCardModalClick}
 								isTeacherVisible={false}

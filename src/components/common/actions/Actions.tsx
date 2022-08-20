@@ -7,17 +7,20 @@ import pencil from 'assets/icons/pencil.svg'
 import teacher from 'assets/icons/teacher.svg'
 import style from './Actions.module.scss'
 import { Path } from 'enums'
+import { useSelector } from 'react-redux'
+import { selectIsDisabled } from 'store/selectors'
 
 export const Actions: FC<ActionsPropsType> =
 	({
 		onActivateDeleteModalClick,
 		onActivateEditModalClick,
-		isDisabled,
 		cardsCount,
 		packId,
 		isOwner,
 		isTeacherVisible = true
 	}): ReturnComponentType => {
+
+		const isDisabled = useSelector(selectIsDisabled)
 
 		const navigate = useNavigate()
 
@@ -31,7 +34,7 @@ export const Actions: FC<ActionsPropsType> =
 					<button
 						className={style.teacher}
 						onClick={onNavigateToLearnPageClick}
-						disabled={cardsCount === 0}
+						disabled={cardsCount === 0 || isDisabled}
 					>
 						<img src={teacher} alt='teacher' />
 					</button>}

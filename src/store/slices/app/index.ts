@@ -1,9 +1,8 @@
-import { updateAuthorizedUser } from './../../asyncActions/auth';
-import { isDisabledFulfilled, isDisabledPending, isDisabledRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from './../../helpers/app'
-import { getAuthorizedUserData } from 'store/asyncActions'
+import { isDisabledFulfilled, isDisabledPending, isDisabledRejected } from 'store/helpers/app'
+import { getAuthorizedUserData, updateAuthorizedUser } from 'store/asyncActions'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
-import { isErrorRejected } from 'store/helpers'
+import { isErrorRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from 'store/helpers'
 import { AppSliceInitialStateType } from './types'
 
 const initialState: AppSliceInitialStateType = {

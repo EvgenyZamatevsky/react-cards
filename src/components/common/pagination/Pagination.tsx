@@ -3,6 +3,8 @@ import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types/ReturnComponentType'
 import style from './Pagination.module.scss'
 import { PageCountValueType, PaginationPropsType } from './types'
+import { useSelector } from 'react-redux'
+import { selectIsDisabled } from 'store/selectors'
 
 const pageCountValues: PageCountValueType[] = [
 	{ value: '5', count: 5 },
@@ -20,6 +22,8 @@ export const Pagination: FC<PaginationPropsType> =
 		handleSetPageCountChange,
 		portionSize = 10,
 	}): ReturnComponentType => {
+
+		const isDisabled = useSelector(selectIsDisabled)
 
 		const [portionNumber, setPortionNumber] = useState(1)
 
@@ -51,7 +55,7 @@ export const Pagination: FC<PaginationPropsType> =
 				<div className={style.container}>
 					{totalItemsCount >= 11 &&
 						<>
-							{portionNumber > 1 && <button onClick={onDecreasePortionNumberClick}>&laquo;</button>}
+							{portionNumber > 1 && <button onClick={onDecreasePortionNumberClick} disabled={isDisabled}>&laquo;</button>}
 
 							{pages
 								.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -63,18 +67,25 @@ export const Pagination: FC<PaginationPropsType> =
 										<button
 											key={p}
 											className={page === p ? style.active : EMPTY_STRING}
-											onClick={onSetPageClick}>
+											onClick={onSetPageClick}
+											disabled={isDisabled}
+										>
 											{p}
 										</button>
 									)
 								})}
 
-							{portionCount > portionNumber && <button onClick={onIncreasePortionNumberClick}>&raquo;</button>}
+							{portionCount > portionNumber && <button onClick={onIncreasePortionNumberClick} disabled={isDisabled}>&raquo;</button>}
 						</>}
 					{totalItemsCount >= 26 &&
 						<div className={style.showContainer}>
 							Show
-							<select defaultValue={pageCount} className={style.select} onChange={onSelectChange}>
+							<select
+								defaultValue={pageCount}
+								className={style.select}
+								onChange={onSelectChange}
+								disabled={isDisabled}
+							>
 								{pageCountValues.map(({ value, count }) => <option key={value} value={value}>{count}</option>)}
 							</select>
 							Cards per Page
