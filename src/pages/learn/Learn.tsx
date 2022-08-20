@@ -18,6 +18,7 @@ import {
 	selectSortCards
 } from 'store/selectors'
 import { Grade } from 'components/grade'
+import { resetMinValueAndMaxValue } from 'store/slices'
 
 const FIRST_INDEX_ELEMENTS = 0
 
@@ -85,7 +86,10 @@ export const Learn: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const handleBackPacksListClick = (): void => navigate(Path.PACKS)
+	const handleBackPacksListClick = (): void => {
+		navigate(Path.PACKS)
+		dispatch(resetMinValueAndMaxValue())
+	}
 
 	const onShowAnswerActiveClick = (): void => setIsShowAnswer(true)
 

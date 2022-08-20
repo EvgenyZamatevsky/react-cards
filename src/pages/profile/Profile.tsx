@@ -15,6 +15,7 @@ import {
 	selectIsAuth,
 	selectIsDisabled
 } from 'store/selectors'
+import { resetMinValueAndMaxValue } from 'store/slices'
 
 export const Profile: FC = (): ReturnComponentType => {
 
@@ -35,7 +36,10 @@ export const Profile: FC = (): ReturnComponentType => {
 		dispatch(logOut())
 	}
 
-	const handleBackPacksListClick = (): void => navigate(Path.PACKS)
+	const handleBackPacksListClick = (): void => {
+		navigate(Path.PACKS)
+		dispatch(resetMinValueAndMaxValue())
+	}
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />

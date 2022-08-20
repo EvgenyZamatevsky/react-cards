@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Path } from 'enums/Path'
 import { useSelector } from 'react-redux'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
@@ -12,11 +12,9 @@ import style from './Header.module.scss'
 import {
 	selectAuthorizedUserAvatar,
 	selectAuthorizedUserName,
-	selectCardsLength,
 	selectIsAuth,
 	selectIsAvatarBroken,
 	selectIsDisabled,
-	selectPacksLength
 } from 'store/selectors'
 
 export const Header: FC = (): ReturnComponentType => {
@@ -30,8 +28,6 @@ export const Header: FC = (): ReturnComponentType => {
 	const authorizedUserName = useSelector(selectAuthorizedUserName)
 	const isDisabled = useSelector(selectIsDisabled)
 	const isAvatarBroken = useSelector(selectIsAvatarBroken)
-	const cardsLength = useSelector(selectCardsLength)
-	const packsLength = useSelector(selectPacksLength)
 
 	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
@@ -89,7 +85,12 @@ export const Header: FC = (): ReturnComponentType => {
 							</button>
 						</div>}
 				</div>
-				: <NavLink to={Path.LOGIN} className={style.signInBtn}>Sign in</NavLink>}
+				: <Link
+					to={Path.LOGIN}
+					className={`${style.signInBtn} ${isDisabled && style.disabledLink}`}
+				>
+					Sign in
+				</Link>}
 		</header>
 	)
 }

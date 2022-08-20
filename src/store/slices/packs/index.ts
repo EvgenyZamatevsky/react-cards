@@ -41,7 +41,10 @@ const packsSlice = createSlice({
 		setPackPageCount(state, action: PayloadAction<number>) {
 			state.pageCount = action.payload
 		},
-
+		resetMinValueAndMaxValue(state) {
+			state.maxValue = 110
+			state.minValue = 0
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -74,6 +77,7 @@ export const {
 	setSelectedPack,
 	setPackPage,
 	setPackPageCount,
+	resetMinValueAndMaxValue,
 } = packsSlice.actions
 
 export default packsSlice.reducer

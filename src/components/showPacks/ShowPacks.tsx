@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'store/hooks'
 import { selectIsDisabled } from 'store/selectors'
-import { setSelectedPack } from 'store/slices'
+import { resetMinValueAndMaxValue, setSelectedPack } from 'store/slices'
 import { ReturnComponentType } from 'types'
-import style from './ShowPacks.module.scss'
 import { ShowPacksPropsType } from './types'
+import style from './ShowPacks.module.scss'
 
 export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnComponentType => {
 
@@ -16,12 +16,14 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 	const onSelectMyPacksClick = (): void => {
 		if (selectedPack !== 'My') {
 			dispatch(setSelectedPack('My'))
+			dispatch(resetMinValueAndMaxValue())
 		}
 	}
 
 	const onSelectAllPacksClick = (): void => {
 		if (selectedPack !== 'All') {
 			dispatch(setSelectedPack('All'))
+			dispatch(resetMinValueAndMaxValue())
 		}
 	}
 

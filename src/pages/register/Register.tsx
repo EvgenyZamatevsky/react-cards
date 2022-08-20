@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch } from 'store/hooks'
 import { registration } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
-import { selectIsRegister } from 'store/selectors'
+import { selectIsDisabled, selectIsRegister } from 'store/selectors'
 import openEye from 'assets/icons/openEye.svg'
 import closedEye from 'assets/icons/closedEye.svg'
 import { RegisterParamsType } from './types'
@@ -17,6 +17,7 @@ export const Register: FC = (): ReturnComponentType => {
 	const dispatch = useAppDispatch()
 
 	const isRegister = useSelector(selectIsRegister)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const [typePassword, setTypePassword] = useState('password')
 	const [typeConfirmPassword, setTypeConfirmPassword] = useState('password')
@@ -70,30 +71,35 @@ export const Register: FC = (): ReturnComponentType => {
 				<h2 className={style.title}>Sign Up</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={style.emailFieldContainer}>
-						<input className={style.emailField} type='email' placeholder='Email'
+						<input className={style.emailField} type='email' placeholder='Email' disabled={isDisabled}
 							{...register('email', emailSettings)} />
 						{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
 					</div>
 					<div className={style.passwordFieldContainer}>
-						<input className={style.passwordField} type={typePassword} placeholder='Password'
+						<input className={style.passwordField} type={typePassword} placeholder='Password' disabled={isDisabled}
 							{...register('password', passwordSettings)} />
 						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
 						{typePassword === 'password'
-							? <img className={style.eye} onClick={showOpenEyeForPasswordField} src={openEye} />
-							: <img className={style.eye} onClick={showClosedEyeForPasswordField} src={closedEye} />}
+							? <button onClick={showOpenEyeForPasswordField} disabled={isDisabled}><img className={style.eye} src={openEye} /></button>
+							: <button onClick={showClosedEyeForPasswordField} disabled={isDisabled}><img className={style.eye} src={closedEye} /></button>}
 					</div>
 					<div className={style.confirmPasswordFieldContainer}>
-						<input className={style.confirmPasswordField} type={typeConfirmPassword} placeholder='Confirm password'
+						<input className={style.confirmPasswordField} type={typeConfirmPassword} placeholder='Confirm password' disabled={isDisabled}
 							{...register('confirmPassword', confirmPasswordSettings)} />
 						{errors?.confirmPassword && <p className={style.errorConfirmPasswordField}>{errors?.confirmPassword.message}</p>}
 						{typeConfirmPassword === 'password'
-							? <img className={style.eye} onClick={showOpenEyeForConfirmPasswordField} src={openEye} />
-							: <img className={style.eye} onClick={showClosedEyeForConfirmPasswordField} src={closedEye} />}
+							? <button onClick={showOpenEyeForConfirmPasswordField} disabled={isDisabled}><img className={style.eye} src={openEye} /></button>
+							: <button onClick={showClosedEyeForConfirmPasswordField} disabled={isDisabled}><img className={style.eye} src={closedEye} /></button>}
 					</div>
 					<div className={style.bottom}>
 						<button className={style.signUpBtn} type='submit' disabled={!isValid}>Sign Up</button>
 						<div className={style.text}>Already have an account?</div>
-						<Link to={Path.LOGIN} className={style.signInBtn}>Sign In</Link>
+						<Link
+							to={Path.LOGIN}
+							className={`${style.signInBtn} ${isDisabled && style.disabledLink}`}
+						>
+							Sign In
+						</Link>
 					</div>
 				</form>
 			</div>

@@ -4,8 +4,6 @@ import { RootStateType } from 'store'
 
 export const selectPacks = (state: RootStateType): PackType[] => state.packs.packs
 
-export const selectPacksLength = (state: RootStateType): number => state.packs.packs.length
-
 export const selectSearchPackValue = (state: RootStateType): string => state.packs.searchPackValue
 
 export const selectSortValue = (state: RootStateType): string => state.packs.sortValue

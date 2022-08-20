@@ -7,7 +7,7 @@ import defaultAvatar from 'assets/images/defaultAvatar.png'
 import selectFile from 'assets/icons/selectFile.svg'
 import { InputFilePropsType } from './types'
 import { useSelector } from 'react-redux'
-import { selectAuthorizedUserAvatar, selectIsAvatarBroken } from 'store/selectors'
+import { selectAuthorizedUserAvatar, selectIsAvatarBroken, selectIsDisabled } from 'store/selectors'
 import style from './InputFile.module.scss'
 
 export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
@@ -16,6 +16,7 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 
 	const isAvatarBroken = useSelector(selectIsAvatarBroken)
 	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
+	const isDisabled = useSelector(selectIsDisabled)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -65,7 +66,7 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 					type='file'
 					onChange={onUploadFileChange}
 				/>
-				<button onClick={onSelectFileClick}>
+				<button onClick={onSelectFileClick} disabled={isDisabled}>
 					<img className={style.selectFileImg} src={selectFile} alt='selectFile' />
 				</button>
 			</label>

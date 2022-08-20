@@ -84,9 +84,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
 
 	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }): void => {
-		if (min !== minCardsCount || max !== maxCardsCount) {
-			dispatch(setMaxAndMinValue({ max, min }))
-		}
+		dispatch(setMaxAndMinValue({ max, min }))
 	}, [])
 
 	const handleSetSearchPackValueChange = (value: string): void => {
