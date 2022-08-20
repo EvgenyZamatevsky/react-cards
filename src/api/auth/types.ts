@@ -19,3 +19,8 @@ export type UpdatedAuthorizedUserResponseType = {
 	tokenDeathTime: number
 	updatedUser: AuthorizedUserDataType
 }
+
+export type PayloadType = {
+	name: string
+	avatar: string
+}

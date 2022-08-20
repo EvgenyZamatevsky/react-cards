@@ -5,7 +5,7 @@ export const instance = axios.create({
 	withCredentials: true
 })
 
-export const additionalInstance = axios.create({
+export const instanceAdditional = axios.create({
 	baseURL: process.env.REACT_APP_ADDITIONAL_BASE_URL,
 	withCredentials: true
 })

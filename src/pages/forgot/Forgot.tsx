@@ -3,7 +3,7 @@ import { Path } from 'enums'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReturnComponentType } from 'types'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { forgotPassword } from 'store/asyncActions'
+import { forgot } from 'store/asyncActions'
 import { useAppDispatch } from 'store/hooks'
 import style from './Forgot.module.scss'
 
@@ -26,7 +26,7 @@ export const Forgot: FC = (): ReturnComponentType => {
 	}
 
 	const onSubmit: SubmitHandler<{ email: string }> = ({ email }): void => {
-		dispatch(forgotPassword(email))
+		dispatch(forgot(email))
 		navigate(`${Path.CHECK_EMAIL}/${email}`)
 	}
 
