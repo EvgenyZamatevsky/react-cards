@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Pagination, Search, Sort } from 'components'
+import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -170,13 +170,13 @@ export const Cards: FC = (): ReturnComponentType => {
 						handleResetSearchValueClick={handleResetSearchCardValueClick}
 					/>
 					{isOwner &&
-						<button
+						<UniversalButton
 							className={style.addNewCardBtn}
 							onClick={handleActivateModalClick}
 							disabled={isDisabled}
 						>
 							Add new card
-						</button>}
+						</UniversalButton>}
 				</div>
 				<div className={style.sort}>
 					<Sort

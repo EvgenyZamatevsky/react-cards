@@ -5,6 +5,7 @@ import style from './Pagination.module.scss'
 import { PageCountValueType, PaginationPropsType } from './types'
 import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
+import { UniversalButton } from '../universalButton'
 
 const pageCountValues: PageCountValueType[] = [
 	{ value: '5', count: 5 },
@@ -55,7 +56,7 @@ export const Pagination: FC<PaginationPropsType> =
 				<div className={style.container}>
 					{totalItemsCount >= 11 &&
 						<>
-							{portionNumber > 1 && <button onClick={onDecreasePortionNumberClick} disabled={isDisabled}>&laquo;</button>}
+							{portionNumber > 1 && <UniversalButton onClick={onDecreasePortionNumberClick} disabled={isDisabled}>&laquo;</UniversalButton>}
 
 							{pages
 								.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -64,18 +65,18 @@ export const Pagination: FC<PaginationPropsType> =
 									const onSetPageClick = (): void => handleSetPageClick(p)
 
 									return (
-										<button
+										<UniversalButton
 											key={p}
 											className={page === p ? style.active : EMPTY_STRING}
 											onClick={onSetPageClick}
 											disabled={isDisabled}
 										>
 											{p}
-										</button>
+										</UniversalButton>
 									)
 								})}
 
-							{portionCount > portionNumber && <button onClick={onIncreasePortionNumberClick} disabled={isDisabled}>&raquo;</button>}
+							{portionCount > portionNumber && <UniversalButton onClick={onIncreasePortionNumberClick} disabled={isDisabled}>&raquo;</UniversalButton>}
 						</>}
 					{totalItemsCount >= 26 &&
 						<div className={style.showContainer}>

@@ -3,6 +3,7 @@ import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalCard.module.scss'
 import { ModalCardPropsType } from './types'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const ModalCard: FC<ModalCardPropsType> =
 	forwardRef(({
@@ -40,8 +41,8 @@ export const ModalCard: FC<ModalCardPropsType> =
 				/>
 
 				<div className={style.buttons}>
-					<button className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</button>
-					<button className={style.saveBtn} onClick={onSaveClick}>Save</button>
+					<UniversalButton className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</UniversalButton>
+					<UniversalButton className={style.saveBtn} onClick={onSaveClick}>Save</UniversalButton>
 				</div>
 			</div>
 		)

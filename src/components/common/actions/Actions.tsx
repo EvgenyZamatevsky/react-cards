@@ -9,6 +9,7 @@ import style from './Actions.module.scss'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
+import { UniversalButton } from '../universalButton'
 
 export const Actions: FC<ActionsPropsType> =
 	({
@@ -31,21 +32,22 @@ export const Actions: FC<ActionsPropsType> =
 		return (
 			<div className={isOwner ? style.container : style.secondaryContainer}>
 				{isTeacherVisible &&
-					<button
+					<UniversalButton
 						className={style.teacher}
 						onClick={onNavigateToLearnPageClick}
 						disabled={cardsCount === 0 || isDisabled}
 					>
 						<img src={teacher} alt='teacher' />
-					</button>}
+					</UniversalButton>
+				}
 				{isOwner &&
 					<>
-						<button onClick={onActivateDeleteModalClick} disabled={isDisabled}>
+						<UniversalButton onClick={onActivateDeleteModalClick} disabled={isDisabled}>
 							<img src={cart} alt='cart' />
-						</button>
-						<button onClick={onActivateEditModalClick} disabled={isDisabled}>
+						</UniversalButton>
+						<UniversalButton onClick={onActivateEditModalClick} disabled={isDisabled}>
 							<img src={pencil} alt='pencil' />
-						</button>
+						</UniversalButton>
 					</>}
 			</div>
 		)

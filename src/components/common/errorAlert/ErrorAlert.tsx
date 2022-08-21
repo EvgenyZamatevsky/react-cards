@@ -6,6 +6,7 @@ import { selectErrorMessage } from 'store/selectors/app'
 import { setErrorMessage } from 'store/slices/app'
 import { ReturnComponentType } from 'types/ReturnComponentType'
 import style from './ErrorAlert.module.scss'
+import { UniversalButton } from '../universalButton'
 
 const DELAY = 3000
 
@@ -34,7 +35,7 @@ export const ErrorAlert: FC = (): ReturnComponentType => {
 	return (
 		<div className={`${style.errorAlert} ${!errorMessage && style.closeErrorAlert}`}>
 			<div className={style.alert}>{errorMessage}</div>
-			<button onClick={onCloseErrorAlertClick}>&#10006;</button>
+			<UniversalButton onClick={onCloseErrorAlertClick}>&#10006;</UniversalButton>
 		</div>
 	)
 }

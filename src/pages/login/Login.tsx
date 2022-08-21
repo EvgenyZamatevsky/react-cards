@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Eye } from 'components'
+import { Eye, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -85,7 +85,7 @@ export const Login: FC = (): ReturnComponentType => {
 						</Link>
 					</div>
 					<div className={style.bottom}>
-						<button className={style.signInBtn} type='submit' disabled={!isValid}>Sign in</button>
+						<UniversalButton primary type='submit' disabled={!isValid}>Sign in</UniversalButton>
 						<div className={style.text}>Don’t have an account?</div>
 						<Link
 							to={Path.REGISTER}

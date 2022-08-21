@@ -12,6 +12,7 @@ import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import style from './Pack.module.scss'
 import { PackPropsType } from './types'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const Pack: FC<PackPropsType> =
 	({ _id, user_id, name, cardsCount, updated, user_name, isDisabled }): ReturnComponentType => {
@@ -107,13 +108,13 @@ export const Pack: FC<PackPropsType> =
 				</Modal>
 				<div className={style.container}>
 					<div className={style.list}>
-						<button
+						<UniversalButton
 							className={style.name}
 							onClick={onGoToCardsPageClick}
 							disabled={isDisabled}
 						>
 							{name}
-						</button>
+						</UniversalButton>
 						<div className={style.cardsCount}>{cardsCount}</div>
 						<div className={style.updated}>{convertDate(updated)}</div>
 						<div className={style.userName}>{user_name}</div>

@@ -5,6 +5,7 @@ import { Key } from 'enums'
 import { EditableItemPropsType } from './types'
 import pencil from 'assets/icons/pencil.svg'
 import style from './EditableItem.module.scss'
+import { UniversalButton } from '../universalButton'
 
 export const EditableItem: FC<EditableItemPropsType> =
 	({ currentValue, isDisabled, updateValue }): ReturnComponentType => {
@@ -71,14 +72,14 @@ export const EditableItem: FC<EditableItemPropsType> =
 						/>
 						{errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
 					</>
-					: <button
+					: <UniversalButton
 						className={style.editableItemBtn}
 						disabled={isDisabled}
 						onClick={onSetCurrentValueClick}
 					>
 						{currentValue}
 						<img className={style.pencilIcon} src={pencil} alt='pencil' />
-					</button>}
+					</UniversalButton>}
 			</>
 		)
 	}

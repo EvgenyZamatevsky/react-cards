@@ -6,6 +6,7 @@ import { resetMinValueAndMaxValue, setSelectedPack } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import { ShowPacksPropsType } from './types'
 import style from './ShowPacks.module.scss'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnComponentType => {
 
@@ -30,20 +31,20 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 	return (
 		<div>
 			<div className={style.showPacksCards}>Show packs cards</div>
-			<button
+			<UniversalButton
 				className={`${style.myBtn} ${selectedPack === 'My' && style.active}`}
 				onClick={onSelectMyPacksClick}
 				disabled={isDisabled}
 			>
 				My
-			</button>
-			<button
+			</UniversalButton>
+			<UniversalButton
 				className={`${style.allBtn} ${selectedPack === 'All' && style.active}`}
 				onClick={onSelectAllPacksClick}
 				disabled={isDisabled}
 			>
 				All
-			</button>
+			</UniversalButton>
 		</div>
 	)
 }

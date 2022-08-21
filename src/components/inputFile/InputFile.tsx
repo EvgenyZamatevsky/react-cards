@@ -9,6 +9,7 @@ import { InputFilePropsType } from './types'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
 import selectFile from 'assets/icons/selectFile.svg'
 import style from './InputFile.module.scss'
+import { UniversalButton } from 'components/common/universalButton'
 
 const MAX_FILE_SIZE = 100000
 const FIRST_FILES_INDEX = 0
@@ -69,9 +70,9 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 					type='file'
 					onChange={onUploadFileChange}
 				/>
-				<button onClick={onSelectFileClick} disabled={isDisabled}>
+				<UniversalButton onClick={onSelectFileClick} disabled={isDisabled}>
 					<img className={style.selectFileImg} src={selectFile} alt='selectFile' />
-				</button>
+				</UniversalButton>
 			</label>
 		</div>
 	)

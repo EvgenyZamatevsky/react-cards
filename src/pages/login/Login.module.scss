@@ -93,10 +93,6 @@
 				margin-top: 50px;
 				@include flex(column, stretch, center);
 
-				.signInBtn {
-					@extend %primaryButton;
-				}
-
 				.text {
 					margin-top: 31px;
 					opacity: 0.5;

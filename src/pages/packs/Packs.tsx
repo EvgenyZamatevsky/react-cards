@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from 'react'
-import { DoubleRange, Pagination, Search, ShowPacks, Sort } from 'components'
+import { DoubleRange, Pagination, Search, ShowPacks, Sort, UniversalButton } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
 import { Path } from 'enums'
@@ -173,12 +173,13 @@ export const Packs: FC = (): ReturnComponentType => {
 			<div className={style.container}>
 				<div className={style.top}>
 					<h2 className={style.title}>Packs list</h2>
-					<button
-						className={style.addNewPackBtn}
+					<UniversalButton
+						primary
+						additionalPrimaryBtn={style.addNewPackBtn}
 						onClick={handleActivateModalClick}
 						disabled={isDisabled}>
 						Add new pack
-					</button>
+					</UniversalButton>
 				</div>
 				<div className={style.main}>
 					<Search

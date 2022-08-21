@@ -3,6 +3,7 @@ import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types'
 import style from './SortValues.module.scss'
 import { SortValuesPropsType } from './types'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const SortValues: FC<SortValuesPropsType> =
 	({
@@ -23,7 +24,7 @@ export const SortValues: FC<SortValuesPropsType> =
 		return (
 			<>
 				{sortValue === sortByDescending[index]
-					? <button
+					? <UniversalButton
 						className={style.sortValueBtn}
 						onClick={onSortByAscendingClick}
 						disabled={isDisabled}
@@ -33,8 +34,8 @@ export const SortValues: FC<SortValuesPropsType> =
 							? `${style.triangleDescending}`
 							: EMPTY_STRING}>
 						</span>
-					</button>
-					: <button
+					</UniversalButton>
+					: <UniversalButton
 						className={style.sortValueBtn}
 						onClick={onSortByDescendingClick}
 						disabled={isDisabled}
@@ -44,7 +45,7 @@ export const SortValues: FC<SortValuesPropsType> =
 							? `${style.triangleAscending}`
 							: EMPTY_STRING}>
 						</span>
-					</button>}
+					</UniversalButton>}
 			</>
 		)
 	}

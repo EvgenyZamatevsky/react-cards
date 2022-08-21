@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Path } from 'enums'
-import { BackToPage, InputFile, EditableItem } from 'components'
+import { BackToPage, InputFile, EditableItem, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate, Navigate } from 'react-router-dom'
@@ -58,15 +58,14 @@ export const Profile: FC = (): ReturnComponentType => {
 				/>
 
 				<div className={style.email}>{authorizedUserEmail}</div>
-
-				<button
-					className={style.LogOutBtn}
+				<UniversalButton
+					secondary
 					onClick={onLogOutClick}
 					disabled={isDisabled}
 				>
 					<img src={logOutIcon} alt='log Out' />
 					Log out
-				</button>
+				</UniversalButton>
 			</div>
 		</div>
 	)

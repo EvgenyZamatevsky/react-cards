@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Path } from 'enums'
-import { Eye } from 'components'
+import { Eye, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -43,7 +43,14 @@ export const NewPassword: FC = (): ReturnComponentType => {
 						<Eye typePassword={typePassword} setTypePassword={setTypePassword} />
 					</div>
 					<div className={style.text}>Create new password and we will send you further instructions to email</div>
-					<button className={style.createNewPasswordBtn} type='submit' disabled={!isValid}>Create new password</button>
+					<UniversalButton
+						primary
+						additionalPrimaryBtn={style.additionalPrimaryBtn}
+						type='submit'
+						disabled={!isValid}
+					>
+						Create new password
+					</UniversalButton>
 				</form>
 			</div>
 		</div>

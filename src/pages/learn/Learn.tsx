@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { CardType } from 'api/cards/types'
-import { BackToPage } from 'components'
+import { BackToPage, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -117,13 +117,13 @@ export const Learn: FC = (): ReturnComponentType => {
 						<div className={style.question}>{currentCard?.question}</div>
 					</div>
 					{!isShowAnswer &&
-						<button
+						<UniversalButton
 							className={style.showAnswerBtn}
 							onClick={onShowAnswerActiveClick}
 							disabled={isDisabled}
 						>
 							Show answer
-						</button>}
+						</UniversalButton>}
 
 					{isShowAnswer &&
 						<>
@@ -136,13 +136,13 @@ export const Learn: FC = (): ReturnComponentType => {
 
 							{gradesRender}
 
-							<button
+							<UniversalButton
 								disabled={gradeIndex === 0}
 								className={style.nextQuestionBtn}
 								onClick={onNextQuestionClick}
 							>
 								Next question
-							</button>
+							</UniversalButton>
 						</>
 					}
 				</div>

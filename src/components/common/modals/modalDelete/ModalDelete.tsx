@@ -3,6 +3,7 @@ import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalDelete.module.scss'
 import { ModalDeletePropsType } from './types'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const ModalDelete: FC<ModalDeletePropsType> =
 	({ onDeactivateModalClick, onDeleteClick, title, name, isPackDelete = true }): ReturnComponentType => {
@@ -20,8 +21,8 @@ export const ModalDelete: FC<ModalDeletePropsType> =
 				</div>
 
 				<div className={style.buttons}>
-					<button className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</button>
-					<button className={style.deleteBtn} onClick={onDeleteClick}>Delete</button>
+					<UniversalButton className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</UniversalButton>
+					<UniversalButton className={style.deleteBtn} onClick={onDeleteClick}>Delete</UniversalButton>
 				</div>
 			</div>
 		)

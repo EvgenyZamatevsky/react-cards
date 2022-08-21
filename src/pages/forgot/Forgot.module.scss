@@ -45,10 +45,6 @@
 				margin-top: 65px;
 				@include flex(column, stretch, center);
 
-				.sendInstructionsBtn {
-					@extend %primaryButton;
-				}
-
 				.text {
 					margin-top: 31px;
 					opacity: 0.5;

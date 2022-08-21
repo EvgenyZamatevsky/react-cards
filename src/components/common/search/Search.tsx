@@ -10,6 +10,7 @@ import { selectIsDisabled } from 'store/selectors'
 import { setIsDisabled } from 'store/slices'
 import style from './Search.module.scss'
 import { SearchPropsType } from './types'
+import { UniversalButton } from '../universalButton'
 
 export const Search: FC<SearchPropsType> =
 	({ title, searchValue, handleSetSearchValueChange, handleResetSearchValueClick }): ReturnComponentType => {
@@ -57,12 +58,12 @@ export const Search: FC<SearchPropsType> =
 						onChange={onInputChange}
 						ref={inputRef} />
 					{searchValue &&
-						<button
+						<UniversalButton
 							className={style.resetSearchValueBtn}
 							onClick={onResetSearchValueClick}
 							disabled={isDisabled}>
 							<img className={style.clearIcon} src={cross} alt='cross' />
-						</button>}
+						</UniversalButton>}
 				</div>
 			</div>
 		)

@@ -7,6 +7,7 @@ import { forgot } from 'store/asyncActions'
 import { ReturnComponentType } from 'types'
 import { ForgotParamsType } from './types'
 import style from './Forgot.module.scss'
+import { UniversalButton } from 'components'
 
 export const Forgot: FC = (): ReturnComponentType => {
 
@@ -41,7 +42,7 @@ export const Forgot: FC = (): ReturnComponentType => {
 					{errors?.email && <p className={style.errorMessage}>{errors?.email.message}</p>}
 					<div className={style.words}>Enter your email address and we will send you further instructions</div>
 					<div className={style.bottom}>
-						<button className={style.sendInstructionsBtn} type='submit' disabled={!isValid}>Send Instructions</button>
+						<UniversalButton primary type='submit' disabled={!isValid}>Send Instructions</UniversalButton>
 						<div className={style.text}>Did you remember your password?</div>
 						<Link to={Path.LOGIN} className={style.tryLoggingInBtn}>Try logging in</Link>
 					</div>

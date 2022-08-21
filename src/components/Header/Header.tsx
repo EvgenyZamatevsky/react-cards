@@ -16,6 +16,7 @@ import {
 	selectIsAvatarBroken,
 	selectIsDisabled,
 } from 'store/selectors'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const Header: FC = (): ReturnComponentType => {
 
@@ -62,12 +63,13 @@ export const Header: FC = (): ReturnComponentType => {
 			<div className={style.title}>Cards</div>
 			{isAuth
 				? <div className={style.authorizedUser}>
-					<button
+					<UniversalButton
 						className={style.name}
 						onClick={onShowPopupClick}
 						disabled={isDisabled}
 					>
-						{authorizedUserName}</button>
+						{authorizedUserName}
+					</UniversalButton>
 					<img
 						className={style.image}
 						src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
@@ -75,14 +77,14 @@ export const Header: FC = (): ReturnComponentType => {
 					/>
 					{isVisiblePopup &&
 						<div className={style.popup}>
-							<button className={style.profileBtn} onClick={onGoToProfileClick}>
+							<UniversalButton className={style.profileBtn} onClick={onGoToProfileClick}	>
 								<img className={style.personIcon} src={person} alt='user' />
 								Profile
-							</button>
-							<button className={style.logOutBtn} onClick={onLogOutClick}>
+							</UniversalButton>
+							<UniversalButton className={style.logOutBtn} onClick={onLogOutClick}>
 								<img className={style.logOutIcon} src={logOutIcon} alt='log out' />
 								Log Out
-							</button>
+							</UniversalButton>
 						</div>}
 				</div>
 				: <Link

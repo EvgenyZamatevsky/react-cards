@@ -3,6 +3,7 @@ import { ReturnComponentType } from 'types'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalPack.module.scss'
 import { ModalPackPropsType } from './types'
+import { UniversalButton } from 'components/common/universalButton'
 
 export const ModalPack: FC<ModalPackPropsType> =
 	forwardRef(({
@@ -48,8 +49,8 @@ export const ModalPack: FC<ModalPackPropsType> =
 					</label>}
 
 				<div className={style.buttons}>
-					<button className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</button>
-					<button className={style.saveBtn} onClick={onSaveClick}>Save</button>
+					<UniversalButton className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</UniversalButton>
+					<UniversalButton className={style.saveBtn} onClick={onSaveClick}>Save</UniversalButton>
 				</div>
 			</div>
 		)

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Eye } from 'components'
+import { Eye, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
@@ -79,7 +79,7 @@ export const Register: FC = (): ReturnComponentType => {
 						<Eye typePassword={typeConfirmPassword} setTypePassword={setTypeConfirmPassword} />
 					</div>
 					<div className={style.bottom}>
-						<button className={style.signUpBtn} type='submit' disabled={!isValid}>Sign Up</button>
+						<UniversalButton primary type='submit' disabled={!isValid}>Sign Up</UniversalButton>
 						<div className={style.text}>Already have an account?</div>
 						<Link
 							to={Path.LOGIN}
