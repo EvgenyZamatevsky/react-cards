@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
-import { BackPage, Card, Pagination, Search, Sort } from 'components'
+import { BackToPage, Card, Pagination, Search, Sort } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -157,9 +157,9 @@ export const Cards: FC = (): ReturnComponentType => {
 				/>
 			</Modal>
 			<div className={style.container}>
-				<BackPage
+				<BackToPage
 					title={'Back to Packs List'}
-					onBackPageClick={handleBackPacksListClick}
+					onBackToPageClick={handleBackPacksListClick}
 				/>
 
 				<h2 className={style.title}>Cards</h2>

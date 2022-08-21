@@ -1,14 +1,17 @@
 import React, { ChangeEvent, FC, useRef } from 'react'
-import { updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
-import { useAppDispatch } from 'hooks'
-import { setErrorMessage, setIsAvatarBroken } from 'store/slices'
 import { ReturnComponentType } from 'types'
+import { useAppDispatch } from 'hooks'
+import { useSelector } from 'react-redux'
+import { updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
+import { selectIsAvatarBroken, selectAuthorizedUserAvatar, selectIsDisabled } from 'store/selectors'
+import { setErrorMessage, setIsAvatarBroken } from 'store/slices'
+import { InputFilePropsType } from './types'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
 import selectFile from 'assets/icons/selectFile.svg'
-import { InputFilePropsType } from './types'
-import { useSelector } from 'react-redux'
-import { selectAuthorizedUserAvatar, selectIsAvatarBroken, selectIsDisabled } from 'store/selectors'
 import style from './InputFile.module.scss'
+
+const MAX_FILE_SIZE = 100000
+const FIRST_FILES_INDEX = 0
 
 export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 
@@ -23,10 +26,10 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 	const onSelectFileClick = (): void => inputRef && inputRef.current?.click()
 
 	const onUploadFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		if (event.target.files && event.target.files.length) {
-			const file = event.target.files[0]
+		if (event.currentTarget.files && event.currentTarget.files.length) {
+			const file = event.currentTarget.files[FIRST_FILES_INDEX]
 
-			if (file.size < 100000) {
+			if (file.size < MAX_FILE_SIZE) {
 				convertFileToBase64(file, (file64: string) => {
 					dispatch(updateAuthorizedUserNameOrAvatar({ avatar: file64 }))
 				})
@@ -53,7 +56,7 @@ export const InputFile: FC<InputFilePropsType> = (): ReturnComponentType => {
 	return (
 		<div className={style.container}>
 			<img
-				className={style.avatar}
+				className={style.avatarImg}
 				src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
 				alt='avatar'
 				onError={onImgError}

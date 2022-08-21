@@ -1,5 +1,5 @@
 export type EditableItemPropsType = {
 	currentValue: string
 	isDisabled: boolean
-	changeCurrentValue: (newValue: string) => void
+	updateValue: (updatedValue: string) => void
 }

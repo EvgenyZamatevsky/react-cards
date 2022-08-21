@@ -109,14 +109,14 @@ export const updateAuthorizedUserNameOrAvatar = createAsyncThunk
 		{ name?: string, avatar?: string },
 		{ rejectValue: { error: string }, state: RootStateType }
 	>
-	('auth/updateAuthorizedUser', async (domainPayload, { rejectWithValue, getState }) => {
+	('auth/updateAuthorizedUser', async (updatedPayload, { rejectWithValue, getState }) => {
 		try {
 			const authorizedUserData = getState().auth.authorizedUserData
 
 			const payload: PayloadType = {
 				name: authorizedUserData?.name as string,
 				avatar: authorizedUserData?.avatar as string,
-				...domainPayload
+				...updatedPayload
 			}
 
 			const response = await AUTH.updateAuthorizedUserNameOrAvatar(payload)

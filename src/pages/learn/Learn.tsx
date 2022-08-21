@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { CardType } from 'api/cards/types'
-import { BackPage } from 'components'
+import { BackToPage } from 'components'
 import { Path } from 'enums'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -99,9 +99,9 @@ export const Learn: FC = (): ReturnComponentType => {
 
 	return (
 		<div className={style.container}>
-			<BackPage
+			<BackToPage
 				title={'Back to Packs List'}
-				onBackPageClick={handleBackPacksListClick}
+				onBackToPageClick={handleBackPacksListClick}
 			/>
 
 			<div className={style.content}>

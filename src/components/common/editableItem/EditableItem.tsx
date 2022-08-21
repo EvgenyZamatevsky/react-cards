@@ -1,39 +1,39 @@
 import React, { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import pencil from 'assets/icons/pencil.svg'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { Key } from 'enums'
-import style from './EditableItem.module.scss'
 import { EditableItemPropsType } from './types'
+import pencil from 'assets/icons/pencil.svg'
+import style from './EditableItem.module.scss'
 
 export const EditableItem: FC<EditableItemPropsType> =
-	({ currentValue, isDisabled, changeCurrentValue }): ReturnComponentType => {
+	({ currentValue, isDisabled, updateValue }): ReturnComponentType => {
 
 		const [isEditMode, setIsEditMode] = useState(false)
-		const [newValue, setNewValue] = useState(EMPTY_STRING)
+		const [updatedValue, setUpdatedValue] = useState(EMPTY_STRING)
 		const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
 
+		const onSetCurrentValueClick = (): void => {
+			setIsEditMode(true)
+			setUpdatedValue(currentValue)
+		}
+
 		const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-			setNewValue(event.currentTarget.value)
+			setUpdatedValue(event.currentTarget.value)
 
 			if (errorMessage) {
 				setErrorMessage(EMPTY_STRING)
 			}
 		}
 
-		const onSetCurrentValueClick = (): void => {
-			setIsEditMode(true)
-			setNewValue(currentValue)
-		}
+		const handleUpdateValueBlurOrKeyDown = (): void => {
+			const updatedValueTrimmed = updatedValue.trim()
 
-		const handleSetNewValueBlurAndKeyDown = (): void => {
-			const newValueTrimmed = newValue.trim()
-
-			if (newValueTrimmed !== EMPTY_STRING) {
+			if (updatedValueTrimmed !== EMPTY_STRING) {
 				setIsEditMode(false)
 
-				if (currentValue !== newValueTrimmed) {
-					changeCurrentValue(newValueTrimmed)
+				if (currentValue !== updatedValueTrimmed) {
+					updateValue(updatedValueTrimmed)
 				}
 
 			} else {
@@ -41,11 +41,17 @@ export const EditableItem: FC<EditableItemPropsType> =
 			}
 		}
 
-		const onSetNewValueBlur = (): void => handleSetNewValueBlurAndKeyDown()
+		const onUpdateValueValueBlur = (): void => handleUpdateValueBlurOrKeyDown()
 
-		const onSetNewValueKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+		const onUpdateValueKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
 			if (event.key === Key.ENTER) {
-				handleSetNewValueBlurAndKeyDown()
+				handleUpdateValueBlurOrKeyDown()
+				return
+			}
+
+			if (event.key === Key.ESCAPE) {
+				setIsEditMode(false)
+				return
 			}
 		}
 
@@ -54,19 +60,19 @@ export const EditableItem: FC<EditableItemPropsType> =
 				{isEditMode
 					? <>
 						<input
-							className={style.newNameField}
+							className={style.newNameInput}
 							type='text'
 							placeholder='Enter a new name'
 							autoFocus
 							onChange={onInputChange}
-							value={newValue}
-							onBlur={onSetNewValueBlur}
-							onKeyDown={onSetNewValueKeyDown}
+							value={updatedValue}
+							onBlur={onUpdateValueValueBlur}
+							onKeyDown={onUpdateValueKeyDown}
 						/>
 						{errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
 					</>
 					: <button
-						className={style.editableItem}
+						className={style.editableItemBtn}
 						disabled={isDisabled}
 						onClick={onSetCurrentValueClick}
 					>

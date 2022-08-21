@@ -1,21 +1,15 @@
 import React, { FC } from 'react'
 import { Path } from 'enums'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { ReturnComponentType } from 'types'
+import { BackToPage, InputFile, EditableItem } from 'components'
 import { useAppDispatch } from 'hooks'
-import { logOut, updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
 import { useSelector } from 'react-redux'
-import logOutIcon from 'assets/icons/logOut.png'
-import { EditableItem, InputFile } from 'components'
-import { BackPage } from 'components/common/backPage'
-import style from './Profile.module.scss'
-import {
-	selectAuthorizedUserEmail,
-	selectAuthorizedUserName,
-	selectIsAuth,
-	selectIsDisabled
-} from 'store/selectors'
+import { useNavigate, Navigate } from 'react-router-dom'
+import { updateAuthorizedUserNameOrAvatar, logOut } from 'store/asyncActions'
+import { selectIsAuth, selectAuthorizedUserName, selectAuthorizedUserEmail, selectIsDisabled } from 'store/selectors'
 import { resetMinValueAndMaxValue } from 'store/slices'
+import { ReturnComponentType } from 'types'
+import logOutIcon from 'assets/icons/logOut.png'
+import style from './Profile.module.scss'
 
 export const Profile: FC = (): ReturnComponentType => {
 
@@ -28,15 +22,15 @@ export const Profile: FC = (): ReturnComponentType => {
 	const authorizedUserEmail = useSelector(selectAuthorizedUserEmail)
 	const isDisabled = useSelector(selectIsDisabled)
 
-	const handleUpdateNameBlurAndKeyDown = (newName: string): void => {
-		dispatch(updateAuthorizedUserNameOrAvatar({ name: newName }))
+	const handleUpdateNameBlurOrKeyDown = (updatedName: string): void => {
+		dispatch(updateAuthorizedUserNameOrAvatar({ name: updatedName }))
 	}
 
 	const onLogOutClick = (): void => {
 		dispatch(logOut())
 	}
 
-	const handleBackPacksListClick = (): void => {
+	const handleBackToPacksListClick = (): void => {
 		navigate(Path.PACKS)
 		dispatch(resetMinValueAndMaxValue())
 	}
@@ -48,9 +42,9 @@ export const Profile: FC = (): ReturnComponentType => {
 	return (
 		<div className={style.profile}>
 
-			<BackPage
+			<BackToPage
 				title={'Back to Packs List'}
-				onBackPageClick={handleBackPacksListClick}
+				onBackToPageClick={handleBackToPacksListClick}
 			/>
 
 			<div className={style.container}>
@@ -60,7 +54,7 @@ export const Profile: FC = (): ReturnComponentType => {
 				<EditableItem
 					currentValue={authorizedUserName}
 					isDisabled={isDisabled}
-					changeCurrentValue={handleUpdateNameBlurAndKeyDown}
+					updateValue={handleUpdateNameBlurOrKeyDown}
 				/>
 
 				<div className={style.email}>{authorizedUserEmail}</div>
