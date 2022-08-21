@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react'
 import notFound from 'assets/images/notFound.png'
 import { Path } from 'enums'
-import style from './NotFound.module.scss'
 import { Link } from 'react-router-dom'
+import style from './NotFound.module.scss'
 
 export const NotFound: FC = (): ReactElement => {
 	return (
@@ -11,7 +11,7 @@ export const NotFound: FC = (): ReactElement => {
 				<div className={style.body}>
 					<h2 className={style.title}>Ooops!</h2>
 					<div className={style.text}>Sorry! Page not found!</div>
-					<Link to={Path.HOME} className={style.backHomePageBtn}>Back to home page</Link>
+					<Link to={Path.HOME} className={style.backToHomePageBtn}>Back to home page</Link>
 				</div>
 				<div>
 					<img src={notFound} alt='not found' />

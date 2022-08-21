@@ -1,9 +1,9 @@
 export type PackPropsType = {
-	_id: string
-	user_id: string
-	name: string
+	packId: string
+	userId: string
+	packName: string
 	cardsCount: number
-	updated: Date
-	user_name: string
+	packUpdated: Date
+	userName: string
 	isDisabled: boolean
 }

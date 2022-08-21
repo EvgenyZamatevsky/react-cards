@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'hooks'
 import { ReturnComponentType } from 'types'
@@ -15,7 +15,7 @@ import { PackPropsType } from './types'
 import { UniversalButton } from 'components/common/universalButton'
 
 export const Pack: FC<PackPropsType> =
-	({ _id, user_id, name, cardsCount, updated, user_name, isDisabled }): ReturnComponentType => {
+	({ userId, userName, packId, packName, cardsCount, packUpdated, isDisabled }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
 
@@ -30,29 +30,29 @@ export const Pack: FC<PackPropsType> =
 
 		const updatedPackNameInputRef = useRef<HTMLInputElement>(null)
 
-		const isOwner = authorizedUserId === user_id
+		const isOwner = authorizedUserId === userId
 
 		const resetPackModalValues = (): void => {
 			setIsPackModalActive(false)
 			setErrorMessage(EMPTY_STRING)
 
-			if (updatedPackName !== name) {
-				setUpdatedPackName(name)
+			if (updatedPackName !== packName) {
+				setUpdatedPackName(packName)
 			}
 		}
 
 		const handleRemovePackClick = (): void => {
-			dispatch(removePack({ packId: _id, authorizedUserId: user_id }))
+			dispatch(removePack({ packId, authorizedUserId: userId }))
 			setIsDeleteModalActive(false)
 		}
 
 		const handleUpdatePackNameClick = (): void => {
 			const updatedPackNameTrimmed = updatedPackName.trim()
-			const nameTrimmed = name.trim()
+			const packNameTrimmed = packName.trim()
 
 			if (updatedPackNameTrimmed !== EMPTY_STRING) {
-				if (updatedPackNameTrimmed !== nameTrimmed) {
-					dispatch(updatePackName({ authorizedUserId: user_id, packId: _id, updatedPackName: updatedPackNameTrimmed }))
+				if (updatedPackNameTrimmed !== packNameTrimmed) {
+					dispatch(updatePackName({ authorizedUserId: userId, packId, updatedPackName: updatedPackNameTrimmed }))
 				}
 
 				setIsPackModalActive(false)
@@ -67,14 +67,14 @@ export const Pack: FC<PackPropsType> =
 
 		const handleActivatePackModalClick = (): void => {
 			setIsPackModalActive(true)
-			setUpdatedPackName(name)
+			setUpdatedPackName(packName)
 			updatedPackNameInputRef.current?.focus()
 		}
 
 		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
 		const onGoToCardsPageClick = (): void => {
-			navigate(`${Path.CARDS}/${_id}`)
+			navigate(`${Path.CARDS}/${packId}`)
 		}
 
 		return (
@@ -94,7 +94,7 @@ export const Pack: FC<PackPropsType> =
 				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>
 					<ModalDelete
 						title={'Delete Pack'}
-						name={name}
+						name={packName}
 						onDeactivateModalClick={handleDeactivateDeleteModalClick}
 						onDeleteClick={handleRemovePackClick}
 					/>
@@ -106,16 +106,16 @@ export const Pack: FC<PackPropsType> =
 							onClick={onGoToCardsPageClick}
 							disabled={isDisabled}
 						>
-							{name}
+							{packName}
 						</UniversalButton>
 						<div className={style.cardsCount}>{cardsCount}</div>
-						<div className={style.updated}>{convertDate(updated)}</div>
-						<div className={style.userName}>{user_name}</div>
+						<div className={style.updated}>{convertDate(packUpdated)}</div>
+						<div className={style.userName}>{userName}</div>
 						<Actions
 							onActivateDeleteModalClick={handleActivateDeleteModalClick}
 							onActivateEditModalClick={handleActivatePackModalClick}
 							cardsCount={cardsCount}
-							packId={_id}
+							packId={packId}
 							isOwner={isOwner}
 						/>
 					</div>

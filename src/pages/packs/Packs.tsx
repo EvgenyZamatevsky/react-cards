@@ -1,31 +1,31 @@
 import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from 'react'
-import { DoubleRange, Pagination, Search, ShowPacks, Sort, UniversalButton } from 'components'
+import { UniversalButton, ShowPacks, DoubleRange, Sort, Pagination, Search } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { Path } from 'enums'
+import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { addPack, getPacks } from 'store/asyncActions/packs'
-import { useAppDispatch } from 'hooks'
-import { setMaxAndMinValue, setPackPage, setPackPageCount, setSearchPackValue, setSortValue } from 'store/slices'
+import { getPacks, addPack } from 'store/asyncActions'
+import { setMaxAndMinValue, setSearchPackValue, setSortValue, setPackPage, setPackPageCount } from 'store/slices'
 import { ReturnComponentType } from 'types'
-import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import style from './Packs.module.scss'
 import {
-	selectAuthorizedUserId,
 	selectIsAuth,
 	selectIsDisabled,
-	selectMaxCardsCount,
+	selectPacks,
+	selectSearchPackValue,
+	selectSortValue,
+	selectMinValue,
 	selectMaxValue,
 	selectMinCardsCount,
-	selectMinValue,
-	selectPacks,
-	selectPacksTotalCount,
-	selectPage,
-	selectPageCount,
-	selectSearchPackValue,
+	selectMaxCardsCount,
+	selectAuthorizedUserId,
 	selectSelectedPack,
-	selectSortValue
+	selectPageCount,
+	selectPage,
+	selectPacksTotalCount
 } from 'store/selectors'
 
 export const Packs: FC = (): ReturnComponentType => {
@@ -62,12 +62,12 @@ export const Packs: FC = (): ReturnComponentType => {
 		return (
 			<Pack
 				key={_id}
-				_id={_id}
-				user_id={user_id}
-				name={name}
+				packId={_id}
+				userId={user_id}
+				packName={name}
 				cardsCount={cardsCount}
-				updated={updated}
-				user_name={user_name}
+				packUpdated={updated}
+				userName={user_name}
 				isDisabled={isDisabled}
 			/>
 		)
