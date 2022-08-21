@@ -18,14 +18,14 @@
 			margin-top: 41px;
 			@include flex(column, stretch, stretch);
 
-			.emailFieldContainer {
+			.emailInputContainer {
 				position: relative;
 
-				.emailField {
+				.emailInput {
 					@extend %input;
 				}
 
-				.errorEmailField {
+				.errorEmailInput {
 					position: absolute;
 					top: 40px;
 					left: 0;
@@ -36,18 +36,18 @@
 				}
 			}
 
-			.passwordFieldContainer,
-			.confirmPasswordFieldContainer {
+			.passwordInputContainer,
+			.confirmPasswordInputContainer {
 				position: relative;
 
-				.passwordField,
-				.confirmPasswordField {
+				.passwordInput,
+				.confirmPasswordInput {
 					margin-top: 40px;
 					@extend %input;
 				}
 
-				.errorPasswordField,
-				.errorConfirmPasswordField {
+				.errorPasswordInput,
+				.errorConfirmPasswordInput {
 					position: absolute;
 					bottom: -22px;
 					left: 0;
@@ -55,10 +55,6 @@
 					text-align: center;
 					width: 100%;
 					font-size: 14px;
-				}
-
-				.eye {
-					@extend %eye;
 				}
 			}
 

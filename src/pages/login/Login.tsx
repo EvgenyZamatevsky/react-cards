@@ -1,15 +1,14 @@
 import React, { FC, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import { ReturnComponentType } from 'types'
-import { Path } from 'enums/Path'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Eye } from 'components'
+import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
-import { login } from 'store/asyncActions'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+import { Navigate, Link } from 'react-router-dom'
+import { login } from 'store/asyncActions'
 import { selectIsAuth, selectIsDisabled, selectIsRegister } from 'store/selectors'
-import openEye from 'assets/icons/openEye.svg'
-import closedEye from 'assets/icons/closedEye.svg'
 import { setIsRegister } from 'store/slices'
+import { ReturnComponentType } from 'types'
 import { LoginParamsType } from './types'
 import style from './Login.module.scss'
 
@@ -23,8 +22,10 @@ export const Login: FC = (): ReturnComponentType => {
 
 	const [typePassword, setTypePassword] = useState('password')
 
-	const { register, handleSubmit, formState: { errors, isValid } } = useForm<LoginParamsType>(
-		{ mode: 'onChange' },
+	const { register, handleSubmit, formState: { errors, isValid } } = useForm<LoginParamsType>({
+		mode: 'onChange',
+		defaultValues: { email: 'nya-admin@nya.nya', password: '1qazxcvBG', rememberMe: false }
+	},
 	)
 
 	const emailSettings = {
@@ -46,16 +47,12 @@ export const Login: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const showOpenEye = (): void => setTypePassword('text')
-
-	const showClosedEye = (): void => setTypePassword('password')
-
 	const onSubmit: SubmitHandler<LoginParamsType> = (data): void => {
 		dispatch(login(data))
 	}
 
 	if (isAuth) {
-		return <Navigate to={Path.PROFILE} />
+		return <Navigate to={Path.HOME} />
 	}
 
 	return (
@@ -63,22 +60,20 @@ export const Login: FC = (): ReturnComponentType => {
 			<div className={style.container}>
 				<h2 className={style.title}>Sign in</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-					<div className={style.emailFieldContainer}>
-						<input className={style.emailField} type='email' placeholder='Email' disabled={isDisabled}
+					<div className={style.emailInputContainer}>
+						<input className={style.emailInput} type='email' placeholder='Email' disabled={isDisabled}
 							{...register('email', emailSettings)} />
-						{errors?.email && <p className={style.errorMessageEmailField}>{errors?.email.message}</p>}
+						{errors?.email && <p className={style.errorMessageEmailInput}>{errors?.email.message}</p>}
 					</div>
-					<div className={style.passwordFieldContainer}>
-						<input className={style.passwordField} type={typePassword} placeholder='Password' disabled={isDisabled}
+					<div className={style.passwordInputContainer}>
+						<input className={style.passwordInput} type={typePassword} placeholder='Password' disabled={isDisabled}
 							{...register('password', passwordSettings)} />
-						{errors?.password && <p className={style.errorMessagePasswordField}>{errors?.password.message}</p>}
-						{typePassword === 'password'
-							? <img onClick={showOpenEye} className={style.eye} src={openEye} />
-							: <img onClick={showClosedEye} className={style.eye} src={closedEye} />}
+						{errors?.password && <p className={style.errorMessagePasswordInput}>{errors?.password.message}</p>}
+						<Eye typePassword={typePassword} setTypePassword={setTypePassword} />
 					</div>
 					<div className={style.body}>
 						<label className={style.label}>
-							<input className={style.rememberMe} type='checkbox' disabled={isDisabled}
+							<input className={style.rememberMeCheckbox} type='checkbox' disabled={isDisabled}
 								{...register('rememberMe')} />
 							Remember me
 						</label>

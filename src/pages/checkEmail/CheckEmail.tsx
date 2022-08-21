@@ -1,15 +1,15 @@
-import { Path } from 'enums'
 import React, { FC } from 'react'
+import { Path } from 'enums'
 import { Link, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectIsDisabled } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import writing from 'assets/icons/writing.png'
 import style from './CheckEmail.module.scss'
-import { useSelector } from 'react-redux'
-import { selectIsDisabled } from 'store/selectors'
 
 export const CheckEmail: FC = (): ReturnComponentType => {
 
-	const { email } = useParams()
+	const { email } = useParams<{ email: string }>()
 
 	const isDisabled = useSelector(selectIsDisabled)
 

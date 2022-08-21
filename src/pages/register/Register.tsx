@@ -1,16 +1,15 @@
 import React, { FC, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import { ReturnComponentType } from 'types'
-import style from './Register.module.scss'
-import { Path } from 'enums/Path'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Eye } from 'components'
 import { useAppDispatch } from 'hooks'
-import { registration } from 'store/asyncActions'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { selectIsDisabled, selectIsRegister } from 'store/selectors'
-import openEye from 'assets/icons/openEye.svg'
-import closedEye from 'assets/icons/closedEye.svg'
+import { Navigate, Link } from 'react-router-dom'
+import { registration } from 'store/asyncActions'
+import { selectIsRegister, selectIsDisabled } from 'store/selectors'
+import { ReturnComponentType } from 'types'
 import { RegisterParamsType } from './types'
+import { Path } from 'enums'
+import style from './Register.module.scss'
 
 export const Register: FC = (): ReturnComponentType => {
 
@@ -49,14 +48,6 @@ export const Register: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const showOpenEyeForPasswordField = (): void => setTypePassword('text')
-
-	const showClosedEyeForPasswordField = (): void => setTypePassword('password')
-
-	const showOpenEyeForConfirmPasswordField = (): void => setTypeConfirmPassword('text')
-
-	const showClosedEyeForConfirmPasswordField = (): void => setTypeConfirmPassword('password')
-
 	const onSubmit: SubmitHandler<RegisterParamsType> = ({ email, password }): void => {
 		dispatch(registration({ email, password }))
 	}
@@ -70,26 +61,22 @@ export const Register: FC = (): ReturnComponentType => {
 			<div className={style.container}>
 				<h2 className={style.title}>Sign Up</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-					<div className={style.emailFieldContainer}>
-						<input className={style.emailField} type='email' placeholder='Email' disabled={isDisabled}
+					<div className={style.emailInputContainer}>
+						<input className={style.emailInput} type='email' placeholder='Email' disabled={isDisabled}
 							{...register('email', emailSettings)} />
-						{errors?.email && <p className={style.errorEmailField}>{errors?.email.message}</p>}
+						{errors?.email && <p className={style.errorEmailInput}>{errors?.email.message}</p>}
 					</div>
-					<div className={style.passwordFieldContainer}>
-						<input className={style.passwordField} type={typePassword} placeholder='Password' disabled={isDisabled}
+					<div className={style.passwordInputContainer}>
+						<input className={style.passwordInput} type={typePassword} placeholder='Password' disabled={isDisabled}
 							{...register('password', passwordSettings)} />
-						{errors?.password && <p className={style.errorPasswordField}>{errors?.password.message}</p>}
-						{typePassword === 'password'
-							? <img onClick={showOpenEyeForPasswordField} className={style.eye} src={openEye} />
-							: <img onClick={showClosedEyeForPasswordField} className={style.eye} src={closedEye} />}
+						{errors?.password && <p className={style.errorPasswordInput}>{errors?.password.message}</p>}
+						<Eye typePassword={typePassword} setTypePassword={setTypePassword} />
 					</div>
-					<div className={style.confirmPasswordFieldContainer}>
-						<input className={style.confirmPasswordField} type={typeConfirmPassword} placeholder='Confirm password' disabled={isDisabled}
+					<div className={style.confirmPasswordInputContainer}>
+						<input className={style.confirmPasswordInput} type={typeConfirmPassword} placeholder='Confirm password' disabled={isDisabled}
 							{...register('confirmPassword', confirmPasswordSettings)} />
-						{errors?.confirmPassword && <p className={style.errorConfirmPasswordField}>{errors?.confirmPassword.message}</p>}
-						{typeConfirmPassword === 'password'
-							? <img onClick={showOpenEyeForConfirmPasswordField} className={style.eye} src={openEye} />
-							: <img onClick={showClosedEyeForConfirmPasswordField} className={style.eye} src={closedEye} />}
+						{errors?.confirmPassword && <p className={style.errorConfirmPasswordInput}>{errors?.confirmPassword.message}</p>}
+						<Eye typePassword={typeConfirmPassword} setTypePassword={setTypeConfirmPassword} />
 					</div>
 					<div className={style.bottom}>
 						<button className={style.signUpBtn} type='submit' disabled={!isValid}>Sign Up</button>

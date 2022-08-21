@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 import { Path } from 'enums'
-import { Link, useNavigate } from 'react-router-dom'
-import { ReturnComponentType } from 'types'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { forgot } from 'store/asyncActions'
 import { useAppDispatch } from 'hooks'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useNavigate, Link } from 'react-router-dom'
+import { forgot } from 'store/asyncActions'
+import { ReturnComponentType } from 'types'
+import { ForgotParamsType } from './types'
 import style from './Forgot.module.scss'
 
 export const Forgot: FC = (): ReturnComponentType => {
@@ -13,7 +14,7 @@ export const Forgot: FC = (): ReturnComponentType => {
 
 	const navigate = useNavigate()
 
-	const { register, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string }>(
+	const { register, handleSubmit, formState: { errors, isValid } } = useForm<ForgotParamsType>(
 		{ mode: 'onChange' },
 	)
 
@@ -25,7 +26,7 @@ export const Forgot: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const onSubmit: SubmitHandler<{ email: string }> = ({ email }): void => {
+	const onSubmit: SubmitHandler<ForgotParamsType> = ({ email }): void => {
 		dispatch(forgot(email))
 		navigate(`${Path.CHECK_EMAIL}/${email}`)
 	}
@@ -35,7 +36,7 @@ export const Forgot: FC = (): ReturnComponentType => {
 			<div className={style.container}>
 				<h2 className={style.title}>Forgot your password?</h2>
 				<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-					<input className={style.emailField} type='email' placeholder='Email'
+					<input className={style.emailInput} type='email' placeholder='Email'
 						{...register('email', emailSettings)} />
 					{errors?.email && <p className={style.errorMessage}>{errors?.email.message}</p>}
 					<div className={style.words}>Enter your email address and we will send you further instructions</div>

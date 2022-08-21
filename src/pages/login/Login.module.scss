@@ -18,14 +18,15 @@
 			margin-top: 41px;
 			@include flex(column, stretch, stretch);
 
-			.emailFieldContainer {
+			.emailInputContainer {
 				position: relative;
 
-				.emailField {
+
+				.emailInput {
 					@extend %input;
 				}
 
-				.errorMessageEmailField {
+				.errorMessageEmailInput {
 					position: absolute;
 					top: 40px;
 					left: 0;
@@ -36,15 +37,15 @@
 				}
 			}
 
-			.passwordFieldContainer {
+			.passwordInputContainer {
 				position: relative;
 
-				.passwordField {
+				.passwordInput {
 					margin-top: 40px;
 					@extend %input;
 				}
 
-				.errorMessagePasswordField {
+				.errorMessagePasswordInput {
 					position: absolute;
 					bottom: -22px;
 					left: 0;
@@ -52,10 +53,6 @@
 					text-align: center;
 					width: 100%;
 					font-size: 14px;
-				}
-
-				.eye {
-					@extend %eye;
 				}
 			}
 
@@ -69,7 +66,7 @@
 					font-size: 14px;
 					line-height: 17px;
 
-					.rememberMe {
+					.rememberMeCheckbox {
 						margin-right: 10px;
 					}
 
@@ -83,6 +80,7 @@
 					font-size: 14px;
 					line-height: 17px;
 					transition: color, 0.2s ease-in-out 0s;
+					color: #000;
 
 					&:hover {
 						text-decoration: underline;
