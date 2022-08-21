@@ -1,0 +1,15 @@
+ @import 'styles/sass/mixins.scss';
+
+ label {
+ 	width: 115px;
+ 	opacity: 0.8;
+ 	margin-top: 30px;
+
+ 	.primaryCheckbox {
+ 		margin-right: 10px;
+ 	}
+
+ 	&:hover {
+ 		text-decoration: underline;
+ 	}
+ }

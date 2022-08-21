@@ -5,13 +5,14 @@ import { UniversalButton } from 'components/common/universalButton'
 import { UniversalInput } from 'components/common/universalInput'
 import cross from 'assets/icons/cross.svg'
 import style from './ModalPack.module.scss'
+import { UniversalCheckbox } from 'components/common/universalCheckbox'
 
 export const ModalPack: FC<ModalPackPropsType> =
 	forwardRef(({
 		onDeactivateModalClick,
 		value,
 		setUpdatedPackName,
-		onCheckboxChange,
+		setIsPackPrivate,
 		onSaveClick,
 		isPackPrivate,
 		title,
@@ -41,15 +42,13 @@ export const ModalPack: FC<ModalPackPropsType> =
 				/>
 
 				{isLabelItem &&
-					<label className={style.label}>
-						<input
-							className={style.privatePack}
-							type='checkbox'
-							onChange={onCheckboxChange}
-							checked={isPackPrivate}
-						/>
+					<UniversalCheckbox
+						primary
+						setValue={setIsPackPrivate}
+						checked={isPackPrivate}
+					>
 						Private pack
-					</label>}
+					</UniversalCheckbox>}
 
 				<div className={style.buttons}>
 					<UniversalButton className={style.cancelBtn} onClick={onDeactivateModalClick}>Cancel</UniversalButton>

@@ -138,10 +138,6 @@ export const Packs: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const onIsPackPrivateChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setIsPackPrivate(event.currentTarget.checked)
-	}
-
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -152,7 +148,7 @@ export const Packs: FC = (): ReturnComponentType => {
 				<ModalPack
 					onDeactivateModalClick={handleDeactivateModalClick}
 					setUpdatedPackName={setPackName}
-					onCheckboxChange={onIsPackPrivateChange}
+					setIsPackPrivate={setIsPackPrivate}
 					onSaveClick={onAddPackClick}
 					value={packName}
 					isPackPrivate={isPackPrivate}

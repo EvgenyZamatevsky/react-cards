@@ -7,7 +7,7 @@ export type ModalPackPropsType = {
 	onSaveClick: () => void
 	title: string
 	errorMessage: string
-	onCheckboxChange?: (event: ChangeEvent<HTMLInputElement>) => void
+	setIsPackPrivate?: (isPackPrivate: boolean) => void
 	setErrorMessage: (errorMessage: string) => void
 	isPackPrivate?: boolean
 	isLabelItem?: boolean
