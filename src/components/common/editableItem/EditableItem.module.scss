@@ -12,12 +12,5 @@
 
 .newNameInput {
 	margin-top: 7px;
-	width: 330px;
-	@extend %input;
-}
-
-.errorMessage {
-	color: red;
-	margin-top: 10px;
-	font-size: 14px;
+	width: 330px !important;
 }

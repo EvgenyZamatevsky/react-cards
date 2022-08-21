@@ -138,13 +138,13 @@ export const Packs: FC = (): ReturnComponentType => {
 		}
 	}
 
-	const onPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setPackName(event.currentTarget.value)
+	// const onPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+	// 	setPackName(event.currentTarget.value)
 
-		if (errorMessage) {
-			setErrorMessage(EMPTY_STRING)
-		}
-	}
+	// 	if (errorMessage) {
+	// 		setErrorMessage(EMPTY_STRING)
+	// 	}
+	// }
 
 	const onIsPackPrivateChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		setIsPackPrivate(event.currentTarget.checked)
@@ -159,13 +159,14 @@ export const Packs: FC = (): ReturnComponentType => {
 			<Modal isModalActive={isActiveModal} onDeactivateModalClick={handleDeactivateModalClick}>
 				<ModalPack
 					onDeactivateModalClick={handleDeactivateModalClick}
-					onInputChange={onPackNameChange}
+					setUpdatedPackName={setPackName}
 					onCheckboxChange={onIsPackPrivateChange}
 					onSaveClick={onAddPackClick}
 					value={packName}
 					isPackPrivate={isPackPrivate}
 					isLabelItem={true}
 					errorMessage={errorMessage}
+					setErrorMessage={setErrorMessage}
 					ref={namePackInputRef}
 					title={'Add new pack'}
 				/>

@@ -1,20 +1,22 @@
-import React, { ChangeEvent, FC, forwardRef } from 'react'
+import React, { FC, forwardRef } from 'react'
 import { ReturnComponentType } from 'types'
-import cross from 'assets/icons/cross.svg'
-import style from './ModalPack.module.scss'
 import { ModalPackPropsType } from './types'
 import { UniversalButton } from 'components/common/universalButton'
+import { UniversalInput } from 'components/common/universalInput'
+import cross from 'assets/icons/cross.svg'
+import style from './ModalPack.module.scss'
 
 export const ModalPack: FC<ModalPackPropsType> =
 	forwardRef(({
 		onDeactivateModalClick,
 		value,
-		onInputChange,
+		setUpdatedPackName,
 		onCheckboxChange,
 		onSaveClick,
 		isPackPrivate,
 		title,
 		errorMessage,
+		setErrorMessage,
 		isLabelItem = false
 	},
 		ref): ReturnComponentType => {
@@ -26,16 +28,17 @@ export const ModalPack: FC<ModalPackPropsType> =
 					<img className={style.cross} src={cross} alt='cross' onClick={onDeactivateModalClick} />
 				</div>
 
-				<input
-					className={style.namePack}
+				<UniversalInput
+					primary
+					additionalPrimaryInput={style.namePack}
 					type='text'
 					placeholder='Name pack'
 					value={value}
-					onChange={onInputChange}
+					setValue={setUpdatedPackName}
 					ref={ref}
+					errorMessage={errorMessage}
+					setErrorMessage={setErrorMessage}
 				/>
-
-				{errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
 
 				{isLabelItem &&
 					<label className={style.label}>

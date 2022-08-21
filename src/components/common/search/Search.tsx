@@ -11,6 +11,7 @@ import { setIsDisabled } from 'store/slices'
 import style from './Search.module.scss'
 import { SearchPropsType } from './types'
 import { UniversalButton } from '../universalButton'
+import { UniversalInput } from '../universalInput'
 
 export const Search: FC<SearchPropsType> =
 	({ title, searchValue, handleSetSearchValueChange, handleResetSearchValueClick }): ReturnComponentType => {
@@ -51,7 +52,7 @@ export const Search: FC<SearchPropsType> =
 				<div className={style.searchText}>{title}</div>
 				<div className={style.search}>
 					<img className={style.searchIcon} src={loon} />
-					<input
+					<UniversalInput
 						className={style.searchInput}
 						placeholder='Provide your text'
 						value={value}

@@ -127,13 +127,13 @@ export const Cards: FC = (): ReturnComponentType => {
 		questionInputRef.current?.focus()
 	}
 
-	const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setAnswerValue(event.currentTarget.value)
-	}
+	// const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
+	// 	setAnswerValue(event.currentTarget.value)
+	// }
 
-	const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setQuestionValue(event.currentTarget.value)
-	}
+	// const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
+	// 	setQuestionValue(event.currentTarget.value)
+	// }
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
@@ -149,8 +149,8 @@ export const Cards: FC = (): ReturnComponentType => {
 					onDeactivateModalClick={handleDeactivateModalClick}
 					onSaveClick={onAddPackClick}
 					title={'Add new card'}
-					onAnswerChange={handleAnswerChange}
-					onQuestionChange={handleQuestionChange}
+					setAnswerValue={setAnswerValue}
+					setQuestionValue={setQuestionValue}
 					answer={answerValue}
 					question={questionValue}
 					ref={questionInputRef}

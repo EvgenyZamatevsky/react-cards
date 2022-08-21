@@ -41,11 +41,6 @@ export const Pack: FC<PackPropsType> =
 			}
 		}
 
-		const onUpdatedPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-			setUpdatedPackName(event.currentTarget.value)
-			setErrorMessage(EMPTY_STRING)
-		}
-
 		const handleRemovePackClick = (): void => {
 			dispatch(removePack({ packId: _id, authorizedUserId: user_id }))
 			setIsDeleteModalActive(false)
@@ -90,11 +85,12 @@ export const Pack: FC<PackPropsType> =
 				<Modal isModalActive={isPackModalActive} onDeactivateModalClick={handleDeactivatePackModalClick}>
 					<ModalPack
 						value={updatedPackName}
-						onInputChange={onUpdatedPackNameChange}
+						setUpdatedPackName={setUpdatedPackName}
 						onDeactivateModalClick={handleDeactivatePackModalClick}
 						onSaveClick={onUpdatePackNameClick}
 						title={'Edit pack'}
 						errorMessage={errorMessage}
+						setErrorMessage={setErrorMessage}
 						ref={updatedPackNameInputRef}
 					/>
 				</Modal>

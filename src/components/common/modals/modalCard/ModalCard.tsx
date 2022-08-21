@@ -1,16 +1,17 @@
 import React, { FC, forwardRef } from 'react'
 import { ReturnComponentType } from 'types'
-import cross from 'assets/icons/cross.svg'
-import style from './ModalCard.module.scss'
 import { ModalCardPropsType } from './types'
 import { UniversalButton } from 'components/common/universalButton'
+import { UniversalInput } from 'components/common/universalInput'
+import cross from 'assets/icons/cross.svg'
+import style from './ModalCard.module.scss'
 
 export const ModalCard: FC<ModalCardPropsType> =
 	forwardRef(({
 		question,
 		answer,
-		onQuestionChange,
-		onAnswerChange,
+		setQuestionValue,
+		setAnswerValue,
 		onDeactivateModalClick,
 		onSaveClick,
 		title,
@@ -24,20 +25,20 @@ export const ModalCard: FC<ModalCardPropsType> =
 					<img className={style.cross} src={cross} alt='cross' onClick={onDeactivateModalClick} />
 				</div>
 
-				<input
-					className={style.question}
-					type='text'
+				<UniversalInput
+					primary
+					additionalPrimaryInput={style.question}
 					placeholder='Question'
 					value={question}
-					onChange={onQuestionChange}
+					setValue={setQuestionValue}
 					ref={ref}
 				/>
-				<input
-					className={style.answer}
-					type='text'
+				<UniversalInput
+					primary
+					additionalPrimaryInput={style.answer}
 					placeholder='Answer'
 					value={answer}
-					onChange={onAnswerChange}
+					setValue={setAnswerValue}
 				/>
 
 				<div className={style.buttons}>

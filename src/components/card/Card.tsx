@@ -46,14 +46,6 @@ export const Card: FC<CardPropsType> =
 			setIsCardModalActive(false)
 		}
 
-		const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
-			setQuestionValue(event.currentTarget.value)
-		}
-
-		const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
-			setAnswerValue(event.currentTarget.value)
-		}
-
 		const handleDeactivateCardModalClick = (): void => resetModalValues()
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
@@ -73,8 +65,8 @@ export const Card: FC<CardPropsType> =
 					<ModalCard
 						answer={answerValue}
 						question={questionValue}
-						onAnswerChange={handleAnswerChange}
-						onQuestionChange={handleQuestionChange}
+						setAnswerValue={setAnswerValue}
+						setQuestionValue={setQuestionValue}
 						onDeactivateModalClick={handleDeactivateCardModalClick}
 						onSaveClick={handleUpdateCardQuestionClick}
 						ref={editableQuestionInputRef}
