@@ -47,18 +47,15 @@ export const Pack: FC<PackPropsType> =
 		}
 
 		const handleUpdatePackNameClick = (): void => {
-			if (updatedPackName !== name) {
-				dispatch(updatePackName({ authorizedUserId: user_id, packId: _id, updatedPackName }))
-			}
-
-			setIsPackModalActive(false)
-		}
-
-		const onUpdatePackNameClick = (): void => {
 			const updatedPackNameTrimmed = updatedPackName.trim()
+			const nameTrimmed = name.trim()
 
 			if (updatedPackNameTrimmed !== EMPTY_STRING) {
-				handleUpdatePackNameClick()
+				if (updatedPackNameTrimmed !== nameTrimmed) {
+					dispatch(updatePackName({ authorizedUserId: user_id, packId: _id, updatedPackName: updatedPackNameTrimmed }))
+				}
+
+				setIsPackModalActive(false)
 			} else {
 				setErrorMessage(ERROR_MESSAGE)
 			}
@@ -87,7 +84,7 @@ export const Pack: FC<PackPropsType> =
 						value={updatedPackName}
 						setUpdatedPackName={setUpdatedPackName}
 						onDeactivateModalClick={handleDeactivatePackModalClick}
-						onSaveClick={onUpdatePackNameClick}
+						onSaveClick={handleUpdatePackNameClick}
 						title={'Edit pack'}
 						errorMessage={errorMessage}
 						setErrorMessage={setErrorMessage}

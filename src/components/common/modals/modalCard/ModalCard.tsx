@@ -15,6 +15,10 @@ export const ModalCard: FC<ModalCardPropsType> =
 		onDeactivateModalClick,
 		onSaveClick,
 		title,
+		questionErrorMessage,
+		setQuestionErrorMessage,
+		answerErrorMessage,
+		setAnswerErrorMessage
 	},
 		ref): ReturnComponentType => {
 
@@ -32,6 +36,8 @@ export const ModalCard: FC<ModalCardPropsType> =
 					value={question}
 					setValue={setQuestionValue}
 					ref={ref}
+					errorMessage={questionErrorMessage}
+					setErrorMessage={setQuestionErrorMessage}
 				/>
 				<UniversalInput
 					primary
@@ -39,6 +45,8 @@ export const ModalCard: FC<ModalCardPropsType> =
 					placeholder='Answer'
 					value={answer}
 					setValue={setAnswerValue}
+					errorMessage={answerErrorMessage}
+					setErrorMessage={setAnswerErrorMessage}
 				/>
 
 				<div className={style.buttons}>

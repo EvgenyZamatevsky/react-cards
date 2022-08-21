@@ -138,14 +138,6 @@ export const Packs: FC = (): ReturnComponentType => {
 		}
 	}
 
-	// const onPackNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-	// 	setPackName(event.currentTarget.value)
-
-	// 	if (errorMessage) {
-	// 		setErrorMessage(EMPTY_STRING)
-	// 	}
-	// }
-
 	const onIsPackPrivateChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		setIsPackPrivate(event.currentTarget.checked)
 	}

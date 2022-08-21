@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
@@ -18,10 +18,10 @@ import {
 } from 'store/selectors'
 import { ReturnComponentType } from 'types'
 import { resetMinValueAndMaxValue, setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
-import style from './Cards.module.scss'
 import { Modal, ModalCard } from 'components/common'
-import { EMPTY_STRING } from 'constants/base'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { useAppDispatch } from 'hooks'
+import style from './Cards.module.scss'
 
 export const Cards: FC = (): ReturnComponentType => {
 
@@ -44,6 +44,8 @@ export const Cards: FC = (): ReturnComponentType => {
 	const [isActiveModal, setIsActiveModal] = useState(false)
 	const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
 	const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
+	const [questionErrorMessage, setQuestionErrorMessage] = useState(EMPTY_STRING)
+	const [answerErrorMessage, setAnswerErrorMessage] = useState(EMPTY_STRING)
 
 	const questionInputRef = useRef<HTMLInputElement>(null)
 
@@ -100,11 +102,25 @@ export const Cards: FC = (): ReturnComponentType => {
 		setIsActiveModal(false)
 		setQuestionValue(EMPTY_STRING)
 		setAnswerValue(EMPTY_STRING)
+		setQuestionErrorMessage(EMPTY_STRING)
+		setAnswerErrorMessage(EMPTY_STRING)
 	}
 
 	const onAddPackClick = (): void => {
-		dispatch(addCard({ packId: packId as string, answer: answerValue, question: questionValue }))
-		resetModalValues()
+		const answerValueTrimmed = answerValue.trim()
+		const questionValueTrimmed = questionValue.trim()
+
+		if (answerValueTrimmed !== EMPTY_STRING && questionValueTrimmed !== EMPTY_STRING) {
+			dispatch(addCard({ packId: packId as string, answer: answerValue, question: questionValue }))
+			resetModalValues()
+		} else {
+			if (answerValueTrimmed === EMPTY_STRING) {
+				setAnswerErrorMessage(ERROR_MESSAGE)
+			}
+			if (questionValueTrimmed === EMPTY_STRING) {
+				setQuestionErrorMessage(ERROR_MESSAGE)
+			}
+		}
 	}
 
 	const handleBackPacksListClick = (): void => {
@@ -127,14 +143,6 @@ export const Cards: FC = (): ReturnComponentType => {
 		questionInputRef.current?.focus()
 	}
 
-	// const handleAnswerChange = (event: ChangeEvent<HTMLInputElement>): void => {
-	// 	setAnswerValue(event.currentTarget.value)
-	// }
-
-	// const handleQuestionChange = (event: ChangeEvent<HTMLInputElement>): void => {
-	// 	setQuestionValue(event.currentTarget.value)
-	// }
-
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -154,6 +162,10 @@ export const Cards: FC = (): ReturnComponentType => {
 					answer={answerValue}
 					question={questionValue}
 					ref={questionInputRef}
+					questionErrorMessage={questionErrorMessage}
+					answerErrorMessage={answerErrorMessage}
+					setQuestionErrorMessage={setQuestionErrorMessage}
+					setAnswerErrorMessage={setAnswerErrorMessage}
 				/>
 			</Modal>
 			<div className={style.container}>

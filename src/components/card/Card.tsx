@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FC, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
-import { EMPTY_STRING } from 'constants/base'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { CardPropsType } from './types'
 import style from './Card.module.scss'
 
@@ -16,20 +16,24 @@ export const Card: FC<CardPropsType> =
 
 		const [isCardModalActive, setIsCardModalActive] = useState(false)
 		const [isDeleteModalActive, setIsDeleteModalActive] = useState(false)
-		const [questionValue, setQuestionValue] = useState(EMPTY_STRING)
-		const [answerValue, setAnswerValue] = useState(EMPTY_STRING)
+		const [updatedQuestion, setUpdatedQuestion] = useState(EMPTY_STRING)
+		const [updatedAnswer, setUpdatedAnswer] = useState(EMPTY_STRING)
+		const [questionErrorMessage, setQuestionErrorMessage] = useState(EMPTY_STRING)
+		const [answerErrorMessage, setAnswerErrorMessage] = useState(EMPTY_STRING)
 
 		const editableQuestionInputRef = useRef<HTMLInputElement>(null)
 
 		const resetModalValues = (): void => {
 			setIsCardModalActive(false)
+			setQuestionErrorMessage(EMPTY_STRING)
+			setAnswerErrorMessage(EMPTY_STRING)
 
-			if (answerValue !== answer) {
-				setAnswerValue(answer)
+			if (updatedAnswer !== answer) {
+				setUpdatedAnswer(answer)
 			}
 
-			if (questionValue !== question) {
-				setQuestionValue(question)
+			if (updatedQuestion !== question) {
+				setUpdatedQuestion(question)
 			}
 		}
 
@@ -38,12 +42,27 @@ export const Card: FC<CardPropsType> =
 			setIsDeleteModalActive(false)
 		}
 
-		const handleUpdateCardQuestionClick = (): void => {
-			if (answerValue !== answer || questionValue !== question) {
-				dispatch(updateCardQuestionOrAnswer({ packId, cardId, domainPayload: { answer: answerValue, question: questionValue } }))
-			}
+		const handleUpdateCardQuestionAndAnswerClick = (): void => {
+			const updatedAnswerTrimmed = updatedAnswer.trim()
+			const updatedQuestionTrimmed = updatedQuestion.trim()
+			const answerTrimmed = answer.trim()
+			const questionTrimmed = question.trim()
 
-			setIsCardModalActive(false)
+			if (updatedAnswerTrimmed !== EMPTY_STRING && updatedQuestionTrimmed !== EMPTY_STRING) {
+				if (updatedAnswerTrimmed !== answerTrimmed || updatedQuestionTrimmed !== questionTrimmed) {
+					dispatch(updateCardQuestionOrAnswer({ packId, cardId, domainPayload: { answer: updatedAnswerTrimmed, question: updatedQuestionTrimmed } }))
+				}
+
+				setIsCardModalActive(false)
+			} else {
+				if (updatedAnswerTrimmed === EMPTY_STRING) {
+					setAnswerErrorMessage(ERROR_MESSAGE)
+				}
+
+				if (updatedQuestionTrimmed === EMPTY_STRING) {
+					setQuestionErrorMessage(ERROR_MESSAGE)
+				}
+			}
 		}
 
 		const handleDeactivateCardModalClick = (): void => resetModalValues()
@@ -52,8 +71,8 @@ export const Card: FC<CardPropsType> =
 
 		const handleActivateCardModalClick = (): void => {
 			setIsCardModalActive(true)
-			setQuestionValue(question)
-			setAnswerValue(answer)
+			setUpdatedQuestion(question)
+			setUpdatedAnswer(answer)
 			editableQuestionInputRef.current?.focus()
 		}
 
@@ -63,14 +82,18 @@ export const Card: FC<CardPropsType> =
 			<>
 				<Modal isModalActive={isCardModalActive} onDeactivateModalClick={handleDeactivateCardModalClick}>
 					<ModalCard
-						answer={answerValue}
-						question={questionValue}
-						setAnswerValue={setAnswerValue}
-						setQuestionValue={setQuestionValue}
+						answer={updatedAnswer}
+						question={updatedQuestion}
+						setAnswerValue={setUpdatedAnswer}
+						setQuestionValue={setUpdatedQuestion}
 						onDeactivateModalClick={handleDeactivateCardModalClick}
-						onSaveClick={handleUpdateCardQuestionClick}
+						onSaveClick={handleUpdateCardQuestionAndAnswerClick}
 						ref={editableQuestionInputRef}
 						title={'Edit card'}
+						questionErrorMessage={questionErrorMessage}
+						setQuestionErrorMessage={setQuestionErrorMessage}
+						setAnswerErrorMessage={setAnswerErrorMessage}
+						answerErrorMessage={answerErrorMessage}
 					/>
 				</Modal>
 
