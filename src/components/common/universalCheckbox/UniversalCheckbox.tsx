@@ -26,7 +26,7 @@ export const UniversalCheckbox: FC<UniversalCheckboxPropsType> =
 		}
 
 		return (
-			<label>
+			<label className={style.label}>
 				<input
 					type='checkbox'
 					onChange={onCheckboxChange}
