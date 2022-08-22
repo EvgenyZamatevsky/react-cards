@@ -17,10 +17,8 @@ import {
 	selectSearchCardValue,
 	selectSortCards
 } from 'store/selectors'
-import { Grade } from 'components/grade'
 import { resetMinValueAndMaxValue } from 'store/slices'
-
-const FIRST_INDEX_ELEMENTS = 0
+import { UniversalRadio } from 'components/common/universalRadio'
 
 const grades: string[] = ['Did not know', 'Forgot', 'A lot of thought', 'Сonfused', 'Knew the answer']
 
@@ -41,12 +39,9 @@ export const Learn: FC = (): ReturnComponentType => {
 
 	const [isShowAnswer, setIsShowAnswer] = useState(false)
 	const [isMounted, setIsMounted] = useState(true)
-	const [gradeIndex, setGradeIndex] = useState(FIRST_INDEX_ELEMENTS)
+	const [gradeIndex, setGradeIndex] = useState(1)
 	const [currentCard, setCurrentCard] = useState<Nullable<CurrentCardType>>(null)
-
-	const gradesRender = grades.map((grade, index) => {
-		return <Grade key={index} grade={grade} index={index} setGradeIndex={setGradeIndex} />
-	})
+	const [currentGrade, setCurrentGrade] = useState(grades[0])
 
 	useEffect(() => {
 		if (isMounted) {
@@ -77,7 +72,8 @@ export const Learn: FC = (): ReturnComponentType => {
 	}
 
 	const onNextQuestionClick = (): void => {
-		setGradeIndex(0)
+		setGradeIndex(1)
+		setCurrentGrade(grades[0])
 		setIsShowAnswer(false)
 
 		if (cards.length > 0) {
@@ -92,6 +88,10 @@ export const Learn: FC = (): ReturnComponentType => {
 	}
 
 	const onShowAnswerActiveClick = (): void => setIsShowAnswer(true)
+
+	const handleSetGradeIndexChange = (index: number): void => {
+		setGradeIndex(index + 1)
+	}
 
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
@@ -134,10 +134,15 @@ export const Learn: FC = (): ReturnComponentType => {
 
 							<div className={style.text}>Rate yourself:</div>
 
-							{gradesRender}
+							<UniversalRadio
+								options={grades}
+								name='radio'
+								value={currentGrade}
+								setValue={setCurrentGrade}
+								setIndex={handleSetGradeIndexChange}
+							/>
 
 							<UniversalButton
-								disabled={gradeIndex === 0}
 								className={style.nextQuestionBtn}
 								onClick={onNextQuestionClick}
 							>

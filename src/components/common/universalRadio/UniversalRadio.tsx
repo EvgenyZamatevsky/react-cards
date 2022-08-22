@@ -4,19 +4,21 @@ import { UniversalRadioPropsType } from './types'
 import style from './UniversalRadio.module.scss'
 
 export const UniversalRadio: FC<UniversalRadioPropsType> =
-	({ options, name, value, setValue, onChange, ...restProps }): ReturnComponentType => {
-
-		const onRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-			onChange && onChange(event)
-			setValue && setValue(event.currentTarget.value)
-		}
+	({ options, name, value, setValue, setIndex, onChange, ...restProps }): ReturnComponentType => {
 
 		const optionsRender: any[] = options
 			? options.map((option, index) => {
+
+				const onRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+					onChange && onChange(event)
+					setValue && setValue(event.currentTarget.value)
+					setIndex && setIndex(index)
+				}
+
 				return (
 					<label key={index} className={style.label}>
 						<input
-							className={''}
+							className={style.radio}
 							type='radio'
 							name={name}
 							value={option}
@@ -24,7 +26,7 @@ export const UniversalRadio: FC<UniversalRadioPropsType> =
 							onChange={onRadioChange}
 							{...restProps}
 						/>
-						{option}
+						<div className={style.option}>{option}</div>
 					</label>
 				)
 			})

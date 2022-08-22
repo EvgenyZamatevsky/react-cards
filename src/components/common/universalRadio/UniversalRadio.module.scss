@@ -1,0 +1,14 @@
+@import 'styles/sass/mixins.scss';
+
+.label {
+	@include flex(row, stretch, center);
+	margin-top: 12px;
+	width: 150px;
+
+	.radio {}
+
+	.option {
+		margin-left: 12px;
+		line-height: 24px;
+	}
+}
