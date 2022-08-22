@@ -10,36 +10,35 @@ export const UniversalSelect: FC<UniversalSelectPropsType> =
 		onChange,
 		options,
 		setValue,
-		primarySelect,
-		secondarySelect,
+		primary,
+		secondary,
 		additionalPrimarySelect,
 		additionalSecondarySelect,
 		...restProps
 	}): ReturnComponentType => {
 
-		const primarySelectClass = primarySelect && `${style.primarySelect} ${additionalPrimarySelect && additionalPrimarySelect}`
-		const secondarySelectClass = secondarySelect && `${style.secondarySelect} ${additionalSecondarySelect && additionalSecondarySelect}`
-		const otherSelectClass = className && className
+		const primarySelect = primary && `${style.primarySelect} ${additionalPrimarySelect && additionalPrimarySelect}`
+		const secondarySelect = secondary && `${style.secondarySelect} ${additionalSecondarySelect && additionalSecondarySelect}`
+		const otherSelect = className && className
 
-		const optionClass = `${style.primaryOption}`
-		const otherOptionClass = optionClassName && optionClassName
+		const primaryOption = `${style.primaryOption}`
+		const otherOption = optionClassName && optionClassName
 
 		const optionsRender: any[] = options
-			? options.map((option, index) => {
-				return <option className={`${optionClass} ${otherOptionClass}`} key={index}>{option}</option>
-			})
+			? options.map((option, index) => <option className={`${primaryOption} ${otherOption}`} key={index}>{option}</option>)
 			: []
 
-		const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		const onSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
 			onChange && onChange(event)
 			setValue && setValue(event.currentTarget.value)
 		}
 
 		return (
 			<select
-				className={`${primarySelectClass} ${secondarySelectClass} ${otherSelectClass}`}
+				className={`${primarySelect} ${secondarySelect} ${otherSelect}`}
 				onChange={onSelectChange}
-				{...restProps}>
+				{...restProps}
+			>
 				{optionsRender}
 			</select>
 		)

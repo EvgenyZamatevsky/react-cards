@@ -6,8 +6,8 @@ export type UniversalSelectPropsType = DefaultSelectPropsType & {
 	options: string[]
 	setValue?: (value: string) => void
 	optionClassName?: string
-	primarySelect?: boolean
-	secondarySelect?: boolean
+	primary?: boolean
+	secondary?: boolean
 	additionalPrimarySelect?: boolean
 	additionalSecondarySelect?: boolean
 }

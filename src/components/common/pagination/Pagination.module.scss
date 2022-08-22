@@ -8,7 +8,7 @@
 	 		display: flex;
 	 		margin-bottom: 36px;
 
-	 		button {
+	 		.pageBtn {
 	 			font-size: 14px;
 	 			line-height: 15px;
 	 			color: #000;
@@ -31,15 +31,15 @@
 	 			margin-left: 30px;
 	 			font-size: 14px;
 	 			line-height: 15px;
-
-	 			.select {
-	 				margin: 0px 5px;
-	 				height: 24px;
-	 				width: 50px;
-	 				border: 1px solid #D9D9D9;
-	 				border-radius: 2px;
-	 				outline: none;
-	 			}
 	 		}
 	 	}
+	 }
+
+
+	 .rightBtn {
+	 	margin-left: 10px;
+	 }
+
+	 .leftBtn {
+	 	margin-right: 10px;
 	 }

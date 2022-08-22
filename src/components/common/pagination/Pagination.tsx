@@ -1,5 +1,4 @@
 import React, { FC, memo, useEffect, useState } from 'react'
-import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types/ReturnComponentType'
 import { PaginationPropsType } from './types'
 import { useSelector } from 'react-redux'
@@ -42,9 +41,7 @@ export const Pagination: FC<PaginationPropsType> =
 
 		const onIncreasePortionNumberClick = (): void => setPortionNumber(portionNumber + 1)
 
-		const onSelectChange = (value: string): void => {
-			handleSetPageCountChange(Number(value))
-		}
+		const onSelectChange = (value: string): void => handleSetPageCountChange(Number(value))
 
 		return (
 			<div className={style.pagination}>
@@ -52,7 +49,14 @@ export const Pagination: FC<PaginationPropsType> =
 				<div className={style.container}>
 					{totalItemsCount >= 11 &&
 						<>
-							{portionNumber > 1 && <UniversalButton onClick={onDecreasePortionNumberClick} disabled={isDisabled}>&laquo;</UniversalButton>}
+							{portionNumber > 1 &&
+								<UniversalButton
+									className={style.leftBtn}
+									onClick={onDecreasePortionNumberClick}
+									disabled={isDisabled}
+								>
+									&laquo;
+								</UniversalButton>}
 
 							{pages
 								.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -63,7 +67,7 @@ export const Pagination: FC<PaginationPropsType> =
 									return (
 										<UniversalButton
 											key={p}
-											className={page === p ? style.active : EMPTY_STRING}
+											className={`${style.pageBtn} ${page === p && style.active}`}
 											onClick={onSetPageClick}
 											disabled={isDisabled}
 										>
@@ -72,13 +76,20 @@ export const Pagination: FC<PaginationPropsType> =
 									)
 								})}
 
-							{portionCount > portionNumber && <UniversalButton onClick={onIncreasePortionNumberClick} disabled={isDisabled}>&raquo;</UniversalButton>}
+							{portionCount > portionNumber &&
+								<UniversalButton
+									className={style.rightBtn}
+									onClick={onIncreasePortionNumberClick}
+									disabled={isDisabled}
+								>
+									&raquo;
+								</UniversalButton>}
 						</>}
 					{totalItemsCount >= 26 &&
 						<div className={style.showContainer}>
 							Show
 							<UniversalSelect
-								className={style.select}
+								primary
 								options={pageCountValues}
 								setValue={onSelectChange}
 								value={pageCount}
