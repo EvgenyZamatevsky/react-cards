@@ -7,6 +7,8 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getCards, updateCardGrade } from 'store/asyncActions/cards'
 import { Nullable, ReturnComponentType } from 'types'
 import { CurrentCardType } from './types'
+import { resetMinValueAndMaxValue } from 'store/slices'
+import { UniversalRadio } from 'components/common/universalRadio'
 import style from './Learn.module.scss'
 import {
 	selectCardPage,
@@ -17,8 +19,6 @@ import {
 	selectSearchCardValue,
 	selectSortCards
 } from 'store/selectors'
-import { resetMinValueAndMaxValue } from 'store/slices'
-import { UniversalRadio } from 'components/common/universalRadio'
 
 const grades: string[] = ['Did not know', 'Forgot', 'A lot of thought', 'Сonfused', 'Knew the answer']
 
@@ -135,6 +135,7 @@ export const Learn: FC = (): ReturnComponentType => {
 							<div className={style.text}>Rate yourself:</div>
 
 							<UniversalRadio
+								primary
 								options={grades}
 								name='radio'
 								value={currentGrade}
