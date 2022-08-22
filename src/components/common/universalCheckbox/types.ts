@@ -8,4 +8,6 @@ export type UniversalCheckboxPropsType = Omit<DefaultCheckboxPropsType, 'type'> 
 	secondary?: boolean
 	additionalPrimaryCheckbox?: string
 	additionalSecondaryCheckbox?: string
+	labelClassName?: string
+	spanClassName?: string
 }
