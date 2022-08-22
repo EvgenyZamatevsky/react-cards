@@ -10,9 +10,9 @@ import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
-import style from './Pack.module.scss'
 import { PackPropsType } from './types'
 import { UniversalButton } from 'components/common/universalButton'
+import style from './Pack.module.scss'
 
 export const Pack: FC<PackPropsType> =
 	({ userId, userName, packId, packName, cardsCount, packUpdated, isDisabled }): ReturnComponentType => {

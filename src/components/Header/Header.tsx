@@ -1,14 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Path } from 'enums/Path'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'hooks'
-import { logOut } from 'store/asyncActions'
 import { UniversalButton } from 'components/common/universalButton'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
-import logOutIcon from 'assets/icons/logOut.png'
-import person from 'assets/icons/person.svg'
+import { Popup } from 'components/popup'
 import style from './Header.module.scss'
 import {
 	selectAuthorizedUserAvatar,
@@ -19,10 +16,6 @@ import {
 } from 'store/selectors'
 
 export const Header: FC = (): ReturnComponentType => {
-
-	const dispatch = useAppDispatch()
-
-	const navigate = useNavigate()
 
 	const isAuth = useSelector(selectIsAuth)
 	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
@@ -48,16 +41,6 @@ export const Header: FC = (): ReturnComponentType => {
 
 	const onShowPopupClick = (): void => setIsVisiblePopup(!isVisiblePopup)
 
-	const onLogOutClick = (): void => {
-		dispatch(logOut())
-		setIsVisiblePopup(false)
-	}
-
-	const onGoToProfileClick = (): void => {
-		navigate(Path.PROFILE)
-		setIsVisiblePopup(false)
-	}
-
 	return (
 		<header className={style.container} ref={itemRef}>
 			<div className={style.title}>Cards</div>
@@ -75,17 +58,7 @@ export const Header: FC = (): ReturnComponentType => {
 						src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
 						alt='avatar'
 					/>
-					{isVisiblePopup &&
-						<div className={style.popup}>
-							<UniversalButton className={style.profileBtn} onClick={onGoToProfileClick}	>
-								<img className={style.personIcon} src={person} alt='user' />
-								Profile
-							</UniversalButton>
-							<UniversalButton className={style.logOutBtn} onClick={onLogOutClick}>
-								<img className={style.logOutIcon} src={logOutIcon} alt='log out' />
-								Log Out
-							</UniversalButton>
-						</div>}
+					{isVisiblePopup && <Popup setIsVisiblePopup={setIsVisiblePopup} />}
 				</div>
 				: <Link
 					to={Path.LOGIN}
