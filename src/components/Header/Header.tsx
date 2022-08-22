@@ -3,11 +3,12 @@ import { ReturnComponentType } from 'types'
 import { Link, useNavigate } from 'react-router-dom'
 import { Path } from 'enums/Path'
 import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'hooks'
+import { logOut } from 'store/asyncActions'
+import { UniversalButton } from 'components/common/universalButton'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
 import logOutIcon from 'assets/icons/logOut.png'
 import person from 'assets/icons/person.svg'
-import { useAppDispatch } from 'hooks'
-import { logOut } from 'store/asyncActions'
 import style from './Header.module.scss'
 import {
 	selectAuthorizedUserAvatar,
@@ -16,7 +17,6 @@ import {
 	selectIsAvatarBroken,
 	selectIsDisabled,
 } from 'store/selectors'
-import { UniversalButton } from 'components/common/universalButton'
 
 export const Header: FC = (): ReturnComponentType => {
 

@@ -4,6 +4,12 @@ import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
+import { ReturnComponentType } from 'types'
+import { resetMinValueAndMaxValue, setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
+import { Modal, ModalCard } from 'components/common'
+import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
+import { useAppDispatch } from 'hooks'
+import style from './Cards.module.scss'
 import {
 	selectAuthorizedUserId,
 	selectCardPage,
@@ -16,12 +22,6 @@ import {
 	selectSearchCardValue,
 	selectSortCards
 } from 'store/selectors'
-import { ReturnComponentType } from 'types'
-import { resetMinValueAndMaxValue, setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
-import { Modal, ModalCard } from 'components/common'
-import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
-import { useAppDispatch } from 'hooks'
-import style from './Cards.module.scss'
 
 export const Cards: FC = (): ReturnComponentType => {
 
