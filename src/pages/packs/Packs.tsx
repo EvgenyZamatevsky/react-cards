@@ -51,7 +51,6 @@ export const Packs: FC = (): ReturnComponentType => {
 	const [packName, setPackName] = useState(EMPTY_STRING)
 	const [isPackPrivate, setIsPackPrivate] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
-
 	const namePackInputRef = useRef<HTMLInputElement>(null)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']

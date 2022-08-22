@@ -1,18 +1,14 @@
-import React, { ChangeEvent, FC, memo, useEffect, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types/ReturnComponentType'
-import style from './Pagination.module.scss'
-import { PageCountValueType, PaginationPropsType } from './types'
+import { PaginationPropsType } from './types'
 import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
 import { UniversalButton } from '../universalButton'
+import { UniversalSelect } from '../universalSelect'
+import style from './Pagination.module.scss'
 
-const pageCountValues: PageCountValueType[] = [
-	{ value: '5', count: 5 },
-	{ value: '25', count: 25 },
-	{ value: '50', count: 50 },
-	{ value: '100', count: 100 },
-]
+const pageCountValues: string[] = ['5', '25', '50', '100']
 
 export const Pagination: FC<PaginationPropsType> =
 	memo(({
@@ -46,8 +42,8 @@ export const Pagination: FC<PaginationPropsType> =
 
 		const onIncreasePortionNumberClick = (): void => setPortionNumber(portionNumber + 1)
 
-		const onSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-			handleSetPageCountChange(Number(event.currentTarget.value))
+		const onSelectChange = (value: string): void => {
+			handleSetPageCountChange(Number(value))
 		}
 
 		return (
@@ -81,14 +77,13 @@ export const Pagination: FC<PaginationPropsType> =
 					{totalItemsCount >= 26 &&
 						<div className={style.showContainer}>
 							Show
-							<select
-								defaultValue={pageCount}
+							<UniversalSelect
 								className={style.select}
-								onChange={onSelectChange}
+								options={pageCountValues}
+								setValue={onSelectChange}
+								value={pageCount}
 								disabled={isDisabled}
-							>
-								{pageCountValues.map(({ value, count }) => <option key={value} value={value}>{count}</option>)}
-							</select>
+							/>
 							Cards per Page
 						</div>}
 				</div>
