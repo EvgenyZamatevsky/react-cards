@@ -40,8 +40,8 @@ export const Learn: FC = (): ReturnComponentType => {
 	const [isShowAnswer, setIsShowAnswer] = useState(false)
 	const [isMounted, setIsMounted] = useState(true)
 	const [gradeIndex, setGradeIndex] = useState(1)
-	const [currentCard, setCurrentCard] = useState<Nullable<CurrentCardType>>(null)
 	const [currentGrade, setCurrentGrade] = useState(grades[0])
+	const [currentCard, setCurrentCard] = useState<Nullable<CurrentCardType>>(null)
 
 	useEffect(() => {
 		if (isMounted) {
