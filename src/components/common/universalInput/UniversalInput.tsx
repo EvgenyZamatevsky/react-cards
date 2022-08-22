@@ -19,6 +19,7 @@ export const UniversalInput: FC<UniversalInputPropsType> =
 		additionalSecondaryInput,
 		primary,
 		secondary,
+		spanClassName,
 		...restProps
 	},
 		ref): ReturnComponentType => {
@@ -26,6 +27,8 @@ export const UniversalInput: FC<UniversalInputPropsType> =
 		const primaryInput = primary && `${style.primaryInput} ${additionalPrimaryInput && additionalPrimaryInput}`
 		const secondaryInput = secondary && `${style.secondaryInput} ${additionalSecondaryInput && additionalSecondaryInput}`
 		const otherInput = className && className
+		const primarySpan = `${style.primarySpan}`
+		const otherSpan = spanClassName && spanClassName
 
 		const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
 			onChange && onChange(event)
@@ -51,7 +54,7 @@ export const UniversalInput: FC<UniversalInputPropsType> =
 					className={`${primaryInput} ${secondaryInput} ${otherInput}`}
 					{...restProps}
 				/>
-				{errorMessage && <span className={style.errorMessage}>{errorMessage}</span>}
+				{errorMessage && <span className={`${primarySpan} ${otherSpan}`}>{errorMessage}</span>}
 			</>
 		)
 	})

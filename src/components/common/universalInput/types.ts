@@ -12,6 +12,6 @@ export type UniversalInputPropsType = DefaultInputPropsType & {
 	secondary?: boolean
 	additionalPrimaryInput?: string
 	additionalSecondaryInput?: string
-
+	spanClassName?: string
 	ref?: Ref<HTMLInputElement>
 }
