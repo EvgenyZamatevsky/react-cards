@@ -4,11 +4,29 @@ import { UniversalSelectPropsType } from './types'
 import style from './UniversalSelect.module.scss'
 
 export const UniversalSelect: FC<UniversalSelectPropsType> =
-	({ className, onChange, options, setValue, ...restProps }): ReturnComponentType => {
+	({
+		className,
+		optionClassName,
+		onChange,
+		options,
+		setValue,
+		primarySelect,
+		secondarySelect,
+		additionalPrimarySelect,
+		additionalSecondarySelect,
+		...restProps
+	}): ReturnComponentType => {
+
+		const primarySelectClass = primarySelect && `${style.primarySelect} ${additionalPrimarySelect && additionalPrimarySelect}`
+		const secondarySelectClass = secondarySelect && `${style.secondarySelect} ${additionalSecondarySelect && additionalSecondarySelect}`
+		const otherSelectClass = className && className
+
+		const optionClass = `${style.primaryOption}`
+		const otherOptionClass = optionClassName && optionClassName
 
 		const optionsRender: any[] = options
 			? options.map((option, index) => {
-				return <option className={style.option} key={index}>{option}</option>
+				return <option className={`${optionClass} ${otherOptionClass}`} key={index}>{option}</option>
 			})
 			: []
 
@@ -17,10 +35,11 @@ export const UniversalSelect: FC<UniversalSelectPropsType> =
 			setValue && setValue(event.currentTarget.value)
 		}
 
-		const selectClassName = `${style.select} ${className && className}`
-
 		return (
-			<select className={selectClassName} onChange={onSelectChange} {...restProps}>
+			<select
+				className={`${primarySelectClass} ${secondarySelectClass} ${otherSelectClass}`}
+				onChange={onSelectChange}
+				{...restProps}>
 				{optionsRender}
 			</select>
 		)

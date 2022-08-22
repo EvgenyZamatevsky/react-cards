@@ -5,4 +5,9 @@ type DefaultSelectPropsType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectE
 export type UniversalSelectPropsType = DefaultSelectPropsType & {
 	options: string[]
 	setValue?: (value: string) => void
+	optionClassName?: string
+	primarySelect?: boolean
+	secondarySelect?: boolean
+	additionalPrimarySelect?: boolean
+	additionalSecondarySelect?: boolean
 }
