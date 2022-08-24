@@ -1,10 +1,5 @@
 @import 'styles/sass/mixins.scss';
 
-.numberOfCards {
-	font-size: 14px;
-	line-height: 17px;
-}
-
 .container {
 	@include flex(row, center, center);
 	margin: 25px 0 60px 0;

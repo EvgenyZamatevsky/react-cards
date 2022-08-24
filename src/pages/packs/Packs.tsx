@@ -178,13 +178,17 @@ export const Packs: FC = (): ReturnComponentType => {
 						handleResetSearchValueClick={handleResetSearchPackValueClick}
 					/>
 					<ShowPacks selectedPack={selectedPack} />
-					<DoubleRange
-						max={maxValue}
-						min={minValue}
-						maxDefaultValue={maxCardsCount}
-						minDefaultValue={minCardsCount}
-						onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
-					/>
+					<div>
+						<div className={style.numberOfCards}>Number of cards</div>
+						<DoubleRange
+							max={maxValue}
+							min={minValue}
+							maxDefaultValue={maxCardsCount}
+							minDefaultValue={minCardsCount}
+							onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
+							isDisabled={isDisabled}
+						/>
+					</div>
 				</div>
 				<div className={style.sort}>
 					<Sort

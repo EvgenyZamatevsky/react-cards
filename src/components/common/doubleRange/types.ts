@@ -4,4 +4,5 @@ export type DoubleRangePropsType = {
 	minDefaultValue: number
 	maxDefaultValue: number
 	onSetMinAndMaxValueMouseUp: ({ min, max }: { min: number, max: number }) => void
+	isDisabled?: boolean
 }
