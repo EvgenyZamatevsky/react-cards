@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { UniversalButton, ShowPacks, DoubleRange, Sort, Pagination, Search } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
@@ -8,7 +8,7 @@ import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { getPacks, addPack } from 'store/asyncActions'
-import { setMaxAndMinValue, setSearchPackValue, setSortValue, setPackPage, setPackPageCount } from 'store/slices'
+import { setSearchPackValue, setSortValue, setPackPage, setPackPageCount, setMinValue, setMaxValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 import {
@@ -85,10 +85,6 @@ export const Packs: FC = (): ReturnComponentType => {
 		}))
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
 
-	const handleSetMinAndMaxValueMouseUp = useCallback(({ min, max }: { min: number, max: number }): void => {
-		dispatch(setMaxAndMinValue({ max, min }))
-	}, [])
-
 	const handleSetSearchPackValueChange = (value: string): void => {
 		dispatch(setSearchPackValue(value))
 	}
@@ -138,6 +134,14 @@ export const Packs: FC = (): ReturnComponentType => {
 		}
 	}
 
+	const handleSetMaxValueMouseUp = useCallback((max: number): void => {
+		dispatch(setMaxValue(max))
+	}, [])
+
+	const handleSetMinValueMouseUp = useCallback((min: number): void => {
+		dispatch(setMinValue(min))
+	}, [])
+
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -185,7 +189,8 @@ export const Packs: FC = (): ReturnComponentType => {
 							min={minValue}
 							maxDefaultValue={maxCardsCount}
 							minDefaultValue={minCardsCount}
-							onSetMinAndMaxValueMouseUp={handleSetMinAndMaxValueMouseUp}
+							setMaxValueMouseUp={handleSetMaxValueMouseUp}
+							setMinValueMouseUp={handleSetMinValueMouseUp}
 							isDisabled={isDisabled}
 						/>
 					</div>

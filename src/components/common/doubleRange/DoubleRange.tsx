@@ -1,15 +1,28 @@
 import React, { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
-import style from './DoubleRange.module.scss'
 import { DoubleRangePropsType } from './types'
+import style from './DoubleRange.module.scss'
 
 export const DoubleRange: FC<DoubleRangePropsType> =
-	memo(({ min, max, minDefaultValue, maxDefaultValue, onSetMinAndMaxValueMouseUp, isDisabled }): ReturnComponentType => {
+	memo(({
+		min,
+		max,
+		minDefaultValue,
+		maxDefaultValue,
+		setMinValueMouseUp,
+		setMaxValueMouseUp,
+		isDisabled
+	}): ReturnComponentType => {
 
 		const [minValue, setMinValue] = useState(min)
 		const [maxValue, setMaxValue] = useState(max)
 
 		const rangeRef = useRef<HTMLDivElement>(null)
+
+		useEffect(() => {
+			setMinValue(minDefaultValue)
+			setMaxValue(maxDefaultValue)
+		}, [minDefaultValue, maxDefaultValue])
 
 		const onMinValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
 			const currentValue = Math.min(Number(event.currentTarget.value), maxValue)
@@ -21,10 +34,13 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 			setMaxValue(currentValue)
 		}
 
-		useEffect(() => {
-			setMinValue(minDefaultValue)
-			setMaxValue(maxDefaultValue)
-		}, [minDefaultValue, maxDefaultValue])
+		const onMinValueMouseUp = (): void => {
+			setMinValueMouseUp && setMinValueMouseUp(minValue)
+		}
+
+		const onMaxValueMouseUp = (): void => {
+			setMaxValueMouseUp && setMaxValueMouseUp(maxValue)
+		}
 
 		return (
 			<div className={style.container}>
@@ -35,7 +51,7 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 					value={minValue}
 					onChange={onMinValueChange}
 					className={`${style.thumb} ${style.thumbLeft}`}
-					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+					onMouseUp={onMinValueMouseUp}
 					disabled={isDisabled}
 				/>
 				<input
@@ -45,7 +61,7 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 					value={maxValue}
 					onChange={onMaxValueChange}
 					className={`${style.thumb} ${style.thumbRight}`}
-					onMouseUp={() => onSetMinAndMaxValueMouseUp({ min: minValue, max: maxValue })}
+					onMouseUp={onMaxValueMouseUp}
 					disabled={isDisabled}
 				/>
 

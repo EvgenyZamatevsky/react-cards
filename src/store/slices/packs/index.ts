@@ -28,9 +28,11 @@ const packsSlice = createSlice({
 		setSortValue(state, action: PayloadAction<string>) {
 			state.sortValue = action.payload
 		},
-		setMaxAndMinValue(state, action: PayloadAction<{ max: number, min: number }>) {
-			state.maxValue = action.payload.max
-			state.minValue = action.payload.min
+		setMaxValue(state, action: PayloadAction<number>) {
+			state.maxValue = action.payload
+		},
+		setMinValue(state, action: PayloadAction<number>) {
+			state.minValue = action.payload
 		},
 		setSelectedPack(state, action: PayloadAction<SelectedPackType>) {
 			state.selectedPack = action.payload
@@ -73,7 +75,8 @@ const packsSlice = createSlice({
 export const {
 	setSearchPackValue,
 	setSortValue,
-	setMaxAndMinValue,
+	setMaxValue,
+	setMinValue,
 	setSelectedPack,
 	setPackPage,
 	setPackPageCount,

@@ -3,6 +3,7 @@ export type DoubleRangePropsType = {
 	max: number
 	minDefaultValue: number
 	maxDefaultValue: number
-	onSetMinAndMaxValueMouseUp: ({ min, max }: { min: number, max: number }) => void
+	setMinValueMouseUp?: (min: number) => void
+	setMaxValueMouseUp?: (max: number) => void
 	isDisabled?: boolean
 }
