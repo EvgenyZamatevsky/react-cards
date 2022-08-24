@@ -27,31 +27,28 @@ export const UniversalRadio: FC<UniversalRadioPropsType> =
 		const primaryLabel = `${style.primaryLabel}`
 		const otherLabel = labelClassName && labelClassName
 
-		const optionsRender: any[] = options
-			? options.map((option, index) => {
+		const optionsRender = options.map((option, index) => {
+			const onRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+				onChange && onChange(event)
+				setValue && setValue(event.currentTarget.value)
+				setIndex && setIndex(index)
+			}
 
-				const onRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-					onChange && onChange(event)
-					setValue && setValue(event.currentTarget.value)
-					setIndex && setIndex(index)
-				}
-
-				return (
-					<label key={index} className={`${primaryLabel} ${otherLabel}`}>
-						<input
-							className={`${primaryRadio} ${secondaryRadio} ${otherRadio}`}
-							type='radio'
-							name={name}
-							value={option}
-							checked={option === value}
-							onChange={onRadioChange}
-							{...restProps}
-						/>
-						{option}
-					</label>
-				)
-			})
-			: []
+			return (
+				<label key={index} className={`${primaryLabel} ${otherLabel}`}>
+					<input
+						className={`${primaryRadio} ${secondaryRadio} ${otherRadio}`}
+						type='radio'
+						name={name}
+						value={option}
+						checked={option === value}
+						onChange={onRadioChange}
+						{...restProps}
+					/>
+					{option}
+				</label>
+			)
+		})
 
 		return (
 			<>{optionsRender}</>

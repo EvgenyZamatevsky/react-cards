@@ -40,16 +40,6 @@ export const EditableItem: FC<EditableItemPropsType> =
 			<>
 				{isEditMode
 					? <>
-						{/* <input
-							className={style.newNameInput}
-							type='text'
-							placeholder='Enter a new name'
-							autoFocus
-							onChange={onInputChange}
-							value={updatedValue}
-							onBlur={onUpdateValueBlur}
-							onKeyDown={onUpdateValueKeyDown}
-						/> */}
 						<UniversalInput
 							primary
 							additionalPrimaryInput={style.newNameInput}

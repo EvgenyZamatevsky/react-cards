@@ -1,8 +1,6 @@
-import { DetailedHTMLProps, InputHTMLAttributes, Ref } from 'react'
+import { ChangeEvent, FocusEvent, KeyboardEvent, Ref } from 'react'
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
-export type UniversalInputPropsType = DefaultInputPropsType & {
+export type UniversalInputPropsType = {
 	setValue?: (value: string) => void
 	onEnter?: () => void
 	onEscape?: () => void
@@ -14,4 +12,13 @@ export type UniversalInputPropsType = DefaultInputPropsType & {
 	additionalSecondaryInput?: string
 	spanClassName?: string
 	ref?: Ref<HTMLInputElement>
+
+	className?: string
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+	onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
+	type?: string
+	placeholder?: string
+	value: string
+	autoFocus?: boolean
+	onBlur?: (event: FocusEvent<HTMLInputElement>) => void
 }

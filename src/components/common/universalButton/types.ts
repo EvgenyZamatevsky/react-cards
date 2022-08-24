@@ -1,10 +1,13 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import { ReactNode } from 'react'
 
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-
-export type UniversalButtonPropsType = DefaultButtonPropsType & {
+export type UniversalButtonPropsType = {
 	primary?: boolean
 	secondary?: boolean
 	additionalPrimaryBtn?: string
 	additionalSecondaryBtn?: string
+	className?: string
+	children: ReactNode
+	onClick?: () => void
+	disabled?: boolean
+	type?: 'button' | 'submit' | 'reset'
 }

@@ -24,9 +24,9 @@ export const UniversalSelect: FC<UniversalSelectPropsType> =
 		const primaryOption = `${style.primaryOption}`
 		const otherOption = optionClassName && optionClassName
 
-		const optionsRender: any[] = options
-			? options.map((option, index) => <option className={`${primaryOption} ${otherOption}`} key={index}>{option}</option>)
-			: []
+		const optionsRender = options.map((option, index) => {
+			return <option className={`${primaryOption} ${otherOption}`} key={index}>{option}</option>
+		})
 
 		const onSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
 			onChange && onChange(event)

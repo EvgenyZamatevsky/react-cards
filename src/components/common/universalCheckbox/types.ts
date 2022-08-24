@@ -1,8 +1,6 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
-type DefaultCheckboxPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
-export type UniversalCheckboxPropsType = Omit<DefaultCheckboxPropsType, 'type'> & {
+export type UniversalCheckboxPropsType = {
 	setValue?: (checked: boolean) => void
 	primary?: boolean
 	secondary?: boolean
@@ -10,4 +8,8 @@ export type UniversalCheckboxPropsType = Omit<DefaultCheckboxPropsType, 'type'> 
 	additionalSecondaryCheckbox?: string
 	labelClassName?: string
 	spanClassName?: string
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+	children: ReactNode
+	className?: string
+	checked?: boolean
 }

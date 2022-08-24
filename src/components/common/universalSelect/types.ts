@@ -1,8 +1,6 @@
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
+import { ChangeEvent } from 'react'
 
-type DefaultSelectPropsType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
-
-export type UniversalSelectPropsType = DefaultSelectPropsType & {
+export type UniversalSelectPropsType = {
 	options: string[]
 	setValue?: (value: string) => void
 	optionClassName?: string
@@ -10,4 +8,8 @@ export type UniversalSelectPropsType = DefaultSelectPropsType & {
 	secondary?: boolean
 	additionalPrimarySelect?: boolean
 	additionalSecondarySelect?: boolean
+	className?: string
+	onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
+	value: number
+	disabled?: boolean
 }
