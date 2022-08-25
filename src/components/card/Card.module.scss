@@ -40,6 +40,7 @@
 			overflow: hidden;
 			text-align: center;
 			margin-left: 110px;
+			@include flex(row, center, stretch);
 		}
 
 		.actionsContainer {

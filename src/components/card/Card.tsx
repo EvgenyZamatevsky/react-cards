@@ -8,6 +8,7 @@ import { Modal, ModalCard, ModalDelete } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { CardPropsType } from './types'
 import style from './Card.module.scss'
+import { Rating } from 'components/rating'
 
 export const Card: FC<CardPropsType> =
 	({ cardId, question, answer, updated, grade, packId, isOwner }): ReturnComponentType => {
@@ -111,7 +112,7 @@ export const Card: FC<CardPropsType> =
 						<div className={style.question}>{question}</div>
 						<div className={style.answer}>{answer}</div>
 						<div className={style.updated}>{convertDate(updated)}</div>
-						<div className={style.grade}>{Number(grade.toFixed(1))}</div>
+						<div className={style.grade}><Rating grade={grade} /></div>
 						<div className={style.actionsContainer}>
 							<Actions
 								onActivateDeleteModalClick={handleActivateDeleteModalClick}
