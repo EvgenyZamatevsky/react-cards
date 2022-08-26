@@ -9,24 +9,24 @@ link</a>
 
 export const AUTH = {
 	register(email: string, password: string) {
-		return instance.post('auth/register', { email, password })
+		return instanceAdditional.post('auth/register', { email, password })
 	},
 	login(email: string, password: string, rememberMe: boolean) {
-		return instance.post<AuthorizedUserDataType>('auth/login', { email, password, rememberMe })
+		return instanceAdditional.post<AuthorizedUserDataType>('auth/login', { email, password, rememberMe })
 	},
 	me() {
-		return instance.post<AuthorizedUserDataType>('auth/me')
+		return instanceAdditional.post<AuthorizedUserDataType>('auth/me')
 	},
 	logOut() {
-		return instance.delete('auth/me')
+		return instanceAdditional.delete('auth/me')
 	},
 	forgot(email: string) {
 		return instanceAdditional.post('auth/forgot', { email, message })
 	},
 	setNewPassword(updatedPassword: string, resetPasswordToken: string) {
-		return instance.post('auth/set-new-password', { password: updatedPassword, resetPasswordToken })
+		return instanceAdditional.post('auth/set-new-password', { password: updatedPassword, resetPasswordToken })
 	},
 	updateAuthorizedUserNameOrAvatar(payload: PayloadType) {
-		return instance.put<UpdatedAuthorizedUserResponseType>('auth/me', payload)
+		return instanceAdditional.put<UpdatedAuthorizedUserResponseType>('auth/me', payload)
 	},
 }
