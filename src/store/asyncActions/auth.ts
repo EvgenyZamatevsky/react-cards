@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AUTH } from 'api'
 import { AuthorizedUserDataType, PayloadType } from 'api/auth/types'
+import axios, { AxiosError } from 'axios'
 import { RootStateType } from 'store'
 
 export const registration = createAsyncThunk
@@ -13,9 +14,17 @@ export const registration = createAsyncThunk
 		try {
 			const response = await AUTH.register(params.email, params.password)
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
