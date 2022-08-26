@@ -26,9 +26,13 @@ export const ErrorAlert: FC = (): ReturnComponentType => {
 
 	useEffect(() => {
 		if (errorMessage) {
-			setTimeout(() => {
+			const timerId = setTimeout(() => {
 				resetErrorMessage()
 			}, DELAY)
+
+			return (() => {
+				clearTimeout(timerId)
+			})
 		}
 	}, [errorMessage])
 
