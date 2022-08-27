@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { CARDS } from 'api'
 import { CardType, PayloadType } from 'api/cards/types'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { RootStateType } from 'store'
 import { handleServerNetworkError } from 'utils'
 
@@ -42,6 +42,7 @@ export const addCard = createAsyncThunk
 			const pageCount = getState().cards.pageCount
 
 			const response = await CARDS.addCard(params.packId, params.question, params.answer)
+
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
 		} catch (error) {
 			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
@@ -62,6 +63,7 @@ export const removeCard = createAsyncThunk
 			const pageCount = getState().cards.pageCount
 
 			const response = await CARDS.removeCard(params.cardId)
+
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
 		} catch (error) {
 			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
@@ -90,6 +92,7 @@ export const updateCardQuestionOrAnswer = createAsyncThunk
 			}
 
 			const response = await CARDS.updateCardQuestionOrAnswer(params.cardId, payload)
+
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
 		} catch (error) {
 			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)

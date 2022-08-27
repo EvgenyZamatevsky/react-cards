@@ -16,7 +16,7 @@ import style from './Pack.module.scss'
 
 export const Pack: FC<PackPropsType> =
 	({ userId, userName, packId, packName, cardsCount, packUpdated, packDeckCover, isDisabled }): ReturnComponentType => {
-		console.log(packDeckCover)
+
 		const dispatch = useAppDispatch()
 
 		const navigate = useNavigate()
