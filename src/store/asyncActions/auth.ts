@@ -40,9 +40,17 @@ export const login = createAsyncThunk
 			const authorizedUserData = response.data
 
 			return authorizedUserData
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -58,9 +66,17 @@ export const getAuthorizedUserData = createAsyncThunk
 			const authorizedUserData = response.data
 
 			return authorizedUserData
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -74,9 +90,17 @@ export const logOut = createAsyncThunk
 		try {
 			const response = await AUTH.logOut()
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -90,9 +114,17 @@ export const forgot = createAsyncThunk
 		try {
 			const response = await AUTH.forgot(email)
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -106,9 +138,17 @@ export const setNewPassword = createAsyncThunk
 		try {
 			const response = await AUTH.setNewPassword(params.updatedPassword, params.resetPasswordToken)
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -133,8 +173,16 @@ export const updateAuthorizedUserNameOrAvatar = createAsyncThunk
 
 			return { avatar, name }
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})

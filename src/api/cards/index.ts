@@ -4,17 +4,17 @@ import { CardsResponseType, PayloadType, UpdatedGradeResponseType } from './type
 
 export const CARDS = {
 	getCards(packId: string, cardQuestion: string, sortCards: string, page: number, pageCount: number) {
-
-		const currentCardQuestion = cardQuestion === EMPTY_STRING ? EMPTY_STRING : `&cardQuestion=${cardQuestion}`
-
-		return instanceAdditional.get<CardsResponseType>(`cards/card
-		?cardsPack_id=${packId}
-		&page=${page}
-		&pageCount=${pageCount}
-		&sortCards=${sortCards}
-		${currentCardQuestion}
-		`)
+		return instanceAdditional.get<CardsResponseType>('cards/card', {
+			params: {
+				cardsPack_id: packId,
+				page,
+				pageCount,
+				sortCards,
+				...cardQuestion === EMPTY_STRING ? EMPTY_STRING : { cardQuestion }
+			}
+		})
 	},
+
 	addCard(packId: string, question: string, answer: string) {
 		return instanceAdditional.post(`cards/card`, { card: { cardsPack_id: packId, question, answer } })
 	},

@@ -1,1 +1,1 @@
-export { convertDate } from './convertDate'
+export * from './convertDate'

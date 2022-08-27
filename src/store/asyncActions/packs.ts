@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { PACKS } from 'api'
 import { PackType } from 'api/packs/types'
+import axios, { AxiosError } from 'axios'
 import { EMPTY_STRING } from 'constants/base'
 import { RootStateType } from 'store'
 
@@ -26,9 +27,17 @@ export const getPacks = createAsyncThunk
 			const { cardPacks: packs, minCardsCount, maxCardsCount, cardPacksTotalCount: packsTotalCount } = response.data
 
 			return { packs, minCardsCount, maxCardsCount, packsTotalCount }
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -58,9 +67,17 @@ export const addPack = createAsyncThunk
 				page,
 				userId: params.authorizedUserId
 			}))
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -91,9 +108,17 @@ export const removePack = createAsyncThunk
 				userId: params.authorizedUserId
 			}))
 
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
 
@@ -123,8 +148,16 @@ export const updatePackName = createAsyncThunk
 				page,
 				userId: params.authorizedUserId
 			}))
-		} catch (e: any) {
-			const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
-			return rejectWithValue({ error })
+		} catch (e) {
+			const err = e as Error | AxiosError
+
+			if (axios.isAxiosError(err)) {
+				const error = err.response?.data
+					? (err.response.data as { error: string }).error
+					: err.message
+				return rejectWithValue({ error })
+			} else {
+				return rejectWithValue({ error: err.message })
+			}
 		}
 	})
