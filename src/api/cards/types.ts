@@ -22,6 +22,11 @@ export type CardType = {
 export type CardsResponseType = {
 	cards: CardType[]
 	packUserId: string
+	packName: string
+	packPrivate: boolean
+	packDeckCover: string
+	packCreated: Date
+	packUpdated: Date
 	page: number
 	pageCount: number
 	cardsTotalCount: number

@@ -15,8 +15,8 @@ import { UniversalButton } from 'components/common/universalButton'
 import style from './Pack.module.scss'
 
 export const Pack: FC<PackPropsType> =
-	({ userId, userName, packId, packName, cardsCount, packUpdated, isDisabled }): ReturnComponentType => {
-
+	({ userId, userName, packId, packName, cardsCount, packUpdated, packDeckCover, isDisabled }): ReturnComponentType => {
+		console.log(packDeckCover)
 		const dispatch = useAppDispatch()
 
 		const navigate = useNavigate()
@@ -101,6 +101,7 @@ export const Pack: FC<PackPropsType> =
 				</Modal>
 				<div className={style.container}>
 					<div className={style.list}>
+						<img style={{ width: '50px' }} src={packDeckCover} alt="" />
 						<UniversalButton
 							className={style.name}
 							onClick={onGoToCardsPageClick}

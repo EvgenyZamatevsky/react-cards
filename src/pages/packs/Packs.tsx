@@ -57,8 +57,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
 	const sortPacksByAscending: string[] = ['1name', '1cardsCount', '1updated', '1user_name']
-
-	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name, user_id }) => {
+	const packsRender = packs.map(({ _id, name, cardsCount, updated, user_name, user_id, deckCover }) => {
 		return (
 			<Pack
 				key={_id}
@@ -68,6 +67,7 @@ export const Packs: FC = (): ReturnComponentType => {
 				cardsCount={cardsCount}
 				packUpdated={updated}
 				userName={user_name}
+				packDeckCover={deckCover}
 				isDisabled={isDisabled}
 			/>
 		)
@@ -196,6 +196,7 @@ export const Packs: FC = (): ReturnComponentType => {
 					</div>
 				</div>
 				<div className={style.sort}>
+					<div>Cover</div>
 					<Sort
 						sortValues={sortPacksValues}
 						sortByDescending={sortPacksByDescending}
