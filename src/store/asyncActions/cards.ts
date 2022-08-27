@@ -3,6 +3,7 @@ import { CARDS } from 'api'
 import { CardType, PayloadType } from 'api/cards/types'
 import axios, { AxiosError } from 'axios'
 import { RootStateType } from 'store'
+import { handleServerNetworkError } from 'utils'
 
 export const getCards = createAsyncThunk
 	<
@@ -22,17 +23,8 @@ export const getCards = createAsyncThunk
 			const { cards, cardsTotalCount, packUserId } = response.data
 
 			return { cards, cardsTotalCount, packUserId }
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -51,17 +43,8 @@ export const addCard = createAsyncThunk
 
 			const response = await CARDS.addCard(params.packId, params.question, params.answer)
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -80,17 +63,8 @@ export const removeCard = createAsyncThunk
 
 			const response = await CARDS.removeCard(params.cardId)
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -117,17 +91,8 @@ export const updateCardQuestionOrAnswer = createAsyncThunk
 
 			const response = await CARDS.updateCardQuestionOrAnswer(params.cardId, payload)
 			dispatch(getCards({ packId: params.packId, cardQuestion: searchCardValue, sortCards, page, pageCount }))
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -143,16 +108,7 @@ export const updateCardGrade = createAsyncThunk
 			const { card_id: cardId, shots, grade } = response.data.updatedGrade
 
 			return { cardId, shots, grade }
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})

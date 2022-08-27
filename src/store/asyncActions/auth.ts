@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AUTH } from 'api'
 import { AuthorizedUserDataType, PayloadType } from 'api/auth/types'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { RootStateType } from 'store'
+import { handleServerNetworkError } from 'utils'
 
 export const registration = createAsyncThunk
 	<
@@ -14,17 +15,8 @@ export const registration = createAsyncThunk
 		try {
 			const response = await AUTH.register(params.email, params.password)
 
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -40,17 +32,8 @@ export const login = createAsyncThunk
 			const authorizedUserData = response.data
 
 			return authorizedUserData
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -66,17 +49,8 @@ export const getAuthorizedUserData = createAsyncThunk
 			const authorizedUserData = response.data
 
 			return authorizedUserData
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -90,17 +64,8 @@ export const logOut = createAsyncThunk
 		try {
 			const response = await AUTH.logOut()
 
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -114,17 +79,8 @@ export const forgot = createAsyncThunk
 		try {
 			const response = await AUTH.forgot(email)
 
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -138,17 +94,8 @@ export const setNewPassword = createAsyncThunk
 		try {
 			const response = await AUTH.setNewPassword(params.updatedPassword, params.resetPasswordToken)
 
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
 
@@ -173,16 +120,7 @@ export const updateAuthorizedUserNameOrAvatar = createAsyncThunk
 
 			return { avatar, name }
 
-		} catch (e) {
-			const err = e as Error | AxiosError
-
-			if (axios.isAxiosError(err)) {
-				const error = err.response?.data
-					? (err.response.data as { error: string }).error
-					: err.message
-				return rejectWithValue({ error })
-			} else {
-				return rejectWithValue({ error: err.message })
-			}
+		} catch (error) {
+			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
 	})
