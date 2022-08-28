@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useRef, useState } from 'react'
+import React, { ChangeEvent, FC, memo, useCallback, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import loon from 'assets/icons/loon.svg'
 import cross from 'assets/icons/cross.svg'
@@ -8,13 +8,13 @@ import debounce from 'lodash.debounce'
 import { useSelector } from 'react-redux'
 import { selectIsDisabled } from 'store/selectors'
 import { setIsDisabled } from 'store/slices'
-import style from './Search.module.scss'
 import { SearchPropsType } from './types'
 import { UniversalButton } from '../universalButton'
 import { UniversalInput } from '../universalInput'
+import style from './Search.module.scss'
 
 export const Search: FC<SearchPropsType> =
-	({ title, searchValue, handleSetSearchValueChange, handleResetSearchValueClick }): ReturnComponentType => {
+	memo(({ title, searchValue, handleSetSearchValueChange, handleResetSearchValueClick }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
 
@@ -39,12 +39,10 @@ export const Search: FC<SearchPropsType> =
 			updateSearchValue(currentValue)
 		}
 
-		const showInputFocus = (): void => inputRef.current?.focus()
-
 		const onResetSearchValueClick = (): void => {
 			setValue(EMPTY_STRING)
 			handleResetSearchValueClick(EMPTY_STRING)
-			showInputFocus()
+			inputRef.current?.focus()
 		}
 
 		return (
@@ -68,4 +66,4 @@ export const Search: FC<SearchPropsType> =
 				</div>
 			</div>
 		)
-	}
+	})

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC } from 'react'
 import { Path } from 'enums'
 import { BackToPage, File, EditableItem, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'

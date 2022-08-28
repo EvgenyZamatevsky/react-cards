@@ -84,13 +84,13 @@ export const Packs: FC = (): ReturnComponentType => {
 		}))
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
 
-	const handleSetSearchPackValueChange = (value: string): void => {
+	const handleSetSearchPackValueChange = useCallback((value: string): void => {
 		dispatch(setSearchPackValue(value))
-	}
+	}, [])
 
-	const handleResetSearchPackValueClick = (resetValue: string): void => {
+	const handleResetSearchPackValueClick = useCallback((resetValue: string): void => {
 		dispatch(setSearchPackValue(resetValue))
-	}
+	}, [])
 
 	const handleSortPacksByAscendingClick = (value: string): void => {
 		dispatch(setSortValue(value))
@@ -100,13 +100,13 @@ export const Packs: FC = (): ReturnComponentType => {
 		dispatch(setSortValue(value))
 	}
 
-	const handleSetPackPageClick = (page: number): void => {
+	const handleSetPackPageClick = useCallback((page: number): void => {
 		dispatch(setPackPage(page))
-	}
+	}, [])
 
-	const handleSetPackPageCountChange = (pageCount: number): void => {
+	const handleSetPackPageCountChange = useCallback((pageCount: number): void => {
 		dispatch(setPackPageCount(pageCount))
-	}
+	}, [])
 
 	const resetModalValues = (): void => {
 		setIsActiveModal(false)

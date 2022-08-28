@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
-import cross from 'assets/icons/cross.svg'
-import style from './ModalDelete.module.scss'
 import { ModalDeletePropsType } from './types'
 import { UniversalButton } from 'components/common/universalButton'
+import cross from 'assets/icons/cross.svg'
+import style from './ModalDelete.module.scss'
 
 export const ModalDelete: FC<ModalDeletePropsType> =
 	({ onDeactivateModalClick, onDeleteClick, title, name, isPackDelete = true }): ReturnComponentType => {

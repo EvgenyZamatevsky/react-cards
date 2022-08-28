@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
@@ -82,13 +82,13 @@ export const Cards: FC = (): ReturnComponentType => {
 		}
 	}, [searchCardValue, sortCards, cardPage, cardPageCount])
 
-	const handleSetSearchCardValueChange = (value: string): void => {
+	const handleSetSearchCardValueChange = useCallback((value: string): void => {
 		dispatch(setSearchCardValue(value))
-	}
+	}, [])
 
-	const handleResetSearchCardValueClick = (resetValue: string): void => {
+	const handleResetSearchCardValueClick = useCallback((resetValue: string): void => {
 		dispatch(setSearchCardValue(resetValue))
-	}
+	}, [])
 
 	const handleSortCardsByDescendingClick = (value: string): void => {
 		dispatch(setSortCards(value))
@@ -128,13 +128,13 @@ export const Cards: FC = (): ReturnComponentType => {
 		dispatch(resetMinValueAndMaxValue())
 	}
 
-	const handleSetPageClick = (page: number): void => {
+	const handleSetPageClick = useCallback((page: number): void => {
 		dispatch(setCardPage(page))
-	}
+	}, [])
 
-	const handleSetPageCountChange = (pageCount: number): void => {
+	const handleSetPageCountChange = useCallback((pageCount: number): void => {
 		dispatch(setCardPageCount(pageCount))
-	}
+	}, [])
 
 	const handleDeactivateModalClick = (): void => resetModalValues()
 
