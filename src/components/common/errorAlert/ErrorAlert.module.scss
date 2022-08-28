@@ -7,8 +7,10 @@
 	background-color: rgb(255, 63, 63);
 	padding: 20px;
 	min-width: 300px;
-	border-radius: 20px;
+	border-radius: 10px;
 	@include flex(row, space-between, center);
+
+	border: 1px solid red;
 
 	.alert {
 		margin-right: 20px;

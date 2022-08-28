@@ -16,14 +16,14 @@ export const ErrorAlert: FC = memo((): ReturnComponentType => {
 
 	const errorMessage = useSelector(selectErrorMessage)
 
-	const onDeactivateErrorAlertAndResetErrorMessageClick = (): void => {
+	const onDeactivateErrorAlertClick = (): void => {
 		dispatch(setErrorMessage(EMPTY_STRING))
 	}
 
 	useEffect(() => {
 		if (errorMessage) {
 			const timerId = setTimeout(() => {
-				onDeactivateErrorAlertAndResetErrorMessageClick()
+				onDeactivateErrorAlertClick()
 			}, DELAY)
 
 			return (() => {
@@ -35,7 +35,7 @@ export const ErrorAlert: FC = memo((): ReturnComponentType => {
 	return (
 		<div className={`${style.errorAlert} ${!errorMessage && style.closeErrorAlert}`}>
 			<div className={style.alert}>{errorMessage}</div>
-			<UniversalButton onClick={onDeactivateErrorAlertAndResetErrorMessageClick}>&#10006;</UniversalButton>
+			<UniversalButton onClick={onDeactivateErrorAlertClick}>&#10006;</UniversalButton>
 		</div>
 	)
 })

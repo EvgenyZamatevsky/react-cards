@@ -25,7 +25,7 @@ export const AUTH = {
     return instance.post('auth/forgot', { email, message })
   },
   setNewPassword(updatedPassword: string, resetPasswordToken: string) {
-    return instance.post('auth/set-new-password', { password: updatedPassword, resetPasswordToken, })
+    return instance.post('auth/set-new-password', { password: updatedPassword, resetPasswordToken })
   },
   updateAuthorizedUserNameOrAvatar(payload: PayloadType) {
     return instance.put<UpdatedAuthorizedUserResponseType>('auth/me', payload)
