@@ -170,6 +170,7 @@ export const Cards: FC = (): ReturnComponentType => {
 			</Modal>
 			<div className={style.container}>
 				<BackToPage
+					isDisabled={isDisabled}
 					title={'Back to Packs List'}
 					onBackToPageClick={handleBackPacksListClick}
 				/>

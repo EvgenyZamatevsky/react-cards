@@ -58,6 +58,7 @@ export const Profile: FC = (): ReturnComponentType => {
 		<div className={style.profile}>
 
 			<BackToPage
+				isDisabled={isDisabled}
 				title={'Back to Packs List'}
 				onBackToPageClick={handleBackToPacksListClick}
 			/>

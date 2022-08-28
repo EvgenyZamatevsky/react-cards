@@ -100,6 +100,7 @@ export const Learn: FC = (): ReturnComponentType => {
 	return (
 		<div className={style.container}>
 			<BackToPage
+				isDisabled={isDisabled}
 				title={'Back to Packs List'}
 				onBackToPageClick={handleBackPacksListClick}
 			/>
