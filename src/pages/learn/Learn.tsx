@@ -7,7 +7,6 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getCards, updateCardGrade } from 'store/asyncActions/cards'
 import { Nullable, ReturnComponentType } from 'types'
 import { CurrentCardType } from './types'
-import { resetMinValueAndMaxValue } from 'store/slices'
 import { UniversalRadio } from 'components/common/universalRadio'
 import style from './Learn.module.scss'
 import {
@@ -84,7 +83,6 @@ export const Learn: FC = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const onShowAnswerActiveClick = (): void => setIsShowAnswer(true)

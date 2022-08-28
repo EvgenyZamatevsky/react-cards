@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { ReturnComponentType } from 'types'
-import { resetMinValueAndMaxValue, setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
+import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
 import { Modal, ModalCard } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { useAppDispatch } from 'hooks'
@@ -125,7 +125,6 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const handleSetPageClick = useCallback((page: number): void => {

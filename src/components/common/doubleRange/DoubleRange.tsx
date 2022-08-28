@@ -59,6 +59,7 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 					onMouseUp={onMinValueMouseUp}
 					disabled={isDisabled}
 				/>
+
 				<input
 					type='range'
 					min={minDefaultValue}

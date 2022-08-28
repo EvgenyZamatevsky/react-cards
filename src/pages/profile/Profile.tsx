@@ -13,7 +13,7 @@ import {
 	selectAuthorizedUserAvatar,
 	selectIsAvatarBroken
 } from 'store/selectors'
-import { resetMinValueAndMaxValue, setErrorMessage, setIsAvatarBroken } from 'store/slices'
+import { setErrorMessage, setIsAvatarBroken } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import logOutIcon from 'assets/icons/logOut.png'
 import defaultAvatar from 'assets/images/defaultAvatar.png'
@@ -42,7 +42,6 @@ export const Profile: FC = (): ReturnComponentType => {
 
 	const handleBackToPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const onImgError = (): void => {
