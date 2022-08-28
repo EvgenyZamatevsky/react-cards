@@ -18,10 +18,15 @@ export const DoubleRange: FC<DoubleRangePropsType> =
 		const [maxValue, setMaxValue] = useState(max)
 
 		const rangeRef = useRef<HTMLDivElement>(null)
+		const isMounted = useRef(false)
 
 		useEffect(() => {
-			setMinValue(minDefaultValue)
-			setMaxValue(maxDefaultValue)
+			if (isMounted.current) {
+				setMinValue(minDefaultValue)
+				setMaxValue(maxDefaultValue)
+			}
+
+			isMounted.current = true
 		}, [minDefaultValue, maxDefaultValue])
 
 		const onMinValueChange = (event: ChangeEvent<HTMLInputElement>): void => {

@@ -84,7 +84,7 @@ export const Learn: FC = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		dispatch(resetMinValueAndMaxValue())
+		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const onShowAnswerActiveClick = (): void => setIsShowAnswer(true)

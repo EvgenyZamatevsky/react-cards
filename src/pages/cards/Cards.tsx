@@ -125,7 +125,7 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	const handleBackPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		dispatch(resetMinValueAndMaxValue())
+		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const handleSetPageClick = useCallback((page: number): void => {

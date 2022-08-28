@@ -42,7 +42,7 @@ export const Profile: FC = (): ReturnComponentType => {
 
 	const handleBackToPacksListClick = (): void => {
 		navigate(Path.PACKS)
-		dispatch(resetMinValueAndMaxValue())
+		//dispatch(resetMinValueAndMaxValue())
 	}
 
 	const onImgError = (): void => {
