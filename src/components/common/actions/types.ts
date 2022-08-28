@@ -4,5 +4,5 @@ export type ActionsPropsType = {
 	cardsCount?: number
 	packId?: string
 	isOwner: boolean
-	isTeacherVisible?: boolean
+	isVisibleTeacher?: boolean
 }

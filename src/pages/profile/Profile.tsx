@@ -1,14 +1,22 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Path } from 'enums'
-import { BackToPage, InputFile, EditableItem, UniversalButton } from 'components'
+import { BackToPage, File, EditableItem, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { updateAuthorizedUserNameOrAvatar, logOut } from 'store/asyncActions'
-import { selectIsAuth, selectAuthorizedUserName, selectAuthorizedUserEmail, selectIsDisabled } from 'store/selectors'
-import { resetMinValueAndMaxValue } from 'store/slices'
+import {
+	selectIsAuth,
+	selectAuthorizedUserName,
+	selectAuthorizedUserEmail,
+	selectIsDisabled,
+	selectAuthorizedUserAvatar,
+	selectIsAvatarBroken
+} from 'store/selectors'
+import { resetMinValueAndMaxValue, setErrorMessage, setIsAvatarBroken } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import logOutIcon from 'assets/icons/logOut.png'
+import defaultAvatar from 'assets/images/defaultAvatar.png'
 import style from './Profile.module.scss'
 
 export const Profile: FC = (): ReturnComponentType => {
@@ -20,7 +28,9 @@ export const Profile: FC = (): ReturnComponentType => {
 	const isAuth = useSelector(selectIsAuth)
 	const authorizedUserName = useSelector(selectAuthorizedUserName)
 	const authorizedUserEmail = useSelector(selectAuthorizedUserEmail)
+	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
 	const isDisabled = useSelector(selectIsDisabled)
+	const isAvatarBroken = useSelector(selectIsAvatarBroken)
 
 	const handleUpdateNameBlurOrKeyDown = (updatedName: string): void => {
 		dispatch(updateAuthorizedUserNameOrAvatar({ name: updatedName }))
@@ -33,6 +43,11 @@ export const Profile: FC = (): ReturnComponentType => {
 	const handleBackToPacksListClick = (): void => {
 		navigate(Path.PACKS)
 		dispatch(resetMinValueAndMaxValue())
+	}
+
+	const onImgError = (): void => {
+		dispatch(setIsAvatarBroken(true))
+		dispatch(setErrorMessage('Curve picture'))
 	}
 
 	if (!isAuth) {
@@ -49,7 +64,13 @@ export const Profile: FC = (): ReturnComponentType => {
 
 			<div className={style.container}>
 				<h2 className={style.title}>Personal Information</h2>
-				<InputFile />
+				<img
+					className={style.avatarImg}
+					src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
+					alt='avatar'
+					onError={onImgError}
+				/>
+				<File isDisabled={isDisabled} />
 
 				<EditableItem
 					currentValue={authorizedUserName}

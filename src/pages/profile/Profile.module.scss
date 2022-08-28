@@ -17,6 +17,15 @@
 			line-height: 27px;
 		}
 
+		.avatarImg {
+			@include flex(column, stretch, center);
+			margin-top: 30px;
+			width: 96px;
+			height: 96px;
+			border-radius: 50%;
+			position: relative;
+		}
+
 		.email {
 			margin-top: 14px;
 			opacity: 0.5;

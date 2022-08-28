@@ -1,25 +1,22 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, memo, useCallback, useRef, useState } from 'react'
 import { removePack, updatePackName } from 'store/asyncActions/packs'
 import { useAppDispatch } from 'hooks'
 import { ReturnComponentType } from 'types'
 import { useSelector } from 'react-redux'
 import { selectAuthorizedUserId } from 'store/selectors'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Path } from 'enums'
 import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { PackPropsType } from './types'
-import { UniversalButton } from 'components/common/universalButton'
 import style from './Pack.module.scss'
 
 export const Pack: FC<PackPropsType> =
-	({ userId, userName, packId, packName, cardsCount, packUpdated, packDeckCover, isDisabled }): ReturnComponentType => {
+	memo(({ userId, userName, packId, packName, cardsCount, packUpdated, isDisabled }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
-
-		const navigate = useNavigate()
 
 		const authorizedUserId = useSelector(selectAuthorizedUserId)
 
@@ -31,6 +28,7 @@ export const Pack: FC<PackPropsType> =
 		const updatedPackNameInputRef = useRef<HTMLInputElement>(null)
 
 		const isOwner = authorizedUserId === userId
+		const currentDate = convertDate(packUpdated)
 
 		const resetPackModalValues = (): void => {
 			setIsPackModalActive(false)
@@ -65,21 +63,22 @@ export const Pack: FC<PackPropsType> =
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const handleActivatePackModalClick = (): void => {
+		const handleActivatePackModalClick = useCallback((): void => {
 			setIsPackModalActive(true)
 			setUpdatedPackName(packName)
 			updatedPackNameInputRef.current?.focus()
-		}
+		}, [])
 
-		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
-
-		const onGoToCardsPageClick = (): void => {
-			navigate(`${Path.CARDS}/${packId}`)
-		}
+		const handleActivateDeleteModalClick = useCallback((): void => {
+			setIsDeleteModalActive(true)
+		}, [])
 
 		return (
 			<>
-				<Modal isModalActive={isPackModalActive} onDeactivateModalClick={handleDeactivatePackModalClick}>
+				<Modal
+					isModalActive={isPackModalActive}
+					onDeactivateModalClick={handleDeactivatePackModalClick}
+				>
 					<ModalPack
 						value={updatedPackName}
 						setUpdatedPackName={setUpdatedPackName}
@@ -91,7 +90,11 @@ export const Pack: FC<PackPropsType> =
 						ref={updatedPackNameInputRef}
 					/>
 				</Modal>
-				<Modal isModalActive={isDeleteModalActive} onDeactivateModalClick={handleDeactivateDeleteModalClick}>
+
+				<Modal
+					isModalActive={isDeleteModalActive}
+					onDeactivateModalClick={handleDeactivateDeleteModalClick}
+				>
 					<ModalDelete
 						title={'Delete Pack'}
 						name={packName}
@@ -99,17 +102,17 @@ export const Pack: FC<PackPropsType> =
 						onDeleteClick={handleRemovePackClick}
 					/>
 				</Modal>
+
 				<div className={style.container}>
 					<div className={style.list}>
-						<UniversalButton
-							className={style.name}
-							onClick={onGoToCardsPageClick}
-							disabled={isDisabled}
+						<Link
+							to={`${Path.CARDS}/${packId}`}
+							className={`${style.name} ${isDisabled && style.disabledLink}`}
 						>
 							{packName}
-						</UniversalButton>
+						</Link>
 						<div className={style.cardsCount}>{cardsCount}</div>
-						<div className={style.updated}>{convertDate(packUpdated)}</div>
+						<div className={style.updated}>{currentDate}</div>
 						<div className={style.userName}>{userName}</div>
 						<Actions
 							onActivateDeleteModalClick={handleActivateDeleteModalClick}
@@ -122,4 +125,4 @@ export const Pack: FC<PackPropsType> =
 				</div>
 			</>
 		)
-	}
+	})

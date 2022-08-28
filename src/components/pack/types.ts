@@ -5,6 +5,5 @@ export type PackPropsType = {
 	cardsCount: number
 	packUpdated: Date
 	userName: string
-	packDeckCover: string
 	isDisabled: boolean
 }

@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, memo, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
@@ -7,11 +7,11 @@ import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { CardPropsType } from './types'
-import style from './Card.module.scss'
 import { Rating } from 'components/rating'
+import style from './Card.module.scss'
 
 export const Card: FC<CardPropsType> =
-	({ cardId, question, answer, updated, grade, packId, isOwner }): ReturnComponentType => {
+	memo(({ cardId, question, answer, updated, grade, packId, isOwner }): ReturnComponentType => {
 
 		const dispatch = useAppDispatch()
 
@@ -23,6 +23,8 @@ export const Card: FC<CardPropsType> =
 		const [answerErrorMessage, setAnswerErrorMessage] = useState(EMPTY_STRING)
 
 		const editableQuestionInputRef = useRef<HTMLInputElement>(null)
+
+		const currentUpdated = convertDate(updated)
 
 		const resetModalValues = (): void => {
 			setIsCardModalActive(false)
@@ -111,13 +113,15 @@ export const Card: FC<CardPropsType> =
 					<div className={style.list}>
 						<div className={style.question}>{question}</div>
 						<div className={style.answer}>{answer}</div>
-						<div className={style.updated}>{convertDate(updated)}</div>
-						<div className={style.grade}><Rating grade={grade} /></div>
+						<div className={style.updated}>{currentUpdated}</div>
+						<div className={style.ratingContainer}>
+							<Rating grade={grade} />
+						</div>
 						<div className={style.actionsContainer}>
 							<Actions
 								onActivateDeleteModalClick={handleActivateDeleteModalClick}
 								onActivateEditModalClick={handleActivateCardModalClick}
-								isTeacherVisible={false}
+								isVisibleTeacher={false}
 								isOwner={isOwner}
 							/>
 						</div>
@@ -125,4 +129,4 @@ export const Card: FC<CardPropsType> =
 				</div>
 			</>
 		)
-	}
+	})

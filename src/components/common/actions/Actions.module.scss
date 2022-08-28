@@ -11,3 +11,8 @@
 	@include flex(row, center, center);
 	margin-left: 56px;
 }
+
+.disabledLink {
+	pointer-events: none;
+	opacity: 0.5;
+}

@@ -18,6 +18,7 @@
 			word-wrap: break-word;
 			cursor: pointer;
 			transition: color 0.2s ease-in-out 0s;
+			color: inherit;
 
 			&:hover {
 				color: #7a7a7a;
@@ -47,4 +48,9 @@
 			text-align: center;
 		}
 	}
+}
+
+.disabledLink {
+	pointer-events: none;
+	opacity: 0.5;
 }
