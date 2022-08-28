@@ -101,7 +101,6 @@ export const Pack: FC<PackPropsType> =
 				</Modal>
 				<div className={style.container}>
 					<div className={style.list}>
-						<img style={{ width: '50px' }} src={packDeckCover} alt="" />
 						<UniversalButton
 							className={style.name}
 							onClick={onGoToCardsPageClick}

@@ -196,7 +196,6 @@ export const Packs: FC = (): ReturnComponentType => {
 					</div>
 				</div>
 				<div className={style.sort}>
-					<div>Cover</div>
 					<Sort
 						sortValues={sortPacksValues}
 						sortByDescending={sortPacksByDescending}

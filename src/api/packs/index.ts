@@ -17,24 +17,12 @@ export const PACKS = {
 		})
 	},
 	addPack(packName: string, isPackPrivate: boolean) {
-		return instanceAdditional.post(`cards/pack`, {
-			cardsPack: {
-				name: packName,
-				private: isPackPrivate,
-				deckCover: 'https://i1.sndcdn.com/avatars-000064006708-xvoch7-t500x500.jpg'
-			}
-		})
+		return instanceAdditional.post(`cards/pack`, { cardsPack: { name: packName, private: isPackPrivate } })
 	},
 	removePack(packId: string) {
 		return instanceAdditional.delete(`cards/pack?id=${packId}`)
 	},
 	updatePackName(packId: string, updatedPackName: string) {
-		return instanceAdditional.put(`cards/pack`, {
-			cardsPack: {
-				_id: packId,
-				name: updatedPackName,
-				deckCover: 'https://www.imgonline.com.ua/examples/bee-on-daisy.jpg'
-			}
-		})
+		return instanceAdditional.put(`cards/pack`, { cardsPack: { _id: packId, name: updatedPackName } })
 	},
 }
