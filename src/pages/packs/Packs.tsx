@@ -181,7 +181,10 @@ export const Packs: FC = (): ReturnComponentType => {
 						handleSetSearchValueChange={handleSetSearchPackValueChange}
 						handleResetSearchValueClick={handleResetSearchPackValueClick}
 					/>
-					<ShowPacks selectedPack={selectedPack} />
+					<div>
+						<div className={style.showPacksCards}>Show packs cards</div>
+						<ShowPacks selectedPack={selectedPack} isDisabled={isDisabled} />
+					</div>
 					<div>
 						<div className={style.numberOfCards}>Number of cards</div>
 						<DoubleRange

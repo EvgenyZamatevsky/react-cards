@@ -25,11 +25,15 @@ export const Header: FC = (): ReturnComponentType => {
 
 	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
 
-	const itemRef = useRef<HTMLDivElement>(null)
+	const authorizedUserRef = useRef<HTMLDivElement>(null)
+
+	const onTogglePopupClick = (): void => setIsVisiblePopup(!isVisiblePopup)
 
 	useEffect(() => {
-		const onOutsideClick = (event: any) => {
-			if (!event.path.includes(itemRef.current)) {
+		const onOutsideClick = (e: MouseEvent) => {
+			const event = e as MouseEvent & { path: Node[] }
+
+			if (authorizedUserRef.current && !event.path.includes(authorizedUserRef.current)) {
 				setIsVisiblePopup(false)
 			}
 		}
@@ -39,22 +43,20 @@ export const Header: FC = (): ReturnComponentType => {
 		return () => document.body.removeEventListener('click', onOutsideClick)
 	}, [])
 
-	const onShowPopupClick = (): void => setIsVisiblePopup(!isVisiblePopup)
-
 	return (
-		<header className={style.container} ref={itemRef}>
+		<header className={style.container} >
 			<div className={style.title}>Cards</div>
 			{isAuth
-				? <div className={style.authorizedUser}>
+				? <div className={style.authorizedUser} ref={authorizedUserRef}>
 					<UniversalButton
 						className={style.name}
-						onClick={onShowPopupClick}
+						onClick={onTogglePopupClick}
 						disabled={isDisabled}
 					>
 						{authorizedUserName}
 					</UniversalButton>
 					<img
-						className={style.image}
+						className={style.avatarImage}
 						src={isAvatarBroken ? defaultAvatar : authorizedUserAvatar}
 						alt='avatar'
 					/>

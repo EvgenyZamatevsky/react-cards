@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { ReturnComponentType } from 'types'
 import { PopupPropsType } from './types'
 import { UniversalButton } from 'components/common'
-import logOutIcon from 'assets/icons/logOut.png'
-import person from 'assets/icons/person.svg'
-import style from './Popup.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { logOut } from 'store/asyncActions'
 import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
+import logOutIcon from 'assets/icons/logOut.png'
+import person from 'assets/icons/person.svg'
+import style from './Popup.module.scss'
 
 export const Popup: FC<PopupPropsType> = ({ setIsVisiblePopup }): ReturnComponentType => {
 
@@ -28,8 +28,8 @@ export const Popup: FC<PopupPropsType> = ({ setIsVisiblePopup }): ReturnComponen
 
 	return (
 		<div className={style.popup}>
-			<UniversalButton className={style.profileBtn} onClick={onGoToProfileClick}	>
-				<img className={style.personIcon} src={person} alt='user' />
+			<UniversalButton className={style.profileBtn} onClick={onGoToProfileClick}>
+				<img className={style.personIcon} src={person} alt='person' />
 				Profile
 			</UniversalButton>
 			<UniversalButton className={style.logOutBtn} onClick={onLogOutClick}>

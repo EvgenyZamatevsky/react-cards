@@ -23,6 +23,12 @@
  		@include flex(row, space-between, stretch);
  		margin-top: 40px;
 
+ 		.showPacksCards {
+ 			font-size: 14px;
+ 			line-height: 17px;
+ 			margin-bottom: 8px;
+ 		}
+
  		.numberOfCards {
  			font-size: 14px;
  			line-height: 17px;

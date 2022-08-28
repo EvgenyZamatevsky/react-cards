@@ -1,18 +1,14 @@
-import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
+import React, { FC, memo } from 'react'
 import { useAppDispatch } from 'hooks'
-import { selectIsDisabled } from 'store/selectors'
 import { resetMinValueAndMaxValue, setSelectedPack } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import { ShowPacksPropsType } from './types'
-import style from './ShowPacks.module.scss'
 import { UniversalButton } from 'components/common/universalButton'
+import style from './ShowPacks.module.scss'
 
-export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnComponentType => {
+export const ShowPacks: FC<ShowPacksPropsType> = memo(({ selectedPack, isDisabled }): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
-
-	const isDisabled = useSelector(selectIsDisabled)
 
 	const onSelectMyPacksClick = (): void => {
 		if (selectedPack !== 'My') {
@@ -29,8 +25,7 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 	}
 
 	return (
-		<div>
-			<div className={style.showPacksCards}>Show packs cards</div>
+		<>
 			<UniversalButton
 				className={`${style.myBtn} ${selectedPack === 'My' && style.active}`}
 				onClick={onSelectMyPacksClick}
@@ -45,6 +40,6 @@ export const ShowPacks: FC<ShowPacksPropsType> = ({ selectedPack }): ReturnCompo
 			>
 				All
 			</UniversalButton>
-		</div>
+		</>
 	)
-}
+})
