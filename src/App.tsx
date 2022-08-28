@@ -27,7 +27,7 @@ export const App: FC = (): ReturnComponentType => {
   }
 
   return (
-    <div className='app'>
+    <>
       <ErrorAlert />
       {isLoading && <Preloader />}
       {pathname !== Path.NOT_FOUND_404 && <Header />}
@@ -38,6 +38,6 @@ export const App: FC = (): ReturnComponentType => {
           </Routes>
         </Suspense>
       </div>
-    </div>
+    </>
   )
 }

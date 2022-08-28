@@ -9,13 +9,10 @@ body {
 	font-family: $fontFamily;
 	font-size: $fontSize;
 	font-weight: $fontWeight;
+	min-height: 100vh;
 }
 
-.app {
-	min-height: 100%;
-
-	.container {
-		max-width: 1008px;
-		margin: 0 auto;
-	}
+.container {
+	max-width: 1008px;
+	margin: 0 auto;
 }
