@@ -25,7 +25,8 @@ import {
 	selectSelectedPack,
 	selectPageCount,
 	selectPage,
-	selectPacksTotalCount
+	selectPacksTotalCount,
+	selectIsLoading
 } from 'store/selectors'
 
 export const Packs: FC = (): ReturnComponentType => {
@@ -34,6 +35,7 @@ export const Packs: FC = (): ReturnComponentType => {
 
 	const isAuth = useSelector(selectIsAuth)
 	const isDisabled = useSelector(selectIsDisabled)
+	const isLoading = useSelector(selectIsLoading)
 	const packs = useSelector(selectPacks)
 	const searchPackValue = useSelector(selectSearchPackValue)
 	const sortValue = useSelector(selectSortValue)
@@ -211,7 +213,7 @@ export const Packs: FC = (): ReturnComponentType => {
 				</div>
 				{packs.length
 					? packsRender
-					: <h2 className={style.emptyItems}>This pack is empty</h2>}
+					: !isLoading && <h2 className={style.emptyItems}>No packs</h2>}
 				<Pagination
 					pageCount={pageCount}
 					page={page}
