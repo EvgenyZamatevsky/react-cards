@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { UniversalButton, ShowPacks, DoubleRange, Sort, Pagination, Search } from 'components'
+import { UniversalButton, ShowPacks, DoubleRange, Sort, Pagination, Search, Head } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
@@ -199,7 +199,7 @@ export const Packs: FC = (): ReturnComponentType => {
 						/>
 					</div>
 				</div>
-				<div className={style.sort}>
+				{/* <div className={style.sort}>
 					<Sort
 						sortValues={sortPacksValues}
 						sortByDescending={sortPacksByDescending}
@@ -210,10 +210,23 @@ export const Packs: FC = (): ReturnComponentType => {
 						isDisabled={isDisabled}
 					/>
 					<div className={style.actions}>Actions</div>
-				</div>
-				{packs.length
-					? packsRender
-					: !isLoading && <h2 className={style.emptyItems}>No packs</h2>}
+				</div> */}
+
+				<table className={style.table}>
+
+					<Head
+						sortValues={sortPacksValues}
+						sortByDescending={sortPacksByDescending}
+						sortByAscending={sortPacksByAscending}
+						sortValue={sortValue}
+						handleSortByAscendingClick={handleSortPacksByAscendingClick}
+						handleSortByDescendingClick={handleSortPacksByDescendingClick}
+					/>
+					{packs.length
+						? packsRender
+						: !isLoading && <h2 className={style.emptyItems}>No packs</h2>}
+				</table>
+
 				<Pagination
 					pageCount={pageCount}
 					page={page}

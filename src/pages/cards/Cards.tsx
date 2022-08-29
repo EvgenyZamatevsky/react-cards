@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
+import { BackToPage, Card, Head, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -18,6 +18,7 @@ import {
 	selectCardsTotalCount,
 	selectIsAuth,
 	selectIsDisabled,
+	selectIsLoading,
 	selectPackUserId,
 	selectSearchCardValue,
 	selectSortCards
@@ -31,6 +32,7 @@ export const Cards: FC = (): ReturnComponentType => {
 	const navigate = useNavigate()
 
 	const isAuth = useSelector(selectIsAuth)
+	const isLoading = useSelector(selectIsLoading)
 	const cards = useSelector(selectCards)
 	const searchCardValue = useSelector(selectSearchCardValue)
 	const sortCards = useSelector(selectSortCards)
@@ -190,7 +192,22 @@ export const Cards: FC = (): ReturnComponentType => {
 							Add new card
 						</UniversalButton>}
 				</div>
-				<div className={style.sort}>
+
+				<table className={style.table}>
+					<Head
+						sortValues={sortCardsValues}
+						sortByDescending={sortCardsByDescending}
+						sortByAscending={sortCardsByAscending}
+						sortValue={sortCards}
+						handleSortByAscendingClick={handleSortCardsByDescendingClick}
+						handleSortByDescendingClick={handleSortCardsByAscendingClick}
+					/>
+					{cards.length
+						? cardsRender
+						: !isLoading && <h2 className={style.emptyItems}>There are no cards in this pack</h2>}
+				</table>
+
+				{/* <div className={style.sort}>
 					<Sort
 						sortValues={sortCardsValues}
 						sortByDescending={sortCardsByDescending}
@@ -200,10 +217,10 @@ export const Cards: FC = (): ReturnComponentType => {
 						handleSortByDescendingClick={handleSortCardsByDescendingClick}
 						handleSortByAscendingClick={handleSortCardsByAscendingClick}
 					/>
-				</div>
-				{cards.length
+				</div> */}
+				{/* {cards.length
 					? cardsRender
-					: <h2 className={style.emptyItems}>There are no cards in this pack</h2>}
+					: !isLoading && <h2 className={style.emptyItems}>There are no cards in this pack</h2>} */}
 				<Pagination
 					pageCount={cardPageCount}
 					page={cardPage}
