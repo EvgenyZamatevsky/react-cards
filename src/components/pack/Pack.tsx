@@ -6,15 +6,12 @@ import { useSelector } from 'react-redux'
 import { selectAuthorizedUserId } from 'store/selectors'
 import { Link } from 'react-router-dom'
 import { Path } from 'enums'
+import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { PackPropsType } from './types'
 import style from './Pack.module.scss'
-import cart from 'assets/icons/cart.svg'
-import teacher from 'assets/icons/teacher.svg'
-import pencil from 'assets/icons/pencil.svg'
-import { UniversalButton } from 'components/common'
 
 export const Pack: FC<PackPropsType> =
 	memo(({ userId, userName, packId, packName, cardsCount, packUpdated, isDisabled }): ReturnComponentType => {
@@ -66,13 +63,13 @@ export const Pack: FC<PackPropsType> =
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const onActivatePackModalClick = useCallback((): void => {
+		const handleActivatePackModalClick = useCallback((): void => {
 			setIsPackModalActive(true)
 			setUpdatedPackName(packName)
 			updatedPackNameInputRef.current?.focus()
 		}, [])
 
-		const onActivateDeleteModalClick = useCallback((): void => {
+		const handleActivateDeleteModalClick = useCallback((): void => {
 			setIsDeleteModalActive(true)
 		}, [])
 
@@ -106,38 +103,26 @@ export const Pack: FC<PackPropsType> =
 					/>
 				</Modal>
 
-				<tbody className={style.tbody}>
-					<tr className={style.tr}>
-						<td className={style.td}>
-							<Link to={`${Path.CARDS}/${packId}`} className={`${style.name} ${isDisabled && style.disabledLink}`}>
-								{packName}
-							</Link>
-						</td>
-						<td className={style.td}>{cardsCount}</td>
-						<td className={style.td}>{currentDate}</td>
-						<td className={style.td}>{userName}</td>
-						<td className={style.td}>
-							<div className={style.actions}>
-								<Link
-									to={`${Path.LEARN}/${packId}`}
-									className={`${style.teacher} ${(isDisabled || cardsCount === 0) && style.disabledLink}`}
-								>
-									<img src={teacher} alt='teacher' />
-								</Link>
-
-								{isOwner &&
-									<>
-										<UniversalButton onClick={onActivateDeleteModalClick} disabled={isDisabled}>
-											<img src={cart} alt='cart' />
-										</UniversalButton>
-										<UniversalButton onClick={onActivatePackModalClick} disabled={isDisabled}>
-											<img src={pencil} alt='pencil' />
-										</UniversalButton>
-									</>}
-							</div>
-						</td>
-					</tr>
-				</tbody>
+				<div className={style.container}>
+					<div className={style.list}>
+						<Link
+							to={`${Path.CARDS}/${packId}`}
+							className={`${style.name} ${isDisabled && style.disabledLink}`}
+						>
+							{packName}
+						</Link>
+						<div className={style.cardsCount}>{cardsCount}</div>
+						<div className={style.updated}>{currentDate}</div>
+						<div className={style.userName}>{userName}</div>
+						<Actions
+							onActivateDeleteModalClick={handleActivateDeleteModalClick}
+							onActivateEditModalClick={handleActivatePackModalClick}
+							cardsCount={cardsCount}
+							packId={packId}
+							isOwner={isOwner}
+						/>
+					</div>
+				</div>
 			</>
 		)
 	})

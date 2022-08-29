@@ -3,6 +3,7 @@ export type SortPropsType = {
 	sortByDescending: string[]
 	sortByAscending: string[]
 	sortValue: string
+	isDisabled: boolean
 	handleSortByDescendingClick: (value: string) => void
 	handleSortByAscendingClick: (value: string) => void
 }

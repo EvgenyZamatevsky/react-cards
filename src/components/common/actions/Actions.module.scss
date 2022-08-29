@@ -1,0 +1,18 @@
+@import 'styles/sass/mixins.scss';
+
+.container {
+	width: 100px;
+	@include flex(row, space-between, center);
+	margin-left: 56px;
+}
+
+.secondaryContainer {
+	width: 100px;
+	@include flex(row, center, center);
+	margin-left: 56px;
+}
+
+.disabledLink {
+	pointer-events: none;
+	opacity: 0.5;
+}

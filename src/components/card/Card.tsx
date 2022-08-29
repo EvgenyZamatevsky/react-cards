@@ -2,13 +2,12 @@ import React, { FC, memo, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
+import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
-import { Modal, ModalCard, ModalDelete, UniversalButton } from 'components/common'
+import { Modal, ModalCard, ModalDelete } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { CardPropsType } from './types'
 import { Rating } from 'components/rating'
-import cart from 'assets/icons/cart.svg'
-import pencil from 'assets/icons/pencil.svg'
 import style from './Card.module.scss'
 
 export const Card: FC<CardPropsType> =
@@ -73,14 +72,14 @@ export const Card: FC<CardPropsType> =
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const onActivateCardModalClick = (): void => {
+		const handleActivateCardModalClick = (): void => {
 			setIsCardModalActive(true)
 			setUpdatedQuestion(question)
 			setUpdatedAnswer(answer)
 			editableQuestionInputRef.current?.focus()
 		}
 
-		const onActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
+		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
 		return (
 			<>
@@ -110,26 +109,24 @@ export const Card: FC<CardPropsType> =
 						isPackDelete={false}
 					/>
 				</Modal>
-
-				<tbody className={style.tbody}>
-					<tr className={style.tr}>
-						<td className={style.td}>{question}</td>
-						<td className={style.td}>{answer}</td>
-						<td className={style.td}>{currentUpdated}</td>
-						<td className={style.td}><Rating grade={grade} /></td>
-						{isOwner &&
-							<td className={style.td}>
-								<div className={style.actions}>
-									<UniversalButton onClick={onActivateDeleteModalClick} >
-										<img src={cart} alt='cart' />
-									</UniversalButton>
-									<UniversalButton onClick={onActivateCardModalClick} >
-										<img src={pencil} alt='pencil' />
-									</UniversalButton>
-								</div>
-							</td>}
-					</tr>
-				</tbody>
+				<div className={style.container}>
+					<div className={style.list}>
+						<div className={style.question}>{question}</div>
+						<div className={style.answer}>{answer}</div>
+						<div className={style.updated}>{currentUpdated}</div>
+						<div className={style.ratingContainer}>
+							<Rating grade={grade} />
+						</div>
+						<div className={style.actionsContainer}>
+							<Actions
+								onActivateDeleteModalClick={handleActivateDeleteModalClick}
+								onActivateEditModalClick={handleActivateCardModalClick}
+								isVisibleTeacher={false}
+								isOwner={isOwner}
+							/>
+						</div>
+					</div>
+				</div>
 			</>
 		)
 	})

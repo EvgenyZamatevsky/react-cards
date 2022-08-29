@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
-import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types'
 import { SortPropsType } from './types'
+import { UniversalButton } from '../universalButton'
+import { EMPTY_STRING } from 'constants/base'
 import style from './Sort.module.scss'
 
 export const Sort: FC<SortPropsType> =
@@ -10,8 +11,9 @@ export const Sort: FC<SortPropsType> =
 		sortByDescending,
 		sortByAscending,
 		sortValue,
+		isDisabled,
 		handleSortByDescendingClick,
-		handleSortByAscendingClick,
+		handleSortByAscendingClick
 	}): ReturnComponentType => {
 
 		const sortValuesRender = sortValues.map((value, index) => {
@@ -21,29 +23,31 @@ export const Sort: FC<SortPropsType> =
 			const onSortByAscendingClick = (): void => handleSortByAscendingClick(sortByAscending[index])
 
 			return (
-				<th key={index} className={style.th}>
+				<div key={index}>
 					{sortValue === sortByDescending[index]
-						? <button
+						? <UniversalButton
 							className={style.sortValueBtn}
 							onClick={onSortByAscendingClick}
+							disabled={isDisabled}
 						>
 							{value}
 							<span className={sortValue === sortByDescending[index]
 								? `${style.triangleDescending}`
 								: EMPTY_STRING}>
 							</span>
-						</button>
-						: <button
+						</UniversalButton>
+						: <UniversalButton
 							className={style.sortValueBtn}
 							onClick={onSortByDescendingClick}
+							disabled={isDisabled}
 						>
 							{value}
 							<span className={sortValue === sortByAscending[index]
 								? `${style.triangleAscending}`
 								: EMPTY_STRING}>
 							</span>
-						</button>}
-				</th>
+						</UniversalButton>}
+				</div>
 			)
 		})
 
