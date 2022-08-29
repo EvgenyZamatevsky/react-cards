@@ -50,6 +50,7 @@ export const Cards: FC = (): ReturnComponentType => {
 	const [answerErrorMessage, setAnswerErrorMessage] = useState(EMPTY_STRING)
 
 	const questionInputRef = useRef<HTMLInputElement>(null)
+	const isMounted = useRef(false)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
@@ -83,6 +84,14 @@ export const Cards: FC = (): ReturnComponentType => {
 				}))
 		}
 	}, [searchCardValue, sortCards, cardPage, cardPageCount])
+
+	useEffect(() => {
+		if (isMounted.current) {
+			window.scrollTo(0, 0)
+		}
+
+		isMounted.current = true
+	}, [cardPage, cardPageCount])
 
 	const handleSetSearchCardValueChange = useCallback((value: string): void => {
 		dispatch(setSearchCardValue(value))

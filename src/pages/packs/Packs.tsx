@@ -55,6 +55,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
 
 	const namePackInputRef = useRef<HTMLInputElement>(null)
+	const isMounted = useRef(false)
 
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
@@ -85,6 +86,14 @@ export const Packs: FC = (): ReturnComponentType => {
 			userId: authorizedUserId
 		}))
 	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
+
+	useEffect(() => {
+		if (isMounted.current) {
+			window.scrollTo(0, 0)
+		}
+
+		isMounted.current = true
+	}, [page, pageCount])
 
 	const handleSetSearchPackValueChange = useCallback((value: string): void => {
 		dispatch(setSearchPackValue(value))
