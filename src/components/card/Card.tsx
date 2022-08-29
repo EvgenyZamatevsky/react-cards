@@ -2,7 +2,6 @@ import React, { FC, memo, useRef, useState } from 'react'
 import { ReturnComponentType } from 'types'
 import { useAppDispatch } from 'hooks'
 import { removeCard, updateCardQuestionOrAnswer } from 'store/asyncActions/cards'
-import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalCard, ModalDelete, UniversalButton } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
@@ -74,14 +73,14 @@ export const Card: FC<CardPropsType> =
 
 		const handleDeactivateDeleteModalClick = (): void => setIsDeleteModalActive(false)
 
-		const handleActivateCardModalClick = (): void => {
+		const onActivateCardModalClick = (): void => {
 			setIsCardModalActive(true)
 			setUpdatedQuestion(question)
 			setUpdatedAnswer(answer)
 			editableQuestionInputRef.current?.focus()
 		}
 
-		const handleActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
+		const onActivateDeleteModalClick = (): void => setIsDeleteModalActive(true)
 
 		return (
 			<>
@@ -121,36 +120,16 @@ export const Card: FC<CardPropsType> =
 						{isOwner &&
 							<td className={style.td}>
 								<div className={style.actions}>
-									<UniversalButton onClick={handleActivateDeleteModalClick} >
+									<UniversalButton onClick={onActivateDeleteModalClick} >
 										<img src={cart} alt='cart' />
 									</UniversalButton>
-									<UniversalButton onClick={handleActivateCardModalClick} >
+									<UniversalButton onClick={onActivateCardModalClick} >
 										<img src={pencil} alt='pencil' />
 									</UniversalButton>
-
 								</div>
 							</td>}
 					</tr>
 				</tbody>
-
-				{/* <div className={style.container}>
-					<div className={style.list}>
-						<div className={style.question}>{question}</div>
-						<div className={style.answer}>{answer}</div>
-						<div className={style.updated}>{currentUpdated}</div>
-						<div className={style.ratingContainer}>
-							<Rating grade={grade} />
-						</div>
-						<div className={style.actionsContainer}>
-							<Actions
-								onActivateDeleteModalClick={handleActivateDeleteModalClick}
-								onActivateEditModalClick={handleActivateCardModalClick}
-								isVisibleTeacher={false}
-								isOwner={isOwner}
-							/>
-						</div>
-					</div>
-				</div> */}
 			</>
 		)
 	})

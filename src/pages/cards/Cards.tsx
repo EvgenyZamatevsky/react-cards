@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Head, Pagination, Search, Sort, UniversalButton } from 'components'
+import { BackToPage, Card, Head, Pagination, Search, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -144,8 +144,6 @@ export const Cards: FC = (): ReturnComponentType => {
 		questionInputRef.current?.focus()
 	}
 
-	const test = false
-
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -209,7 +207,6 @@ export const Cards: FC = (): ReturnComponentType => {
 							{isOwner && <th className={style.th}>Actions</th>}
 						</tr>
 					</thead>
-
 					{cardsRender}
 				</table>
 

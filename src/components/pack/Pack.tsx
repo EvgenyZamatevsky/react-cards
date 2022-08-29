@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 import { selectAuthorizedUserId } from 'store/selectors'
 import { Link } from 'react-router-dom'
 import { Path } from 'enums'
-import { Actions } from 'components/common/actions'
 import { convertDate } from 'utils'
 import { Modal, ModalDelete, ModalPack } from 'components/common/modals'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
@@ -110,11 +109,7 @@ export const Pack: FC<PackPropsType> =
 				<tbody className={style.tbody}>
 					<tr className={style.tr}>
 						<td className={style.td}>
-
-							<Link
-								to={`${Path.CARDS}/${packId}`}
-								className={`${style.name} ${isDisabled && style.disabledLink}`}
-							>
+							<Link to={`${Path.CARDS}/${packId}`} className={`${style.name} ${isDisabled && style.disabledLink}`}>
 								{packName}
 							</Link>
 						</td>
@@ -143,27 +138,6 @@ export const Pack: FC<PackPropsType> =
 						</td>
 					</tr>
 				</tbody>
-
-				{/* <div className={style.container}>
-					<div className={style.list}>
-						<Link
-							to={`${Path.CARDS}/${packId}`}
-							className={`${style.name} ${isDisabled && style.disabledLink}`}
-						>
-							{packName}
-						</Link>
-						<div className={style.cardsCount}>{cardsCount}</div>
-						<div className={style.updated}>{currentDate}</div>
-						<div className={style.userName}>{userName}</div>
-						<Actions
-							onActivateDeleteModalClick={handleActivateDeleteModalClick}
-							onActivateEditModalClick={handleActivatePackModalClick}
-							cardsCount={cardsCount}
-							packId={packId}
-							isOwner={isOwner}
-						/>
-					</div>
-				</div> */}
 			</>
 		)
 	})
