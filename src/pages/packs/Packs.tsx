@@ -199,33 +199,25 @@ export const Packs: FC = (): ReturnComponentType => {
 						/>
 					</div>
 				</div>
-				{/* <div className={style.sort}>
-					<Sort
-						sortValues={sortPacksValues}
-						sortByDescending={sortPacksByDescending}
-						sortByAscending={sortPacksByAscending}
-						sortValue={sortValue}
-						handleSortByAscendingClick={handleSortPacksByAscendingClick}
-						handleSortByDescendingClick={handleSortPacksByDescendingClick}
-						isDisabled={isDisabled}
-					/>
-					<div className={style.actions}>Actions</div>
-				</div> */}
 
 				<table className={style.table}>
-
-					<Head
-						sortValues={sortPacksValues}
-						sortByDescending={sortPacksByDescending}
-						sortByAscending={sortPacksByAscending}
-						sortValue={sortValue}
-						handleSortByAscendingClick={handleSortPacksByAscendingClick}
-						handleSortByDescendingClick={handleSortPacksByDescendingClick}
-					/>
-					{packs.length
-						? packsRender
-						: !isLoading && <h2 className={style.emptyItems}>No packs</h2>}
+					<thead className={style.thead}>
+						<tr className={style.tr}>
+							<Head
+								sortValues={sortPacksValues}
+								sortByDescending={sortPacksByDescending}
+								sortByAscending={sortPacksByAscending}
+								sortValue={sortValue}
+								handleSortByAscendingClick={handleSortPacksByAscendingClick}
+								handleSortByDescendingClick={handleSortPacksByDescendingClick}
+							/>
+							<th className={style.th}>Actions</th>
+						</tr>
+					</thead>
+					{packsRender}
 				</table>
+
+				{!packs.length && !isLoading && <h2 className={style.emptyItems}>No packs</h2>}
 
 				<Pagination
 					pageCount={pageCount}

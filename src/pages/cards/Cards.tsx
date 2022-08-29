@@ -144,6 +144,8 @@ export const Cards: FC = (): ReturnComponentType => {
 		questionInputRef.current?.focus()
 	}
 
+	const test = false
+
 	if (!isAuth) {
 		return <Navigate to={Path.LOGIN} />
 	}
@@ -194,33 +196,25 @@ export const Cards: FC = (): ReturnComponentType => {
 				</div>
 
 				<table className={style.table}>
-					<Head
-						sortValues={sortCardsValues}
-						sortByDescending={sortCardsByDescending}
-						sortByAscending={sortCardsByAscending}
-						sortValue={sortCards}
-						handleSortByAscendingClick={handleSortCardsByDescendingClick}
-						handleSortByDescendingClick={handleSortCardsByAscendingClick}
-					/>
-					{cards.length
-						? cardsRender
-						: !isLoading && <h2 className={style.emptyItems}>There are no cards in this pack</h2>}
+					<thead className={style.thead}>
+						<tr className={style.tr}>
+							<Head
+								sortValues={sortCardsValues}
+								sortByDescending={sortCardsByDescending}
+								sortByAscending={sortCardsByAscending}
+								sortValue={sortCards}
+								handleSortByAscendingClick={handleSortCardsByDescendingClick}
+								handleSortByDescendingClick={handleSortCardsByAscendingClick}
+							/>
+							{isOwner && <th className={style.th}>Actions</th>}
+						</tr>
+					</thead>
+
+					{cardsRender}
 				</table>
 
-				{/* <div className={style.sort}>
-					<Sort
-						sortValues={sortCardsValues}
-						sortByDescending={sortCardsByDescending}
-						sortByAscending={sortCardsByAscending}
-						sortValue={sortCards}
-						isDisabled={isDisabled}
-						handleSortByDescendingClick={handleSortCardsByDescendingClick}
-						handleSortByAscendingClick={handleSortCardsByAscendingClick}
-					/>
-				</div> */}
-				{/* {cards.length
-					? cardsRender
-					: !isLoading && <h2 className={style.emptyItems}>There are no cards in this pack</h2>} */}
+				{!cards.length && !isLoading && <h2 className={style.emptyItems}>There are no cards in this pack</h2>}
+
 				<Pagination
 					pageCount={cardPageCount}
 					page={cardPage}

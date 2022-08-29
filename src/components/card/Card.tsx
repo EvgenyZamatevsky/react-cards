@@ -118,19 +118,18 @@ export const Card: FC<CardPropsType> =
 						<td className={style.td}>{answer}</td>
 						<td className={style.td}>{currentUpdated}</td>
 						<td className={style.td}><Rating grade={grade} /></td>
-						<td className={style.td}>
-							<div className={style.actions}>
-								{isOwner &&
-									<>
-										<UniversalButton onClick={handleActivateDeleteModalClick} >
-											<img src={cart} alt='cart' />
-										</UniversalButton>
-										<UniversalButton onClick={handleActivateCardModalClick} >
-											<img src={pencil} alt='pencil' />
-										</UniversalButton>
-									</>}
-							</div>
-						</td>
+						{isOwner &&
+							<td className={style.td}>
+								<div className={style.actions}>
+									<UniversalButton onClick={handleActivateDeleteModalClick} >
+										<img src={cart} alt='cart' />
+									</UniversalButton>
+									<UniversalButton onClick={handleActivateCardModalClick} >
+										<img src={pencil} alt='pencil' />
+									</UniversalButton>
+
+								</div>
+							</td>}
 					</tr>
 				</tbody>
 

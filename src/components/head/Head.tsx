@@ -56,11 +56,6 @@ export const Head: FC<HeadPropsType> =
 		})
 
 		return (
-			<thead className={style.thead}>
-				<tr className={style.tr}>
-					{sortValuesRender}
-					<th className={style.th}>Actions</th>
-				</tr>
-			</thead>
+			<>{sortValuesRender}</>
 		)
 	}
