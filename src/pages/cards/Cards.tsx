@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
+import { BackToPage, Card, Pagination, Search, UniversalButton, Sort } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -51,11 +51,10 @@ export const Cards: FC = (): ReturnComponentType => {
 
 	const questionInputRef = useRef<HTMLInputElement>(null)
 
+	const isOwner = authorizedUserId === packUserId
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
 	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
 	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade ']
-	const isOwner = authorizedUserId === packUserId
-
 	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
 		return (
 			<Card

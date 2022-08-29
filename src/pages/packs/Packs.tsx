@@ -201,17 +201,19 @@ export const Packs: FC = (): ReturnComponentType => {
 				</div>
 
 				<table className={style.table}>
-					<tr className={style.tr}>
-						<Sort
-							sortValues={sortPacksValues}
-							sortByDescending={sortPacksByDescending}
-							sortByAscending={sortPacksByAscending}
-							sortValue={sortValue}
-							handleSortByAscendingClick={handleSortPacksByAscendingClick}
-							handleSortByDescendingClick={handleSortPacksByDescendingClick}
-						/>
-						<th className={style.th}>Actions</th>
-					</tr>
+					<thead>
+						<tr>
+							<Sort
+								sortValues={sortPacksValues}
+								sortByDescending={sortPacksByDescending}
+								sortByAscending={sortPacksByAscending}
+								sortValue={sortValue}
+								handleSortByAscendingClick={handleSortPacksByAscendingClick}
+								handleSortByDescendingClick={handleSortPacksByDescendingClick}
+							/>
+							<th className={style.th}>Actions</th>
+						</tr>
+					</thead>
 					{packsRender}
 				</table>
 
