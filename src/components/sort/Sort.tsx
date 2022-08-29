@@ -1,18 +1,10 @@
-import { EMPTY_STRING } from 'constants/base'
 import React, { FC } from 'react'
+import { EMPTY_STRING } from 'constants/base'
 import { ReturnComponentType } from 'types'
-import style from './Head.module.scss'
+import { SortPropsType } from './types'
+import style from './Sort.module.scss'
 
-type HeadPropsType = {
-	sortValues: string[]
-	sortByDescending: string[]
-	sortByAscending: string[]
-	sortValue: string
-	handleSortByDescendingClick: (value: string) => void
-	handleSortByAscendingClick: (value: string) => void
-}
-
-export const Head: FC<HeadPropsType> =
+export const Sort: FC<SortPropsType> =
 	({
 		sortValues,
 		sortByDescending,

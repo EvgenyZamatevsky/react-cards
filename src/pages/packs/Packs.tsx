@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { UniversalButton, ShowPacks, DoubleRange, Pagination, Search, Head } from 'components'
+import { UniversalButton, ShowPacks, DoubleRange, Pagination, Search, Sort } from 'components'
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
@@ -201,19 +201,17 @@ export const Packs: FC = (): ReturnComponentType => {
 				</div>
 
 				<table className={style.table}>
-					<thead className={style.thead}>
-						<tr className={style.tr}>
-							<Head
-								sortValues={sortPacksValues}
-								sortByDescending={sortPacksByDescending}
-								sortByAscending={sortPacksByAscending}
-								sortValue={sortValue}
-								handleSortByAscendingClick={handleSortPacksByAscendingClick}
-								handleSortByDescendingClick={handleSortPacksByDescendingClick}
-							/>
-							<th className={style.th}>Actions</th>
-						</tr>
-					</thead>
+					<tr className={style.tr}>
+						<Sort
+							sortValues={sortPacksValues}
+							sortByDescending={sortPacksByDescending}
+							sortByAscending={sortPacksByAscending}
+							sortValue={sortValue}
+							handleSortByAscendingClick={handleSortPacksByAscendingClick}
+							handleSortByDescendingClick={handleSortPacksByDescendingClick}
+						/>
+						<th className={style.th}>Actions</th>
+					</tr>
 					{packsRender}
 				</table>
 

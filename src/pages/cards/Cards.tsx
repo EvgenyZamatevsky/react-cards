@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Head, Pagination, Search, UniversalButton } from 'components'
+import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -194,9 +194,9 @@ export const Cards: FC = (): ReturnComponentType => {
 				</div>
 
 				<table className={style.table}>
-					<thead className={style.thead}>
-						<tr className={style.tr}>
-							<Head
+					<thead>
+						<tr>
+							<Sort
 								sortValues={sortCardsValues}
 								sortByDescending={sortCardsByDescending}
 								sortByAscending={sortCardsByAscending}
