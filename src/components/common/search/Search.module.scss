@@ -1,10 +1,4 @@
-.searchText {
-	font-size: 14px;
-	line-height: 17px;
-	margin-bottom: 8px;
-}
-
-.search {
+.container {
 	position: relative;
 
 	.searchIcon {
@@ -32,7 +26,7 @@
 	.resetSearchValueBtn {
 		position: relative;
 
-		.clearIcon {
+		.crossIcon {
 			width: 30px;
 			height: 30px;
 			opacity: 0.8;

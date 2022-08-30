@@ -23,6 +23,12 @@
  		@include flex(row, space-between, stretch);
  		margin-top: 40px;
 
+ 		.searchText {
+ 			font-size: 14px;
+ 			line-height: 17px;
+ 			margin-bottom: 8px;
+ 		}
+
  		.showPacksCards {
  			font-size: 14px;
  			line-height: 17px;

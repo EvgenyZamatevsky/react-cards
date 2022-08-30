@@ -185,12 +185,15 @@ export const Packs: FC = (): ReturnComponentType => {
 					</UniversalButton>
 				</div>
 				<div className={style.main}>
-					<Search
-						title={'Search'}
-						searchValue={searchPackValue}
-						handleSetSearchValueChange={handleSetSearchPackValueChange}
-						handleResetSearchValueClick={handleResetSearchPackValueClick}
-					/>
+					<div>
+						<div className={style.searchText}>Search</div>
+						<Search
+							searchValue={searchPackValue}
+							isDisabled={isDisabled}
+							handleSetSearchValueChange={handleSetSearchPackValueChange}
+							handleResetSearchValueClick={handleResetSearchPackValueClick}
+						/>
+					</div>
 					<div>
 						<div className={style.showPacksCards}>Show packs cards</div>
 						<ShowPacks selectedPack={selectedPack} isDisabled={isDisabled} />

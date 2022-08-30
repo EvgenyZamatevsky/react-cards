@@ -53,8 +53,8 @@ export const Cards: FC = (): ReturnComponentType => {
 	const isMounted = useRef(false)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
-	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade ']
-	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade ']
+	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade']
+	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade']
 	const isOwner = authorizedUserId === packUserId
 
 	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
@@ -189,6 +189,7 @@ export const Cards: FC = (): ReturnComponentType => {
 				<div className={style.content}>
 					<Search
 						searchValue={searchCardValue}
+						isDisabled={isDisabled}
 						handleSetSearchValueChange={handleSetSearchCardValueChange}
 						handleResetSearchValueClick={handleResetSearchCardValueClick}
 					/>
