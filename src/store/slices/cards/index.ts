@@ -40,6 +40,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(updateCardGrade.fulfilled, (state, action) => {
 				const card = state.cards.find(card => card._id === action.payload.cardId)
+
 				if (card) {
 					card.shots = action.payload.shots
 					card.grade = action.payload.grade

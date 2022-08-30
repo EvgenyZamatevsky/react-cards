@@ -30,10 +30,10 @@ beforeEach(() => {
 	}
 })
 
-test('must find the right pack', (() => {
-	const endState = packsSlice(startState, setSearchPackValue('my pack'))
+test('must find the right packs', (() => {
+	const endState = packsSlice(startState, setSearchPackValue('my packs'))
 
-	expect(endState.searchPackValue).toBe('my pack')
+	expect(endState.searchPackValue).toBe('my packs')
 }))
 
 test('packs should be sorted correctly', (() => {
