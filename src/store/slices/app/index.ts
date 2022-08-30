@@ -1,9 +1,16 @@
-import { isDisabledFulfilled, isDisabledPending, isDisabledRejected } from 'store/helpers/app'
 import { getAuthorizedUserData, updateAuthorizedUserNameOrAvatar } from 'store/asyncActions'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { EMPTY_STRING } from 'constants/base'
-import { isErrorRejected, isLoadingFulfilled, isLoadingPending, isLoadingRejected } from 'store/helpers'
 import { AppSliceInitialStateType } from './types'
+import {
+	isErrorRejected,
+	isLoadingFulfilled,
+	isLoadingPending,
+	isLoadingRejected,
+	isDisabledFulfilled,
+	isDisabledPending,
+	isDisabledRejected
+} from 'store/helpers'
 
 const initialState: AppSliceInitialStateType = {
 	errorMessage: EMPTY_STRING,

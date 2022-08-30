@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { PACKS } from 'api'
 import { PackType } from 'api/packs/types'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { EMPTY_STRING } from 'constants/base'
 import { RootStateType } from 'store'
 import { handleServerNetworkError } from 'utils'
