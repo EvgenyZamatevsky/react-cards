@@ -6,7 +6,7 @@ export const selectPacks = (state: RootStateType): PackType[] => state.packs.pac
 
 export const selectSearchPackValue = (state: RootStateType): string => state.packs.searchPackValue
 
-export const selectSortValue = (state: RootStateType): string => state.packs.sortValue
+export const selectSortPacks = (state: RootStateType): string => state.packs.sortPacks
 
 export const selectMinValue = (state: RootStateType): number => state.packs.minValue
 

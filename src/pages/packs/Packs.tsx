@@ -8,7 +8,7 @@ import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { getPacks, addPack } from 'store/asyncActions'
-import { setSearchPackValue, setSortValue, setPackPage, setPackPageCount, setMinValue, setMaxValue } from 'store/slices'
+import { setSearchPackValue, setSortPacks, setPackPage, setPackPageCount, setMinValue, setMaxValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 import {
@@ -16,7 +16,7 @@ import {
 	selectIsDisabled,
 	selectPacks,
 	selectSearchPackValue,
-	selectSortValue,
+	selectSortPacks,
 	selectMinValue,
 	selectMaxValue,
 	selectMinCardsCount,
@@ -38,7 +38,7 @@ export const Packs: FC = (): ReturnComponentType => {
 	const isLoading = useSelector(selectIsLoading)
 	const packs = useSelector(selectPacks)
 	const searchPackValue = useSelector(selectSearchPackValue)
-	const sortValue = useSelector(selectSortValue)
+	const sortPacks = useSelector(selectSortPacks)
 	const minValue = useSelector(selectMinValue)
 	const maxValue = useSelector(selectMaxValue)
 	const minCardsCount = useSelector(selectMinCardsCount)
@@ -78,14 +78,14 @@ export const Packs: FC = (): ReturnComponentType => {
 	useEffect(() => {
 		dispatch(getPacks({
 			packName: searchPackValue,
-			sortPacks: sortValue,
+			sortPacks,
 			min: minValue,
 			max: maxValue,
 			pageCount,
 			page,
 			userId: authorizedUserId
 		}))
-	}, [searchPackValue, sortValue, minValue, maxValue, pageCount, page, selectedPack])
+	}, [searchPackValue, sortPacks, minValue, maxValue, pageCount, page, selectedPack])
 
 	useEffect(() => {
 		if (isMounted.current) {
@@ -104,11 +104,11 @@ export const Packs: FC = (): ReturnComponentType => {
 	}, [])
 
 	const handleSortPacksByAscendingClick = (value: string): void => {
-		dispatch(setSortValue(value))
+		dispatch(setSortPacks(value))
 	}
 
 	const handleSortPacksByDescendingClick = (value: string): void => {
-		dispatch(setSortValue(value))
+		dispatch(setSortPacks(value))
 	}
 
 	const handleSetPackPageClick = useCallback((page: number): void => {
@@ -213,7 +213,7 @@ export const Packs: FC = (): ReturnComponentType => {
 						sortValues={sortPacksValues}
 						sortByDescending={sortPacksByDescending}
 						sortByAscending={sortPacksByAscending}
-						sortValue={sortValue}
+						sortValue={sortPacks}
 						handleSortByAscendingClick={handleSortPacksByAscendingClick}
 						handleSortByDescendingClick={handleSortPacksByDescendingClick}
 						isDisabled={isDisabled}

@@ -7,7 +7,7 @@ import { PacksSliceInitialStateType, SelectedPackType } from './types'
 const initialState: PacksSliceInitialStateType = {
 	packs: [],
 	searchPackValue: EMPTY_STRING,
-	sortValue: '0updated',
+	sortPacks: '0updated',
 	minCardsCount: 0,
 	maxCardsCount: 110,
 	minValue: 0,
@@ -25,8 +25,8 @@ const packsSlice = createSlice({
 		setSearchPackValue(state, action: PayloadAction<string>) {
 			state.searchPackValue = action.payload
 		},
-		setSortValue(state, action: PayloadAction<string>) {
-			state.sortValue = action.payload
+		setSortPacks(state, action: PayloadAction<string>) {
+			state.sortPacks = action.payload
 		},
 		setMaxValue(state, action: PayloadAction<number>) {
 			state.maxValue = action.payload
@@ -59,7 +59,7 @@ const packsSlice = createSlice({
 			.addCase(logOut.fulfilled, (state) => {
 				state.packs = []
 				state.searchPackValue = EMPTY_STRING
-				state.sortValue = '0updated'
+				state.sortPacks = '0updated'
 				state.minValue = 0
 				state.maxValue = 110
 				state.minCardsCount = 0
@@ -74,7 +74,7 @@ const packsSlice = createSlice({
 
 export const {
 	setSearchPackValue,
-	setSortValue,
+	setSortPacks,
 	setMaxValue,
 	setMinValue,
 	setSelectedPack,

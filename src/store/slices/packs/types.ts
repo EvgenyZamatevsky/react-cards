@@ -3,7 +3,7 @@ import { PackType } from 'api/packs/types'
 export type PacksSliceInitialStateType = {
 	packs: PackType[],
 	searchPackValue: string
-	sortValue: string
+	sortPacks: string
 	minValue: number
 	maxValue: number
 	minCardsCount: number

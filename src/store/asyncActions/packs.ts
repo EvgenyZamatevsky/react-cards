@@ -42,7 +42,7 @@ export const addPack = createAsyncThunk
 	('packs/addPack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
-			const sortPacks = getState().packs.sortValue
+			const sortPacks = getState().packs.sortPacks
 			const minValue = getState().packs.minValue
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount
@@ -73,7 +73,7 @@ export const removePack = createAsyncThunk
 	('packs/removePack', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
-			const sortPacks = getState().packs.sortValue
+			const sortPacks = getState().packs.sortPacks
 			const minValue = getState().packs.minValue
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount
@@ -90,7 +90,6 @@ export const removePack = createAsyncThunk
 				page,
 				userId: params.authorizedUserId
 			}))
-
 		} catch (error) {
 			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
@@ -105,7 +104,7 @@ export const updatePackName = createAsyncThunk
 	('packs/updatePackName', async (params, { rejectWithValue, dispatch, getState }) => {
 		try {
 			const searchPackValue = getState().packs.searchPackValue
-			const sortPacks = getState().packs.sortValue
+			const sortPacks = getState().packs.sortPacks
 			const minValue = getState().packs.minValue
 			const maxValue = getState().packs.maxValue
 			const pageCount = getState().packs.pageCount

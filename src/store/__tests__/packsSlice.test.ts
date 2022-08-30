@@ -8,7 +8,7 @@ import packsSlice,
 	setPackPageCount,
 	setSearchPackValue,
 	setSelectedPack,
-	setSortValue
+	setSortPacks
 } from 'store/slices/packs'
 import { PacksSliceInitialStateType } from 'store/slices/packs/types'
 
@@ -18,7 +18,7 @@ beforeEach(() => {
 	startState = {
 		packs: [],
 		searchPackValue: '',
-		sortValue: '0updated',
+		sortPacks: '0updated',
 		minCardsCount: 0,
 		maxCardsCount: 110,
 		minValue: 0,
@@ -37,9 +37,9 @@ test('must find the right packs', (() => {
 }))
 
 test('packs should be sorted correctly', (() => {
-	const endState = packsSlice(startState, setSortValue('1updated'))
+	const endState = packsSlice(startState, setSortPacks('1updated'))
 
-	expect(endState.sortValue).toBe('1updated')
+	expect(endState.sortPacks).toBe('1updated')
 }))
 
 test('the max value must be correctly set', (() => {
@@ -135,7 +135,7 @@ test('all data in the state must be reset', () => {
 
 	expect(endState.packs).toEqual([])
 	expect(endState.searchPackValue).toBe('')
-	expect(endState.sortValue).toBe('0updated')
+	expect(endState.sortPacks).toBe('0updated')
 	expect(endState.minValue).toBe(0)
 	expect(endState.maxValue).toBe(110)
 	expect(endState.minCardsCount).toBe(0)

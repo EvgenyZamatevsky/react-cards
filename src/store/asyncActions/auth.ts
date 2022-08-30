@@ -119,7 +119,6 @@ export const updateAuthorizedUserNameOrAvatar = createAsyncThunk
 			const { avatar, name } = response.data.updatedUser
 
 			return { avatar, name }
-
 		} catch (error) {
 			return handleServerNetworkError(error as AxiosError | Error, rejectWithValue)
 		}
