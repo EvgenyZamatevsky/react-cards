@@ -1,12 +1,11 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { BackToPage, Card, Pagination, Search, Sort, UniversalButton } from 'components'
+import { BackToPage, Card, Modal, ModalCard, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { ReturnComponentType } from 'types'
 import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
-import { Modal, ModalCard } from 'components/common'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { useAppDispatch } from 'hooks'
 import style from './Cards.module.scss'
@@ -53,8 +52,8 @@ export const Cards: FC = (): ReturnComponentType => {
 	const isMounted = useRef(false)
 
 	const sortCardsValues: string[] = ['Question', 'Answer', 'Last Updated', 'Grade']
-	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '0grade']
-	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '1grade']
+	const sortCardsByDescending: string[] = ['0question', '0answer', '0updated', '1grade']
+	const sortCardsByAscending: string[] = ['1question', '1answer', '1updated', '0grade']
 	const isOwner = authorizedUserId === packUserId
 
 	const cardsRender = cards.map(({ _id, question, answer, updated, grade }) => {
