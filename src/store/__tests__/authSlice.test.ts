@@ -115,7 +115,7 @@ test('properties authorizedUserData and isAuth should be reset', () => {
 	expect(endState.isAuth).toBe(false)
 })
 
-test('у авторизованного пользователя должна обновиться avatar', () => {
+test('the authorized user must have their avatar updated', () => {
 
 	const action = updateAuthorizedUserNameOrAvatar.fulfilled({ avatar: 'new avatar', name: '' }, 'requestId', { avatar: 'new avatar' })
 
