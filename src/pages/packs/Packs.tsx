@@ -6,7 +6,7 @@ import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
 import { getPacks, addPack } from 'store/asyncActions'
-import { setSearchPackValue, setSortPacks, setPackPage, setPackPageCount, setMinValue, setMaxValue } from 'store/slices'
+import { setSearchPackValue, setSortPacks, setPackPage, setPackPageCount, setMinValue, setMaxValue, setSelectedPack } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 import {
@@ -25,6 +25,8 @@ import {
 	selectPacksTotalCount,
 	selectIsLoading
 } from 'store/selectors'
+import { useSearchParams } from 'react-router-dom'
+import { SelectedPackType } from 'store/slices/packs/types'
 
 export const Packs: FC = (): ReturnComponentType => {
 
@@ -49,10 +51,12 @@ export const Packs: FC = (): ReturnComponentType => {
 	const [packName, setPackName] = useState(EMPTY_STRING)
 	const [isPackPrivate, setIsPackPrivate] = useState(false)
 	const [errorMessage, setErrorMessage] = useState(EMPTY_STRING)
+	const [searchParams, setSearchParams] = useSearchParams()
 
 	const namePackInputRef = useRef<HTMLInputElement>(null)
 	const isMounted = useRef(false)
 
+	const currentShowPacks = searchParams.get('showPacks') || selectedPack
 	const sortPacksValues: string[] = ['Name', 'Cards', 'Last Updated', 'Created by']
 	const sortPacksByDescending: string[] = ['0name', '0cardsCount', '0updated', '0user_name']
 	const sortPacksByAscending: string[] = ['1name', '1cardsCount', '1updated', '1user_name']
@@ -82,6 +86,14 @@ export const Packs: FC = (): ReturnComponentType => {
 			userId: authorizedUserId
 		}))
 	}, [searchPackValue, sortPacks, minValue, maxValue, pageCount, page, selectedPack])
+
+	useEffect(() => {
+		setSearchParams({ showPacks: selectedPack })
+	}, [selectedPack])
+
+	useEffect(() => {
+		dispatch(setSelectedPack(currentShowPacks as SelectedPackType))
+	}, [currentShowPacks])
 
 	useEffect(() => {
 		if (isMounted.current) {
@@ -188,7 +200,11 @@ export const Packs: FC = (): ReturnComponentType => {
 					</div>
 					<div>
 						<div className={style.showPacksCards}>Show packs cards</div>
-						<ShowPacks selectedPack={selectedPack} isDisabled={isDisabled} />
+						<ShowPacks
+							selectedPack={selectedPack}
+							isDisabled={isDisabled}
+							setSearchParams={setSearchParams}
+						/>
 					</div>
 					<div>
 						<div className={style.numberOfCards}>Number of cards</div>
