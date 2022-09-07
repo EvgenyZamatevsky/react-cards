@@ -3,7 +3,7 @@ import { CardType } from 'api/cards/types'
 import { BackToPage, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getCards, updateCardGrade } from 'store/asyncActions/cards'
 import { Nullable, ReturnComponentType } from 'types'
 import { CurrentCardType } from './types'
@@ -13,7 +13,6 @@ import {
 	selectCardPage,
 	selectCardPageCount,
 	selectCards,
-	selectIsAuth,
 	selectIsDisabled,
 	selectSearchCardValue,
 	selectSortCards
@@ -33,7 +32,6 @@ export const Learn: FC = (): ReturnComponentType => {
 	const sortCards = useSelector(selectSortCards)
 	const cardPage = useSelector(selectCardPage)
 	const cardPageCount = useSelector(selectCardPageCount)
-	const isAuth = useSelector(selectIsAuth)
 	const isDisabled = useSelector(selectIsDisabled)
 
 	const [isShowAnswer, setIsShowAnswer] = useState(false)
@@ -89,10 +87,6 @@ export const Learn: FC = (): ReturnComponentType => {
 
 	const handleSetGradeIndexChange = (index: number): void => {
 		setGradeIndex(index + 1)
-	}
-
-	if (!isAuth) {
-		return <Navigate to={Path.LOGIN} />
 	}
 
 	return (

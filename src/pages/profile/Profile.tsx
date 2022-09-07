@@ -3,10 +3,9 @@ import { Path } from 'enums'
 import { BackToPage, File, EditableItem, UniversalButton } from 'components'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { updateAuthorizedUserNameOrAvatar, logOut } from 'store/asyncActions'
 import {
-	selectIsAuth,
 	selectAuthorizedUserName,
 	selectAuthorizedUserEmail,
 	selectIsDisabled,
@@ -25,7 +24,6 @@ export const Profile: FC = (): ReturnComponentType => {
 
 	const navigate = useNavigate()
 
-	const isAuth = useSelector(selectIsAuth)
 	const authorizedUserName = useSelector(selectAuthorizedUserName)
 	const authorizedUserEmail = useSelector(selectAuthorizedUserEmail)
 	const authorizedUserAvatar = useSelector(selectAuthorizedUserAvatar)
@@ -47,10 +45,6 @@ export const Profile: FC = (): ReturnComponentType => {
 	const onImgError = (): void => {
 		dispatch(setIsAvatarBroken(true))
 		dispatch(setErrorMessage('Curve picture'))
-	}
-
-	if (!isAuth) {
-		return <Navigate to={Path.LOGIN} />
 	}
 
 	return (

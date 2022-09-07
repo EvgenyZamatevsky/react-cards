@@ -3,16 +3,13 @@ import { UniversalButton, ShowPacks, DoubleRange, Sort, Pagination, Search } fro
 import { Modal, ModalPack } from 'components/common'
 import { Pack } from 'components/pack'
 import { EMPTY_STRING, ERROR_MESSAGE } from 'constants/base'
-import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
 import { getPacks, addPack } from 'store/asyncActions'
 import { setSearchPackValue, setSortPacks, setPackPage, setPackPageCount, setMinValue, setMaxValue } from 'store/slices'
 import { ReturnComponentType } from 'types'
 import style from './Packs.module.scss'
 import {
-	selectIsAuth,
 	selectIsDisabled,
 	selectPacks,
 	selectSearchPackValue,
@@ -33,7 +30,6 @@ export const Packs: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
-	const isAuth = useSelector(selectIsAuth)
 	const isDisabled = useSelector(selectIsDisabled)
 	const isLoading = useSelector(selectIsLoading)
 	const packs = useSelector(selectPacks)
@@ -151,10 +147,6 @@ export const Packs: FC = (): ReturnComponentType => {
 	const handleSetMinValueMouseUp = useCallback((min: number): void => {
 		dispatch(setMinValue(min))
 	}, [])
-
-	if (!isAuth) {
-		return <Navigate to={Path.LOGIN} />
-	}
 
 	return (
 		<>

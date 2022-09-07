@@ -3,3 +3,7 @@ export type LoginParamsType = {
 	password: string
 	rememberMe: boolean
 }
+
+export type LocationStateType = {
+	from: { pathname: string }
+}

@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { BackToPage, Card, Modal, ModalCard, Pagination, Search, Sort, UniversalButton } from 'components'
 import { Path } from 'enums'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { addCard, getCards } from 'store/asyncActions/cards'
 import { ReturnComponentType } from 'types'
 import { setCardPage, setCardPageCount, setSearchCardValue, setSortCards } from 'store/slices'
@@ -150,10 +150,6 @@ export const Cards: FC = (): ReturnComponentType => {
 	const handleActivateModalClick = (): void => {
 		setIsActiveModal(true)
 		questionInputRef.current?.focus()
-	}
-
-	if (!isAuth) {
-		return <Navigate to={Path.LOGIN} />
 	}
 
 	return (

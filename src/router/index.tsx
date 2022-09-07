@@ -1,4 +1,5 @@
 import { Path } from 'enums'
+import { RequireAuth } from 'hocs'
 import { Profile } from 'pages'
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
@@ -32,15 +33,15 @@ const Learn = lazy(() => import(/* webpackChunkName: 'Learn' */'pages/learn')
 
 export const ROUTES = [
 	{ path: Path.HOME, element: <Navigate to={Path.PROFILE} /> },
-	{ path: Path.PROFILE, element: <Profile /> },
-	{ path: Path.PACKS, element: <Packs /> },
+	{ path: Path.PROFILE, element: <RequireAuth><Profile /></RequireAuth> },
+	{ path: Path.PACKS, element: <RequireAuth><Packs /></RequireAuth> },
 	{ path: Path.LOGIN, element: <Login /> },
 	{ path: Path.REGISTER, element: <Register /> },
 	{ path: Path.FORGOT, element: <Forgot /> },
-	{ path: `${Path.CARDS}/:packId`, element: <Cards /> },
+	{ path: `${Path.CARDS}/:packId`, element: <RequireAuth><Cards /></RequireAuth> },
 	{ path: `${Path.CHECK_EMAIL}/:email`, element: <CheckEmail /> },
 	{ path: `${Path.NEW_PASSWORD}/:token`, element: <NewPassword /> },
-	{ path: `${Path.LEARN}/:packId`, element: <Learn /> },
+	{ path: `${Path.LEARN}/:packId`, element: <RequireAuth><Learn /></RequireAuth> },
 	{ path: Path.NOT_FOUND_404, element: <NotFound /> },
 	{ path: Path.NOT_FOUND, element: <Navigate to={Path.NOT_FOUND_404} /> },
 ]

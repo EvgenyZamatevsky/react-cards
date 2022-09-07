@@ -4,23 +4,27 @@ import { Path } from 'enums'
 import { useAppDispatch } from 'hooks'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate, Link, useLocation } from 'react-router-dom'
 import { login } from 'store/asyncActions'
 import { selectIsAuth, selectIsDisabled, selectIsRegister } from 'store/selectors'
 import { setIsRegister } from 'store/slices'
 import { ReturnComponentType } from 'types'
-import { LoginParamsType } from './types'
+import { LocationStateType, LoginParamsType } from './types'
 import style from './Login.module.scss'
 
 export const Login: FC = (): ReturnComponentType => {
 
 	const dispatch = useAppDispatch()
 
+	const location = useLocation()
+
 	const isAuth = useSelector(selectIsAuth)
 	const isDisabled = useSelector(selectIsDisabled)
 	const isRegister = useSelector(selectIsRegister)
 
 	const [typePassword, setTypePassword] = useState('password')
+
+	const fromPage = (location.state as LocationStateType)?.from?.pathname || Path.HOME
 
 	const { register, handleSubmit, formState: { errors, isValid } } = useForm<LoginParamsType>({
 		mode: 'onChange',
@@ -52,7 +56,7 @@ export const Login: FC = (): ReturnComponentType => {
 	}
 
 	if (isAuth) {
-		return <Navigate to={Path.HOME} />
+		return <Navigate to={fromPage} />
 	}
 
 	return (
